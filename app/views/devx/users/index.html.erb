@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1><%= controller_name.classify.pluralize %></h1>
+    </div>
+    <div class="large-12 columns">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @users %>
+        </tbody>
+      </table>
+    </div>
+    <div class="large-4">
+      <%= link_to 'Create User', fullstack.new_user_path %>
+    </div>
+  </div>
+</div>

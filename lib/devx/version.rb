@@ -1,0 +1,3 @@
+module Devx
+  VERSION = "0.0.1"
+end

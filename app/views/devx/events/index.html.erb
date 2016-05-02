@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1><%= controller_name.classify.pluralize %></h1>
+    </div>
+    <div class="large-12 columns">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @events %>
+        </tbody>
+      </table>
+    </div>
+    <div class="large-4">
+      <%= link_to 'Create Event', fullstack.new_event_path %>
+    </div>
+  </div>
+</div>

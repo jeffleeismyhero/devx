@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="large-12">
+      <h1>Create <%= controller_name.classify %></h1>
+    </div>
+    <div class="large-12">
+      <%= link_to 'Back to users', :back %>
+      <%= form_for @user, url: fullstack.user_path(@user) do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

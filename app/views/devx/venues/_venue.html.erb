@@ -1,0 +1,8 @@
+<tr>
+  <td><%= link_to venue.name, fullstack.edit_venue_path(venue) %></td>
+  <td><%= venue.address %></td>
+  <td>
+    <%= link_to 'Edit', fullstack.edit_venue_path(venue) %>
+    <%= link_to 'Delete', fullstack.venue_path(venue), method: :delete, data: { confirm: "Are you sure you want to delete #{venue.name}?" } %>
+  </td>
+</tr>

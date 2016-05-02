@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="large-12">
+      <h1>Create <%= controller_name.classify %></h1>
+    </div>
+    <div class="large-12">
+      <%= link_to 'Back to venues', :back %>
+      <%= form_for @venue, url: fullstack.venue_path(@venue) do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

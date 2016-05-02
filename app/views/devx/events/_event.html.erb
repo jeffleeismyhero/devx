@@ -1,0 +1,10 @@
+<tr>
+  <td><%= link_to event.name, fullstack.edit_event_path(event) %></td>
+  <td><%= event.description %></td>
+  <td><%= event.start_time.try(:strftime, '%m/%d/%Y %H:%I:%s') %></td>
+  <td><%= event.end_time.try(:strftime, '%m/%d/%Y %H:%I:%s') %></td>
+  <td>
+    <%= link_to 'Edit', fullstack.edit_event_path(event) %>
+    <%= link_to 'Delete', fullstack.event_path(event), method: :delete, data: { confirm: "Are you sure you want to delete #{event.name}?" } %>
+  </td>
+</tr>

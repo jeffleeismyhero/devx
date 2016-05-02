@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1><%= controller_name.classify.pluralize %></h1>
+    </div>
+    <div class="large-12 columns">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Short Description</th>
+            <th>Published</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'article', collection: @articles %>
+        </tbody>
+      </table>
+    </div>
+    <div class="large-4">
+      <%= link_to 'Create Article', fullstack.new_admin_article_path %>
+    </div>
+  </div>
+</div>
