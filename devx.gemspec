@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "cancancan"
   s.add_dependency "paranoia", "~> 2.0"
   s.add_dependency "friendly_id"
-  s.add_dependency "ckeditor"
+  s.add_dependency "ckeditor", "~> 4.1"
   s.add_dependency "carrierwave"
   s.add_dependency "mini_magick"
   
