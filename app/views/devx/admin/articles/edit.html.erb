@@ -5,7 +5,7 @@
     </div>
     <div class="large-12">
       <%= link_to 'Back to articles', :back %>
-      <%= form_for @article, url: fullstack.admin_article_path(@article) do |f| %>
+      <%= form_for @article, url: devx.admin_article_path(@article) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
     </div>
