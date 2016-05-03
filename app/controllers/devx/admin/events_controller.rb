@@ -3,9 +3,10 @@ require_dependency "devx/application_controller"
 
 module Devx
   class Admin::EventsController < ApplicationController
-
+    before_filter :authenticate_user!
+    layout 'devx/admin'
   	#initializes instance variables. ( e.g. index uses @users = User.all, show uses @user = User.find(params[:id]) )
-  	load_and_authorize_resources
+  	load_and_authorize_resource :event, class: 'Devx::Event'
 
   	def index
   	end
