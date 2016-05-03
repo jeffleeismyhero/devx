@@ -3,7 +3,8 @@ require_dependency "devx/application_controller"
 
 module Devx
   class Admin::VenuesController < ApplicationController
-
+    before_filter :authenticate_user!
+    layout 'devx/admin'
   	#initializes instance variables. ( e.g. index uses @venues = Venue.all, show uses @venue = Venue.find(params[:id]) )
   	load_and_authorize_resource
 
@@ -21,7 +22,7 @@ module Devx
 
   	def create
   		if @venue.valid? && @venue.save
-  			redirect_to venues_path,
+  			redirect_to devx.venues_path,
   			notice: "Successfully saved venue"
   		else
   			render :new,
@@ -31,7 +32,7 @@ module Devx
 
   	def update
   		if @venue.valid? && @venue.save
-  			redirect_to venues_path,
+  			redirect_to devx.venues_path,
   			notice: "Successfully saved venue"
   		else
   			render :new,
@@ -41,7 +42,7 @@ module Devx
 
   	def destroy
   		if @venue.destroy
-  			redirect_to venues_path
+  			redirect_to devx.venues_path
   		end
   	end
 

@@ -11,6 +11,10 @@ Devx::Engine.routes.draw do
   namespace :admin do
     resources :pages
     resources :articles
+    resources :events
+    resources :branding
+    resources :users
+    resources :venues
   end
 
 

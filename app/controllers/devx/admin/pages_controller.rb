@@ -2,6 +2,8 @@ require_dependency "Devx/application_controller"
 
 module Devx
   class Admin::PagesController < ApplicationController
+    before_filter :authenticate_user!
+    layout 'devx/admin'
     load_and_authorize_resource :page, class: 'Devx::Page', except: :show
 
     def index
@@ -35,7 +37,7 @@ module Devx
 
     def destroy
       if @page.destroy
-        redirect_to admin_pages_path,
+        redirect_to devx.admin_pages_path,
         notice: "Successfully deleted page"
       end
     end

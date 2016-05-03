@@ -15,7 +15,7 @@ module Devx
 
     def create
       if @article.save
-        redirect_to Devx.articles_path,
+        redirect_to devx.articles_path,
         notice: "Successfully created #{@article}"
       else
         render :new,
@@ -25,7 +25,7 @@ module Devx
 
     def update
       if @article.update(article_params)
-        redirect_to Devx.articles_path,
+        redirect_to devx.articles_path,
         notice: "Successfully updated #{@article}"
       else
         render :edit,
@@ -35,7 +35,7 @@ module Devx
 
     def destroy
       if @article.destroy
-        redirect_to Devx.articles_path,
+        redirect_to devx.articles_path,
         notice: "Successfully deleted #{@article.title}"
       else
         render :index,
@@ -47,10 +47,10 @@ module Devx
       @article = Article.find(params[:id])
 
       if @article.update_columns(approved_by: current_user, approved_at: Time.zone.now)
-        redirect_to articles_path,
+        redirect_to devx.articles_path,
         notice: "Approved"
       else
-        redirect_to articles_path,
+        redirect_to devx.articles_path,
         notice: "Failed to approve"
       end
     end

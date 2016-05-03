@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
 
-  mount Devx::Engine => "/devx"
+  mount Devx::Engine => "/"
 end

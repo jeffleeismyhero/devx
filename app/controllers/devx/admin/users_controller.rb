@@ -3,7 +3,8 @@ require_dependency "devx/application_controller"
 
 module Devx
   class Admin::UsersController < ApplicationController
-
+    before_filter :authenticate_user!
+    layout 'devx/admin'
   	#initializes instance variables. ( e.g. index uses @users = User.all, show uses @user = User.find(params[:id]) )
   	load_and_authorize_resource
   	
@@ -21,7 +22,7 @@ module Devx
 
   	def create
   		if @user.valid? && @user.save
-  			redirect_to users_path,
+  			redirect_to devx.users_path,
   			notice: "Successfully saved user"
 
   		else
@@ -32,7 +33,7 @@ module Devx
 
   	def update
   		if @user.valid? && @user.save
-  			redirect_to users_path,
+  			redirect_to devx.users_path,
   			notice: "Successfully updated user"
 
   		else
@@ -43,7 +44,7 @@ module Devx
 
   	def destroy
   		if @user.destroy
-  			redirect_to users_path,
+  			redirect_to devx.users_path,
   			notice: "Successfully deleted user"
   		end
   	end

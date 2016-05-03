@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ImageUploader < CarrierWave::Uploader::Base
+class Devx::ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -13,11 +13,12 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    if Rails.env.test?
-      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{id_partitioning}"
-    else
-      "#{Rails.env.to_s}/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{id_partitioning}"
-    end
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{id_partitioning}"
+    # if Rails.env.test?
+    #   "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{id_partitioning}"
+    # else
+    #   "#{Rails.env.to_s}/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{id_partitioning}"
+    #end
   end
 
   def extension_white_list

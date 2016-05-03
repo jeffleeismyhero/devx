@@ -2,6 +2,8 @@ require_dependency "Devx/application_controller"
 
 module Devx
   class Admin::ArticlesController < ApplicationController
+    before_filter :authenticate_user!
+    layout 'devx/admin'
     load_and_authorize_resource :article, class: 'Devx::Article'
 
     def index
@@ -15,7 +17,7 @@ module Devx
 
     def create
       if @article.save
-        redirect_to Devx.admin_articles_path,
+        redirect_to devx.admin_articles_path,
         notice: "Successfully created #{@article}"
       else
         render :new,
@@ -25,7 +27,7 @@ module Devx
 
     def update
       if @article.update(article_params)
-        redirect_to Devx.admin_articles_path,
+        redirect_to devx.admin_articles_path,
         notice: "Successfully updated #{@article}"
       else
         render :edit,
@@ -35,7 +37,7 @@ module Devx
 
     def destroy
       if @article.destroy
-        redirect_to Devx.admin_articles_path,
+        redirect_to devx.admin_articles_path,
         notice: "Successfully deleted #{@article.title}"
       else
         render :index,

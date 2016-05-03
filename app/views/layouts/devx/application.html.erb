@@ -1,25 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Devx</title>
+  <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    "devx/application", media: "all" %>
   <%= javascript_include_tag "devx/application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-  <div class="container">
-    <div class="row">
-      <div class="large-12 columns">
-        <% if app_branding.logo.present? %>
-          <%= image_tag(app_branding.logo.try(:url)) %>
-        <% else %>
-          <%= app_branding.company_name || 'Company Name' %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</header>
+
 <%= yield %>
 
 </body>
