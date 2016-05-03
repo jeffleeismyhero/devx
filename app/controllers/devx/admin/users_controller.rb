@@ -6,7 +6,7 @@ module Devx
     before_filter :authenticate_user!
     layout 'devx/admin'
   	#initializes instance variables. ( e.g. index uses @users = User.all, show uses @user = User.find(params[:id]) )
-  	load_and_authorize_resource
+  	load_and_authorize_resource :user, class: 'Devx::User'
   	
   	def index
   	end
