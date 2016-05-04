@@ -31,5 +31,6 @@ Gem::Specification.new do |s|
   s.add_dependency "delayed_job"
   s.add_dependency "delayed_job_active_record"
   s.add_dependency "daemons"
+  s.add_dependency "twilio-ruby"
   
 end
