@@ -2,7 +2,6 @@ require_dependency "Devx/application_controller"
 
 module Devx
   class PagesController < ApplicationController
-    load_and_authorize_resource except: :show
 
     def show
       if params[:id].present?

@@ -7,7 +7,7 @@
 <%= f.label :end_time %>
 <%= f.date_field :end_time %>
 <%= f.label :venue %>
-<%= f.select :venue_id, devx::Venue.all.collect{ |x| [x.name, x.id] }, { include_blank: true } %>
+<%= f.select :venue_id, Devx::Venue.all.collect{ |x| [x.name, x.id] }, { include_blank: true } %>
 <%= f.label :contact_name %>
 <%= f.text_field :contact_name %>
 <%= f.label :contact_email %>

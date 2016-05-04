@@ -3,7 +3,6 @@ Devx::Engine.routes.draw do
 
   resources :branding, controller: 'branding', only: [ :index, :update ]
   resources :articles, except: :show
-  resources :pages
   resources :venues
   resources :events
   resources :users

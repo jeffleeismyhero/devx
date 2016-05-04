@@ -22,7 +22,7 @@ module Devx
 
   	def create
   		if @event.valid? && event.save
-  			redirect_to events_path,
+  			redirect_to devx.admin_events_path,
   			notice: "Successfully created event"
   		else
   			render :new,
@@ -33,7 +33,7 @@ module Devx
   	def update
   		if
   			@event.valid? && @event.update(event_params)
-  			redirect_to events_path,
+  			redirect_to devx.admin_events_path,
   			notice: "Successfully updated event"
   		else
   			render :new,
@@ -43,7 +43,7 @@ module Devx
 
   	def destroy
   		if @event.destroy
-  			redirect_to events_path
+  			redirect_to devx.admin_events_path
   		end
   	end
 
