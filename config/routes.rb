@@ -14,6 +14,9 @@ Devx::Engine.routes.draw do
     resources :branding
     resources :users
     resources :venues
+    resources :orders do
+      resources :transactions
+    end
   end
 
 

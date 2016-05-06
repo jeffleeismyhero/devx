@@ -1,0 +1,13 @@
+<%= f.label :user_id, 'Customer name' %>
+<%= f.select :user_id, Devx::User.all.collect{ |x| [x.full_name, x.id] }, { include_blank: true } %>
+
+<% if !@order.new_record? %>
+  <%= @order.transactions.new.inspect %>
+  <div class="nested-attributes">
+    <%= f.fields_for :transactions, @order.transactions.new do |transaction| %>
+      <%= render partial: 'transaction_fields', locals: { f: transaction } %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= f.submit %>

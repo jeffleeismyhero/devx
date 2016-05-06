@@ -33,4 +33,11 @@ Gem::Specification.new do |s|
   s.add_dependency "daemons"
   s.add_dependency "twilio-ruby"
   
+  s.add_development_dependency "factory_girl_rails"
+  s.add_development_dependency "capybara"
+  s.add_development_dependency "database_cleaner"
+  s.add_development_dependency "capybara-webkit"
+  s.add_development_dependency "selenium-webdriver"
+  s.add_development_dependency "capybara-screenshot"
+
 end

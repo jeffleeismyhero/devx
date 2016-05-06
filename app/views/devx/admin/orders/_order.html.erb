@@ -1,0 +1,9 @@
+<tr>
+  <td><%= order.id %></td>
+  <td><%= order.created_at %></td>
+  <td><%= order.user.try(:full_name) %></td>
+  <td>
+    <%= link_to 'Edit', devx.edit_admin_order_path(order) %>
+    <%= link_to 'Delete', devx.admin_order_path(order), method: :delete, data: { confirm: "Are you sure you want to delete Order ##{order.id}?" } %>
+  </td>
+</tr>

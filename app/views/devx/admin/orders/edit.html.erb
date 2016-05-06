@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="large-12">
+      <h1>Create <%= controller_name.classify %></h1>
+    </div>
+    <div class="large-12">
+      <%= link_to 'Back to orders', :back %>
+      <%= form_for @order, url: devx.admin_order_path(@order) do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>
