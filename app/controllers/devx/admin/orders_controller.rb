@@ -17,7 +17,7 @@ module Devx
 
     def create
       if @order.save
-        redirect_to devx.admin_orders_path,
+        redirect_to devx.edit_admin_order_path(@order),
         notice: "Successfully created #{@order}"
       else
         render :new,
@@ -26,8 +26,10 @@ module Devx
     end
 
     def update
+      # render plain: params.inspect
+      # return
       if @order.update(order_params)
-        redirect_to devx.admin_orders_path,
+        redirect_to devx.edit_admin_order_path(@order),
         notice: "Successfully updated #{@order}"
       else
         render :edit,
@@ -38,7 +40,7 @@ module Devx
     def destroy
       if @order.destroy
         redirect_to devx.admin_orders_path,
-        notice: "Successfully deleted #{@order.title}"
+        notice: "Successfully deleted #{@order.id}"
       else
         render :index,
         notice: 'An error occurred'
@@ -50,7 +52,7 @@ module Devx
 
     def order_params
       accessible = [ :user_id,
-                    transactions_attributes: [ :id, :order_id, :payment_method, :amount, :comments ]
+                    transactions_attributes: [ :id, :order_id, :payment_method, :amount, :comments, :_destroy ]
                   ]
       params.require(:order).permit(accessible)
     end

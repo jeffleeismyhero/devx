@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504232928) do
+ActiveRecord::Schema.define(version: 20160509171344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,13 @@ ActiveRecord::Schema.define(version: 20160504232928) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "devx_media", force: :cascade do |t|
+    t.string   "name"
+    t.string   "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_orders", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
@@ -97,6 +104,22 @@ ActiveRecord::Schema.define(version: 20160504232928) do
     t.integer  "page_id"
     t.string   "name"
     t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "devx_slides", force: :cascade do |t|
+    t.integer  "slideshow_id"
+    t.string   "title"
+    t.string   "content"
+    t.string   "image"
+    t.integer  "position"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "devx_slideshows", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

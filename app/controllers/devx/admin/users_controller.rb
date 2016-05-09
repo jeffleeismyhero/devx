@@ -22,7 +22,7 @@ module Devx
 
   	def create
   		if @user.valid? && @user.save
-  			redirect_to devx.users_path,
+  			redirect_to devx.admin_users_path,
   			notice: "Successfully saved user"
 
   		else
@@ -32,8 +32,8 @@ module Devx
   	end
 
   	def update
-  		if @user.valid? && @user.save
-  			redirect_to devx.users_path,
+  		if @user.valid? && @user.update(user_params)
+  			redirect_to devx.admin_users_path,
   			notice: "Successfully updated user"
 
   		else
@@ -44,7 +44,7 @@ module Devx
 
   	def destroy
   		if @user.destroy
-  			redirect_to devx.users_path,
+  			redirect_to devx.admin_users_path,
   			notice: "Successfully deleted user"
   		end
   	end

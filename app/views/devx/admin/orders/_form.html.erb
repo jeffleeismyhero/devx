@@ -1,10 +1,30 @@
 <%= f.label :user_id, 'Customer name' %>
-<%= f.select :user_id, Devx::User.all.collect{ |x| [x.full_name, x.id] }, { include_blank: true } %>
+
+<% if @order.new_record? %>
+  <%= f.select :user_id, Devx::User.all.collect{ |x| [x.full_name, x.id] }, { include_blank: true } %>
+<% else %>
+  <%= @order.user.full_name %>
+<% end %>
 
 <% if !@order.new_record? %>
-  <%= @order.transactions.new.inspect %>
+  <h3>Transactions</h3>
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Payment Method</th>
+        <th>Amount</th>
+        <th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'transaction', collection: @order.transactions %>
+    </tbody>
+  </table>
+
+  <h3>Make a Payment</h3>
   <div class="nested-attributes">
-    <%= f.fields_for :transactions, @order.transactions.new do |transaction| %>
+    <%= f.fields_for :transactions, @order.transactions.build do |transaction| %>
       <%= render partial: 'transaction_fields', locals: { f: transaction } %>
     <% end %>
   </div>

@@ -1,0 +1,26 @@
+<%= f.label :name %>
+<%= f.text_field :name %>
+
+<h3>Current Slides</h3>
+<table width="100%">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Image</th>
+      <th>Position</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'slide', collection: @slideshow.slides %>
+  </tbody>
+</table>
+
+<div class="nested-attributes">
+  <h3>Manage Slides</h3>
+  <%= f.fields_for :slides, @slideshow.slides.build do |slide| %>
+    <%= render partial: 'slide_fields', locals: { f: slide } %>
+  <% end %>
+</div>
+
+<%= f.submit %>

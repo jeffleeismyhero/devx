@@ -4,7 +4,7 @@
       <h1>Create <%= controller_name.classify %></h1>
     </div>
     <div class="large-12">
-      <%= link_to 'Back to events', :back %>
+      <%= link_to 'Back to events', devx.admin_events_path %>
       <%= form_for @event, url: devx.admin_events_path, method: :post do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>

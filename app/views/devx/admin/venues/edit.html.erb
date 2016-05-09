@@ -4,8 +4,8 @@
       <h1>Create <%= controller_name.classify %></h1>
     </div>
     <div class="large-12">
-      <%= link_to 'Back to venues', :back %>
-      <%= form_for @venue, url: devx.venue_path(@venue) do |f| %>
+      <%= link_to 'Back to venues', devx.admin_venues_path %>
+      <%= form_for @venue, url: devx.admin_venue_path(@venue) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
     </div>

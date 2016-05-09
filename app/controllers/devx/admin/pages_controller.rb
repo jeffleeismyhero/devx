@@ -17,7 +17,7 @@ module Devx
 
     def create
       if @page.valid? && @page.save
-        redirect_to @page,
+        redirect_to devx.page_path(@page),
         notice: "Successfully saved page"
       else
         render :new,
@@ -27,7 +27,7 @@ module Devx
 
     def update
       if @page.valid? && @page.update(page_params)
-        redirect_to @page,
+        redirect_to devx.page_path(@page),
         notice: "Successfully updated page"
       else
         render :edit,

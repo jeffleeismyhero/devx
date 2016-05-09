@@ -5,22 +5,24 @@ Devx::Engine.routes.draw do
   resources :articles, except: :show
   resources :venues
   resources :events
-  resources :users
 
   namespace :admin do
+    root 'dashboard#index'
     resources :pages
     resources :articles
     resources :events
     resources :branding
     resources :users
     resources :venues
+    resources :slideshows
+    resources :media
     resources :orders do
       resources :transactions
     end
   end
 
 
-  match '/:id' => 'pages#show', via: [ :get, :post ]
+  match '/:id' => 'pages#show', via: [ :get, :post ], as: :page
 
   root 'pages#show'
   
