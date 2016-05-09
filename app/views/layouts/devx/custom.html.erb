@@ -1,0 +1,1 @@
+<%= sc_content_html(Liquid::Template.parse(@page.layout.try(:content)).render('page_content' => yield, 'page_title' => yield(:title))) %>

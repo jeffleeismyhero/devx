@@ -50,7 +50,7 @@ module Devx
 
     def slideshow_params
       accessible = [ :name,
-                    slides_attributes: [ :id, :slideshow_id, :title, :content, :image, :_destroy ]
+                    slides_attributes: [ :id, :slideshow_id, :title, :content, :image, :position, :_destroy ]
                   ]
       params.require(:slideshow).permit(accessible)
     end

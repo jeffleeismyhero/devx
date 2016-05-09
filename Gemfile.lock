@@ -11,6 +11,7 @@ PATH
       devise
       friendly_id
       jquery-rails
+      liquid
       mini_magick
       paranoia (~> 2.0)
       pg
@@ -125,6 +126,7 @@ GEM
     jwt (1.5.4)
     launchy (2.4.3)
       addressable (~> 2.3)
+    liquid (3.0.6)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)

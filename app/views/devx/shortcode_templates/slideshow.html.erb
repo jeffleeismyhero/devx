@@ -1,0 +1,12 @@
+<div id="slideshow" class="slideshow">
+    <div class="slides">
+        <ul>
+            <% @attributes[:slides].each do |slide| %>
+              <li style="background-image:url(<%= slide.image.url %>)"></li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() { $("#slideshow").jcw_slideshow(); });
+</script>

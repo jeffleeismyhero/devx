@@ -13,5 +13,13 @@ module Devx
         base_title
       end
     end
+
+    def sc_content(content)
+      Shortcode.process(content)
+    end
+
+    def sc_content_html(content)
+      raw sc_content(content)
+    end
   end
 end
