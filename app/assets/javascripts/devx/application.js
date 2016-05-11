@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require ckeditor/init
 //= require select2
+//= require_tree ./ckeditor
 //= require_tree .
 
 $(function()

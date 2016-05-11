@@ -1,6 +1,2 @@
-CKEDITOR.editorConfig = function(config)
-{
-  config.enterMode = CKEDITOR.ENTER_BR;
-  config.shiftEnterMode = CKEDITOR.ENTER_BR;;
-  config.autoParagraph = false;
-}
+CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+CKEDITOR.config.entities = false;
