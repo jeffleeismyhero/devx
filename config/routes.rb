@@ -9,6 +9,7 @@ Devx::Engine.routes.draw do
   namespace :admin do
     root 'dashboard#index'
     resources :pages
+    resources :layouts
     resources :articles
     resources :events
     resources :branding

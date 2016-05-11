@@ -5,6 +5,7 @@ class CreateDevxPages < ActiveRecord::Migration
       t.string :name
       t.string :slug
       t.string :content
+      t.boolean :is_home
 
       t.timestamps null: false
     end
