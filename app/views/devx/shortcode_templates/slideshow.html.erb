@@ -2,7 +2,10 @@
     <div class="slides">
         <ul>
             <% @attributes[:slides].each do |slide| %>
-              <li style="background-image:url(<%= slide.image.url %>)"></li>
+              <li class="slide-image" style="background-image:url(<%= slide.image.url %>)">
+                <div class="slide-title"><%= slide.title %></div>
+                <div class="slide-content"><%= slide.content %></div>
+              </li>
             <% end %>
         </ul>
     </div>
