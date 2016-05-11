@@ -1,5 +1,5 @@
 <ul id="event-list" style="margin-bottom:20px">
-    <% @attributes[:events].each do |event| %>
+    <% @attributes[:events].try(:each) do |event| %>
         <%= link_to "<li class=\"event\">
         <div class=\"event-square\">
             <div class=\"event-date\">
@@ -9,12 +9,11 @@
             </div>
         </div>
         <div class=\"event-text\">
-            <p class=\"event-title\">#{link_to event.title.try(:upcase), event_path(event)}</p>
-            <p class=\"event-desc\">#{event.subtitle.try(:upcase)}</p>
+            <p class=\"event-title\">#{link_to event.name.try(:upcase), '#'}</p>
             <p class=\"event-desc\">#{event.start_time.try(:strftime, '%I:%M%p')}</p>
-            <p class=\"event-desc\">#{event.venue.try(:upcase)}<br>#{event.location.try(:upcase)}</p>
+            <p class=\"event-desc\">#{event.venue.try(:upcase)}</p>
         </div>
-    </li>".html_safe, event %>
+    </li>".html_safe, "#" %>
 
     <% end %>
 </ul>

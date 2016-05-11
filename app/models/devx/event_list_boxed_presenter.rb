@@ -1,7 +1,7 @@
 module Devx
   class EventListBoxedPresenter
     def self.for
-      :slideshow
+      :event_list_boxed
     end
 
     def initialize(attributes, content, additional_attributes)
@@ -21,7 +21,7 @@ module Devx
     private
 
     def events
-      Devx::Event.upcoming.try(:limit, @attributes[:limit])
+      Devx::Event.upcoming
     end
   end
 end

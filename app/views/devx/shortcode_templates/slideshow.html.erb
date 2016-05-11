@@ -1,7 +1,7 @@
 <div id="slideshow" class="slideshow">
     <div class="slides">
         <ul>
-            <% @attributes[:slides].each do |slide| %>
+            <% @attributes[:slides].try(:each) do |slide| %>
               <li class="slide-image" style="background-image:url(<%= slide.image.url %>)">
                 <div class="slide-title"><%= slide.title %></div>
                 <div class="slide-content"><%= slide.content %></div>

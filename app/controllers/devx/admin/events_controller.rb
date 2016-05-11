@@ -21,7 +21,7 @@ module Devx
   	end
 
   	def create
-  		if @event.valid? && event.save
+  		if @event.valid? && @event.save
   			redirect_to devx.admin_events_path,
   			notice: "Successfully created event"
   		else
@@ -36,7 +36,7 @@ module Devx
   			redirect_to devx.admin_events_path,
   			notice: "Successfully updated event"
   		else
-  			render :new,
+  			render :edit,
   			notice: "Failed to update event"
   		end
   	end

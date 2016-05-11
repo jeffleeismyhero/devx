@@ -1,6 +1,6 @@
 <tr>
   <td><%= link_to event.name, devx.edit_admin_event_path(event) %></td>
-  <td><%= event.description %></td>
+  <td><%= strip_tags(event.description) %></td>
   <td><%= event.start_time.try(:strftime, '%m/%d/%Y %H:%I:%s') %></td>
   <td><%= event.end_time.try(:strftime, '%m/%d/%Y %H:%I:%s') %></td>
   <td>
