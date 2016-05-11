@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<%= sc_content_html(Liquid::Template.parse(@page.layout.try(:content)).render('page_content' => yield, 'page_title' => yield(:title), 'branding_logo' => app_branding.logo)) %>
+<%= sc_content_html(Liquid::Template.parse(@page.layout.try(:content)).render('page_content' => yield, 'page_title' => yield(:title), 'branding_logo' => image_tag(app_branding.logo.try(:url), class: 'logo'))) %>
 
 </body>
 </html>
