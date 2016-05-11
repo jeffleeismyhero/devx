@@ -26,7 +26,7 @@ module Devx
   	private
 
   		def branding_params
-  			accessible = [ :company_name, :logo ]
+  			accessible = [ :company_name, :logo, :alternate_logo, :favicon, :primary_color, :secondary_color, :accent_color_1, :accent_color_2, :accent_color_3 ]
   			params.require(:branding).permit(accessible)
   		end
 

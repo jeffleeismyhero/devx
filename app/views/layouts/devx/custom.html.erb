@@ -6,6 +6,7 @@
   <% @page.layout.stylesheets.try(:each) do |stylesheet| %>
     <link rel="stylesheet" type="text/css" href="<%= stylesheet_path(stylesheet) %>">
   <% end %>
+  <link rel="icon" type="image/png" href="<%= app_branding.favicon.try(:url) %>" />   
   <%= javascript_include_tag "devx/application" %>
   <link rel="stylesheet" type="text/css" href="//cdn.jcwproductions.com/plugins/slideshow/slideshow.css">
   <script type="text/javascript" src="//cdn.jcwproductions.com/plugins/slideshow/slideshow.jquery.min.js"></script>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511142552) do
+ActiveRecord::Schema.define(version: 20160511192536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,8 +57,15 @@ ActiveRecord::Schema.define(version: 20160511142552) do
   create_table "devx_brandings", force: :cascade do |t|
     t.string   "company_name"
     t.string   "logo"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "alternate_logo"
+    t.string   "favicon"
+    t.string   "primary_color"
+    t.string   "secondary_color"
+    t.string   "accent_color_1"
+    t.string   "accent_color_2"
+    t.string   "accent_color_3"
   end
 
   create_table "devx_events", force: :cascade do |t|
