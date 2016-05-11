@@ -4,4 +4,4 @@ Shortcode.setup do |config|
   config.self_closing_tags = [ :slideshow, :event_list_boxed ]
 end
 
-Shortcode.register_presenter(Devx::SlideshowPresenter, Devx::EventPresenter)
+Shortcode.register_presenter(Devx::SlideshowPresenter, Devx::EventListBoxedPresenter)
