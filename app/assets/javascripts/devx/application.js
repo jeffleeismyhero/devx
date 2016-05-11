@@ -13,4 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require ckeditor/init
+//= require select2
 //= require_tree .
+
+$(function()
+{
+
+  // Select2
+  $(".select2").select2({ multiple: true });
+  $(".select2-fixed").select2({ multiple: false });
+
+});

@@ -5,11 +5,13 @@ Devx::Engine.routes.draw do
   resources :articles, except: :show
   resources :venues
   resources :events
+  resources :stylesheets, defaults: { format: 'css' }
 
   namespace :admin do
     root 'dashboard#index'
     resources :pages
     resources :layouts
+    resources :stylesheets
     resources :articles
     resources :events
     resources :branding

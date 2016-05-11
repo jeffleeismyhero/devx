@@ -49,7 +49,7 @@ module Devx
     private
 
     def layout_params
-      accessible = [ :name, :content ]
+      accessible = [ :name, :content, stylesheet_ids: [] ]
       params.require(:layout).permit(accessible)
     end
   end
