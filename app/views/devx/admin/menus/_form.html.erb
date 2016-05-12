@@ -1,0 +1,23 @@
+<%= f.label :name %>
+<%= f.text_field :name %>
+
+<% if !@menu.new_record? %>
+  <h3>Current Navigation</h3>
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>Page</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'page', collection: @menu.pages %>
+    </tbody>
+  </table>
+
+  <div class="nested-attributes">
+    <h3>Add Pages</h3>
+    <%= f.select :page_ids, Devx::Page.all.collect{ |x| [x.name, x.id] } %>
+  </div>
+<% end %>
+
+<%= f.submit %>

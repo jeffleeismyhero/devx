@@ -3,6 +3,8 @@ module Devx
     extend FriendlyId
     friendly_id :name, use: [ :slugged, :finders ]
 
+    has_many :menu_pages
+    has_many :menus, through: :menu_pages
     belongs_to :layout
 
     validates :name, presence: true
