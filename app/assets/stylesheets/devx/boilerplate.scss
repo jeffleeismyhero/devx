@@ -20,7 +20,7 @@
 */
 
 /** Fonts **/
-@import url('//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700');
+
 /** End Fonts **/
 
 /* Grid */
@@ -723,7 +723,6 @@ So basically 1.5rem = 15px */
 html {
   font-size: 62.5%; }
 body {
-    font-family: 'Source Sans Pro', sans-serif;
     color: #444;
     background: #fff;
   font-style: normal;
@@ -739,7 +738,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 2rem;
   font-weight: 100;
-  font-family: 'Source Sans Pro', sans-serif;
 }
 h1 { font-size: 5.0rem; line-height: 1.2;  letter-spacing: -.1rem; font-weight: 100; padding-top: 20px;}
 h2 { font-size: 4.5rem; line-height: 1.25; letter-spacing: -1px; font-weight: 100; padding-top: 18px;}
@@ -766,7 +764,6 @@ h6 { font-size: 2.2rem; line-height: 1.5;  letter-spacing: 0; font-weight: 700; 
   h5 { font-size: 2.2rem; }
 }
 p {
-    font-family: 'Source Sans Pro', sans-serif;
     color: #777;
   font-size: 1.6rem;
   font-weight: 400;
@@ -780,7 +777,6 @@ p {
 }
 /* Links */
 a {
-    color: #115CA7;
     text-decoration: none;
   transition: all 0.3s ease 0s;
     -webkit-transition: all 0.3s ease 0s;
