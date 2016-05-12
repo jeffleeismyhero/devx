@@ -5,5 +5,8 @@ module Devx
 
     has_many :layout_stylesheets
     has_many :layouts, through: :layout_stylesheets
+
+    validates :name, presence: true
+    validates :content, presence: true
   end
 end

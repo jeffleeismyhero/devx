@@ -5,6 +5,9 @@ module Devx
     devise :database_authenticatable, :registerable,
            :recoverable, :rememberable, :trackable, :validatable
 
+
+    validates :email, presence: true
+
     def full_name
       if !self.first_name.nil?
       "#{self.first_name} #{self.last_name}".squish 
