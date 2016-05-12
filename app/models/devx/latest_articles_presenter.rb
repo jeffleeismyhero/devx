@@ -21,7 +21,7 @@ module Devx
 
     private
 
-    def media
+    def articles
       Devx::Article.latest.try(:limit, @attributes[:limit])
     end
   end
