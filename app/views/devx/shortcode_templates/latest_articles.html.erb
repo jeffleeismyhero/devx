@@ -1,2 +1,22 @@
-<%= @attributes.inspect %>
-<%= @attributes[:articles].inspect %>
+<% @attributes[:articles].try(:each) do |article| %>
+<% @text = nil %>
+<% article.content.try(:split, ' ').try(:take, 30).each do |word| %>
+    <% @text = "#{@text} " + word.html_safe %>
+<% end %>
+
+<% if article.image.blank? %>
+    <% @image = image_path('news/default.jpg') %>
+<% else %>
+    <% @image = article.image.url %>
+<% end %>
+
+<%= link_to "<div class=\"small-12 medium-6 large-6 columns\">
+    <div class=\"featured-news\" style=\"background-image:url('#{@image}');position:relative\">
+        <div class=\"featured-title\">#{article.title}
+        <hr class=\"line2\" />
+        <div class=\"featured-desc\"><p>#{strip_tags(article.content)[0..120] + "..."}</p>
+        <p>READ MORE</p></div>
+    </div>
+    </div>
+</div>".html_safe, "#" %>
+<% end %>
