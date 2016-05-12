@@ -8,6 +8,8 @@ DevX is an open source content management system.
 
 ## Getting started
 
+DevX can be added to your Gemfile using the following:
+
 ```ruby
 gem 'devx'
 ```
