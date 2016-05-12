@@ -7,16 +7,23 @@
     <thead>
       <tr>
         <th>Page</th>
+        <th>Position</th>
       </tr>
     </thead>
     <tbody>
-      <%= render partial: 'page', collection: @menu.pages %>
+      <% @menu.menu_pages.try(:each) do |page| %>
+        <tr>
+          <td><%= Devx::Page.find(page.page_id).name %></td>
+          <td><%= page.position %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 
   <div class="nested-attributes">
     <h3>Add Pages</h3>
-    <%= f.select :page_ids, Devx::Page.all.collect{ |x| [x.name, x.id] } %>
+    <%= select_tag 'page[id]', options_from_collection_for_select(Devx::Page.all, 'id', 'name') %>
+    <%= number_field_tag 'page[position]' %>
   </div>
 <% end %>
 

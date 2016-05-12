@@ -11,7 +11,7 @@ module Devx
 
     def add(page)
       unless added?(page)
-        self.menu_pages.create(page: page)
+        self.menu_pages.create(page: Page.find(page[:id]), position: page[:position])
       end
     end
   end

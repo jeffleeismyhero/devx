@@ -1,0 +1,5 @@
+<ul class="navigation" id="<%= @attributes[:name] %>">
+  <% @attributes[:pages].try(:each_with_index) do |page, index| %>
+    <li><a href="/<%= @attributes[:paths][index] %>"><%= page.name %></a>
+  <% end %>
+</ul>

@@ -29,7 +29,7 @@ module Devx
       if @menu.valid? && @menu.update(menu_params)
         
 
-        if !@menu.add(Page.find(params[:menu][:page_ids]))
+        if !@menu.add(params[:page])
           redirect_to devx.edit_admin_menu_path
           puts "Page already exists in the menu"
         end
