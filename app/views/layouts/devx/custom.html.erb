@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= full_title(yield(:title)) %></title>
-  <% stylesheet_link_tag    "devx/application", media: "all" %>
+  <%= stylesheet_link_tag    "devx/application", media: "all" %>
   <% @page.layout.stylesheets.try(:each) do |stylesheet| %>
     <link rel="stylesheet" type="text/css" href="<%= stylesheet_path(stylesheet) %>">
   <% end %>
