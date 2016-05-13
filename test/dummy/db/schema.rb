@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512183620) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20160513205611) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -30,7 +27,7 @@ ActiveRecord::Schema.define(version: 20160512183620) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "devx_articles", force: :cascade do |t|
     t.string   "title"
@@ -45,7 +42,14 @@ ActiveRecord::Schema.define(version: 20160512183620) do
     t.datetime "updated_at",        null: false
   end
 
-  add_index "devx_articles", ["published_at"], name: "index_devx_articles_on_published_at", using: :btree
+  add_index "devx_articles", ["published_at"], name: "index_devx_articles_on_published_at"
+
+  create_table "devx_attendances", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "devx_authorizations", force: :cascade do |t|
     t.integer  "user_id"
@@ -78,6 +82,13 @@ ActiveRecord::Schema.define(version: 20160512183620) do
     t.string   "contact_email"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "devx_forms", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.text     "fields"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "devx_layout_stylesheets", force: :cascade do |t|
@@ -121,19 +132,18 @@ ActiveRecord::Schema.define(version: 20160512183620) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "devx_page_stylesheets", force: :cascade do |t|
-    t.integer  "page_id"
-    t.integer  "stylesheet_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
   create_table "devx_pages", force: :cascade do |t|
     t.integer  "layout_id"
     t.string   "name"
     t.string   "slug"
     t.string   "content"
     t.boolean  "is_home"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "devx_registrations", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -176,7 +186,7 @@ ActiveRecord::Schema.define(version: 20160512183620) do
     t.string   "slug"
   end
 
-  add_index "devx_stylesheets", ["slug"], name: "index_devx_stylesheets_on_slug", using: :btree
+  add_index "devx_stylesheets", ["slug"], name: "index_devx_stylesheets_on_slug"
 
   create_table "devx_transactions", force: :cascade do |t|
     t.integer  "order_id"
@@ -185,6 +195,13 @@ ActiveRecord::Schema.define(version: 20160512183620) do
     t.text     "comments"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "devx_user_registrations", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "devx_users", force: :cascade do |t|
@@ -208,10 +225,10 @@ ActiveRecord::Schema.define(version: 20160512183620) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "devx_users", ["deleted_at"], name: "index_devx_users_on_deleted_at", using: :btree
-  add_index "devx_users", ["email"], name: "index_devx_users_on_email", unique: true, using: :btree
-  add_index "devx_users", ["reset_password_token"], name: "index_devx_users_on_reset_password_token", unique: true, using: :btree
-  add_index "devx_users", ["unlock_token"], name: "index_devx_users_on_unlock_token", unique: true, using: :btree
+  add_index "devx_users", ["deleted_at"], name: "index_devx_users_on_deleted_at"
+  add_index "devx_users", ["email"], name: "index_devx_users_on_email", unique: true
+  add_index "devx_users", ["reset_password_token"], name: "index_devx_users_on_reset_password_token", unique: true
+  add_index "devx_users", ["unlock_token"], name: "index_devx_users_on_unlock_token", unique: true
 
   create_table "devx_venues", force: :cascade do |t|
     t.string   "name"

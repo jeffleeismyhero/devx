@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="large-12">
+      <h1><%= @registration.name %></h1>
+    </div>
+    <div class="large-12">
+      <h3>Registrations</h3>
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Child Name</th>
+          </tr>
+        </thead>
+      </table>
+      <span>Total registered: <%= @registration.user_registrations.count %>
+    </div>
+  </div>
+</div>

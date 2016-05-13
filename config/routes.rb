@@ -20,6 +20,9 @@ Devx::Engine.routes.draw do
     resources :venues
     resources :slideshows
     resources :media
+    resources :registrations do
+      resources :attendances
+    end
     resources :orders do
       resources :transactions
     end

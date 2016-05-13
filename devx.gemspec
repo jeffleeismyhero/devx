@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.2"
+  s.add_dependency "sqlite3"
   s.add_dependency "jquery-rails"
   s.add_dependency "sass-rails", "~> 5.0"
-  s.add_dependency "pg"
   s.add_dependency "devise"
   s.add_dependency "cancancan"
   s.add_dependency "paranoia", "~> 2.0"

@@ -6,6 +6,10 @@ module Devx
            :recoverable, :rememberable, :trackable, :validatable
 
 
+    has_many :user_registrations
+    has_many :registrations, through: :user_registrations
+    has_many :attendances
+
     validates :email, presence: true
 
     def full_name
