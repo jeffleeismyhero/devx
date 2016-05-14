@@ -26,8 +26,6 @@ module Devx
     end
 
     def update
-      # render plain: params.inspect
-      # return
       if @order.update(order_params)
         redirect_to devx.edit_admin_order_path(@order),
         notice: "Successfully updated #{@order}"

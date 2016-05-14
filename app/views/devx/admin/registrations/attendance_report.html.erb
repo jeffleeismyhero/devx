@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="large-12">
+      <h1><%= @child.try(:full_name) %></h1>
+    </div>
+    <div class="large-12">
+      <h3>Attendance report for <%= @registration.name %></h3>
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Check in</th>
+            <th>Check out</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @attendances.try(:each) do |attendance| %>
+            <tr>
+              <td><%= attendance.check_in %></td>
+              <td><%= attendance.check_out %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -21,7 +21,12 @@ Devx::Engine.routes.draw do
     resources :slideshows
     resources :media
     resources :registrations do
-      resources :attendances
+      member do
+        post 'enroll'
+        get 'attendance'
+        post 'attendance'
+        get 'attendance_report'
+      end
     end
     resources :orders do
       resources :transactions

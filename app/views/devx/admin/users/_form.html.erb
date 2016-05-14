@@ -8,4 +8,26 @@
 <%= f.password_field :password %>
 <%= f.label :password_confirmation %>
 <%= f.password_field :password_confirmation %>
+
+<h3>Children</h3>
+<table width="100%">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'child', collection: @user.children %>
+  </tbody>
+</table>
+
+<h3>Add Child</h3>
+<%= f.fields_for :children, @user.children.build do |child| %>
+  <%= child.label :first_name %>
+  <%= child.text_field :first_name %>
+  <%= child.label :last_name %>
+  <%= child.text_field :last_name %>
+<% end %>
+
 <%= f.submit %>

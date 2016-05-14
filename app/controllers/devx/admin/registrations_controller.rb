@@ -48,12 +48,30 @@ module Devx
       end
     end
 
+    def enroll
+      if params[:child].present?
+        @registration.enroll(params[:child])
+      end
+
+      redirect_to devx.admin_registration_path(@registration)
+    end
+
+    def attendance
+      if @registration.record_attendance(params[:child_id])
+        redirect_to devx.admin_registration_path(@registration)
+      end
+    end
+
+    def attendance_report
+      @child = Devx::Child.find(params[:child_id])
+      @attendances = @registration.attendance(@child)
+    end
+
 
     private
 
     def registration_params
-      accessible = [ :name
-                    ]
+      accessible = [ :name ]
       params.require(:registration).permit(accessible)
     end
   end

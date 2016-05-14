@@ -22,7 +22,7 @@ module Devx
 
   	def create
   		if @user.valid? && @user.save
-  			redirect_to devx.admin_users_path,
+  			redirect_to devx.edit_admin_user_path(@user),
   			notice: "Successfully saved user"
 
   		else
@@ -33,7 +33,7 @@ module Devx
 
   	def update
   		if @user.valid? && @user.update(user_params)
-  			redirect_to devx.admin_users_path,
+  			redirect_to devx.edit_admin_user_path(@user),
   			notice: "Successfully updated user"
 
   		else
@@ -52,7 +52,9 @@ module Devx
   	private
 
   		def user_params
-  			accessible = [ :email, :first_name, :last_name ]
+  			accessible = [ :email, :first_name, :last_name,
+                      children_attributes: [ :id, :first_name, :last_name, :_destroy ]
+                    ]
 
   			#adds the below params to the above var except when the user and password fields are blank
   			accessible  << [ :password, :password_confirmation ] unless params[:user][:password].blank?
