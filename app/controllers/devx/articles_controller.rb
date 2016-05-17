@@ -1,4 +1,4 @@
-require_dependency "Devx/application_controller"
+require_dependency "devx/application_controller"
 
 module Devx
   class ArticlesController < ApplicationController
