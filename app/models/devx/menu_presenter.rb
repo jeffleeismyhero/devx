@@ -37,7 +37,7 @@ module Devx
     def get_paths
       paths = []
 
-      @attributes[:pages].each do |p|
+      get_pages.try(:each) do |p|
         paths.push(p.slug)
       end
 
