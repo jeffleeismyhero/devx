@@ -14,6 +14,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if @page.image.present? %>
+  <div class="container banner header-image" style="background-image:url(<%= @page.image.url %>)"></div>
+<% end %>
 
 <%= sc_content_html(Liquid::Template.parse(@page.layout.try(:content)).render('page_content' => yield, 'page_title' => yield(:title), 'branding_logo' => image_tag(app_branding.logo.try(:url), class: 'logo'), 'alternate_logo' => image_tag(app_branding.alternate_logo.try(:url), class: 'alternate-logo'))) %>
 

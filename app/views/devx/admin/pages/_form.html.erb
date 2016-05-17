@@ -4,4 +4,9 @@
 <%= f.cktext_area :content %>
 <%= f.label :layout_id %>
 <%= f.select :layout_id, Devx::Layout.all.collect{ |x| [ x.name, x.id ] }, { include_blank: true } %>
+<%= f.label :parent %>
+<%= f.select :parent, Devx::Page.all.where.not(id: @page.id).collect{ |x| [x.name, x.id] }, { include_blank: true } %>
+<%= f.label :image, 'Header image' %>
+<%= f.file_field :image %>
+<%= f.check_box :active %>Active
 <%= f.submit %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160514002023) do
+ActiveRecord::Schema.define(version: 20160517211332) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -46,9 +46,7 @@ ActiveRecord::Schema.define(version: 20160514002023) do
 
   create_table "devx_attendances", force: :cascade do |t|
     t.integer  "registration_id"
-    t.integer  "child_id"
-    t.datetime "check_in"
-    t.datetime "check_out"
+    t.integer  "user_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
@@ -72,13 +70,6 @@ ActiveRecord::Schema.define(version: 20160514002023) do
     t.string   "accent_color_1"
     t.string   "accent_color_2"
     t.string   "accent_color_3"
-  end
-
-  create_table "devx_child_registrations", force: :cascade do |t|
-    t.integer  "registration_id"
-    t.integer  "child_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
   end
 
   create_table "devx_children", force: :cascade do |t|
@@ -157,7 +148,13 @@ ActiveRecord::Schema.define(version: 20160514002023) do
     t.boolean  "is_home"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "parent"
+    t.string   "image"
+    t.boolean  "active"
+    t.integer  "parent_id"
   end
+
+  add_index "devx_pages", ["parent_id"], name: "index_devx_pages_on_parent_id"
 
   create_table "devx_registrations", force: :cascade do |t|
     t.string   "name"
@@ -212,6 +209,13 @@ ActiveRecord::Schema.define(version: 20160514002023) do
     t.text     "comments"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "devx_user_registrations", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "devx_users", force: :cascade do |t|

@@ -17,7 +17,7 @@ module Devx
 
     def create
       if @page.valid? && @page.save
-        redirect_to devx.page_path(@page),
+        redirect_to devx.edit_admin_page_path(@page),
         notice: "Successfully saved page"
       else
         render :new,
@@ -27,7 +27,7 @@ module Devx
 
     def update
       if @page.valid? && @page.update(page_params)
-        redirect_to devx.page_path(@page),
+        redirect_to devx.edit_admin_page_path(@page),
         notice: "Successfully updated page"
       else
         render :edit,
@@ -46,7 +46,7 @@ module Devx
     private
 
     def page_params
-      accessible = [ :name, :content, :layout_id ]
+      accessible = [ :name, :content, :layout_id, :parent, :image, :active ]
       params.require(:page).permit(accessible)
     end
   end
