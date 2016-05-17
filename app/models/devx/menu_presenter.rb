@@ -41,7 +41,7 @@ module Devx
 
       get_pages.try(:each) do |p|
         if p.slug == 'home'
-          paths.push('/')
+          paths.push('')
         else
           paths.push(p.slug)
         end
