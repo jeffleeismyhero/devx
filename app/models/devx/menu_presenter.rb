@@ -27,7 +27,7 @@ module Devx
     end
 
     def get_pages
-      pages []
+      pages = []
 
       menu.menu_pages.ordered.each do |p|
         pages.push(Devx::Page.find(p.id))
