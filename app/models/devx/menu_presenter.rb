@@ -32,6 +32,8 @@ module Devx
       menu.menu_pages.ordered.each do |p|
         pages.push(Devx::Page.find(p.id))
       end
+
+      return pages
     end
 
     def get_paths
