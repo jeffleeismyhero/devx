@@ -33,14 +33,12 @@ DevX makes use of shortcodes (similar to Wordpress) that pull from a repository 
 
 The slideshow plugin can be called using the following shortcode with `id` as an argument.
 
-
     [slideshow id="1"]
 
 
 #### Media
 
 The media plugin can be called using the following shortcode with `id`, `size`, `classes`, and `styles` as arguments.
-
 
     [media id="2" size="300x150" classes="blog_image" styles="margin-top:15px"]
 
@@ -49,6 +47,12 @@ The media plugin can be called using the following shortcode with `id`, `size`, 
 The latest article plugin can be called using the following shortcode with `limit` as an argument.
 
     [latest_articles limit="4"]
+
+### Menu
+
+The navigation menu plugin can be called using the following shortcode with `id` as an argument.
+
+    [menu id="1"]
 
 
 ## Support

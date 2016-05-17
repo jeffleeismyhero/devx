@@ -29,7 +29,7 @@ module Devx
     def get_paths
       paths = []
 
-      menu.pages.each do |p|
+      menu.pages.ordered.each do |p|
         paths.push(p.slug)
       end
 

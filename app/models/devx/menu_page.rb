@@ -1,5 +1,8 @@
 module Devx
   class MenuPage < ActiveRecord::Base
+
+    scope :ordered, -> { order(position: :asc) }
+
     belongs_to :menu
     belongs_to :page
 
