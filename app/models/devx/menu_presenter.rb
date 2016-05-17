@@ -30,7 +30,7 @@ module Devx
       paths = []
 
       menu.menu_pages.ordered.each do |p|
-        paths.push(p.slug)
+        paths.push(Devx::Page.find(p.id).slug)
       end
 
       return paths
