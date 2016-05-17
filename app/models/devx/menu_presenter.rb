@@ -15,7 +15,7 @@ module Devx
 
     def attributes
       { name: menu.name,
-        pages: menu.pages,
+        pages: get_pages,
         paths: get_paths }
     end
 
@@ -26,11 +26,19 @@ module Devx
       Devx::Menu.find(@attributes[:id])
     end
 
+    def get_pages
+      pages []
+
+      menu.menu_pages.ordered.each do |p|
+        pages.push(Devx::Page.find(p.id))
+      end
+    end
+
     def get_paths
       paths = []
 
-      menu.menu_pages.ordered.each do |p|
-        paths.push(Devx::Page.find(p.id).slug)
+      @attributes[:pages].each do |p|
+        paths.push(p.slug)
       end
 
       return paths
