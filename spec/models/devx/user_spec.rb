@@ -24,6 +24,12 @@ module Devx
       end
     end
 
+    describe 'children' do
+      it 'should allow multiple children' do
+        expect(user).to respond_to(:children)
+      end
+    end
+
     # describe 'roles' do
     #   it 'should allow multiple roles' do
     #     skip
