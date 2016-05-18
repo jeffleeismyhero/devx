@@ -13,22 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160517211332) do
 
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
-
   create_table "devx_articles", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
@@ -46,7 +30,9 @@ ActiveRecord::Schema.define(version: 20160517211332) do
 
   create_table "devx_attendances", force: :cascade do |t|
     t.integer  "registration_id"
-    t.integer  "user_id"
+    t.integer  "child_id"
+    t.datetime "check_in"
+    t.datetime "check_out"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
@@ -70,6 +56,13 @@ ActiveRecord::Schema.define(version: 20160517211332) do
     t.string   "accent_color_1"
     t.string   "accent_color_2"
     t.string   "accent_color_3"
+  end
+
+  create_table "devx_child_registrations", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.integer  "child_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "devx_children", force: :cascade do |t|
@@ -209,13 +202,6 @@ ActiveRecord::Schema.define(version: 20160517211332) do
     t.text     "comments"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-  end
-
-  create_table "devx_user_registrations", force: :cascade do |t|
-    t.integer  "registration_id"
-    t.integer  "user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
   end
 
   create_table "devx_users", force: :cascade do |t|

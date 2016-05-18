@@ -9,6 +9,7 @@ module Devx
     belongs_to :layout
 
     validates :name, presence: true
+    validates :content, presence: true
 
     mount_uploader :image, Devx::ImageUploader
 
