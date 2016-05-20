@@ -4,6 +4,7 @@ module Devx
   RSpec.describe Page, type: :model do
     let(:page){ FactoryGirl.build(:devx_page) }
 
+    ## Name unit tests
     describe 'name' do
       it 'is invalid if blank' do
         page.name = ''
@@ -11,6 +12,7 @@ module Devx
       end
     end
 
+    ## Content unit tests
     describe 'content' do
       it 'is invalid if blank' do
         page.content = ''

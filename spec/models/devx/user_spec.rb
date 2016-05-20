@@ -30,12 +30,12 @@ module Devx
       end
     end
 
-    # describe 'roles' do
-    #   it 'should allow multiple roles' do
-    #     skip
-    #     expect(user).to respond_to(:email)
-    #   end
-    # end
+    ## Role unit tests
+    describe 'roles' do
+      it 'should allow multiple roles' do
+        expect(user).to respond_to(:roles)
+      end
+    end
 
   end
 end
