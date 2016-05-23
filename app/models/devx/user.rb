@@ -5,6 +5,8 @@ module Devx
     devise :database_authenticatable, :registerable,
            :recoverable, :rememberable, :trackable, :validatable
 
+    has_many :authorizations
+    has_many :roles, through: :authorizations
     has_many :children
     has_many :child_registrations
     has_many :registrations, through: :child_registrations
