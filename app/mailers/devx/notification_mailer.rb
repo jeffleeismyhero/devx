@@ -8,5 +8,14 @@ module Devx
   		mail to: @user.email, 
   		     subject: @subject
   	end
+
+    def notify(user, subject, content)
+      @user = user
+      @subject = subject
+      @content = content
+
+      mail to: @user.email,
+           subject: @subject
+    end
   end
 end
