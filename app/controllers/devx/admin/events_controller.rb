@@ -6,7 +6,8 @@ module Devx
     before_filter :authenticate_user!
     layout 'devx/admin'
   	#initializes instance variables. ( e.g. index uses @users = User.all, show uses @user = User.find(params[:id]) )
-  	load_and_authorize_resource :event, class: 'Devx::Event'
+    load_and_authorize_resource :event, class: 'Devx::Event'
+  	load_and_authorize_resource :calendar, class: 'Devx::Calendar'
 
   	def index
   	end
@@ -21,8 +22,10 @@ module Devx
   	end
 
   	def create
+      @event.calendar_id = params[:calendar_id]
+      
   		if @event.valid? && @event.save
-  			redirect_to devx.admin_events_path,
+  			redirect_to devx.admin_calendar_path(id: params[:calendar_id]),
   			notice: "Successfully created event"
   		else
   			render :new,
@@ -31,9 +34,10 @@ module Devx
   	end
 
   	def update
-  		if
-  			@event.valid? && @event.update(event_params)
-  			redirect_to devx.admin_events_path,
+      @event.calendar_id = params[:calendar_id]
+      
+  		if @event.valid? && @event.update(event_params)
+  			redirect_to devx.admin_calendar_path(id: params[:calendar_id]),
   			notice: "Successfully updated event"
   		else
   			render :edit,
@@ -43,14 +47,14 @@ module Devx
 
   	def destroy
   		if @event.destroy
-  			redirect_to devx.admin_events_path
+  			redirect_to devx.admin_calendar_path(id: params[:calendar_id])
   		end
   	end
 
   	private
 
   		def event_params
-  			accessible = [ :name, :description, :start_time, :end_time, :contact_name, :contact_email, :venue_id ]
+  			accessible = [ :calendar_id, :name, :description, :start_time, :end_time, :contact_name, :contact_email, :venue_id ]
   			params.require(:event).permit(accessible)
   		end
 

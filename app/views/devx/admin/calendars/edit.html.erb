@@ -4,8 +4,8 @@
       <h1>Create <%= controller_name.classify %></h1>
     </div>
     <div class="large-12">
-      <%= link_to 'Back to calendar', devx.admin_calendar_path(@calendar) %>
-      <%= form_for @event, url: devx.admin_calendar_events_path(@calendar), method: :post do |f| %>
+      <%= link_to 'Back to calendars', devx.admin_calendars_path %>
+      <%= form_for @calendar, url: devx.admin_calendar_path(@calendar) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
     </div>

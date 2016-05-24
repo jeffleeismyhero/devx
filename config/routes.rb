@@ -14,7 +14,9 @@ Devx::Engine.routes.draw do
     resources :layouts
     resources :stylesheets
     resources :articles
-    resources :events
+    resources :calendars do
+      resources :events
+    end
     resources :branding
     resources :users
     resources :venues

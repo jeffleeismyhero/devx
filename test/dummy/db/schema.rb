@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160523225005) do
+ActiveRecord::Schema.define(version: 20160524160458) do
 
   create_table "devx_articles", force: :cascade do |t|
     t.string   "title"
@@ -58,6 +58,13 @@ ActiveRecord::Schema.define(version: 20160523225005) do
     t.string   "accent_color_3"
   end
 
+  create_table "devx_calendars", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_child_registrations", force: :cascade do |t|
     t.integer  "registration_id"
     t.integer  "child_id"
@@ -93,7 +100,10 @@ ActiveRecord::Schema.define(version: 20160523225005) do
     t.string   "contact_email"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "calendar_id"
   end
+
+  add_index "devx_events", ["calendar_id"], name: "index_devx_events_on_calendar_id"
 
   create_table "devx_forms", force: :cascade do |t|
     t.integer  "registration_id"

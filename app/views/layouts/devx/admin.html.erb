@@ -8,8 +8,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-  <div id="devx_admin_header" class="container header"<%= " style=background-color:#{app_branding.primary_color}" if app_branding.primary_color.present? %>>
+<header id="devx_admin_header">
+  <div class="container header"<%= " style=background-color:#{app_branding.primary_color}" if app_branding.primary_color.present? %>>
     <div class="row">
       <div class="large-8 columns">
         <% if app_branding.logo.present? %>
@@ -37,7 +37,7 @@
 </div>
 
 <footer>
-  <div class="container footer">
+  <div id="devx_admin_footer" class="container footer">
     <div class="row">
       <div class="large-12 columns text-center">
         <span><small>DevX <%= Devx::VERSION %> - powered by <%= link_to 'JCW', '//jcwproductions.com', target: '_blank' %></small></span>

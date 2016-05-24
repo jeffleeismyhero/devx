@@ -3,6 +3,8 @@ module Devx
     extend FriendlyId
     friendly_id :name, use: [ :slugged, :finders ]
 
+    scope :ordered, -> { order(position: :asc) }
+
     has_one :page, foreign_key: 'parent'
     has_many :menu_pages
     has_many :menus, through: :menu_pages

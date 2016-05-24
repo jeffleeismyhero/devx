@@ -6,7 +6,8 @@ Shortcode.setup do |config|
     :event_list_boxed,
     :media,
     :latest_articles,
-    :menu
+    :menu,
+    :submenu
   ]
 end
 
@@ -15,5 +16,6 @@ Shortcode.register_presenter(
   Devx::EventListBoxedPresenter,
   Devx::MediaPresenter,
   Devx::LatestArticlesPresenter,
-  Devx::MenuPresenter
+  Devx::MenuPresenter,
+  Devx::SubmenuPresenter
 )
