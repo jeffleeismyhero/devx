@@ -17,6 +17,7 @@ Devx::Engine.routes.draw do
     resources :calendars do
       resources :events
     end
+    resources :members
     resources :branding
     resources :users
     resources :venues

@@ -15,6 +15,7 @@ module Devx
 
     def attributes
       { name: menu.name,
+        style: @attributes[:style],
         pages: get_pages,
         paths: get_paths }
     end
