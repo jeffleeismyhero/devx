@@ -1,49 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DevX | <%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
+  <title><%= full_title(yield(:title)) %></title>
+  <% stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
   <%= stylesheet_link_tag    "devx/application", media: "all" %>
+  <%= stylesheet_link_tag    "devx/devx_admin", media: "all" %>
   <%= javascript_include_tag "devx/application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header id="devx_admin_header">
-  <div class="container header"<%= " style=background-color:#{app_branding.primary_color}" if app_branding.primary_color.present? %>>
-    <div class="row">
-      <div class="large-8 columns">
-        <% if app_branding.logo.present? %>
-          <%= link_to image_tag(app_branding.logo.try(:url), id: 'devx_branding_logo'), devx.admin_root_path %>
-        <% else %>
-          <%= app_branding.company_name || 'Company Name' %>
-        <% end %>
-      </div>
-      <div class="large-4 columns text-right">
-        <% if current_user %>
-          <%= link_to current_user.full_name, edit_admin_user_path(current_user) %> | <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="container header"<%= " style=background-color:#{app_branding.accent_color_1}" if app_branding.primary_color.present? %>>
-    <div class="row">
-      <%= render partial: 'devx/shared/admin_menu' %>
-    </div>
-  </div>
-</header>
 
-<div id="content">
-  <%= yield %>
-</div>
+  <!-- START: HEADER -->
+  <header class="cd-main-header">
 
-<footer>
-  <div id="devx_admin_footer" class="container footer">
-    <div class="row">
-      <div class="large-12 columns text-center">
-        <span><small>DevX <%= Devx::VERSION %> - powered by <%= link_to 'JCW', '//jcwproductions.com', target: '_blank' %></small></span>
-      </div>
+    <!-- START: LOGO -->
+    <%= link_to 'Logo', admin_dashboard_path, class: 'cd-logo' %>
+    <!-- END: LOGO -->
+    
+    <!-- START: TOP NAVIGATION -->
+    <nav class="cd-nav">
+      <ul class="cd-top-nav">
+        <li>
+          <%= link_to 'Account Balance', '#' %>
+        </li>
+        <li>
+          <%= link_to 'Search', '#' %>
+        </li>
+        <li>
+          <%= link_to 'Support', '#' %>
+        </li>
+        <li class="has-children account">
+          <%= link_to 'Account', '#' %>
+          <ul>
+            <li>
+              <%= link_to 'Edit Account', '#' %>
+            </li>
+            <li>
+              <%= link_to 'Logout', '#' %>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- END: TOP NAVIGATION -->
+
+  </header>
+  <!-- END: HEADER -->
+
+  
+  <!-- START: CONTENT -->
+  <main class="cd-main-content">
+
+    <!-- START: SIDE NAVIGATION -->
+    <nav class="cd-side-nav">
+      <ul>
+        <li class="cd-label">Primary Navigation</li>
+        <li>
+          <%= link_to '<i class="fa fa-tachometer"></i> Dashboard'.html_safe, admin_dashboard_path %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-user"></i> Users'.html_safe, admin_users_path %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-sitemap"></i> Organizations'.html_safe, '#' %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-laptop"></i> Site Management'.html_safe, admin_pages_path %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-calendar"></i> Events'.html_safe, admin_calendars_path %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-newspaper-o"></i> News'.html_safe, admin_articles_path %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-cogs"></i> Settings'.html_safe, admin_branding_index_path %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-shopping-cart"></i> Commerce'.html_safe, '#' %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-graduation-cap"></i> Admissions'.html_safe, '#' %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-terminal"></i> Developer'.html_safe, '#' %>
+        </li>
+      </ul>
+
+      <!-- START: FOOTER -->
+      <footer class="cd-main-footer">
+        DevX <%= Devx::VERSION %> | Powered by <%= link_to 'JCW', '//jcwproductions.com' %>
+      </footer>
+      <!-- END: FOOTER -->  
+    </nav>
+    <!-- END: SIDE NAVIGATION -->
+
+
+    <!-- START: MAIN CONTENT -->
+    <div class="content-wrapper">
+      <div class="content">
+        <%= yield %>
+      </div>    
     </div>
-  </div>
-</footer>
+    <!-- END: MAIN CONTENT -->
+
+  </main>
+  <!-- END: CONTENT -->
+
 </body>
 </html>

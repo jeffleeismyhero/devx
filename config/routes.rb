@@ -8,7 +8,7 @@ Devx::Engine.routes.draw do
   resources :stylesheets, defaults: { format: 'css' }
 
   namespace :admin do
-    root 'dashboard#index'
+    get '/' => 'dashboard#index', as: :dashboard
     resources :pages
     resources :menus
     resources :layouts
@@ -34,6 +34,7 @@ Devx::Engine.routes.draw do
     resources :orders do
       resources :transactions
     end
+    root 'dashboard#index'
   end
 
 

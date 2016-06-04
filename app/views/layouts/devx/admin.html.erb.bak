@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DevX | <%= full_title(yield(:title)) %></title>
+  <%= stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
+  <%= stylesheet_link_tag    "devx/application", media: "all" %>
+  <%= javascript_include_tag "devx/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header id="devx_admin_header">
+  <div class="container header"<%= " style=background-color:#{app_branding.primary_color}" if app_branding.primary_color.present? %>>
+    <div class="row">
+      <div class="large-8 columns">
+        <% if app_branding.logo.present? %>
+          <%= link_to image_tag(app_branding.logo.try(:url), id: 'devx_branding_logo'), devx.admin_root_path %>
+        <% else %>
+          <%= app_branding.company_name || 'Company Name' %>
+        <% end %>
+      </div>
+      <div class="large-4 columns text-right">
+        <% if current_user %>
+          <%= link_to current_user.full_name, edit_admin_user_path(current_user) %> | <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="container header"<%= " style=background-color:#{app_branding.accent_color_1}" if app_branding.primary_color.present? %>>
+    <div class="row">
+      <%= render partial: 'devx/shared/admin_menu' %>
+    </div>
+  </div>
+</header>
+
+<div id="content">
+  <%= yield %>
+</div>
+
+<footer>
+  <div id="devx_admin_footer" class="container footer">
+    <div class="row">
+      <div class="large-12 columns text-center">
+        <span><small>DevX <%= Devx::VERSION %> - powered by <%= link_to 'JCW', '//jcwproductions.com', target: '_blank' %></small></span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

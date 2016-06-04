@@ -1,9 +1,12 @@
+<% provide(:title, '' + @calendar.name) %>
+
 <div class="container">
   <div class="row">
     <div class="large-12 columns">
-      <h1><%= @calendar.name %> Calendar</h1>
+      <h1><%= yield(:title) %></h1>
     </div>
     <div class="large-12 columns">
+      <%= link_to 'Back to calendars', admin_calendars_path %>
       <h3>Events</h3>
       <table width="100%">
         <thead>
