@@ -55,6 +55,15 @@ h1 {
   display:none;
 }
 
+.child-nav {
+  display:none;
+  background-color:#CCCCCC;
+}
+
+.child-nav.active {
+  display:block;
+}
+
 /**
   HEADER
 **/
@@ -189,6 +198,11 @@ a.cd-logo {
     font-weight:500;
   }
 
+  .cd-side-nav ul > li a.active, .cd-side-nav ul > li a:hover {
+    border-right:4px solid #084269;
+  }
+
+
   .cd-side-nav ul > li:hover a {
     color:#FFFFFF;
   }
@@ -231,6 +245,7 @@ a.cd-logo {
     color:#757575;
     font-size:0.7rem;
     font-weight:700;
+    text-align:left;
     text-transform:uppercase;
   }
 

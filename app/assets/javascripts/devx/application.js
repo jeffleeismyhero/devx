@@ -24,4 +24,54 @@ $(function()
   $(".select2").select2({ multiple: true });
   $(".select2-fixed").select2({ multiple: false });
 
+  var active_path = window.location.pathname;
+
+  $(".cd-side-nav a").each(function()
+  {
+    if($(this).attr("href") == active_path)
+    {
+      var active_link = null;
+
+      if($(this).attr("data") != undefined)
+      {
+        active_link = $(this);
+      }
+      else
+      {
+        var parent = $(this).parent().parent().attr("data-parent");;
+
+        $(".cd-side-nav a").each(function()
+        {
+          if($(this).attr("data") == parent)
+          {
+            active_link = $(this);
+          }
+        });
+      }
+
+      active_link.addClass("active");
+    }
+  });
+
+  $(".cd-side-nav a.has-children").on("click", function()
+  {
+    var child = $(this).attr("data");
+
+    $(".child-nav").each(function()
+    {
+      if($(this).hasClass("active"))
+      {
+        var same = $(this).attr("data-parent");
+        $(this).removeClass("active");
+      }
+
+      if($(this).attr("data-parent") == child && $(this).attr("data-parent") != same)
+      {
+        $(this).addClass("active");
+      }
+    });
+
+      return false;
+  });
+
 });

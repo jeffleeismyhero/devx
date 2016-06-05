@@ -14,7 +14,11 @@
   <header class="cd-main-header">
 
     <!-- START: LOGO -->
-    <%= link_to 'Logo', admin_dashboard_path, class: 'cd-logo' %>
+    <% if app_branding.logo.present? %>
+      <%= link_to image_tag(app_branding.logo.try(:url)), devx.admin_root_path, class: 'cd-logo' %>
+    <% else %>
+      <%= link_to (app_branding.company_name || 'Company Name'), devx.admin_root_path, class: 'cd-logo' %>
+    <% end %>
     <!-- END: LOGO -->
     
     <!-- START: TOP NAVIGATION -->
@@ -56,34 +60,54 @@
       <ul>
         <li class="cd-label">Primary Navigation</li>
         <li>
-          <%= link_to '<i class="fa fa-tachometer"></i> Dashboard'.html_safe, admin_dashboard_path %>
+          <%= link_to '<i class="fa fa-tachometer"></i> Dashboard'.html_safe, devx.admin_dashboard_path, data: 'dashboard' %>
         </li>
         <li>
-          <%= link_to '<i class="fa fa-user"></i> Users'.html_safe, admin_users_path %>
+          <%= link_to '<i class="fa fa-user"></i> Users'.html_safe, devx.admin_users_path, data: 'users' %>
+        </li>
+<!--         <ul class="child-nav" data-parent="users">
+          <li><%= link_to 'Manage Users', devx.admin_users_path %></li>
+        </ul> -->
+        <li>
+          <%= link_to '<i class="fa fa-sitemap"></i> Organizations'.html_safe, '#', class: 'has-children', data: 'organizations' %>
+        </li>
+        <ul class="child-nav" data-parent="organizations">
+          <li><%= link_to 'Team Members', devx.admin_members_path %></li>
+        </ul>
+        <li>
+          <%= link_to '<i class="fa fa-laptop"></i> Site Management'.html_safe, '#', class: 'has-children', data: 'site-management' %>
+        </li>
+        <ul class="child-nav" data-parent="site-management">
+          <li><%= link_to 'Pages', devx.admin_pages_path %></li>
+          <li><%= link_to 'Layouts', devx.admin_layouts_path %></li>
+          <li><%= link_to 'Stylesheets', devx.admin_stylesheets_path %></li>
+          <li><%= link_to 'Media', devx.admin_media_path %></li>
+          <li><%= link_to 'Menus', devx.admin_menus_path %></li>
+        </ul>
+        <li>
+          <%= link_to '<i class="fa fa-calendar"></i> Events'.html_safe, devx.admin_calendars_path, class: 'has-children', data: 'calendars' %>
+        </li>
+        <ul class="child-nav" data-parent="calendars">
+          <li><%= link_to 'Calendars', devx.admin_calendars_path %></li>
+          <li><%= link_to 'Venues', devx.admin_venues_path %></li>
+        </ul>
+        <li>
+          <%= link_to '<i class="fa fa-newspaper-o"></i> News'.html_safe, devx.admin_articles_path, data: 'news' %>
         </li>
         <li>
-          <%= link_to '<i class="fa fa-sitemap"></i> Organizations'.html_safe, '#' %>
+          <%= link_to '<i class="fa fa-cogs"></i> Settings'.html_safe, devx.admin_branding_index_path, data: 'settings' %>
         </li>
         <li>
-          <%= link_to '<i class="fa fa-laptop"></i> Site Management'.html_safe, admin_pages_path %>
+          <%= link_to '<i class="fa fa-shopping-cart"></i> Commerce'.html_safe, '#', class: 'has-children', data: 'commerce' %>
+        </li>
+        <ul class="child-nav" data-parent="commerce">
+          <li><%= link_to 'Orders', devx.admin_orders_path %></li>
+        </ul>
+        <li>
+          <%= link_to '<i class="fa fa-graduation-cap"></i> Admissions'.html_safe, '#', data: 'admissions' %>
         </li>
         <li>
-          <%= link_to '<i class="fa fa-calendar"></i> Events'.html_safe, admin_calendars_path %>
-        </li>
-        <li>
-          <%= link_to '<i class="fa fa-newspaper-o"></i> News'.html_safe, admin_articles_path %>
-        </li>
-        <li>
-          <%= link_to '<i class="fa fa-cogs"></i> Settings'.html_safe, admin_branding_index_path %>
-        </li>
-        <li>
-          <%= link_to '<i class="fa fa-shopping-cart"></i> Commerce'.html_safe, '#' %>
-        </li>
-        <li>
-          <%= link_to '<i class="fa fa-graduation-cap"></i> Admissions'.html_safe, '#' %>
-        </li>
-        <li>
-          <%= link_to '<i class="fa fa-terminal"></i> Developer'.html_safe, '#' %>
+          <%= link_to '<i class="fa fa-terminal"></i> Developer'.html_safe, '#', data: 'developer' %>
         </li>
       </ul>
 
