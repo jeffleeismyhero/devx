@@ -6,8 +6,8 @@
       <h1><%= yield(:title) %></h1>
     </div>
     <div class="large-12">
-      <%= link_to 'Back to members', devx.admin_members_path %>
-      <%= form_for @member, url: devx.admin_member_path(@member) do |f| %>
+      <%= link_to 'Back to roles', devx.admin_roles_path %>
+      <%= form_for @role, url: devx.admin_role_path(@role) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
     </div>
