@@ -1,0 +1,8 @@
+<tr>
+  <td><%= page.name %></td>
+  <td><%= page.slug %></td>
+  <td>
+    <%= link_to 'Edit', devx.edit_portal_page_path(page) %>
+    <%= link_to 'Delete', devx.portal_page_path(page), method: :delete, data: { confirm: "Are you sure you want to delete #{page.name}?" } %>
+  </td>
+</tr>

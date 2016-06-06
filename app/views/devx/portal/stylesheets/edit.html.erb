@@ -1,0 +1,15 @@
+<% provide(:title, 'Edit ' + controller_name.classify) %>
+
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="large-12">
+      <%= link_to 'Back to stylesheets', devx.portal_stylesheets_path %>
+      <%= form_for @stylesheet, url: devx.portal_stylesheet_path(@stylesheet) do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

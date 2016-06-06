@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+  <% stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
+  <%= stylesheet_link_tag    "devx/application", media: "all" %>
+  <%= stylesheet_link_tag    "devx/devx_portal", media: "all" %>
+  <%= javascript_include_tag "devx/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <!-- START: HEADER -->
+  <header class="cd-main-header">
+
+    <!-- START: LOGO -->
+    <% if app_branding.logo.present? %>
+      <%= link_to image_tag(app_branding.logo.try(:url)), devx.portal_root_path, class: 'cd-logo' %>
+    <% else %>
+      <%= link_to (app_branding.company_name || 'Company Name'), devx.portal_root_path, class: 'cd-logo' %>
+    <% end %>
+    <!-- END: LOGO -->
+    
+    <!-- START: TOP NAVIGATION -->
+    <nav class="cd-nav">
+      <div class="cd-top-nav cd-horizontal-accordion">
+        <div class="cd-accordion-tab">
+          <div class="cd-accordion-title">
+            <span><i class="fa fa-money"></i></span>
+          </div>
+          <div class="cd-accordion-body">
+            <strong>Account Balance</strong>
+          </div>
+        </div>
+        <div class="cd-accordion-tab">
+          <div class="cd-accordion-title">
+            <span><i class="fa fa-search"></i></span>
+          </div>
+          <div class="cd-accordion-body">
+            Example text
+          </div>
+        </div>
+        <div class="cd-accordion-tab">
+          <div class="cd-accordion-title">
+            <span><i class="fa fa-question"></i></span>
+          </div>
+          <div class="cd-accordion-body">
+            Example text
+          </div>
+        </div>
+        <div class="cd-accordion-tab">
+          <div class="cd-accordion-title">
+            <span><%= current_user.try(:full_name) %></span>
+          </div>
+          <div class="cd-accordion-body">
+            <%= link_to 'Edit Profile', devx.edit_portal_user_path(current_user) %><br />
+            <%= link_to 'Logout', devx.destroy_user_session_path, method: :delete %>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END: TOP NAVIGATION -->
+
+  </header>
+  <!-- END: HEADER -->
+
+  
+  <!-- START: CONTENT -->
+  <main class="cd-main-content">
+
+    <!-- START: SIDE NAVIGATION -->
+    <nav class="cd-side-nav">
+      <ul>
+        <li class="cd-label">Primary Navigation</li>
+        <li>
+          <%= link_to '<i class="fa fa-tachometer"></i> <span>Dashboard</span>'.html_safe, devx.portal_dashboard_path, data: 'dashboard' %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-user"></i> <span>Users</span>'.html_safe, '#', class: 'has-children', data: 'users' %>
+        </li>
+        <ul class="child-nav" data-parent="users">
+          <li><%= link_to 'Manage Users', devx.portal_users_path %></li>
+          <li><%= link_to 'Roles', devx.portal_roles_path %></li>
+        </ul>
+        <li>
+          <%= link_to '<i class="fa fa-sitemap"></i> <span>Organizations</span>'.html_safe, '#', class: 'has-children', data: 'organizations' %>
+        </li>
+        <ul class="child-nav" data-parent="organizations">
+          <li><%= link_to 'Team Members', devx.portal_members_path %></li>
+        </ul>
+        <li>
+          <%= link_to '<i class="fa fa-laptop"></i> <span>Site Management</span>'.html_safe, '#', class: 'has-children', data: 'site-management' %>
+        </li>
+        <ul class="child-nav" data-parent="site-management">
+          <li><%= link_to 'Pages', devx.portal_pages_path %></li>
+          <li><%= link_to 'Layouts', devx.portal_layouts_path %></li>
+          <li><%= link_to 'Stylesheets', devx.portal_stylesheets_path %></li>
+          <li><%= link_to 'Media', devx.portal_media_path %></li>
+          <li><%= link_to 'Menus', devx.portal_menus_path %></li>
+        </ul>
+        <li>
+          <%= link_to '<i class="fa fa-calendar"></i> <span>Events</span>'.html_safe, devx.portal_calendars_path, class: 'has-children', data: 'calendars' %>
+        </li>
+        <ul class="child-nav" data-parent="calendars">
+          <li><%= link_to 'Calendars', devx.portal_calendars_path %></li>
+          <li><%= link_to 'Venues', devx.portal_venues_path %></li>
+        </ul>
+        <li>
+          <%= link_to '<i class="fa fa-newspaper-o"></i> <span>News</span>'.html_safe, devx.portal_articles_path, data: 'news' %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-cogs"></i> <span>Settings</span>'.html_safe, devx.portal_branding_index_path, data: 'settings' %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-shopping-cart"></i> <span>Commerce</span>'.html_safe, '#', class: 'has-children', data: 'commerce' %>
+        </li>
+        <ul class="child-nav" data-parent="commerce">
+          <li><%= link_to 'Orders', devx.portal_orders_path %></li>
+        </ul>
+        <li>
+          <%= link_to '<i class="fa fa-graduation-cap"></i> <span>Admissions</span>'.html_safe, '#', data: 'admissions' %>
+        </li>
+        <li>
+          <%= link_to '<i class="fa fa-terminal"></i> <span>Developer</span>'.html_safe, '#', data: 'developer' %>
+        </li>
+      </ul>
+
+      <!-- START: FOOTER -->
+      <footer class="cd-main-footer">
+        DevX <%= Devx::VERSION %> | Powered by <%= link_to 'JCW', '//jcwproductions.com' %>
+      </footer>
+      <!-- END: FOOTER -->  
+    </nav>
+    <!-- END: SIDE NAVIGATION -->
+
+
+    <!-- START: MAIN CONTENT -->
+    <div class="content-wrapper">
+      <div class="content">
+        <%= yield %>
+      </div>    
+    </div>
+    <!-- END: MAIN CONTENT -->
+
+  </main>
+  <!-- END: CONTENT -->
+
+</body>
+</html>

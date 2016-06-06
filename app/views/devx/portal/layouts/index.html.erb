@@ -1,0 +1,25 @@
+<% provide(:title, '' + controller_name.classify.pluralize) %>
+
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="large-12 columns">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'layout', collection: @layouts %>
+        </tbody>
+      </table>
+    </div>
+    <div class="large-4">
+      <%= link_to 'Create Layout', devx.new_portal_layout_path %>
+    </div>
+  </div>
+</div>

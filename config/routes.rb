@@ -1,5 +1,7 @@
 Devx::Engine.routes.draw do
-  devise_for :users, class_name: "Devx::User", module: :devise
+  devise_for :users, class_name: "Devx::User", module: :devise, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' } do
+    get '/login' => 'devise/sessions#new'
+  end
 
   resources :branding, controller: 'branding', only: [ :index, :update ]
   resources :articles, except: :show
@@ -7,7 +9,7 @@ Devx::Engine.routes.draw do
   resources :events
   resources :stylesheets, defaults: { format: 'css' }
 
-  namespace :admin do
+  namespace :portal do
     get '/' => 'dashboard#index', as: :dashboard
     resources :pages
     resources :menus

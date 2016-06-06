@@ -1,7 +1,0 @@
-<tr>
-  <td><%= link_to registration.name, devx.admin_registration_path(registration) %></td>
-  <td>
-    <%= link_to 'Edit', devx.edit_admin_registration_path(registration) %>
-    <%= link_to 'Delete', devx.admin_registration_path(registration), method: :delete, data: { confirm: "Are you sure you want to delete #{registration.name}?" } %>
-  </td>
-</tr>

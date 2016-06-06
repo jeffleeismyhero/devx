@@ -1,0 +1,27 @@
+<% provide(:title, '' + controller_name.classify.pluralize) %>
+
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="large-12 columns">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Customer Name</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'order', collection: @orders %>
+        </tbody>
+      </table>
+    </div>
+    <div class="large-4">
+      <%= link_to 'Create Order', devx.new_portal_order_path %>
+    </div>
+  </div>
+</div>

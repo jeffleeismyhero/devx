@@ -1,0 +1,26 @@
+<% provide(:title, '' + controller_name.classify.pluralize) %>
+
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="large-12 columns">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'venue', collection: @venues %>
+        </tbody>
+      </table>
+    </div>
+    <div class="large-4">
+      <%= link_to 'Create Venue', devx.new_portal_venue_path %>
+    </div>
+  </div>
+</div>

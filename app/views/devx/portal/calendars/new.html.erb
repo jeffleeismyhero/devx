@@ -1,0 +1,15 @@
+<% provide(:title, 'Create ' + controller_name.classify) %>
+
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="large-12">
+      <%= link_to 'Back to calendars', devx.portal_calendars_path %>
+      <%= form_for @calendar, url: devx.portal_calendars_path, method: :post do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>
