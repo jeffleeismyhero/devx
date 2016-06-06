@@ -20,6 +20,7 @@ Devx::Engine.routes.draw do
     resources :members
     resources :branding
     resources :users
+    resources :roles
     resources :venues
     resources :slideshows
     resources :media

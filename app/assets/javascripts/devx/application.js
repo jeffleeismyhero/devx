@@ -42,7 +42,14 @@ $(function()
 
         $(".cd-side-nav a").each(function()
         {
-          if($(this).attr("data") == parent)
+          var o = $(this);
+
+          if (o.attr("href") == active_path)
+          {
+            o.addClass("active")
+          }
+
+          if(o.attr("data") == parent)
           {
             active_link = $(this);
           }

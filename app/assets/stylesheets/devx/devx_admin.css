@@ -160,6 +160,78 @@ a.cd-logo {
     font-size:1rem;
   }
 
+  .cd-horizontal-accordion {
+  }
+
+  .cd-horizontal-accordion > .cd-accordion-tab {
+    display:inline-block;
+    height:100%;
+    border-left:1px solid #CCCCCC;
+    box-sizing:border-box;
+    -wekit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    float:left;
+
+  }
+
+  .cd-accordion-tab > .cd-accordion-title, .cd-accordion-tab > .cd-accordion-body {
+    display:inline-block;
+  }
+
+  .cd-accordion-tab > .cd-accordion-title {
+    padding:15px 15px 0px;
+    color:#ffffff;
+    float:left;
+    cursor:pointer;
+  }
+
+  .cd-accordion-tab > .cd-accordion-title:last-of-type {
+    padding:20px 15px 0px;
+  }
+
+  .cd-accordion-tab > .cd-accordion-title .fa {
+    display:block;
+    font-size:2rem;
+    text-align:center;
+  }
+
+  .cd-accordion-tab > .cd-accordion-body {
+    background-color:#ffffff;
+    width:0;
+    height:100%;
+    float:right;
+    overflow:hidden;
+    opacity:0;
+    transition:all 0.4s ease-in-out;
+    -webkit-transition:all 0.4s ease-in-out;
+    -moz-transition:all 0.4s ease-in-out;
+    -o-transition:all 0.4s ease-in-out;
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -o-box-sizing:border-box;
+}
+
+  .cd-accordion-body a {
+    color:#084269;
+    font-size:0.8rem;
+  }
+
+  .cd-accordion-body a:hover {
+    color:#ACCC38;
+  }
+
+  .cd-accordion-tab:hover {
+    background-color:#ACCC38;
+  }
+
+  .cd-accordion-tab:hover > .cd-accordion-body {
+    padding:10px;
+    width:200px;
+    opacity:1;
+  }
+
   .cd-side-nav {
     padding-top:80px;
     width:110px;
@@ -198,6 +270,10 @@ a.cd-logo {
     font-weight:500;
   }
 
+  .cd-side-nav ul > li span {
+    display:none;
+  }
+
   .cd-side-nav ul > li a.active, .cd-side-nav ul > li a:hover {
     border-right:4px solid #084269;
   }
@@ -209,6 +285,10 @@ a.cd-logo {
 
   .cd-side-nav ul > li:hover a {
     background:#ACCC38;
+  }
+
+  .child-nav li a {
+    font-size:0.8rem!important;
   }
 
   .content-wrapper {
@@ -247,6 +327,10 @@ a.cd-logo {
     font-weight:700;
     text-align:left;
     text-transform:uppercase;
+  }
+
+  .cd-side-nav ul > li span {
+    display:initial;
   }
 
   .content-wrapper {

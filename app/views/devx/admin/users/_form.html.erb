@@ -30,4 +30,7 @@
   <%= child.text_field :last_name %>
 <% end %>
 
+<h3>User Roles</h3>
+<%= f.select :role_ids, Devx::Role.all.collect{ |x| [x.name, x.id] }, { multiple: true }, { class: 'select2-fixed' } %>
+
 <%= f.submit %>

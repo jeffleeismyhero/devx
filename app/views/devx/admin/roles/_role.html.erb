@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to role.name, devx.edit_admin_role_path(role) %></td>
+  <td>
+    <%= link_to 'Edit', devx.edit_admin_role_path(role) %>
+    <%= link_to 'Delete', devx.admin_role_path(role), method: :delete, data: { confirm: "Are you sure you want to delete #{role.try(:full_name)}?" } %>
+  </td>
+</tr>

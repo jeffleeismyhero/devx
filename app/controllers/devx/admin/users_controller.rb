@@ -52,7 +52,7 @@ module Devx
   	private
 
   		def user_params
-  			accessible = [ :email, :first_name, :last_name,
+  			accessible = [ :email, :first_name, :last_name, role_ids: [],
                       children_attributes: [ :id, :first_name, :last_name, :_destroy ]
                     ]
 
