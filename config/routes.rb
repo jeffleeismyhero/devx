@@ -5,7 +5,6 @@ Devx::Engine.routes.draw do
 
   resources :branding, controller: 'branding', only: [ :index, :update ]
   resources :articles, except: :show
-  resources :venues
   resources :events
   resources :stylesheets, defaults: { format: 'css' }
 

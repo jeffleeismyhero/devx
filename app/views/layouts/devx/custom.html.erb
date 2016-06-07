@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<%= sc_content_html(Liquid::Template.try(:parse, @page.layout.try(:content)).render('page_content' => yield, 'page_title' => yield(:title), 'branding_logo' => image_tag(app_branding.logo.try(:url), class: 'logo'), 'alternate_logo' => image_tag(app_branding.alternate_logo.try(:url), class: 'alternate-logo'), 'breadcrumbs' => breadcrumbs(@page), 'header_image' => '<div class="container banner header-image" style="background-image:url(<%= @page.image.try(:url) %>)"></div>')) %>
+<%= sc_content_html(Liquid::Template.try(:parse, @page.layout.try(:content)).render('page_content' => yield, 'page_title' => yield(:title), 'branding_logo' => image_tag(app_branding.logo.try(:url), class: 'logo'), 'alternate_logo' => image_tag(app_branding.alternate_logo.try(:url), class: 'alternate-logo'), 'breadcrumbs' => breadcrumbs(@page), 'header_image' => "<div class=\"container banner header-image\" style=\"background-image:url('#{@page.image.try(:url)}')\"></div>")) %>
 
 </body>
 </html>
