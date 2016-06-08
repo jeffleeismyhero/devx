@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160608191046) do
     t.string   "state"
     t.string   "zip"
     t.string   "email"
+    t.string   "phone"
     t.string   "marital_status"
     t.string   "linked_in"
     t.integer  "graduation_year"

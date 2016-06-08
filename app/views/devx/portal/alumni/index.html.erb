@@ -1,0 +1,27 @@
+<% provide(:title, '' + controller_name.classify) %>
+
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="large-12 columns">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Graduation Year</th>
+            <th>Last Updated</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'alumni', collection: @alumnis %>
+        </tbody>
+      </table>
+    </div>
+    <div class="large-4">
+      <%= link_to 'Create Alumni', devx.new_portal_alumni_path %>
+    </div>
+  </div>
+</div>

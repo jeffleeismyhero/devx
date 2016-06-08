@@ -1,0 +1,40 @@
+<h3>Personal Information</h3>
+<%= f.label :prefix %>
+<%= f.text_field :prefix %>
+<%= f.label :first_name %>
+<%= f.text_field :first_name %>
+<%= f.label :last_name %>
+<%= f.text_field :last_name %>
+<%= f.label :suffix %>
+<%= f.text_field :suffix %>
+<%= f.label :nickname %>
+<%= f.text_field :nickname %>
+<%= f.label :marital_status %>
+<%= f.text_field :marital_status %>
+<%= f.label :birthdate %>
+<%= f.date_field :birthdate %>
+
+<h3>Class</h3>
+<%= f.label :graduation_year %>
+<%= f.number_field :graduation_year %>
+
+<h3>Address</h3>
+<%= f.label :address %>
+<%= f.text_field :address %>
+<%= f.label :city %>
+<%= f.text_field :city %>
+<%= f.label :state %>
+<%= f.text_field :state %>
+<%= f.label :zip %>
+<%= f.text_field :zip %>
+
+<h3>Contact Information</h3>
+<%= f.label :email %>
+<%= f.text_field :email %>
+<%= f.label :phone %>
+<%= f.text_field :phone %>
+<%= f.label :linked_in %>
+<%= f.text_field :linked_in %>
+
+<br />
+<%= f.submit %>

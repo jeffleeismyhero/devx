@@ -19,19 +19,41 @@ module Devx
     end
 
     def create
+      if @alumni.valid? && @alumni.save
+        redirect_to devx.portal_alumni_index_path,
+        notice: "Successfully saved alumni"
+      else
+        render :new,
+        notice: "Failed to save alumni"
+      end
     end
 
     def update
+      if @alumni.valid? && @alumni.save
+        redirect_to devx.portal_alumni_index_path,
+        notice: "Successfully updated alumni"
+      else
+        render :new,
+        notice: "Failed to update alumni"
+      end
     end
 
     def destroy
+      if @alumni.destroy
+        redirect_to devx.portal_alumni_index_path,
+        notice: "Successfully deleted alumni"
+      else
+        redirect_to devx.portal_alumni_index_path,
+        notice: "Failed to delete alumni"
+      end
     end
 
 
     private
 
     def alumni_params
-      accessible = []
+      accessible = [ :prefix, :first_name, :last_name, :suffix, :nickname, :marital_status, :birthdate, :graduation_year, :address, :city, :state, :zip, :email, :phone, :linked_in ]
+      params.require(:alumni).permit(accessible)
     end
   end
 end
