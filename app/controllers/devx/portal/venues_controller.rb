@@ -22,7 +22,7 @@ module Devx
 
   	def create
   		if @venue.valid? && @venue.save
-  			redirect_to devx.venues_path,
+  			redirect_to devx.portal_venues_path,
   			notice: "Successfully saved venue"
   		else
   			render :new,
@@ -32,7 +32,7 @@ module Devx
 
   	def update
   		if @venue.valid? && @venue.save
-  			redirect_to devx.venues_path,
+  			redirect_to devx.portal_venues_path,
   			notice: "Successfully saved venue"
   		else
   			render :new,
@@ -42,14 +42,14 @@ module Devx
 
   	def destroy
   		if @venue.destroy
-  			redirect_to devx.venues_path
+  			redirect_to devx.portal_venues_path
   		end
   	end
 
   	private
 
   		def venue_params
-  			accessible = [ :name, :address, :city, :state, :zip ].
+  			accessible = [ :name, :address, :city, :state, :zip ]
   			params.require(:venue).permit(accessible)
   		end
   		
