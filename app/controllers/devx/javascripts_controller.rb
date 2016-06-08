@@ -1,7 +1,7 @@
 require_dependency "devx/application_controller"
 
 module Devx
-  class JavascriptController < ApplicationController
+  class JavascriptsController < ApplicationController
   	load_and_authorize_resource :javascript, class: 'Devx::Javascript'
 
     def show

@@ -1,4 +1,4 @@
-<% provide(:title, 'Create ' + controller_name.classify) %>
+<% provide(:title, 'Create Staff') %>
 
 <div class="container">
   <div class="row">
@@ -6,7 +6,7 @@
       <h1><%= yield(:title) %></h1>
     </div>
     <div class="large-12">
-      <%= link_to 'Back to member', devx.portal_members_path %>
+      <%= link_to 'Back to staff', devx.portal_members_path %>
       <%= form_for @member, url: devx.portal_members_path, method: :post do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>

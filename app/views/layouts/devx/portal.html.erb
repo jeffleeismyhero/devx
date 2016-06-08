@@ -86,7 +86,7 @@
           <%= link_to '<i class="fa fa-sitemap"></i> <span>Organizations</span>'.html_safe, '#', class: 'has-children', data: 'organizations' %>
         </li>
         <ul class="child-nav" data-parent="organizations">
-          <li><%= link_to 'Team Members', devx.portal_members_path %></li>
+          <li><%= link_to 'Staff', devx.portal_members_path %></li>
           <li><%= link_to 'Alumni Database', devx.portal_alumni_index_path %></li>
         </ul>
         <li>
@@ -96,6 +96,7 @@
           <li><%= link_to 'Pages', devx.portal_pages_path %></li>
           <li><%= link_to 'Layouts', devx.portal_layouts_path %></li>
           <li><%= link_to 'Stylesheets', devx.portal_stylesheets_path %></li>
+          <li><%= link_to 'JavaScript', devx.portal_javascripts_path %></li>
           <li><%= link_to 'Media', devx.portal_media_path %></li>
           <li><%= link_to 'Menus', devx.portal_menus_path %></li>
         </ul>
