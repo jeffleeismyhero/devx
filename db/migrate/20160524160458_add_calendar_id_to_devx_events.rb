@@ -1,5 +1,5 @@
 class AddCalendarIdToDevxEvents < ActiveRecord::Migration
   def change
-    add_reference :devx_events, :calendar, index: true, foreign_key: true
+    add_column :devx_events, :calendar_id, :integer, index: true
   end
 end
