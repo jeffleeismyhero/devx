@@ -1,0 +1,15 @@
+<% @attributes[:events].try(:each) do |event| %>
+  <div class="medium-12 large-4 columns event-column">
+    <div class="event-square">
+      <div class="event-month">
+        <%= event.start_time.try(:strftime, '%b') %>
+      </div>
+      <div class="event-day">
+        <%= event.start_time.try(:strftime, '%d') %>
+      </div>
+    </div>
+    <div class="article-title" style="margin:40px 0 10px 0;"><%= event.name %></div>
+    <div style="padding:0px 28px;margin-bottom:20px;"><%= event.description %></div>
+    <a href="#" class="button primary small" style="margin-bottom:20px;">Learn More</a>
+  </div>
+<% end %>

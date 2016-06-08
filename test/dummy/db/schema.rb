@@ -13,6 +13,27 @@
 
 ActiveRecord::Schema.define(version: 20160608214935) do
 
+  create_table "devx_alumnis", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "prefix"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "suffix"
+    t.string   "nickname"
+    t.date     "birthdate"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "marital_status"
+    t.string   "linked_in"
+    t.integer  "graduation_year"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "devx_articles", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
@@ -103,6 +124,7 @@ ActiveRecord::Schema.define(version: 20160608214935) do
     t.integer  "calendar_id"
   end
 
+<<<<<<< HEAD
   add_index "devx_events", ["calendar_id"], name: "index_devx_events_on_calendar_id"
 
   create_table "devx_extracurriculars", force: :cascade do |t|
@@ -120,6 +142,8 @@ ActiveRecord::Schema.define(version: 20160608214935) do
     t.datetime "updated_at", null: false
   end
 
+=======
+>>>>>>> origin/master
   create_table "devx_forms", force: :cascade do |t|
     t.integer  "registration_id"
     t.text     "fields"

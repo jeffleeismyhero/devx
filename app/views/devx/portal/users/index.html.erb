@@ -17,13 +17,14 @@
             <table width="100%">
                 <thead>
                     <tr style="background-color:#ACCC38;">
-                        <th style="color:#084269; padding:10px; text-align:left; width:40%;">User Email</th>
-                        <th style="color:#084269; padding:10px; text-align:left; width:30%;">First Name</i></th>
-                        <th style="color:#084269; padding:10px; text-align:left; width:30%;">Last Name</i></th>
+                        <th style="color:#084269; padding:10px; text-align:left; width:30%;">User Email</th>
+                        <th style="color:#084269; padding:10px; text-align:left; width:25%;">First Name</th>
+                        <th style="color:#084269; padding:10px; text-align:left; width:25%;">Last Name</th>
+                        <th style="color:#084269; padding:10px; text-align:left; width:20%;">&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%= render partial: 'user', collection: @members %>
+                    <%= render partial: 'user', collection: @users %>
                 </tbody>
             </table>
         </div>

@@ -8,19 +8,31 @@
     <div class="large-12 columns">
       <%= link_to 'Back to calendars', portal_calendars_path %>
       <h3>Events</h3>
+        <div class="large-12 columns" style="padding-bottom:20px;">
+          <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> <%= link_to 'Create Event', devx.new_portal_calendar_event_path(calendar_id: @calendar.id) %> 
+          <div style="float:right;">
+              <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+              <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+              <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
+          </div>
+        </div>
       <table width="100%">
         <thead>
-          <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>&nbsp;</th>
+          <tr style="background-color:#ACCC38;">
+              <th style="color:#084269; padding:10px; text-align:left; width:30%;">Name</th>
+              <th style="color:#084269; padding:10px; text-align:left; width:20%;">Date of Event</th>
+              <th style="color:#084269; padding:10px; text-align:left; width:20%;">&nbsp;</th>
           </tr>
         </thead>
         <tbody>
           <% @calendar.events.try(:each) do |event| %>
             <tr>
-              <td><%= link_to event.name, edit_portal_calendar_event_path(calendar_id: @calendar.id, event: event) %></td>
-              <td><%= event.start_time %></td>
+              <td style="padding:10px;border-bottom:1px solid #ccc;"><%= link_to event.name, edit_portal_calendar_event_path(calendar_id: @calendar.id, event: event) %></td>
+              <td style="padding:10px;border-bottom:1px solid #ccc;"><%= event.start_time.try(:strftime, '%m/%d/%Y %I:%M %P') %></td>
+              <td style="text-align:right; padding:10px;border-bottom:1px solid #ccc;">
+              <%= link_to 'Edit', devx.edit_portal_calendar_event_path(calendar_id: @calendar.id, event: event) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              <%= link_to 'Delete', devx.portal_calendar_event_path(calendar_id: @calendar.id, event: event), method: :delete, data: { confirm: "Are you sure you want to delete #{event.name}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
+              </td>
             </tr>
           <% end %>
         </tbody>

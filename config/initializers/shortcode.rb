@@ -4,8 +4,11 @@ Shortcode.setup do |config|
   config.self_closing_tags = [
     :slideshow,
     :event_list_boxed,
+    :event_list_columns,
     :media,
     :latest_articles,
+    :latest_articles_columns,
+    :articles_columns,
     :menu,
     :submenu
   ]
@@ -14,8 +17,11 @@ end
 Shortcode.register_presenter(
   Devx::SlideshowPresenter,
   Devx::EventListBoxedPresenter,
+  Devx::EventListColumnsPresenter,
   Devx::MediaPresenter,
   Devx::LatestArticlesPresenter,
+  Devx::LatestArticlesColumnsPresenter,
+  Devx::ArticlesColumnsPresenter,
   Devx::MenuPresenter,
   Devx::SubmenuPresenter
 )

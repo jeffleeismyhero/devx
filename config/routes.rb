@@ -1,4 +1,5 @@
 Devx::Engine.routes.draw do
+<<<<<<< HEAD
   namespace :portal do
   get 'javascripts/index'
   end
@@ -228,6 +229,8 @@ Devx::Engine.routes.draw do
   get 'urgentnews/show'
 
   get 'javascript/show'
+=======
+>>>>>>> origin/master
 
   devise_for :users, class_name: "Devx::User", module: :devise, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' } do
     get '/login' => 'devise/sessions#new'
@@ -236,7 +239,8 @@ Devx::Engine.routes.draw do
   resources :branding, controller: 'branding', only: [ :index, :update ]
   resources :articles, except: :show
   resources :events
-  resources :stylesheets, defaults: { format: 'css' }
+  resource :stylesheets, defaults: { format: 'css' }
+  resource :javascripts, defaults: { format: 'js' }
 
   namespace :portal do
     get '/' => 'dashboard#index', as: :dashboard
@@ -249,6 +253,7 @@ Devx::Engine.routes.draw do
       resources :events
     end
     resources :members
+    resources :alumni
     resources :branding
     resources :users
     resources :roles
