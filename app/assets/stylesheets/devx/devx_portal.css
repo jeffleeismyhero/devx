@@ -759,7 +759,21 @@ table {
     border-spacing: 0px;
 }
 
+.primary {
+    background-color:#084269;
+}
 
+.secondary {
+    background-color:#accc38;
+}
+
+.accent {
+    background-color:#d9dde3;
+}
+
+.divider {
+    background-color:#cccccc;
+}
 
 .text-left {
   text-align:left;
@@ -790,10 +804,59 @@ table {
 
 
 .cd-login {
-  max-width:400px;
+  max-width:300px;
   margin:0 auto;
+  text-align: center;
+  margin-top:10%;
 }
 
+.cd-login a {
+    color:#084269;
+}
+
+.cd-login-bkrd {
+    background-color:#d9dde3;
+    width:100vw;
+    height:100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: -1;
+}
+
+.field input[type=email],.field input[type=password] {
+    margin:4px 0;
+    padding:10px;
+    font-size:1rem;
+    max-width:300px;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.logo img {
+    width:100%;
+}
+
+.actions input[type=submit] {
+    margin:4px 0;
+    max-width:300px;
+    width:100%;
+    font-size:1rem;
+    font-weight:600;
+    color:#084269;
+    padding:12px 20px;
+    box-sizing:border-box;
+    background-color:#accc38;
+    border:none;
+    -webkit-transition: background-color .6s; /* Safari */
+    transition: background-color .6s;
+}
+
+.actions input[type=submit]:hover {
+    color:#accc38;
+    background-color:#084269;
+    cursor: pointer;
+}
 
 /**
   HEADER
