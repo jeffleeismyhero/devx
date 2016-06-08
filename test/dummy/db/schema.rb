@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608191046) do
+ActiveRecord::Schema.define(version: 20160608192905) do
 
   create_table "devx_alumnis", force: :cascade do |t|
     t.integer  "user_id"
@@ -129,6 +129,13 @@ ActiveRecord::Schema.define(version: 20160608191046) do
     t.text     "fields"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "devx_javascripts", force: :cascade do |t|
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "devx_layout_stylesheets", force: :cascade do |t|
