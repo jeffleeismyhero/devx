@@ -6,7 +6,7 @@ module Devx
 
     def show
     	respond_to do |format|
-    		format.javascript { render text: @javascript.content, content_type: 'javascript'}
+    		format.javascript { render text: @javascript.content, content_type: 'text/javascript'}
     	end
     end
   end

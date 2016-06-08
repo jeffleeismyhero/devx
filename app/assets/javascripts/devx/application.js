@@ -24,6 +24,9 @@ $(function()
   $(".select2").select2({ multiple: true });
   $(".select2-fixed").select2({ multiple: false });
 
+
+
+  // Navigation
   var active_path = window.location.pathname;
 
   $(".cd-side-nav a").each(function()
@@ -80,5 +83,10 @@ $(function()
 
       return false;
   });
+
+
+
+  // DateTime Picker
+  $(".datetimepicker").datetimepicker();
 
 });
