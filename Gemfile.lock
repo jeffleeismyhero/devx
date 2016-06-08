@@ -164,6 +164,10 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -224,7 +228,8 @@ DEPENDENCIES
   database_cleaner
   devx!
   factory_girl_rails
+  rspec
   rspec-rails
 
 BUNDLED WITH
-   1.12.3
+   1.12.5
