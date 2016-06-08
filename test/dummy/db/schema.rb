@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524231754) do
+ActiveRecord::Schema.define(version: 20160608191046) do
+
+  create_table "devx_alumnis", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "prefix"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "suffix"
+    t.string   "nickname"
+    t.date     "birthdate"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "email"
+    t.string   "marital_status"
+    t.string   "linked_in"
+    t.integer  "graduation_year"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "devx_articles", force: :cascade do |t|
     t.string   "title"

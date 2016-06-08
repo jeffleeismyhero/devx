@@ -8,6 +8,8 @@ module Devx
 
     before_create :add_publish_date
 
+    mount_uploader :image, ImageUploader
+
     def add_publish_date
       unless self.published_at.present?
         self.published_at = Time.zone.now

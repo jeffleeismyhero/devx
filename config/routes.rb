@@ -19,6 +19,7 @@ Devx::Engine.routes.draw do
       resources :events
     end
     resources :members
+    resources :alumni
     resources :branding
     resources :users
     resources :roles
