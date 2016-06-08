@@ -33,7 +33,9 @@ h1 {
   border-bottom:1px solid #CCCCCC;
 }
 
-
+table {
+    border-spacing: 0px;
+}
 
 
 

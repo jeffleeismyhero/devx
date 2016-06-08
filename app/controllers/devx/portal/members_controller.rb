@@ -36,7 +36,7 @@ module Devx
     end
 
     def destroy
-      if @member.destroy?
+      if @member.destroy
         redirect_to devx.portal_members_path,
         notice: "Successfully deleted member"
       else
