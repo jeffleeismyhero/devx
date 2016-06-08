@@ -3,7 +3,7 @@ module Devx
     belongs_to :layout
     belongs_to :stylesheet
 
-    validates :stylesheet, presence: true, uniqueness: { scope: [ :layout_id ] }
-    validates :layout_id, presence: true
+    validates :layout, presence: true, uniqueness: { scope: [ :stylesheet_id ] }
+    validates :stylesheet_id, presence: true
   end
 end
