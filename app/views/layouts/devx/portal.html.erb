@@ -15,11 +15,7 @@
   <header class="cd-main-header">
 
     <!-- START: LOGO -->
-    <% if app_branding.logo.present? %>
-      <%= link_to image_tag(app_branding.logo.try(:url)), devx.portal_root_path, class: 'cd-logo' %>
-    <% else %>
       <%= link_to (app_branding.company_name || 'Company Name'), devx.portal_root_path, class: 'cd-logo' %>
-    <% end %>
     <!-- END: LOGO -->
     
     <!-- START: TOP NAVIGATION -->
@@ -50,7 +46,7 @@
           </div>
         </div>
         <div class="cd-accordion-tab">
-          <div class="cd-accordion-title">
+          <div class="cd-accordion-title" style="padding-top:21px;">
             <span><%= current_user.try(:full_name) %></span>
           </div>
           <div class="cd-accordion-body">

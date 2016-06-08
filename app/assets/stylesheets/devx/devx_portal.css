@@ -920,7 +920,8 @@ a.cd-logo {
 /** DESKTOP **/
 @media only screen and (min-width:768px) {
   .cd-logo {
-    margin:16px 0px 0px 36px
+    margin:17px 0px 0px 36px;
+    font-size:1.4rem;
   }
 
   .cd-main-header {
