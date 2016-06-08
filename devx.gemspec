@@ -35,6 +35,12 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "liquid"
   s.add_runtime_dependency "select2-rails"
   s.add_runtime_dependency "font-awesome-rails"
+  s.add_runtime_dependency "twitter"
+  s.add_runtime_dependency "koala"
+  s.add_runtime_dependency "rails_autolink"
+  s.add_runtime_dependency "wow-rails"
+  s.add_runtime_dependency "animate-rails"
+  s.add_runtime_dependency "breadcrumbs_on_rails"
   s.add_runtime_dependency "stripe"
   
   s.add_development_dependency "rspec"

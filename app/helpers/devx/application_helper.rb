@@ -4,16 +4,7 @@ module Devx
       Devx::Branding.find_or_create_by(id: 1)
     end
 
-    def breadcrumbs(value)
-      current_page = value
-      parent = Devx::Page.find(current_page.parent)
-      
-      if parent.is_home?
-        (link_to parent.name, root_path) + ' > ' + current_page.name
-      else
-        (link_to parent.name, root_path) + ' > ' + current_page.name
-      end
-    end
+
 
     def full_title(value = '')
       base_title = app_branding.company_name

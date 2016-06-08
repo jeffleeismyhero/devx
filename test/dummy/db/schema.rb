@@ -103,8 +103,6 @@ ActiveRecord::Schema.define(version: 20160524231754) do
     t.integer  "calendar_id"
   end
 
-  add_index "devx_events", ["calendar_id"], name: "index_devx_events_on_calendar_id"
-
   create_table "devx_forms", force: :cascade do |t|
     t.integer  "registration_id"
     t.text     "fields"

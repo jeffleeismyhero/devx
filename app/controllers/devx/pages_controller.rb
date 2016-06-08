@@ -7,12 +7,22 @@ module Devx
 
     def show
       if params[:id].present?
-        @page = Page.find(params[:id])
+        @page = Devx::Page.find(params[:id])
+
+        add_breadcrumb 'Home', :root_path
+
+        if @page.parent.present?
+          @parent = Devx::Page.find(@page.parent)
+          add_breadcrumb @parent.name, @parent
+        end
+
+        add_breadcrumb @page.name
+
       else
-        @page = Page.find_by(is_home: true)
+        @page = Devx::Page.find_by(is_home: true)
 
         if @page.nil?
-          @page = Page.create(name: 'Home', content: 'This is the default homepage for DevX', is_home: true)
+          @page = Devx::Page.create(name: 'Home', content: 'This is the default homepage for DevX', is_home: true)
         end
       end
 
