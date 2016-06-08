@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Devx
-  class JavascriptControllerTest < ActionController::TestCase
+  class JavascriptsControllerTest < ActionController::TestCase
     setup do
       @routes = Engine.routes
     end

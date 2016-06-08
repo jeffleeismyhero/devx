@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608192905) do
+ActiveRecord::Schema.define(version: 20160608214935) do
 
   create_table "devx_articles", force: :cascade do |t|
     t.string   "title"
@@ -105,6 +105,21 @@ ActiveRecord::Schema.define(version: 20160608192905) do
 
   add_index "devx_events", ["calendar_id"], name: "index_devx_events_on_calendar_id"
 
+  create_table "devx_extracurriculars", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "image"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "devx_faqs", force: :cascade do |t|
+    t.string   "question"
+    t.text     "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_forms", force: :cascade do |t|
     t.integer  "registration_id"
     t.text     "fields"
@@ -194,6 +209,18 @@ ActiveRecord::Schema.define(version: 20160608192905) do
 
   add_index "devx_pages", ["parent_id"], name: "index_devx_pages_on_parent_id"
 
+  create_table "devx_products", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "sku"
+    t.float    "price"
+    t.float    "weight"
+    t.boolean  "taxable"
+    t.boolean  "stockable"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "devx_registrations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -230,6 +257,12 @@ ActiveRecord::Schema.define(version: 20160608192905) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_sports", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_stylesheets", force: :cascade do |t|
     t.string   "name"
     t.text     "content"
@@ -240,6 +273,13 @@ ActiveRecord::Schema.define(version: 20160608192905) do
 
   add_index "devx_stylesheets", ["slug"], name: "index_devx_stylesheets_on_slug"
 
+  create_table "devx_teams", force: :cascade do |t|
+    t.integer  "sport_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_transactions", force: :cascade do |t|
     t.integer  "order_id"
     t.string   "payment_method"
@@ -247,6 +287,16 @@ ActiveRecord::Schema.define(version: 20160608192905) do
     t.text     "comments"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "devx_urgent_news", force: :cascade do |t|
+    t.string   "title"
+    t.text     "message"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean  "active",     default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "devx_users", force: :cascade do |t|

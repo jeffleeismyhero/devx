@@ -1,0 +1,8 @@
+<tr>
+  <td><%= link_to extracurricular.name, portal_extracurricular_path(extracurricular) %></td>
+  <td>&nbsp;</td>
+  <td>
+    <%= link_to '<i class="fa fa-edit"></i> Edit'.html_safe, edit_portal_extracurricular_path(extracurricular) %>
+    <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, portal_extracurricular_path(extracurricular), method: :delete, data: { confirm: "Are you sure you want to delete \"#{extracurricular.name}\"?" } %>
+  </td>
+</tr>

@@ -1,0 +1,38 @@
+<% provide(:title, 'Manage Sports') %>
+<div class="container">
+  <div class="row">
+
+    <div class="medium-8 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+
+    <div class="medium-4 columns">
+        <%= link_to '<i class="fa fa-plus"></i> New'.html_safe, new_portal_sport_path %>
+    </div>
+
+    <div class="medium-12 columns">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Sport</th>
+            <th># of Players</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @sports %>
+          <tr>
+            <td colspan="4" style="text-align:right"><%= "Total: #{ @sports.count } sports" %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div class="container">
+    <div class="row full-width">
+        <%= will_paginate @sports, class: 'apple_pagination' %>
+    </div>
+</div>
