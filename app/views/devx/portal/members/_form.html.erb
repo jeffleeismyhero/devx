@@ -1,28 +1,69 @@
-<%= f.label :first_name %>
-<%= f.text_field :first_name %>
-<%= f.label :last_name %>
-<%= f.text_field :last_name %>
-<%= f.label :position %>
-<%= f.text_field :position %>
-<%= f.label :department %>
-<%= f.text_field :department %>
-<%= f.label :address %>
-<%= f.text_field :address %>
-<%= f.label :city %>
-<%= f.text_field :city %>
-<%= f.label :state %>
-<%= f.text_field :state %>
-<%= f.label :zip %>
-<%= f.text_field :zip %>
-<% if @member.photo.present? %>
-  <%= image_tag(@member.photo.small.url) %>
-<% end %>
-<%= f.label :photo %>
-<%= f.file_field :photo %>
-<%= f.label :phone %>
-<%= f.text_field :phone %>
-<%= f.label :email %>
-<%= f.email_field :email %>
-<%= f.label :biography %>
-<%= f.text_area :biography %>
-<%= f.submit %>
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :first_name %><br>
+        <%= f.text_field :first_name %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :last_name %><br>
+        <%= f.text_field :last_name %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :position %><br>
+        <%= f.text_field :position %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :department %><br>
+        <%= f.text_field :department %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :address %><br>
+        <%= f.text_field :address %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :city %><br>
+        <%= f.text_field :city %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :state %><br>
+        <%= f.text_field :state %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :zip %><br>
+        <%= f.text_field :zip %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :phone %><br>
+        <%= f.text_field :phone %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :email %><br>
+        <%= f.text_field :email %>
+    </div>
+</div>
+
+<div class="col-4 columns" style="margin-top:20px;">
+    <% if @member.photo.present? %>
+        <%= image_tag(@member.photo.small.url) %>
+    <% end %>
+    <%= f.label :photo %>
+    <%= f.file_field :photo %> 
+</div>
+    
+<div class="col-12 columns cd-edit-form">
+    <%= f.label :biography %><br>
+    <div style="margin:4px 0;"><%= f.cktext_area :biography %></div>
+</div>
+
+
+<div class="col-12 columns cd-update-form" style="margin-top:20px;">
+    <%= f.submit %>
+</div>

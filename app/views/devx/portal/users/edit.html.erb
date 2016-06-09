@@ -5,11 +5,7 @@
     <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
     </div>
-<<<<<<< HEAD
     <div class="col-12 columns">
-=======
-    <div class="col-12">
->>>>>>> origin/master
       <%= link_to 'Back to users', devx.portal_users_path %>
       <%= form_for @user, url: devx.portal_user_path(@user) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
