@@ -3,9 +3,9 @@ Devx::Engine.routes.draw do
     get '/login' => 'devise/sessions#new'
   end
 
-  resources :branding, controller: 'branding', only: [ :index, :update ]
   resources :articles, except: :show
   resources :events
+  resources :registrations, only: [ :show, :create ]
   resource :stylesheets, defaults: { format: 'css' }
   resource :javascripts, defaults: { format: 'js' }
 
@@ -33,6 +33,7 @@ Devx::Engine.routes.draw do
     resources :slideshows
     resources :media
     resources :registrations do
+      resources :forms
       member do
         post 'enroll'
         get 'attendance'

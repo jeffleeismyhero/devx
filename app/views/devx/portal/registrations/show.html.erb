@@ -5,13 +5,20 @@
     <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
     </div>
-    <div class="col-12">
+    <div class="col-12 columns">
+      <h3>Registration Form</h3>
+
+      <% if @registration.form.present? %>
+        <p><%= link_to 'Edit form', edit_portal_registration_form_path(@registration, @registration.form) %></p>
+      <% else %>
+        <i class="fa fa-form-plus" aria-hidden="true"></i> <%= link_to 'Add form', new_portal_registration_form_path(registration_id: @registration) %>
+      <% end %>
       <h3>Registrations</h3>
       <table width="100%">
         <thead>
-          <tr>
-            <th>Child Name</th>
-            <th>&nbsp;</th>
+          <tr style="background-color:#ACCC38;">
+            <th style="color:#084269; padding:10px; text-align:left; width:30%;">Child Name</th>
+            <th style="color:#084269; padding:10px; text-align:left; width:30%;">&nbsp;</th>
           </tr>
         </thead>
         <tbody>

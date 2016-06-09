@@ -1,4 +1,4 @@
-<% provide(:title, 'Create ' + controller_name.classify.pluralize) %>
+<% provide(:title, 'Edit ' + controller_name.classify) %>
 
 <div class="container">
   <div class="row">
@@ -6,8 +6,8 @@
       <h1><%= yield(:title) %></h1>
     </div>
     <div class="col-12 columns">
-      <%= link_to 'Back to users', devx.portal_users_path %>
-      <%= form_for @user, url: devx.portal_users_path, method: :post do |f| %>
+      <%= link_to 'Back to forms', devx.portal_registration_path(@registration) %>
+      <%= form_for @form, url: devx.portal_registration_form_path(@registration, @form) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
     </div>

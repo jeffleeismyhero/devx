@@ -4,9 +4,12 @@ module Devx
     has_many :children, through: :child_registrations
     has_many :attendances
     has_one :form
+    has_many :registration_submissions
 
     accepts_nested_attributes_for :attendances
     accepts_nested_attributes_for :form
+
+    attr_accessor :submission_content
 
     def attendance(child)
       self.attendances.where(child_id: child.id)

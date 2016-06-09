@@ -1,0 +1,8 @@
+<tr>
+    <td style="padding:10px;border-bottom:1px solid #ccc;"><%= link_to forms.name, devx.edit_portal_form_path(forms) %></td>
+    <td style="padding:10px;border-bottom:1px solid #ccc;"><%= forms.registration_id %></td>
+    <td style="text-align:right; padding:10px;border-bottom:1px solid #ccc;">
+    <%= link_to 'Edit', devx.edit_portal_form_path(forms) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    <%= link_to 'Delete', devx.portal_form_path(forms), method: :delete, data: { confirm: "Are you sure you want to delete #{forms.name}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
+    </td>
+</tr>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160609143722) do
+ActiveRecord::Schema.define(version: 20160609212712) do
 
   create_table "devx_alumnis", force: :cascade do |t|
     t.integer  "user_id"
@@ -132,8 +132,6 @@ ActiveRecord::Schema.define(version: 20160609143722) do
     t.integer  "calendar_id"
   end
 
-  add_index "devx_events", ["calendar_id"], name: "index_devx_events_on_calendar_id"
-
   create_table "devx_extracurriculars", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -149,11 +147,22 @@ ActiveRecord::Schema.define(version: 20160609143722) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_fields", force: :cascade do |t|
+    t.integer  "form_id"
+    t.string   "name"
+    t.string   "field_type"
+    t.integer  "field_size"
+    t.boolean  "required"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_forms", force: :cascade do |t|
     t.integer  "registration_id"
-    t.text     "fields"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "name"
+    t.string   "slug"
   end
 
   create_table "devx_inventories", force: :cascade do |t|
@@ -261,6 +270,13 @@ ActiveRecord::Schema.define(version: 20160609143722) do
     t.boolean  "stockable"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "devx_registration_submissions", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.text     "submission_content"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "devx_registrations", force: :cascade do |t|

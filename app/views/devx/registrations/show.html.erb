@@ -1,0 +1,21 @@
+<div class="container banner">
+
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <%= form_for @registration, url: devx.registrations_path, method: :post do |f| %>
+        <%= f.hidden_field :id %>
+        <%= f.fields_for :submission_content, OpenStruct.new(@registration.submission_content) do |submission| %>
+          <% @registration.form.fields.try(:each) do |field| %>
+            <%= render "#{field.field_type}", field: field, f: submission %>
+          <% end %>
+        <% end %>
+     </div>
+      <div class="large-12 columns">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>

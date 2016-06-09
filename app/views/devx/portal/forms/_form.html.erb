@@ -1,0 +1,22 @@
+<div class="col-4 columns no-padding cd-edit-form" style="margin-top:20px;">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+</div>
+
+<div class="col-12 columns no-padding">
+  <h3>Form Fields</h3>
+
+  <%= content_tag 'div', class: 'nested-attributes' do %>
+    <%= f.fields_for :fields do |l| %>
+      <%= render partial: 'form_fields', locals: { f: l } %>
+    <% end %>
+  <% end %>
+  <%= link_to_add_fields 'Add Field', f, :fields, nil, 'form_fields', '' %>
+</div>
+
+<div class="col-12 columns no-padding">
+    <div class="cd-update-form">
+        <%= f.submit %>
+    </div>
+</div>
+

@@ -1,0 +1,24 @@
+<div class="col-12 columns no-padding">
+
+  <div class="col-3 columns cd-edit-form">
+    <%= f.label :field_type %>
+    <%= f.select :field_type, %w[text_field check_box], {}, { class: 'select2-fixed' } %>
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <%= f.label :field_size %>
+    <%= f.select :field_size, %w[1 2 3 4 5 6 7 8 9 10 11 12], {}, { class: 'select2-fixed' } %>
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <%= f.check_box :required %> <%= f.label :required %>
+  </div>
+
+  
+  <div class="nested-actions pull-right buttons">
+    <%= f.hidden_field :_destroy, class: 'remove-field' %>
+    <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, '#', class: 'remove_fields' %>
+  </div>
+</div>
