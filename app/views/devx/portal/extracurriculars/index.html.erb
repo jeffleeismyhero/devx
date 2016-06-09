@@ -1,0 +1,40 @@
+<% provide(:title, 'Manage Extracurriculars') %>
+<%= render partial: 'shared/notice_messages' %>
+<div class="container">
+  <div class="row">
+
+    <div class="medium-8 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+
+    <div class="medium-4 columns">
+        <%= link_to '<i class="fa fa-plus"></i> New'.html_safe, new_portal_extracurricular_path %>
+    </div>
+
+    <div class="medium-12 columns">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Extracurricular</th>
+            <th># of Students</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @extracurriculars %>
+          <tr>
+            <td colspan="4" style="text-align:right"><%= "Total: #{ @extracurriculars.count } extracurriculars" %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div class="container">
+    <div class="row full-width">
+        <%= will_paginate @extracurriculars, class: 'apple_pagination' %>
+    </div>
+</div>
+

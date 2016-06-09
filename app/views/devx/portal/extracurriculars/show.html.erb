@@ -1,0 +1,17 @@
+<% provide(:title, @extracurricular.name) %>
+<div class="container">
+  <div class="row">
+    <div class="medium-12 columns">
+      <%= link_to '<i class="fa fa-edit"></i> Edit'.html_safe, edit_portal_extracurricular_path(@extracurricular) %>
+      <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, portal_extracurricular_path(@extracurricular), method: :delete, data: { confirm: "Are you sure you want to delete \"#{@extracurricular.name}\"?" } %>
+    </div>
+
+    <div class="medium-12 columns">
+      <h1><%= yield(:title) %></h1>
+      <% if @extracurricular.image.present? %>
+        <%= image_tag(@extracurricular.image.small.url) %>
+      <% end %>
+      <%= simple_format @extracurricular.description %>
+    </div>
+  </div>
+</div>

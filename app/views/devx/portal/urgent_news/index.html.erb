@@ -1,0 +1,28 @@
+<% provide(:title, 'Manage Urgent News') %>
+<div class="container">
+  <div class="row">
+    
+    <div class="medium-8 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+
+    <div class="medium-4 columns">
+      <%= link_to '<i class="fa fa-plus"></i> New Event'.html_safe, new_portal_urgent_news_path %>
+    </div>
+
+    <div class="medium-12 columns">
+      <table width="100%">
+        <thead>
+          <th>Event</th>
+          <th>Message</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>&nbsp;</th>
+        </thead>
+        <tbody>
+          <%= render @urgent_news %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

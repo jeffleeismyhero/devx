@@ -93,6 +93,7 @@
           <li><%= link_to 'Pages', devx.portal_pages_path %></li>
           <li><%= link_to 'Layouts', devx.portal_layouts_path %></li>
           <li><%= link_to 'Stylesheets', devx.portal_stylesheets_path %></li>
+          <li><%= link_to 'JavaScripts', devx.portal_javascripts_path %></li>
           <li><%= link_to 'Media', devx.portal_media_path %></li>
           <li><%= link_to 'Menus', devx.portal_menus_path %></li>
         </ul>
@@ -113,6 +114,7 @@
           <%= link_to '<i class="fa fa-shopping-cart"></i> <span>Commerce</span>'.html_safe, '#', class: 'has-children', data: 'commerce' %>
         </li>
         <ul class="child-nav" data-parent="commerce">
+          <li><%= link_to 'Products', devx.portal_products_path %></li>
           <li><%= link_to 'Orders', devx.portal_orders_path %></li>
         </ul>
         <li>

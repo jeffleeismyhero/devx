@@ -1,0 +1,13 @@
+<% provide(:title, 'New FAQ') %>
+<div class="container">
+  <div class="row">
+    <div class="medium-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="medium-12 columns">
+      <%= form_for @faq, url: portal_faqs_path do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

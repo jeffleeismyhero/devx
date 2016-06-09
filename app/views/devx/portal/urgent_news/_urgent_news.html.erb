@@ -1,0 +1,10 @@
+<tr>
+  <td><%= urgent_news.title %></td>
+  <td><%= urgent_news.message %></td>
+  <td><%= urgent_news.start_time.try(:strftime, '%m/%d/%Y %I:%M%p') %></td>
+  <td><%= urgent_news.end_time.try(:strftime, '%m/%d/%Y %I:%M%p') %></td>
+  <td>
+    <%= link_to '<i class="fa fa-edit"></i> Edit'.html_safe, edit_portal_urgent_news_path(urgent_news) %>
+    <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, portal_urgent_news_path(urgent_news), method: :delete, data: { confirm: "Are you sure you want to delete \"#{urgent_news.title}\"?" } %>
+  </td>
+</tr>

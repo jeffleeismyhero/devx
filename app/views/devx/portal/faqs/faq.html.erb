@@ -1,0 +1,8 @@
+<tr>
+  <td><%= faq.question %></td>
+  <td><%= faq.tag_list %></td>
+  <td>
+    <%= link_to '<i class="fa fa-edit"></i> Edit'.html_safe, edit_portal_faq_path(faq) %>
+    <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, portal_faq_path(faq), method: :delete, data: { confirm: "Are you sure you want to delete \"#{faq.question}?\"" } %>
+  </td>
+</tr>

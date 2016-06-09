@@ -1,5 +1,4 @@
 Devx::Engine.routes.draw do
-
   devise_for :users, class_name: "Devx::User", module: :devise, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' } do
     get '/login' => 'devise/sessions#new'
   end
@@ -15,6 +14,7 @@ Devx::Engine.routes.draw do
     resources :pages
     resources :menus
     resources :layouts
+    resources :javascripts
     resources :stylesheets
     resources :articles
     resources :calendars do
@@ -22,6 +22,10 @@ Devx::Engine.routes.draw do
     end
     resources :members
     resources :alumni
+    resources :faqs
+    resources :products
+    resources :sports
+    resources :urgent_news
     resources :branding
     resources :users
     resources :roles

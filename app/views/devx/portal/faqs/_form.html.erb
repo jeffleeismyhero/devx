@@ -1,0 +1,9 @@
+<%= f.label :question %>
+<%= f.text_field :question, style: 'width:100%;max-width:800px' %>
+<%= f.label :answer %>
+<%= f.cktext_area :answer, style: 'width:100%;max-width:800px' %>
+<%= f.label :tag_list, 'Category' %>
+<%= f.select :tag_list, @tags, { prompt: 'Select one', selected: @faq.tag_list }, { class: 'select2', multiple: false } %>
+<%= f.label :position %>
+<%= f.number_field :position %>
+<%= f.submit %>

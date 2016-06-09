@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  sku: MyString
+  price: 1.5
+  weight: 1.5
+  taxable: false
+  stockable: false
+
+two:
+  name: MyString
+  description: MyText
+  sku: MyString
+  price: 1.5
+  weight: 1.5
+  taxable: false
+  stockable: false
