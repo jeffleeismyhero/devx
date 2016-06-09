@@ -1,7 +1,22 @@
-<%= f.label :name %>
-<%= f.text_field :name %>
-<%= f.label :content %>
-<%= f.text_area :content %>
-<%= f.label :stylesheet_ids %>
-<%= f.select :stylesheet_ids, Devx::Stylesheet.all.collect{ |x| [x.name, x.id] }, { }, { multiple: true, class: 'select2' } %>
-<%= f.submit %>
+<div class="col-4 columns no-padding" style="margin-top:20px;">
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+    </div>
+    
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :stylesheet_ids %><br>
+        <%= f.select :stylesheet_ids, Devx::Stylesheet.all.collect{ |x| [x.name, x.id] }, { }, { multiple: true, class: 'select2' } %>
+    </div>
+</div>
+
+<div class="col-12 columns cd-edit-form no-padding" style="margin-top:20px;">
+    <div class="col-12 columns">
+        <%= f.label :content %><br>
+        <div style="margin:4px 0;"><%= f.cktext_area :content %></div>
+    </div>
+</div>
+
+<div class="col-12 columns cd-update-form" style="margin-top:20px;">
+    <%= f.submit %>
+</div>

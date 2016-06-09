@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160609212712) do
     t.integer  "graduation_year"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "photo"
   end
 
   create_table "devx_articles", force: :cascade do |t|

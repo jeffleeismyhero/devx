@@ -1,12 +1,44 @@
-<%= f.label :name %>
-<%= f.text_field :name %>
-<%= f.label :content %>
-<%= f.cktext_area :content %>
-<%= f.label :layout_id %>
-<%= f.select :layout_id, Devx::Layout.all.collect{ |x| [ x.name, x.id ] }, { include_blank: true } %>
-<%= f.label :parent %>
-<%= f.select :parent, Devx::Page.all.where.not(id: @page.id).collect{ |x| [x.name, x.id] }, { include_blank: true } %>
-<%= f.label :image, 'Header image' %>
-<%= f.file_field :image %>
-<%= f.check_box :active %>Active
-<%= f.submit %>
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-12 columns"><h3>Personal Information</h3></div>
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :layout_id %><br>
+        <div style="margin:4px 0;"><%= f.select :layout_id, Devx::Layout.all.collect{ |x| [ x.name, x.id ] }, { }, {class:'select2-fixed'} %></div>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :parent %><br>
+        <div style="margin:4px 0;"><%= f.select :parent, Devx::Page.all.where.not(id: @page.id).collect{ |x| [x.name, x.id] }, { }, {class:'select2-fixed'} %></div>
+    </div>
+    
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :active %><br>
+    </div>
+    
+    <div class="col-12 columns cd-edit-form">
+        <label class="switch">
+            <%= f.check_box :active %>
+            <div class="slider round"></div>
+        </label>
+    </div>
+</div>
+
+<div class="col-4 columns cd-edit-form">
+    <%= f.label :image, 'Header image' %>
+    <%= f.file_field :image %>
+</div>
+
+<div class="col-12 columns cd-edit-form no-padding" style="margin-top:20px;">
+    <div class="col-12 columns">
+        <%= f.label :content %><br>
+        <div style="margin:4px 0;"><%= f.cktext_area :content %></div>
+    </div>
+</div>
+
+<div class="col-12 columns cd-update-form" style="margin-top:20px;">
+    <%= f.submit %>
+</div>
