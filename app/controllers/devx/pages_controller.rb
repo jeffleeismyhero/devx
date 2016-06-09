@@ -31,6 +31,10 @@ module Devx
       return
     end
 
+    def search
+      @q = @pages.search(params[:q])
+      @pages = @q.result
+    end
 
     private
 
