@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608192905) do
+ActiveRecord::Schema.define(version: 20160609011317) do
 
   create_table "devx_alumnis", force: :cascade do |t|
     t.integer  "user_id"
@@ -82,8 +82,16 @@ ActiveRecord::Schema.define(version: 20160608192905) do
   create_table "devx_calendars", force: :cascade do |t|
     t.string   "name"
     t.boolean  "active"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "google_calendar_id"
+    t.string   "client_id"
+    t.string   "client_secret"
+    t.string   "calendar_type"
+    t.string   "authorization_url"
+    t.string   "authorization_code"
+    t.string   "refresh_token"
+    t.string   "time_zone"
   end
 
   create_table "devx_child_registrations", force: :cascade do |t|
@@ -148,6 +156,14 @@ ActiveRecord::Schema.define(version: 20160608192905) do
   create_table "devx_layouts", force: :cascade do |t|
     t.string   "name"
     t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "devx_line_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.integer  "quanity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

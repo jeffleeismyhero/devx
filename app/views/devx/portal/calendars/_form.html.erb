@@ -1,4 +1,25 @@
 <%= f.label :name %>
 <%= f.text_field :name %>
+
+<%= f.label :calendar_type %>
+<%= f.select :calendar_type, options_for_select(['Standard', 'Google Calendar'], @calendar.calendar_type) %>
+
+<%= f.label :client_id %>
+<%= f.text_field :client_id %>
+<%= f.label :client_secret %>
+<%= f.text_field :client_secret %>
+<%= f.label :google_calendar_id %>
+<%= f.text_field :google_calendar_id %>
+<%= f.label :authorization_code %>
+<%= f.text_field :authorization_code %>
+<%= f.label :time_zone %>
+<%= f.text_field :time_zone %>
+
 <%= f.check_box :active %> Active
 <%= f.submit %>
+
+<% if @calendar.authorization_url.present? && @calendar.refresh_token.blank? %>
+  <p>
+    Click <%= link_to 'here', @calendar.authorization_url, target: '_blank' %> to authorize the application
+  </p>
+<% end %>

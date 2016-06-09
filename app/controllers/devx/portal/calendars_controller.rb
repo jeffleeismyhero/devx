@@ -10,6 +10,9 @@ module Devx
     end
 
     def show
+        if @calendar.calendar_type == 'Google Calendar'
+            @google_events = @calendar.get_google_events
+        end
     end
 
     def new
@@ -52,7 +55,7 @@ module Devx
     private
 
     def calendar_params
-        accessible = [ :name, :active ]
+        accessible = [ :name, :calendar_type, :client_id, :client_secret, :google_calendar_id, :authorization_code, :time_zone, :active ]
         params.require(:calendar).permit(accessible)
     end
   end
