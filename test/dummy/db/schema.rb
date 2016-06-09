@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160609011317) do
+ActiveRecord::Schema.define(version: 20160609143722) do
 
   create_table "devx_alumnis", force: :cascade do |t|
     t.integer  "user_id"
@@ -360,6 +360,7 @@ ActiveRecord::Schema.define(version: 20160609011317) do
     t.datetime "deleted_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "photo"
   end
 
   add_index "devx_users", ["deleted_at"], name: "index_devx_users_on_deleted_at"
