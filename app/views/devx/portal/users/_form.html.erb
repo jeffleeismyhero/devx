@@ -1,25 +1,45 @@
-<div style="margin:40px 0;">
-    <div class="cd-edit-forms"><%= f.label :first_name %><br>
-    <%= f.text_field :first_name %></div>
-    <div class="cd-edit-forms"><%= f.label :last_name %><br>
-    <%= f.text_field :last_name %></div>
-    <div class="cd-edit-forms"><%= f.label :email %><br>
-    <%= f.text_field :email %></div>
-    <div><%= f.label :password %></div>
-    <div class="cd-edit-forms"><%= f.password_field :password %></div>
-    <div><%= f.label :password_confirmation %></div>
-    <div class="cd-edit-forms"><%= f.password_field :password_confirmation %></div>
-    <div><%= f.label :photo %>
-        <%= f.file_field :photo %> </div>
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :first_name %><br>
+        <%= f.text_field :first_name %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :last_name %><br>
+        <%= f.text_field :last_name %>
+    </div>
+    
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :email %><br>
+        <%= f.text_field :email %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :password %><br>
+        <%= f.password_field :password %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :password_confirmation %><br>
+        <%= f.password_field :password_confirmation %>
+    </div>
+</div>
+<div class="col-4 columns" style="margin-top:20px;">
+    <div>
+        <%= f.label :photo %>
+        <%= f.file_field :photo %> 
+    </div>
 </div>
 
-<div style="margin:40px 0;">
+<div class="col-8 columns" style="margin-top:20px;">
     <h3>User Roles</h3>
-    <div><%= f.select :role_ids, Devx::Role.all.collect{ |x| [x.name, x.id] }, { multiple: true }, { class: 'select2' } %></div>
+    <div>
+        <%= f.select :role_ids, Devx::Role.all.collect{ |x| [x.name, x.id] }, { multiple: true }, { class: 'select2' } %>
+    </div>
 </div> 
 
 
-<div style="margin:40px 0;">
+<div class="col-12 columns" style="margin-top:20px;">
     <h3>Children</h3>
     <table width="100%">
       <thead>
@@ -34,14 +54,20 @@
     </table>
 </div>
 
-<div style="margin:40px 0;">
-    <h3>Add Child</h3>
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-12 columns">
+        <h3>Add Child</h3>
+    </div>
     <%= f.fields_for :children, @user.children.build do |child| %>
-      <div class="cd-edit-forms"><%= child.label :first_name %><br>
+      <div class="col-6 columns cd-edit-form"><%= child.label :first_name %><br>
           <%= child.text_field :first_name %></div>
-      <div class="cd-edit-forms"><%= child.label :last_name %><br>
+      <div class="col-6 columns cd-edit-form"><%= child.label :last_name %><br>
           <%= child.text_field :last_name %></div>
     <% end %>
 </div>
 
-<div class="add-child"><%= f.submit %></div>
+<div class="col-12 columns" style="margin-top:20px;">
+    <div class="cd-update-form">
+        <%= f.submit %>
+    </div>
+</div>

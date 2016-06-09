@@ -34,6 +34,10 @@ secondary
   padding-right: 0.9375em;
   float: left; }
 
+.no-padding {
+    padding:0;
+}
+
 .col-1 {
   width: 8.33333%; }
 
@@ -516,19 +520,32 @@ a.cd-logo {
 
 /* #EDIT FORMS */
 
-.cd-edit-forms{
+.cd-edit-form {
     display: inline-block;
+    margin-top:10px;
 }
 
-.cd-edit-forms input{
+.cd-edit-form input {
     margin:4px 0;
     padding:10px;
     font-size:1rem;
-    width:400px;
+    width:100%;
     box-sizing:border-box;
 }
 
-.add-child input[type=submit] {
+.cd-edit-form input[type=submit] {
+    margin:4px 0;
+    padding:10px;
+    font-size:1rem;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.select2 {
+    width:100%!important;
+}
+
+.cd-update-form input[type=submit] {
     margin:20px 0;
     max-width:300px;
     width:100%;
@@ -544,7 +561,7 @@ a.cd-logo {
     border-radius:20px;
 }
 
-.add-child input[type=submit]:hover {
+.cd-update-form input[type=submit]:hover {
     cursor: pointer;
     border-radius:20px;
     box-shadow: 2px 2px 8px #888888;
