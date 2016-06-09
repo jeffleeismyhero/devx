@@ -1,23 +1,24 @@
 <% provide(:title, '' + controller_name.classify) %>
 
 <div class="container">
+
   <div class="row">
+
     <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
-      
-			  <div class="row">
-
-			    <div class="medium-12 large-6 columns" style="max-width:400px;color:white;">
-			      <div>
-			      	<%= search_form_for @q do |f| %>
-			        	<%= f.search_field :title_cont, placeholder: 'SEARCH', class: 'search-bar' %>
-			        	<i class="fa fa-search fa-2x search-icon"></i>
-			        <% end %>
-			      </div>
-			    </div>
-			    
-			  </div>
-
     </div>
+
   </div>
+
+  <div class="row">
+
+    <div class="medium-12 large-6 columns" style="max-width:400px;color:white;">
+    	<%= search_form_for @q do |f| %>
+      	<%= f.search_field :title_cont, placeholder: 'SEARCH', class: 'search-bar' %>
+      	<i class="fa fa-search fa-2x search-icon"></i>
+      <% end %>
+    </div> 
+    
+	</div>
+
 </div>
