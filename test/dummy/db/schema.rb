@@ -132,6 +132,8 @@ ActiveRecord::Schema.define(version: 20160609011317) do
     t.integer  "calendar_id"
   end
 
+  add_index "devx_events", ["calendar_id"], name: "index_devx_events_on_calendar_id"
+
   create_table "devx_extracurriculars", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
