@@ -13,6 +13,8 @@ module Devx
     has_many :attendances
 
     validates :email, presence: true
+      
+    mount_uploader :photo, ImageUploader
 
     accepts_nested_attributes_for :children,
       reject_if: proc{ |x| x['first_name'].blank? }
