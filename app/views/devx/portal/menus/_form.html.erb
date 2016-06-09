@@ -1,5 +1,15 @@
-<%= f.label :name %>
-<%= f.text_field :name %>
+<div class="col-8 columns no-padding">
+    <div class="col-6 columns cd-edit-form" style="margin-top:20px;">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+    </div>
+
+    <div class="col-12 columns">
+        <div class="cd-update-form">
+            <%= f.submit %>
+        </div>
+    </div>
+</div>
 
 <% if !@menu.new_record? %>
   <h3>Current Navigation</h3>
@@ -26,5 +36,3 @@
     <%= number_field_tag 'page[position]' %>
   </div>
 <% end %>
-
-<%= f.submit %>

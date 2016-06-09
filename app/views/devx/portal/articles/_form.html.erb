@@ -1,11 +1,31 @@
-<%= f.label :title %>
-<%= f.text_field :title %>
-<%= f.label :short_description %>
-<%= f.text_field :short_description %>
-<%= f.label :image %>
-<%= f.file_field :image %>
-<%= f.label :content %>
-<%= f.cktext_area :content %>
-<%= f.label :published_at %>
-<%= f.date_field :published_at %>
-<%= f.submit %>
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-12 columns"><h3>Personal Information</h3></div>
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :title %><br>
+        <%= f.text_field :title %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :short_description %><br>
+        <%= f.text_field :short_description %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :published_at %><br>
+        <%= f.date_field :published_at %>
+    </div>
+</div>
+
+<div class="col-4 columns cd-edit-form">
+    <%= f.label :image, 'Header image' %>
+    <%= f.file_field :image %>
+</div>
+
+<div class="col-12 columns cd-edit-form no-padding" style="margin-top:20px;">
+    <div class="col-12 columns">
+        <%= f.label :content %><br>
+        <div style="margin:4px 0;"><%= f.cktext_area :content %></div>
+    </div>
+</div>
+
+<div class="col-12 columns cd-update-form" style="margin-top:20px;">
+    <%= f.submit %>
+</div>

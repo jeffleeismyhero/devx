@@ -1,22 +1,57 @@
-<%= f.label :name %>
-<%= f.text_field :name %>
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :time_zone %><br>
+        <%= f.select :time_zone, options_for_select(['', ''], @calendar.time_zone) %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :calendar_type %><br>
+        <%= f.select :calendar_type, options_for_select(['Standard', 'Google Calendar'], @calendar.calendar_type) %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :client_id %><br>
+        <%= f.text_field :client_id %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :client_secret %><br>
+        <%= f.text_field :client_secret %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :google_calendar_id %><br>
+        <%= f.text_field :google_calendar_id %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :authorization_code %><br>
+        <%= f.text_field :authorization_code %>
+    </div>
+    
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :active %><br>
+    </div>
+    
+    <div class="col-12 columns cd-edit-form">
+        <label class="switch">
+            <%= f.check_box :active %>
+            <div class="slider round"></div>
+        </label>
+    </div>
+</div>
 
-<%= f.label :calendar_type %>
-<%= f.select :calendar_type, options_for_select(['Standard', 'Google Calendar'], @calendar.calendar_type) %>
+<div class="col-12 columns" style="margin-top:20px;">
+    <div class="cd-update-form">
+        <%= f.submit %>
+    </div>
+</div>
 
-<%= f.label :client_id %>
-<%= f.text_field :client_id %>
-<%= f.label :client_secret %>
-<%= f.text_field :client_secret %>
-<%= f.label :google_calendar_id %>
-<%= f.text_field :google_calendar_id %>
-<%= f.label :authorization_code %>
-<%= f.text_field :authorization_code %>
-<%= f.label :time_zone %>
-<%= f.text_field :time_zone %>
-
-<%= f.check_box :active %> Active
-<%= f.submit %>
 
 <% if @calendar.authorization_url.present? && @calendar.refresh_token.blank? %>
   <p>

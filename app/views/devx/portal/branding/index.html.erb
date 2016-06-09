@@ -7,26 +7,64 @@
     </div>
     <div class="col-12 columns">
       <%= form_for @branding, url: devx.portal_branding_path(@branding) do |f| %>
-        <%= f.label :company_name %>
-        <%= f.text_field :company_name %>
-        <%= f.label :logo %>
-        <%= f.file_field :logo %>
-        <%= f.label :alternate_logo %>
-        <%= f.file_field :alternate_logo %>
-        <%= f.label :favicon %>
-        <%= f.file_field :favicon %>
-        <%= f.label :primary_color %>
-        <%= f.text_field :primary_color %>
-        <%= f.label :secondary_color %>
-        <%= f.text_field :secondary_color %>
-        <%= f.label :accent_color_1 %>
-        <%= f.text_field :accent_color_1 %>
-        <%= f.label :accent_color_2 %>
-        <%= f.text_field :accent_color_2 %>
-        <%= f.label :accent_color_3 %>
-        <%= f.text_field :accent_color_3 %>
-        <%= f.submit %>
+        <div class="col-8 columns no-padding">
+            <div class="col-12 columns cd-edit-form">
+                <%= f.label :company_name %>
+                <%= f.text_field :company_name %>
+            </div>
+        </div>
+        
+        <div class="col-8 columns" style="margin-top:20px;">
+            <h3>Logo</h3>
+            <div class="col-12 columns cd-edit-form">
+                <%= f.label :logo %>
+                <%= f.file_field :logo %>
+            </div>
+            <div class="col-12 columns cd-edit-form">
+                <%= f.label :alternate_logo %>
+                <%= f.file_field :alternate_logo %>
+            </div>
+            <div class="col-12 columns cd-edit-form">
+                <%= f.label :favicon %>
+                <%= f.file_field :favicon %>
+            </div>
+        </div>
+        
+        <div class="col-8 columns" style="margin-top:20px;">
+            <h3>Colors</h3>
+            <div class="col-6 columns cd-edit-form">
+                <%= f.label :primary_color %>
+                <%= f.text_field :primary_color %>
+            </div>
+            <div class="col-6 columns cd-edit-form">
+                <%= f.label :secondary_color %>
+                <%= f.text_field :secondary_color %>
+            </div>
+            <div class="col-6 columns cd-edit-form">
+                <%= f.label :accent_color_1 %>
+                <%= f.text_field :accent_color_1 %>
+            </div>
+            <div class="col-6 columns cd-edit-form">
+                <%= f.label :accent_color_2 %>
+                <%= f.text_field :accent_color_2 %>
+            </div>
+            <div class="col-6 columns cd-edit-form">
+                <%= f.label :accent_color_3 %>
+                <%= f.text_field :accent_color_3 %>
+            </div>
+        </div>
+        
+        <div class="col-12 columns" style="margin-top:20px;">
+            <div class="cd-update-form">
+                <%= f.submit %>
+            </div>
+        </div>
+        
       <% end %>
     </div>
   </div>
 </div>
+
+
+
+
