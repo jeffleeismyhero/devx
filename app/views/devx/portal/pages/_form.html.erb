@@ -7,12 +7,12 @@
     
     <div class="col-6 columns cd-edit-form">
         <%= f.label :layout_id %><br>
-        <div style="margin:4px 0;"><%= f.select :layout_id, Devx::Layout.all.collect{ |x| [ x.name, x.id ] }, { }, {class:'select2-fixed'} %></div>
+        <div style="margin:4px 0;"><%= f.select :layout_id, Devx::Layout.all.collect{ |x| [ x.name, x.id ] }, { include_blank: true }, {class:'select2-fixed'} %></div>
     </div>
     
     <div class="col-6 columns cd-edit-form">
         <%= f.label :parent %><br>
-        <div style="margin:4px 0;"><%= f.select :parent, Devx::Page.all.where.not(id: @page.id).collect{ |x| [x.name, x.id] }, { }, {class:'select2-fixed'} %></div>
+        <div style="margin:4px 0;"><%= f.select :parent, Devx::Page.all.where.not(id: @page.id).collect{ |x| [x.name, x.id] }, { include_blank: true }, {class:'select2-fixed'} %></div>
     </div>
     
     <div class="col-12 columns cd-edit-form">

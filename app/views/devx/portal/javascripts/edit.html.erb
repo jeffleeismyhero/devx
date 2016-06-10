@@ -7,7 +7,7 @@
     </div>
     <div class="col-12">
       <%= link_to 'Back to javascripts', devx.portal_javascripts_path %>
-      <%= form_for @stylesheet, url: devx.portal_javascript_path(@javascript) do |f| %>
+      <%= form_for @javascript, url: devx.portal_javascript_path(@javascript) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
     </div>

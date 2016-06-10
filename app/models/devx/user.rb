@@ -11,6 +11,7 @@ module Devx
     has_many :child_registrations
     has_many :registrations, through: :child_registrations
     has_many :attendances
+    belongs_to :person
 
     validates :email, presence: true
       
@@ -25,6 +26,26 @@ module Devx
       else
         self.email
       end
+    end
+
+    def super_administrator?
+      self.roles.exists?(name: 'Super Administrator') || self.roles.exists?(name: 'Developer')
+    end
+
+    def administrator?
+      self.roles.exists?(name: 'Administrator') || super_administrator?
+    end
+
+    def student?
+      self.roles.exists?(name: 'Student')
+    end
+
+    def parent?
+      self.roles.exists?(name: 'Parent')
+    end
+
+    def faculty
+      self.roles.exists?(name: 'Faculty')
     end
   end
 end

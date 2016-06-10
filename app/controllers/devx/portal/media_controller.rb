@@ -9,17 +9,13 @@ module Devx
     def index
     end
 
-
-    def new
-    end
-
     def create
+      @medium.name = @medium.file.filename
+
       if @medium.valid? && @medium.save
-        redirect_to devx.portal_media_path,
-        notice: "Successfully saved media"
-      else
-        render :new,
-        notice: "Failed to save media"
+        respond_to do |format|
+          format.json{ render json: @medium }
+        end
       end
     end
 

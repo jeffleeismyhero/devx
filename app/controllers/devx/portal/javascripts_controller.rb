@@ -16,7 +16,7 @@ module Devx
     end
 
     def create
-    	if @javascript.valid? && @javascript
+    	if @javascript.valid? && @javascript.save
     		redirect_to devx.edit_portal_javascript_path(@javascript),
     		notice: "Successfully saved javascript"
     	else

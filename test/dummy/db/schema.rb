@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160609223933) do
 
   create_table "alumnis", force: :cascade do |t|
@@ -31,6 +32,9 @@ ActiveRecord::Schema.define(version: 20160609223933) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+=======
+ActiveRecord::Schema.define(version: 20160610093248) do
+>>>>>>> origin/master
 
   create_table "devx_alumnis", force: :cascade do |t|
     t.integer  "user_id"
@@ -66,6 +70,15 @@ ActiveRecord::Schema.define(version: 20160609223933) do
     t.string   "employer_city"
     t.string   "employer_state"
     t.integer  "employer_zip"
+<<<<<<< HEAD
+=======
+  end
+
+  create_table "devx_application_settings", force: :cascade do |t|
+    t.text     "settings"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+>>>>>>> origin/master
   end
 
   create_table "devx_articles", force: :cascade do |t|
@@ -202,6 +215,8 @@ ActiveRecord::Schema.define(version: 20160609223933) do
   end
 
   create_table "devx_inventories", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -209,6 +224,7 @@ ActiveRecord::Schema.define(version: 20160609223933) do
   create_table "devx_javascripts", force: :cascade do |t|
     t.string   "name"
     t.text     "content"
+    t.string   "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -296,6 +312,23 @@ ActiveRecord::Schema.define(version: 20160609223933) do
 
   add_index "devx_pages", ["parent_id"], name: "index_devx_pages_on_parent_id"
 
+  create_table "devx_people", force: :cascade do |t|
+    t.string   "prefix"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "suffix"
+    t.date     "birthdate"
+    t.string   "gender"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_products", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -357,6 +390,12 @@ ActiveRecord::Schema.define(version: 20160609223933) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_students", force: :cascade do |t|
+    t.integer  "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_stylesheets", force: :cascade do |t|
     t.string   "name"
     t.text     "content"
@@ -413,10 +452,12 @@ ActiveRecord::Schema.define(version: 20160609223933) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "photo"
+    t.integer  "person_id"
   end
 
   add_index "devx_users", ["deleted_at"], name: "index_devx_users_on_deleted_at"
   add_index "devx_users", ["email"], name: "index_devx_users_on_email", unique: true
+  add_index "devx_users", ["person_id"], name: "index_devx_users_on_person_id"
   add_index "devx_users", ["reset_password_token"], name: "index_devx_users_on_reset_password_token", unique: true
   add_index "devx_users", ["unlock_token"], name: "index_devx_users_on_unlock_token", unique: true
 

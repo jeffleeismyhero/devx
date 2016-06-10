@@ -5,11 +5,17 @@
         <div class="col-12 columns">
             <h1><%= yield(:title) %></h1>
         </div>
+        <div class="col-12 columns" style="margin-bottom:30px">
+          <%= form_tag devx.portal_media_path, method: :post, id: 'media-dropzone', class: 'dropzone' do %>
+            <div class="fallback">
+              <%= file_field_tag :file %>
+            </div>
+          <% end %>
+        </div>
         <div class="col-12 columns" style="padding-bottom:20px;">
-            <i class="fa fa-file-image-o" aria-hidden="true"></i> <%= link_to 'Add Media', new_portal_medium_path %>
             <div style="float:right;">
-                <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                <span style="padding:0 10px;"><i class="fa fa-caret-down" aria-hidden="true"></i> Filter by</span>
+                <span style="padding:0 10px;"><i class="fa fa-caret-down" aria-hidden="true"></i>Arrange by</span>
                 <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
             </div>
         </div>

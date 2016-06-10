@@ -299,6 +299,7 @@ a.cd-logo {
 
 .content-wrapper {
   position:relative;
+  overflow:scroll;
 }
 
 
@@ -417,11 +418,11 @@ a.cd-logo {
     padding-top:80px;
     width:110px;
     min-height:100vh;
-    max-height:none;
+    max-height:100vh;
     position:relative;
     top:auto;
     visibility:visible;
-    overflow:visible;
+    overflow-y:scroll;
     float:left;
   }
 
@@ -456,6 +457,8 @@ a.cd-logo {
   }
 
   .cd-side-nav ul > li a.active, .cd-side-nav ul > li a:hover {
+    background-color:#ACCC38;
+    color:#ffffff;
     border-right:4px solid #084269;
   }
 
@@ -473,13 +476,15 @@ a.cd-logo {
   }
 
   .content-wrapper {
-    padding:6em 4em;
+    padding:80px 0px;
     margin-left:110px;
-    min-height:100vh;
+    min-height:100%;
+    max-height:100vh;
     box-sizing:border-box;
     -webkit-box-sizing:border-box;
     -moz-box-sizing:border-box;
     -o-box-sizing:border-box;
+    overflow-y:scroll;
   }
 
   .cd-main-footer {
@@ -522,8 +527,9 @@ a.cd-logo {
 /* #EDIT FORMS */
 
 .cd-edit-form {
-    display: inline-block;
+    display: block;
     margin:5px 0;
+    min-height:69px;
 }
 
 .cd-edit-form input {
@@ -624,4 +630,13 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.select2-container .select2-selection--single {
+  margin-top:5px;
+  height:42px;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-top:6px;
 }

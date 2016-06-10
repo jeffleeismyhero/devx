@@ -33,37 +33,41 @@
 
 <div class="col-8 columns" style="margin-top:20px;">
     <h3>User Roles</h3>
-    <div>
-        <%= f.select :role_ids, Devx::Role.all.collect{ |x| [x.name, x.id] }, { multiple: true }, { class: 'select2' } %>
+    <div class="col-12 columns no-padding">
+        <%= f.select :role_ids, Devx::Role.all.collect{ |x| [x.name, x.id] }, {  }, { multiple: true, class: 'select2' } %>
     </div>
 </div> 
 
-<div class="col-12 columns" style="margin-top:20px;">
-    <h3>Children</h3>
-    <table width="100%">
-      <thead>
-        <tr style="background-color:#ACCC38;">
-          <th style="color:#084269; padding:10px; text-align:left; width:50%;">First Name</th>
-          <th style="color:#084269; padding:10px; text-align:left; width:50%;">Last Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render partial: 'child', collection: @user.children %>
-      </tbody>
-    </table>
-</div>
-
-<div class="col-8 columns no-padding" style="margin-top:20px;">
-    <div class="col-12 columns">
-        <h3>Add Child</h3>
+<% if @user.parent? %>
+    <div class="col-12 columns" style="margin-top:20px;">
+        <h3>Children</h3>
+        <table width="100%">
+          <thead>
+            <tr style="background-color:#ACCC38;">
+              <th style="color:#084269; padding:10px; text-align:left; width:50%;">First Name</th>
+              <th style="color:#084269; padding:10px; text-align:left; width:50%;">Last Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render partial: 'child', collection: @user.children %>
+          </tbody>
+        </table>
     </div>
-    <%= f.fields_for :children, @user.children.build do |child| %>
-      <div class="col-6 columns cd-edit-form"><%= child.label :first_name %><br>
-          <%= child.text_field :first_name %></div>
-      <div class="col-6 columns cd-edit-form"><%= child.label :last_name %><br>
-          <%= child.text_field :last_name %></div>
-    <% end %>
-</div>
+<% end %>
+
+<% if current_user.administrator? %>
+    <div class="col-8 columns no-padding" style="margin-top:20px;">
+        <div class="col-12 columns">
+            <h3>Add Child</h3>
+        </div>
+        <%= f.fields_for :children, @user.children.build do |child| %>
+          <div class="col-6 columns cd-edit-form"><%= child.label :first_name %><br>
+              <%= child.text_field :first_name %></div>
+          <div class="col-6 columns cd-edit-form"><%= child.label :last_name %><br>
+              <%= child.text_field :last_name %></div>
+        <% end %>
+    </div>
+<% end %>
 
 <div class="col-12 columns" style="margin-top:20px;">
     <div class="cd-update-form">
