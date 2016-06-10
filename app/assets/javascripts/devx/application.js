@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require ckeditor/init
 //= require select2
+//= require dropzone
 //= require_tree ./ckeditor
 //= require_tree .
 
@@ -89,4 +90,25 @@ $(function()
   // DateTime Picker
   $(".datetimepicker").datetimepicker();
 
+  $("#media-dropzone").dropzone({
+    paramName: "medium[file]",
+    queuecomplete: function()
+    {
+      location.reload();
+    }
+  });
+
+
 });
+
+// $(function()
+// {
+//   Dropzone.autoDiscover = false;
+//   Dropzone.paramName = "medium[file]";
+
+//   var mediaDropzone = new Dropzone("#media-dropzone");
+//   return mediaDropzone.on("success", function(file, responseText)
+//   {
+//     var imageUrl = responseText.file_name.url;
+//   });
+// });

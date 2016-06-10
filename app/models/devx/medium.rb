@@ -3,7 +3,7 @@ module Devx
     mount_uploader :file, ImageUploader
     #mount_uploader :file, DocumentUploader
 
-    validates :name, presence: true
-    validates :file, presence: true
+    #validates :name, presence: true
+    #validates :file, presence: true
   end
 end

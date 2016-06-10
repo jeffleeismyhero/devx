@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "stripe"
   s.add_runtime_dependency "google_calendar"
   s.add_runtime_dependency "ransack"
+  s.add_runtime_dependency "dropzonejs-rails"
   
   s.add_development_dependency "rspec"
   s.add_development_dependency "rspec-rails"

@@ -10,6 +10,7 @@ PATH
       ckeditor (~> 4.1)
       coffee-rails (~> 4.1.0)
       devise
+      dropzonejs-rails
       font-awesome-rails
       friendly_id
       google_calendar
@@ -114,6 +115,8 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.20160310)
       unf (>= 0.0.5, < 1.0.0)
+    dropzonejs-rails (0.7.3)
+      rails (> 3.1)
     equalizer (0.0.10)
     erubis (2.7.0)
     execjs (2.7.0)
