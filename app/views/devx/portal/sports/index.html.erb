@@ -2,15 +2,15 @@
 <div class="container">
   <div class="row">
 
-    <div class="medium-8 columns">
+    <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
     </div>
 
-    <div class="medium-4 columns">
+    <div class="col-4 columns">
         <%= link_to '<i class="fa fa-plus"></i> New'.html_safe, new_portal_sport_path %>
     </div>
 
-    <div class="medium-12 columns">
+    <div class="col-12 columns">
       <table width="100%">
         <thead>
           <tr>
@@ -29,10 +29,4 @@
     </div>
 
   </div>
-</div>
-
-<div class="container">
-    <div class="row full-width">
-        <%= will_paginate @sports, class: 'apple_pagination' %>
-    </div>
 </div>

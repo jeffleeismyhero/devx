@@ -3,6 +3,7 @@ class CreateDevxJavascripts < ActiveRecord::Migration
     create_table :devx_javascripts do |t|
       t.string :name
       t.text :content
+      t.string :slug
 
       t.timestamps null: false
     end

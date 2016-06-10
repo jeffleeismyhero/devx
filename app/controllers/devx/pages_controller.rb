@@ -3,7 +3,7 @@ require_dependency "devx/application_controller"
 module Devx
   class PagesController < ApplicationController
 
-    layout :set_layout
+    layout :set_layout, only: :show
 
     def show
       if params[:id].present?
@@ -32,6 +32,7 @@ module Devx
     end
 
     def search
+      @pages = Devx::Page.all
       @q = @pages.search(params[:q])
       @pages = @q.result
     end

@@ -34,6 +34,11 @@
         <%= f.label :birthdate %><br>
         <%= f.date_field :birthdate %>
     </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :gender %><br>
+        <%= f.select :gender, %w[Male Female], { include_blank: true }, { class: 'select2-fixed' } %>
+    </div>
 </div>
 
 <div class="col-4 columns no-padding" style="margin-top:20px;">
@@ -53,7 +58,7 @@
 </div>
 
 <div class="col-8 columns no-padding" style="margin-top:20px;">
-    <div class="col-12 columns"><h3>Address</h3></div>
+    <div class="col-12 columns"><h3>Mailing Address</h3></div>
     <div class="col-6 columns cd-edit-form">
         <%= f.label :address %><br>
         <%= f.text_field :address %>
@@ -66,7 +71,7 @@
     
     <div class="col-6 columns cd-edit-form">
         <%= f.label :state %><br>
-        <%= f.text_field :state %>
+        <%= f.select :state, options_for_select(us_states), { include_blank: true }, { class: 'select2-fixed' } %>
     </div>
     
     <div class="col-6 columns cd-edit-form">
@@ -87,8 +92,77 @@
     </div>
     
     <div class="col-6 columns cd-edit-form">
-        <%= f.label :linked_in %><br>
+        <%= f.label :linked_in, 'LinkedIn' %><br>
         <%= f.text_field :linked_in %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :twitter %><br>
+        <%= f.text_field :twitter %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :facebook %><br>
+        <%= f.text_field :facebook %>
+    </div>
+</div>
+
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-12 columns"><h3>Education</h3></div>
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :undergraduate, 'Undergraduate college' %><br>
+        <%= f.text_field :undergraduate %>
+    </div>
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :degree_ug, 'Undergraduate degree' %><br>
+        <%= f.text_field :degree_ug %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :graduate, 'Graduate college' %><br>
+        <%= f.text_field :graduate %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :degree_grad, 'Graduate degree' %><br>
+        <%= f.text_field :degree_grad %>
+    </div>
+</div>
+
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-12 columns"><h3>Employment</h3></div>
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :employer %><br>
+        <%= f.text_field :employer %>
+    </div>
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :industry %><br>
+        <%= f.select :industry, %w[], { include_blank: true }, { class: 'select2-fixed' } %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :position %><br>
+        <%= f.text_field :position %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :employer_address %><br>
+        <%= f.text_field :employer_address %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :employer_city %><br>
+        <%= f.text_field :employer_city %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :employer_state %><br>
+        <%= f.select :employer_state, options_for_select(us_states), { include_blank: true }, { class: 'select2-fixed' } %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :employer_zip %><br>
+        <%= f.text_field :employer_zip %>
     </div>
 </div>
 

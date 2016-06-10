@@ -1,0 +1,1 @@
+Devx::Engine.load_seed

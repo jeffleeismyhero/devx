@@ -17,7 +17,7 @@ module Devx
 
     def create
       if @order.save
-        redirect_to devx.edit_portal_order_path(@order),
+        redirect_to devx.portal_order_path(@order),
         notice: "Successfully created #{@order}"
       else
         render :new,
@@ -27,7 +27,7 @@ module Devx
 
     def update
       if @order.update(order_params)
-        redirect_to devx.edit_portal_order_path(@order),
+        redirect_to devx.portal_order_path(@order),
         notice: "Successfully updated #{@order}"
       else
         render :edit,

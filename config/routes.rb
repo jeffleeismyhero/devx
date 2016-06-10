@@ -6,8 +6,8 @@ Devx::Engine.routes.draw do
   resources :articles, except: :show
   resources :events
   resources :registrations, only: [ :show, :create ]
-  resource :stylesheets, defaults: { format: 'css' }
-  resource :javascripts, defaults: { format: 'js' }
+  resources :stylesheets, only: :show, defaults: { format: 'css' }
+  resources :javascripts, only: :show, defaults: { format: 'js' }
 
   namespace :portal do
     get '/' => 'dashboard#index', as: :dashboard
@@ -25,6 +25,7 @@ Devx::Engine.routes.draw do
     resources :faqs
     resources :products
     resources :sports
+    resources :extracurriculars
     resources :urgent_news
     resources :branding
     resources :users
@@ -32,6 +33,7 @@ Devx::Engine.routes.draw do
     resources :venues
     resources :slideshows
     resources :media
+    resources :administration
     resources :registrations do
       resources :forms
       member do
@@ -41,13 +43,16 @@ Devx::Engine.routes.draw do
         get 'attendance_report'
       end
     end
-    resources :orders do
+    resources :orders, except: [ :edit ] do
       resources :transactions
     end
+    resources :developer, only: :index
+    post 'developer/update' => 'developer#update'
+    
     root 'dashboard#index'
   end
 
-
+  get '/search' => 'pages#search'
   match '/:id' => 'pages#show', via: [ :get, :post ], as: :page
 
   root 'pages#show'

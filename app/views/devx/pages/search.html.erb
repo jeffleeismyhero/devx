@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <% @pages.try(:each) do |page| %>
+        <div class="large-8 columns search-result">
+          <h6><%= page.name %></h6>
+          <%= strip_tags(page.content.try(:gsub!, params[:q][:content_cont], "<strong>#{params[:q][:content_cont]}</strong>".html_safe)) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

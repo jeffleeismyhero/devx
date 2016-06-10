@@ -3,12 +3,10 @@ require_dependency "devx/application_controller"
 module Devx
   class Portal::SportsController < ApplicationController
     before_filter :authenticate_user!
-    load_and_authorize_resource
-
-    layout 'portal'
+    load_and_authorize_resource :sport, class: 'Devx::Sport'
+    layout 'devx/portal'
 
     def index
-        @sports = @sport.paginate(page: params[:page], per_page: 10)
     end
 
     def new

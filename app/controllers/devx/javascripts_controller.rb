@@ -6,12 +6,8 @@ module Devx
 
     def show
     	respond_to do |format|
-<<<<<<< HEAD:app/controllers/devx/javascripts_controller.rb
-        format.javascript { render text: @javascript.content, content_type: 'javascript' }
-=======
-    		format.javascript { render text: @javascript.content, content_type: 'text/javascript'}
+    		format.js { render text: @javascript.content, content_type: 'text/javascript'}
     	end
->>>>>>> origin/master:app/controllers/devx/javascripts_controller.rb
     end
   end
 end
