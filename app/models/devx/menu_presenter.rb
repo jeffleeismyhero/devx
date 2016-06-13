@@ -30,8 +30,8 @@ module Devx
     def get_pages
       pages = []
 
-      menu.menu_pages.ordered.each do |p|
-        pages.push(Devx::Page.find(p.id))
+      Devx::Menu.find(3).menu_pages.ordered.each do |p|
+        pages.push(Devx::Page.find(p.page_id))
       end
 
       return pages
