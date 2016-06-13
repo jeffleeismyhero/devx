@@ -4,9 +4,9 @@ module PayeezyTransaction
   def self.process(amount, cc_type, ch_name, cc_number, exp_date, cvv)
     transaction = Payeezy::Transactions.new(
       url: 'https://api-cert.payeezy.com/v1/transactions',
-      apikey: Devx::ApplicationSetting.find(1).settings['payeezy_api_key'],
-      apisecret: Devx::ApplicationSetting.find(1).settings['payeezy_api_secret'],
-      token: Devx::ApplicationSetting.find(1).settings['payeezy_api_token']
+      apikey: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_key'],
+      apisecret: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_secret'],
+      token: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_token']
     ) rescue nil
 
     params = {
