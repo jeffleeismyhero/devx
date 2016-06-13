@@ -157,7 +157,7 @@
                     <%= "#{Devx::Medium.find(7).id}" + "."%> <br/>
                     <%= Devx::Medium.find(7).name %>
                 </div>
-
+                
                 <div class="media-grid">
                     <div id="overlay">
                         <table border="1" class="media-table">
@@ -195,26 +195,6 @@
                     <%= "#{Devx::Medium.find(9).id}" + "."%> <br/>
                     <%= Devx::Medium.find(9).name %>
                 </div>
-
-                <div class="media-grid">
-                    <div id="overlay">
-                        <table border="1" class="media-table">
-                            <tr>
-                                <td width="50%"><i class="fa fa-pencil media-icons"></i> <br/> [edit]</td>
-                                <td><i class="fa fa-exclamation media-icons"></i> <br/> [alert]</td>
-                            </tr>
-                            <tr>
-                                <td width="50%"><i class="fa fa-arrow-circle-o-down media-icons"></i> <br/> [download]</td>
-                                <td><i class="fa fa-trash-o media-icons"></i> <br/>[delete]</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <%= image_tag(Devx::Medium.find(10).file.url, style: 'width:200px; height:200px;') %>
-                    <%= "#{Devx::Medium.find(10).id}" + "."%> <br/>
-                    <%= Devx::Medium.find(10).name %>
-                </div>
-
 
 
             </div>
