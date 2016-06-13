@@ -45,6 +45,6 @@ class Ability
     can [ :read, :update ], Devx::Order, user_id: user.id
     can :create, Devx::Transaction
 
-    # can :manage, Devx::User
+    can :manage, Devx::User
   end
 end
