@@ -18,35 +18,88 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
   s.test_files = Dir["spec/**/*"]
 
+  
+  ## Base Gems
   s.add_runtime_dependency "rails", ">= 4.2"
   s.add_runtime_dependency "sqlite3"
   s.add_runtime_dependency "jquery-rails"
   s.add_runtime_dependency "coffee-rails", "~> 4.1.0"
   s.add_runtime_dependency "sass-rails", "~> 5.0"
+
+
+  ## Authentication
   s.add_runtime_dependency "devise"
   s.add_runtime_dependency "cancancan"
+  s.add_runtime_dependency "omniauth"
+  s.add_runtime_dependency "omniauth-google-oauth2"
+
+
+  ## Data Management
   s.add_runtime_dependency "paranoia", "~> 2.0"
   s.add_runtime_dependency "friendly_id"
-  s.add_runtime_dependency "ckeditor", "~> 4.1"
-  s.add_runtime_dependency "carrierwave"
-  s.add_runtime_dependency "mini_magick"
+  s.add_runtime_dependency "ransack"
   s.add_runtime_dependency "acts-as-taggable-on"
-  s.add_runtime_dependency "twilio-ruby"
-  s.add_runtime_dependency "shortcode"
-  s.add_runtime_dependency "liquid"
+  s.add_runtime_dependency "will_paginate"
+
+
+  ## User Interface
   s.add_runtime_dependency "select2-rails"
   s.add_runtime_dependency "font-awesome-rails"
-  s.add_runtime_dependency "twitter"
-  s.add_runtime_dependency "koala"
-  s.add_runtime_dependency "rails_autolink"
   s.add_runtime_dependency "wow-rails"
   s.add_runtime_dependency "animate-rails"
-  s.add_runtime_dependency "breadcrumbs_on_rails"
-  s.add_runtime_dependency "stripe"
-  s.add_runtime_dependency "google_calendar"
-  s.add_runtime_dependency "ransack"
+
+
+  ## WYSIWYG Editor
+  s.add_runtime_dependency "ckeditor", "~> 4.1"  
+
+
+  ## Image Processing
+  s.add_runtime_dependency "carrierwave"
+  s.add_runtime_dependency "mini_magick"
   s.add_runtime_dependency "dropzonejs-rails"
+
+
+  ## Payment solutions
+  s.add_runtime_dependency "stripe"
+  s.add_runtime_dependency "payeezy"
   
+
+  ## Data Import/Export
+  s.add_runtime_dependency "axlsx"
+  s.add_runtime_dependency "axlsx_rails"
+
+
+  ## Conversion Tracking
+  s.add_runtime_dependency "mixpanel-ruby"
+
+
+  ## Social Networks
+  s.add_runtime_dependency "twitter"
+  s.add_runtime_dependency "koala"
+
+
+  ## Google Calendar Integration
+  s.add_runtime_dependency "google_calendar"
+  s.add_runtime_dependency "icalendar"
+
+
+  ## CMS Functionality
+  s.add_runtime_dependency "liquid"
+  s.add_runtime_dependency "shortcode"
+  s.add_runtime_dependency "breadcrumbs_on_rails"
+
+
+  ## SMS Integration
+  s.add_runtime_dependency "twilio-ruby"
+
+
+  ## Miscellaneous
+  s.add_runtime_dependency "rails_autolink"
+
+
+
+  ## Development Gems
+
   s.add_development_dependency "rspec"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_girl_rails"

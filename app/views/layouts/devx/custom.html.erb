@@ -3,7 +3,9 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title><%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
+  <% if app_settings['boilerplate'] %>
+    <%= stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
+  <% end %>
   <%= stylesheet_link_tag "devx/application", media: "all" %>
   <% @page.layout.stylesheets.try(:each) do |stylesheet| %>
     <link rel="stylesheet" type="text/css" href="<%= stylesheet_path(stylesheet) %>.css">

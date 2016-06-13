@@ -11,6 +11,12 @@ Devx::Engine.routes.draw do
 
   namespace :portal do
     get '/' => 'dashboard#index', as: :dashboard
+    post 'developer/update', to: 'developer#update'
+    match 'developer/commerce', to: 'developer#commerce_settings', via: [ :get, :post ]
+    match 'developer/sms_alert', to: 'developer#sms_alert_settings', via: [ :get, :post ]
+    match 'users/import', to: 'users#import', via: [ :get, :post ]
+
+    
     resources :pages
     resources :menus
     resources :layouts
@@ -47,7 +53,6 @@ Devx::Engine.routes.draw do
       resources :transactions
     end
     resources :developer, only: :index
-    post 'developer/update' => 'developer#update'
     
     root 'dashboard#index'
   end

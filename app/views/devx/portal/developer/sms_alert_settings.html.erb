@@ -1,0 +1,22 @@
+<% provide(:title, 'SMS Alert Settings') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="col-12 columns">
+      <%= form_for @settings, url: devx.portal_developer_update_path, method: :post do |f| %>
+        <%= f.fields_for :settings, OpenStruct.new do |setting| %>
+          <%= render partial: 'sms_alert_settings_form', locals: { f:setting } %>
+        <% end %>
+
+        <div class="col-12 columns">
+          <div class="cd-update-form">
+              <%= f.submit 'Update application' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

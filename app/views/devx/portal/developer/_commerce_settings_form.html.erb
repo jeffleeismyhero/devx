@@ -1,0 +1,49 @@
+<div class="col-8 columns cd-edit-form">
+    <%= label_tag 'settings[stripe]', 'Stripe' %><br>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch">
+        <%= check_box_tag 'settings[stripe]', @settings.settings['stripe'], @settings.settings['stripe'] %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+  <%= label_tag 'settings[stripe_publishable_key]', 'Publishable Key' %>
+  <%= password_field_tag 'settings[stripe_publishable_key]' %>
+</div>
+
+
+<div class="col-6 columns cd-edit-form">
+  <%= label_tag 'settings[stripe_secret_key]', 'Secret Key' %>
+  <%= password_field_tag 'settings[stripe_secret_key]' %>
+</div>
+
+
+
+<div class="col-8 columns cd-edit-form">
+    <%= label_tag 'settings[payeezy]', 'Payeezy' %><br>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch">
+        <%= check_box_tag 'settings[payeezy]', @settings.settings['payeezy'], @settings.settings['payeezy'] %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+  <%= label_tag 'settings[payeezy_api_key]', 'API Key' %>
+  <%= password_field_tag 'settings[payeezy_api_key]' %>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+  <%= label_tag 'settings[payeezy_api_secret]', 'API Secret' %>
+  <%= password_field_tag 'settings[payeezy_api_secret]' %>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+  <%= label_tag 'settings[payeezy_api_token]', 'API Token' %>
+  <%= password_field_tag 'settings[payeezy_api_token]' %>
+</div>

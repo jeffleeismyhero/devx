@@ -9,6 +9,12 @@ module Devx
   	load_and_authorize_resource :user, class: 'Devx::User'
   	
   	def index
+      respond_to do |format|
+        format.html
+        format.xlsx do
+          render xlsx: 'index', filename: 'users.xlsx'
+        end
+      end
   	end
   	
   	def show
@@ -48,6 +54,47 @@ module Devx
   			notice: "Successfully deleted user"
   		end
   	end
+
+    def import
+      require 'csv'
+
+      @import = Devx::Import.new(params[:import])
+      @errors = 0;
+
+      if request.post?
+
+        if @import.valid?
+
+          puts @import.inspect
+
+          if records = CSV.read(@import.file.path, headers: true)
+            records.each_with_index do |record, index|
+              first_name = record[0].to_s.squish
+              last_name = record[1].to_s.squish
+              email = record[2].to_s.squish
+              password = record[3].to_s.squish
+
+              user = Devx::User.new(
+                first_name: first_name,
+                last_name: last_name,
+                email: email,
+                password: password,
+              )
+
+              puts user.inspect
+
+              if user.valid?
+                user.save
+              else
+                @errors += 1
+              end
+            end
+          end
+        end
+          redirect_to devx.portal_users_path,
+          notice: "#{@errors} users could not be imported due to errors"
+      end
+    end
 
   	private
 

@@ -177,8 +177,19 @@
 
         <% if can? :manage, Devx::ApplicationSetting && current_user.super_administrator? %>
           <li>
-            <%= link_to '<i class="fa fa-terminal"></i> <span>Developer</span>'.html_safe, devx.portal_developer_index_path, data: 'developer' %>
+            <%= link_to '<i class="fa fa-terminal"></i> <span>Developer</span>'.html_safe, devx.portal_developer_index_path, class: 'has-children', data: 'developer' %>
           </li>
+          <ul class="child-nav" data-parent="developer">
+            <li>
+              <%= link_to 'Global Settings'.html_safe, devx.portal_developer_index_path %>
+            </li>
+            <% if app_settings['commerce'] %>
+              <li><%= link_to 'Commerce Settings', devx.portal_developer_commerce_path %></li>
+            <% end %>
+            <% if app_settings['sms_alerts'] %>
+              <li><%= link_to 'SMS Settings', devx.portal_developer_sms_alert_path %></li>
+            <% end %>
+          </ul>
         <% end %>
       </ul>
 

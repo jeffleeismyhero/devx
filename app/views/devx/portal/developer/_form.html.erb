@@ -1,4 +1,16 @@
+<div class="col-8 columns cd-edit-form">
+    <%= label_tag 'settings[boilerplate]', 'JCW Boilerplate' %><br>
+</div>
+
 <div class="col-1 columns cd-edit-form">
+    <label class="switch">
+        <%= check_box_tag 'settings[boilerplate]', @settings.settings['boilerplate'], @settings.settings['boilerplate'] %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
+
+<div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[admissions]', 'Admissions' %><br>
 </div>
 
@@ -11,7 +23,7 @@
 
 
 
-<div class="col-1 columns cd-edit-form">
+<div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[commerce]', 'Commerce' %><br>
 </div>
 
@@ -24,7 +36,7 @@
 
 
 
-<div class="col-1 columns cd-edit-form">
+<div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[organizations]', 'Organizations' %><br>
 </div>
 
@@ -37,7 +49,7 @@
 
 
 
-<div class="col-1 columns cd-edit-form">
+<div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[alumni_database]', 'Alumni Database' %><br>
 </div>
 
@@ -50,7 +62,7 @@
 
 
 
-<div class="col-1 columns cd-edit-form">
+<div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[registrations]', 'Registrations' %><br>
 </div>
 
@@ -63,13 +75,26 @@
 
 
 
-<div class="col-1 columns cd-edit-form">
+<div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[student_management]', 'Student Management' %><br>
 </div>
 
 <div class="col-1 columns cd-edit-form">
     <label class="switch">
         <%= check_box_tag 'settings[student_management]', @settings.settings['student_management'], @settings.settings['student_management'] %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
+
+
+<div class="col-8 columns cd-edit-form">
+    <%= label_tag 'settings[student_management]', 'SMS Alerts' %><br>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch">
+        <%= check_box_tag 'settings[sms_alerts]', @settings.settings['sms_alerts'], @settings.settings['sms_alerts'] %>
         <div class="slider round"></div>
     </label>
 </div>

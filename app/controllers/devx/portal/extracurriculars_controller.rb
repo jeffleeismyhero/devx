@@ -7,6 +7,7 @@ module Devx
     layout 'devx/portal'
 
     def index
+        @extracurriculars = @extracurriculars.page(params[:page])
     end
 
     def new
