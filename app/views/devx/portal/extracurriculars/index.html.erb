@@ -1,5 +1,4 @@
 <% provide(:title, 'Manage Extracurriculars') %>
-<%= render partial: 'shared/notice_messages' %>
 <div class="container">
   <div class="row">
 
@@ -21,7 +20,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= render @extracurriculars %>
+          <%= render partial: 'extracurricular', collection: @extracurriculars %>
           <tr>
             <td colspan="4" style="text-align:right"><%= "Total: #{ @extracurriculars.count } extracurriculars" %></td>
           </tr>
@@ -34,7 +33,7 @@
 
 <div class="container">
     <div class="row full-width">
-        <%= will_paginate @extracurriculars, class: 'apple_pagination' %>
+
     </div>
 </div>
 
