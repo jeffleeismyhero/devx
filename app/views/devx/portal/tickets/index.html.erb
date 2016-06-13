@@ -1,0 +1,32 @@
+<% provide(:title, '' + controller_name.classify.pluralize) %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 columns">
+            <h1><%= yield(:title) %></h1>
+        </div>
+        <div class="col-12 columns" style="padding-bottom:20px;">
+            <i class="fa fa-question-circle" aria-hidden="true"></i> <%= link_to 'Create Ticket', new_portal_ticket_path %>
+            <div style="float:right;">
+                <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
+            </div>
+        </div>
+        <div class="col-12 columns">
+            <table width="100%">
+                <thead>
+                    <tr style="background-color:#ACCC38;">
+                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">Summary</th>
+                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">Submitted By</th>
+                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">Created At</th>
+                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%= render partial: 'ticket', collection: @tickets %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

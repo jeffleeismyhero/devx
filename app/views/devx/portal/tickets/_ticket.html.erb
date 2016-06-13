@@ -1,0 +1,5 @@
+<tr>
+  <td><%= ticket.summary %></td>
+  <td><%= ticket.user.try(:full_name) %></td>
+  <td><%= ticket.created_at %></td>
+</tr>
