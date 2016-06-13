@@ -1,0 +1,5 @@
+<% @attributes[:faqs].try(:each) do |faq| %>
+
+	<li> <%= faq.question %> </li>
+
+<% end %>

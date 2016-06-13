@@ -11,7 +11,9 @@ Shortcode.setup do |config|
     :articles_columns,
     :menu,
     :submenu,
-    :extracurriculars
+    :extracurriculars,
+    :athletics,
+    :faqs
   ]
 end
 
@@ -25,5 +27,7 @@ Shortcode.register_presenter(
   Devx::ArticlesColumnsPresenter,
   Devx::MenuPresenter,
   Devx::SubmenuPresenter,
-  Devx::ExtracurricularsPresenter
+  Devx::ExtracurricularsPresenter,
+  Devx::AthleticsPresenter,
+  Devx::FaqsPresenter
 )

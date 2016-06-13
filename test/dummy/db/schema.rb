@@ -13,6 +13,25 @@
 
 ActiveRecord::Schema.define(version: 20160610093248) do
 
+  create_table "alumnis", force: :cascade do |t|
+    t.string   "undergraduate"
+    t.string   "degree_ug"
+    t.string   "graduate"
+    t.string   "degree_grad"
+    t.string   "gender"
+    t.string   "twitter"
+    t.string   "facebook"
+    t.string   "employer"
+    t.string   "industry"
+    t.string   "position"
+    t.string   "employer_address"
+    t.string   "employer_city"
+    t.string   "employer_state"
+    t.integer  "employer_zip"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "devx_alumnis", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "prefix"
@@ -153,6 +172,8 @@ ActiveRecord::Schema.define(version: 20160610093248) do
     t.integer  "calendar_id"
   end
 
+  add_index "devx_events", ["calendar_id"], name: "index_devx_events_on_calendar_id"
+
   create_table "devx_extracurriculars", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -187,8 +208,6 @@ ActiveRecord::Schema.define(version: 20160610093248) do
   end
 
   create_table "devx_inventories", force: :cascade do |t|
-    t.integer  "product_id"
-    t.integer  "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -196,7 +215,6 @@ ActiveRecord::Schema.define(version: 20160610093248) do
   create_table "devx_javascripts", force: :cascade do |t|
     t.string   "name"
     t.text     "content"
-    t.string   "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
