@@ -56,6 +56,7 @@ Devx::Engine.routes.draw do
     resources :orders, except: [ :edit ] do
       resources :transactions
     end
+    resources :tickets
     resources :developer, only: :index
     
     root 'dashboard#index'

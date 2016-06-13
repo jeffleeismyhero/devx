@@ -1,0 +1,15 @@
+<% provide(:title, 'Edit ' + controller_name.classify.pluralize) %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="col-12 columns">
+      <%= link_to 'Back to tickets', devx.portal_tickets_path %>
+      <%= form_for @ticket, url: devx.portal_ticket_path(@ticket) do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

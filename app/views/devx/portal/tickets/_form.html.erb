@@ -1,0 +1,38 @@
+<div class="col-8 columns no-padding">
+  <div class="col-6 columns cd-edit-form" style="margin-top:20px;">
+      <%= f.label :summary %><br>
+      <%= f.text_field :summary %>
+  </div>
+  <div class="col-12 columns cd-edit-form" style="margin-top:20px;">
+      <%= f.label :description %><br>
+      <%= f.cktext_area :description %>
+  </div>
+
+  <div class="col-6 columns cd-edit-form" style="margin-top:20px;">
+      <%= f.label :location %><br>
+      <%= f.text_field :location %>
+  </div>
+
+  <div class="col-6 columns cd-edit-form" style="margin-top:20px;">
+      <%= f.label :file %><br>
+      <%= f.file_field :file %>
+  </div>
+
+  <div class="col-6 columns cd-edit-form" style="margin-top:20px;">
+      <%= f.label :severity %><br>
+      <%= f.select :severity, %w[Low Moderate High Critical], { include_blank: true }, { class: 'select2-fixed' } %>
+  </div>
+
+  <% if current_user.super_administrator? %>
+  <div class="col-6 columns cd-edit-form" style="margin-top:20px;">
+      <%= f.label :status %><br>
+      <%= f.select :status, ['New', 'In Progress', 'Resolved', 'Cancelled'], { include_blank: true }, { class: 'select2-fixed' } %>
+  </div>
+  <% end %>
+
+  <div class="col-12 columns">
+      <div class="cd-update-form">
+          <%= f.submit %>
+      </div>
+  </div>
+</div>
