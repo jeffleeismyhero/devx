@@ -1,6 +1,25 @@
-<tr>
+<!--<tr>
     <td style="padding:10px;border-bottom:1px solid #ccc;"><%= medium.id %></td>
     <td style="padding:10px;border-bottom:1px solid #ccc;"><%= medium.name %></td>
     <td style="text-align:right; padding:10px;border-bottom:1px solid #ccc;"><%= link_to 'View', medium.file.url, target: '_blank' %> <i class="fa fa-picture-o" aria-hidden="true"></i>
       <%= link_to 'Delete', devx.portal_medium_path(medium), method: :delete, data: { confirm: "Are you sure you want to delete #{medium.name}?" } %>  <i class="fa fa-trash" aria-hidden="true"></i></td>
-</tr>
+</tr>-->
+
+<div class="media-grid">
+    <div id="overlay">
+        <table border="1" class="media-table">
+            <tr>
+                <td width="50%"><i class="fa fa-pencil media-icons"></i> <br/> [edit]</td>
+                <td><i class="fa fa-exclamation media-icons"></i> <br/> [alert]</td>
+            </tr>
+            <tr>
+                <td width="50%"><i class="fa fa-arrow-circle-o-down media-icons"></i> <br/> [download]</td>
+                <td><i class="fa fa-trash-o media-icons"></i> <br/>[delete]</td>
+            </tr>
+        </table>
+    </div>
+
+    <%= image_tag(medium.try(:file).try(:url), style: 'width:200px; height:200px;') %>
+    <%= "#{medium.try(:id)}" + "."%> <br/>
+    <%= link_to medium.try(:name), medium.file.try(:url), target: '_blank' %>
+</div>
