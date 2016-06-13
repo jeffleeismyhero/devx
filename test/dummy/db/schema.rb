@@ -13,15 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160613175114) do
 
-  create_table "devx_account_transactions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "transaction_type"
-    t.string   "payment_method"
-    t.float    "amount"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
   create_table "alumnis", force: :cascade do |t|
     t.string   "undergraduate"
     t.string   "degree_ug"
@@ -37,6 +28,15 @@ ActiveRecord::Schema.define(version: 20160613175114) do
     t.string   "employer_city"
     t.string   "employer_state"
     t.integer  "employer_zip"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "devx_account_transactions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "transaction_type"
+    t.string   "payment_method"
+    t.float    "amount"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
