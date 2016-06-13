@@ -61,7 +61,7 @@ Gem::Specification.new do |s|
 
   ## Payment solutions
   s.add_runtime_dependency "stripe"
-  s.add_runtime_dependency "payeezy"
+  s.add_runtime_dependency "payeezy", "~> 1.1"
   
 
   ## Data Import/Export

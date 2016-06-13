@@ -11,6 +11,7 @@ module Devx
     has_many :child_registrations
     has_many :registrations, through: :child_registrations
     has_many :attendances
+    has_many :account_transactions
     belongs_to :person
 
     validates :email, presence: true
@@ -46,6 +47,23 @@ module Devx
 
     def faculty
       self.roles.exists?(name: 'Faculty')
+    end
+
+    def balance
+      debit_bal = 0
+      credit_bal = 0
+      credits = self.account_transactions.where(transaction_type: 'Credit')
+      debits = self.account_transactions.where(transaction_type: 'Debit')
+
+      debits.try(:each) do |d|
+        debit_bal += d.amount
+      end
+
+      credits.try(:each) do |c|
+        credit_bal += c.amount
+      end
+
+      return credit_bal - debit_bal
     end
   end
 end

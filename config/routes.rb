@@ -34,7 +34,11 @@ Devx::Engine.routes.draw do
     resources :extracurriculars
     resources :urgent_news
     resources :branding
-    resources :users
+    resources :users do
+      member do
+        match 'account-deposit', to: 'users#account_deposit', via: [ :get, :post ]
+      end
+    end
     resources :roles
     resources :venues
     resources :slideshows

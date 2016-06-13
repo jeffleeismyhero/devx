@@ -34,6 +34,22 @@
     </label>
 </div>
 
+<%= render partial: 'commerce_settings_form' %>
+
+
+
+
+<div class="col-8 columns cd-edit-form">
+    <%= label_tag 'settings[balance_tracking]', 'Balance Tracking' %><br>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch">
+        <%= check_box_tag 'settings[balance_tracking]', @settings.settings['balance_tracking'], @settings.settings['balance_tracking'] %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
 
 
 <div class="col-8 columns cd-edit-form">
@@ -99,4 +115,5 @@
     </label>
 </div>
 
+<%= render partial: 'sms_alert_settings_form' %>
 

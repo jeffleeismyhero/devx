@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610093248) do
+ActiveRecord::Schema.define(version: 20160613175114) do
+
+  create_table "devx_account_transactions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "transaction_type"
+    t.string   "payment_method"
+    t.float    "amount"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "devx_alumnis", force: :cascade do |t|
     t.integer  "user_id"

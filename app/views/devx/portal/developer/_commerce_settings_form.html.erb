@@ -35,15 +35,15 @@
 
 <div class="col-6 columns cd-edit-form">
   <%= label_tag 'settings[payeezy_api_key]', 'API Key' %>
-  <%= password_field_tag 'settings[payeezy_api_key]' %>
+  <%= password_field_tag 'settings[payeezy_api_key]', @settings.settings['payeezy_api_key'] %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
   <%= label_tag 'settings[payeezy_api_secret]', 'API Secret' %>
-  <%= password_field_tag 'settings[payeezy_api_secret]' %>
+  <%= password_field_tag 'settings[payeezy_api_secret]', @settings.settings['payeezy_api_secret'] %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
   <%= label_tag 'settings[payeezy_api_token]', 'API Token' %>
-  <%= password_field_tag 'settings[payeezy_api_token]' %>
+  <%= password_field_tag 'settings[payeezy_api_token]', @settings.settings['payeezy_api_token'] %>
 </div>

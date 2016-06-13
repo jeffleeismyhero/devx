@@ -55,6 +55,32 @@ module Devx
   		end
   	end
 
+    def account_deposit
+
+      @transaction = AccountTransaction.new
+
+      if request.post?
+        @transaction.amount = params[:account_transaction][:amount]
+        @transaction.transaction_type = 'Credit'
+        @transaction.payment_method = 'Credit Card'
+        @transaction.user = @user
+
+        exp_date = "#{params[:exp_month]}#{params[:exp_year]}"
+        if PayeezyTransaction.process(@transaction.amount.to_i, params[:cc_type], params[:ch_name], params[:cc_number], exp_date, params[:cvv])
+          if @transaction.save
+            flash.now[:success] = 'Your transaction has been processed successfully'
+            redirect_to devx.account_deposit_portal_user_path(@user)
+          else
+            flash.now[:alert] = 'Transaction was complete but the balance could not be updated'
+            redirect_to devx.account_deposit_portal_user_path(@user)
+          end
+        else
+          flash.now[:alert] = 'Your transaction could not be processed'
+          render :account_deposit
+        end
+      end
+    end
+
     def import
       require 'csv'
 
