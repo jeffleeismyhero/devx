@@ -12,11 +12,9 @@
 
 <%= link_to "<div class=\"small-12 medium-6 large-6 columns\">
     <div class=\"featured-news\" style=\"background-image:url('#{@image}');position:relative\">
-        <div class=\"featured-title\">#{article.title}
-        <hr class=\"line2\" />
-        <div class=\"featured-desc\"><p>#{strip_tags(article.content)[0..120] + "..."}</p>
-        <p>READ MORE</p></div>
-    </div>
+        <div class=\"featured-title\">
+        <span>#{article.title}</span>
+        </div>
     </div>
 </div>".html_safe, "#" %>
 <% end %>
