@@ -14,14 +14,22 @@ module Devx
     end
 
     def attributes
-      { events: events }
+      {
+        calendar: calendar,
+        events: get_events,
+        limit: @attributes[:limit]
+      }
     end
 
 
     private
 
-    def events
-      Devx::Event.upcoming
+    def calendar
+      Devx::Calendar.find(@attributes[:id])
+    end
+
+    def get_events
+      calendar.upcoming_events.try(:limit, @attributes[:limit])
     end
   end
 end
