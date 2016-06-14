@@ -30,6 +30,7 @@ Devx::Engine.routes.draw do
     resources :alumni
     resources :faqs
     resources :products
+    resources :documents
     resources :sports
     resources :extracurriculars
     resources :urgent_news

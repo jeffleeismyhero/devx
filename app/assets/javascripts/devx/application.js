@@ -98,6 +98,14 @@ $(function()
     }
   });
 
+  $("#document-dropzone").dropzone({
+    paramName: "document[file]",
+    queuecomplete: function()
+    {
+      location.reload();
+    }
+  });
+
 
 });
 

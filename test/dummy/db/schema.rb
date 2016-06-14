@@ -11,30 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613193152) do
+ActiveRecord::Schema.define(version: 20160614160416) do
 
-<<<<<<< HEAD
-  create_table "alumnis", force: :cascade do |t|
-    t.string   "undergraduate"
-    t.string   "degree_ug"
-    t.string   "graduate"
-    t.string   "degree_grad"
-    t.string   "gender"
-    t.string   "twitter"
-    t.string   "facebook"
-    t.string   "employer"
-    t.string   "industry"
-    t.string   "position"
-    t.string   "employer_address"
-    t.string   "employer_city"
-    t.string   "employer_state"
-    t.integer  "employer_zip"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-=======
->>>>>>> origin/master
   create_table "devx_account_transactions", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "transaction_type"
@@ -167,6 +145,13 @@ ActiveRecord::Schema.define(version: 20160613193152) do
     t.string   "email"
     t.string   "subject"
     t.string   "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "devx_documents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
