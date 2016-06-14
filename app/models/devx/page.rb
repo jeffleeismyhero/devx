@@ -15,8 +15,26 @@ module Devx
 
     mount_uploader :image, Devx::ImageUploader
 
+    before_save :check_if_home
+
+    def self.home_page
+        find_by(is_home: true)
+    end
+
     def should_generate_new_friendly_id?
       name_changed?
+    end
+
+    def check_if_home
+        if self.is_home == true
+            if !Devx::Page.home_page.blank?
+                Devx::Page.home_page.update_columns(is_home: false)
+            end
+        else
+            if Devx::Page.home_page == self
+                self.is_home = true
+            end
+        end
     end
   end
 end

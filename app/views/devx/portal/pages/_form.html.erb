@@ -18,13 +18,24 @@
         <div style="margin:4px 0;"><%= f.select :parent, Devx::Page.all.where.not(id: @page.id).collect{ |x| [x.name, x.id] }, { include_blank: true }, {class:'select2-fixed'} %></div>
     </div>
     
-    <div class="col-12 columns cd-edit-form">
+    <div class="col-8 columns cd-edit-form">
         <%= f.label :active %><br>
     </div>
     
-    <div class="col-12 columns cd-edit-form">
+    <div class="col-4 columns cd-edit-form">
         <label class="switch">
             <%= f.check_box :active %>
+            <div class="slider round"></div>
+        </label>
+    </div>
+    
+    <div class="col-8 columns cd-edit-form">
+        <%= f.label :is_home %><br>
+    </div>
+    
+    <div class="col-4 columns cd-edit-form">
+        <label class="switch">
+            <%= f.check_box :is_home %>
             <div class="slider round"></div>
         </label>
     </div>
