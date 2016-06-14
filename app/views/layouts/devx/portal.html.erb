@@ -21,7 +21,7 @@
     <!-- START: TOP NAVIGATION -->
     <nav class="cd-nav">
       <div class="cd-top-nav cd-horizontal-accordion">
-        <% if !current_user.parent? %>
+        <% if app_settings['balance_tracking'] && !current_user.parent? %>
         <div class="cd-accordion-tab">
           <div class="cd-accordion-title">
             <span><i class="fa fa-money"></i></span>
@@ -188,12 +188,6 @@
             <li>
               <%= link_to 'Global Settings'.html_safe, devx.portal_developer_index_path %>
             </li>
-            <% if app_settings['commerce'] %>
-              <li><%= link_to 'Commerce Settings', devx.portal_developer_commerce_path %></li>
-            <% end %>
-            <% if app_settings['sms_alerts'] %>
-              <li><%= link_to 'SMS Settings', devx.portal_developer_sms_alert_path %></li>
-            <% end %>
           </ul>
         <% end %>
       </ul>
