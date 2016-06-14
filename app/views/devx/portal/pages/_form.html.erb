@@ -1,5 +1,8 @@
 <div class="col-8 columns no-padding" style="margin-top:20px;">
-    <div class="col-12 columns"><h3>Personal Information</h3></div>
+    <% if !@page.new_record? %>
+        <%= link_to 'View Page', page_path(@page), target: '_blank' %>
+    <% end %>
+    <div class="col-12 columns"><h3>Page Information</h3></div>
     <div class="col-12 columns cd-edit-form">
         <%= f.label :name %><br>
         <%= f.text_field :name %>
