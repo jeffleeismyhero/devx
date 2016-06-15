@@ -10,9 +10,11 @@ module Devx
     end
 
     def new
+      @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
     end
 
     def edit
+      @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
     end
 
     def create
@@ -49,7 +51,7 @@ module Devx
     private
 
     def article_params
-      accessible = [ :title, :slug, :short_description, :content, :image, :published_at ]
+      accessible = [ :title, :slug, :short_description, :content, :image, :published_at, :tag_list ]
       params.require(:article).permit(accessible)
     end
   end

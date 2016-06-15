@@ -4,6 +4,10 @@
         <%= f.text_field :title %>
     </div>
     <div class="col-12 columns cd-edit-form">
+        <%= f.label :tag_list, 'Category' %><br>
+        <%= f.select :tag_list, @tags, { include_blank: true }, { class: 'select2' } %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
         <%= f.label :short_description %><br>
         <%= f.text_field :short_description %>
     </div>

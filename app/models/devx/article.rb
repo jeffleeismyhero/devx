@@ -10,6 +10,8 @@ module Devx
 
     mount_uploader :image, ImageUploader
 
+    acts_as_taggable
+
     def add_publish_date
       unless self.published_at.present?
         self.published_at = Time.zone.now

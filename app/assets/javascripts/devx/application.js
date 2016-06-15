@@ -22,8 +22,9 @@ $(function()
 {
 
   // Select2
-  $(".select2").select2({ multiple: true });
-  $(".select2-fixed").select2({ multiple: false });
+  $(".select2").select2({ tags: true });
+  $(".select2-multiple").select2({ tags: true, multiple: true });
+  $(".select2-fixed").select2({ tags: false, multiple: false });
 
 
 
