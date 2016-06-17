@@ -22,7 +22,7 @@ module Devx
         @page = Devx::Page.find_by(is_home: true)
 
         if @page.nil?
-          @page = Devx::Page.create(name: 'Home', content: 'This is the default homepage for DevX', is_home: true)
+          @page = Devx::Page.create(name: 'Home', content: 'This is the default homepage for DevX', is_home: true, active: true)
         end
       end
 

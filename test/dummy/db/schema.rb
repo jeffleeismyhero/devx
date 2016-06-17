@@ -203,8 +203,6 @@ ActiveRecord::Schema.define(version: 20160615182316) do
   end
 
   create_table "devx_inventories", force: :cascade do |t|
-    t.integer  "product_id"
-    t.integer  "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -212,7 +210,6 @@ ActiveRecord::Schema.define(version: 20160615182316) do
   create_table "devx_javascripts", force: :cascade do |t|
     t.string   "name"
     t.text     "content"
-    t.string   "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

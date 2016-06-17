@@ -26,8 +26,8 @@ module Devx
     end
 
     def check_if_home
-        if self.is_home == true
-            if !Devx::Page.home_page.blank?
+        if self.is_home == true || self.is_home == 'true'
+            if !Devx::Page.home_page.nil? && Devx::Page.home_page != self
                 Devx::Page.home_page.update_columns(is_home: false)
             end
         else
