@@ -2,7 +2,7 @@ require_dependency "devx/application_controller"
 
 module Devx
   class RegistrationsController < ApplicationController
-    load_and_authorize_resource :registration, class: 'Devx::Registration'
+    load_resource :registration, class: 'Devx::Registration'
 
     def show
     end

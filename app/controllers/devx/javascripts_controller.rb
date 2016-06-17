@@ -2,7 +2,7 @@ require_dependency "devx/application_controller"
 
 module Devx
   class JavascriptsController < ApplicationController
-  	load_and_authorize_resource :javascript, class: 'Devx::Javascript'
+  	load_resource :javascript, class: 'Devx::Javascript'
 
     def show
     	respond_to do |format|

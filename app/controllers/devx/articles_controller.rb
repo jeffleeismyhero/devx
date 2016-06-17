@@ -2,7 +2,7 @@ require_dependency "devx/application_controller"
 
 module Devx
   class ArticlesController < ApplicationController
-    load_and_authorize_resource
+    load_resource :article, class: 'Devx::Article'
 
     def index
     end

@@ -2,7 +2,7 @@ require_dependency "devx/application_controller"
 
 module Devx
   class EventsController < ApplicationController
-    load_and_authorize_resource
+    load_resource :event, class: 'Devx::Event'
 
     def index
     end
