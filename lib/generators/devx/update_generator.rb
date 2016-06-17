@@ -1,8 +1,8 @@
 module Devx
   class UpdateGenerator < Rails::Generators::Base
     def update
-      run 'bundle install'
-      rake 'devx:install:migrations'
+      run 'bundle update devx'
+      rake 'db:migrate'
     end
   end
 end
