@@ -13,6 +13,7 @@ module Devx
     initializer 'devx.assets.precompile' do |app|
       app.config.assets.precompile += app.config.assets.precompile += %w( devx/devx_portal.css )
       app.config.assets.precompile += app.config.assets.precompile += %w( ckeditor/* )
+      app.config.assets.precompile += app.config.assets.precompile += %w( devx/* )
     end
 
     initializer :append_migrations do |app|

@@ -1,0 +1,35 @@
+<div class="large-<%= field.field_size %> columns cd-edit-form">
+
+  <% if app_settings['stripe'] %>
+    <div class="col-6 columns cd-edit-form">
+        <%= label_tag :amount %>
+        <%= f.number_field :amount, { step: '0.01', placeholder: 'Amount' } %>
+    </div>
+
+    <div class="col-8 columns cd-edit-form">
+    <%= label_tag :cc_type %>
+    <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), prompt: 'Select Card Type' %>
+    </div>
+    <div class="col-8 columns cd-edit-form">
+    <%= label_tag :cc_number, 'Card Number' %>
+    <%= text_field_tag :cc_number, '', placeholder: 'Card Number', autocomplete: :off %>
+    </div>
+
+    <div class="col-8 columns cd-edit-form">
+    <%= label_tag :ch_name, 'Cardholder Name' %>
+    <%= text_field_tag :ch_name, '', placeholder: 'Cardholder Name', autocomplete: :off %>
+    </div>
+
+    <div class="col-8 columns cd-edit-form">
+    <%= label_tag :expiry_date, 'Expiration Date' %>
+    <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_month_numbers: false, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed' } %>
+    </div>
+
+    <div class="col-8 columns cd-edit-form">
+    <%= label_tag :cvv, 'Security Code' %>
+    <%= number_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off %>
+    </div>
+  <% end %>
+</div>
+<%= javascript_include_tag "https://js.stripe.com/v2/" %>
+<%= javascript_tag "Stripe.publishableKey = '#{app_settings['stripe_publishable_key']}';" %>

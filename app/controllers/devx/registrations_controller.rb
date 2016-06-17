@@ -8,6 +8,9 @@ module Devx
     end
 
     def create
+      render plain: @registration.inspect
+      return
+
       @submission = Devx::RegistrationSubmission.new(registration_id: params[:registration][:id], submission_content: params[:registration][:submission_content])
 
       if @submission.valid? && @submission.save

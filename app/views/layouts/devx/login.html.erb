@@ -19,7 +19,7 @@
             <% if app_branding.logo.present? %>
                 <%= image_tag(app_branding.logo.url) %>
             <% else %>
-                <%= image_tag('assets/images/devx/devx-logo') %>
+                <%= image_tag('devx/devx-logo.svg', style: 'width:100%') %>
             <% end %>
         </div>
 
@@ -39,6 +39,9 @@
 
         <% render "devise/shared/links" %>
 
+    </div>
+    <div class="cd-version-info">
+      <span>Powered by DevX CMS (Version <%= Devx::VERSION %>)</span>
     </div>
     
 </body>

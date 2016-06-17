@@ -11,13 +11,13 @@
 
 <div class="col-6 columns cd-edit-form">
   <%= label_tag 'settings[stripe_publishable_key]', 'Publishable Key' %>
-  <%= password_field_tag 'settings[stripe_publishable_key]' %>
+  <%= password_field_tag 'settings[stripe_publishable_key]', @settings.settings['stripe_publishable_key'] %>
 </div>
 
 
 <div class="col-6 columns cd-edit-form">
   <%= label_tag 'settings[stripe_secret_key]', 'Secret Key' %>
-  <%= password_field_tag 'settings[stripe_secret_key]' %>
+  <%= password_field_tag 'settings[stripe_secret_key]', @settings.settings['stripe_secret_key'] %>
 </div>
 
 

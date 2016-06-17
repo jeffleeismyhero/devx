@@ -209,6 +209,17 @@ table {
     z-index: -1;
 }
 
+.cd-version-info {
+  padding-top:10px;
+  margin:0 auto;
+  max-width:300px;
+  text-align:center;
+}
+
+.cd-version-info span {
+  font-size:0.7rem;
+}
+
 .field input[type=email],.field input[type=password] {
     margin:4px 0;
     padding:10px;
