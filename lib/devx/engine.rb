@@ -14,5 +14,14 @@ module Devx
       app.config.assets.precompile += app.config.assets.precompile += %w( devx/devx_portal.css )
       app.config.assets.precompile += app.config.assets.precompile += %w( ckeditor/* )
     end
+
+    initializer :append_migrations do |app|
+      unless app.root.to_s.match root.to_s
+        config.paths['db/migrate'].expanded.each do |expanded_path|
+          app.config.paths['db/migrate'] << expanded_path
+        end
+      end
+    end
+
   end
 end
