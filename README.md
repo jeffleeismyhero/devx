@@ -18,12 +18,12 @@ Run the bundle command to install it.
 
 After running bundler, you can install the Engine with the following command, which will mount the Engine and install all migrations:
 
-```ruby
+```bash
 rails generate devx:install
 ```
 
 #### Alternatives
-Mounts the Engine to the application in the routes.rb file
+Mount the Engine to the application in the routes.rb file
 
 ```bash
 mount Devx::Engine => '/'
@@ -34,10 +34,6 @@ Then install the database migrations:
 ```bash
 rake db:migrate
 ```
-
-
-
-This will install all required migrations and mount the Engine to the routes.
 
 
 ## Shortcodes

@@ -1,6 +1,7 @@
 module Devx
   class Calendar < ActiveRecord::Base
     has_many :events
+    has_many :calendar_subscriptions
 
     validates :name, presence: true, uniqueness: { case_sensitive: false }
 

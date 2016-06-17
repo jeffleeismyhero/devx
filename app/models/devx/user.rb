@@ -12,6 +12,8 @@ module Devx
     has_many :registrations, through: :child_registrations
     has_many :attendances
     has_many :account_transactions
+    has_many :calendar_subscriptions
+    has_many :event_subscriptions
     belongs_to :person
 
     validates :email, presence: true
