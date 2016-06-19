@@ -585,6 +585,10 @@ a.cd-logo {
     width:100%;
 }
 
+#google_calendar_fields {
+  display:none;
+}
+
 /* #TOGGLE SWITCH*/
 
 .switch {

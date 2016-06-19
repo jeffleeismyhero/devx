@@ -14,6 +14,7 @@ module Devx
     has_many :account_transactions
     has_many :calendar_subscriptions
     has_many :event_subscriptions
+    has_many :article_subscriptions
     belongs_to :person
 
     validates :email, presence: true

@@ -6,7 +6,7 @@
     
     <div class="col-6 columns cd-edit-form">
         <%= f.label :time_zone %><br>
-        <%= f.select :time_zone, options_for_select(['', ''], @calendar.time_zone) %>
+        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, default: "Central Time (US & Canada)" %>
     </div>
     
     <div class="col-6 columns cd-edit-form">
@@ -14,31 +14,33 @@
         <%= f.select :calendar_type, options_for_select(['Standard', 'Google Calendar'], @calendar.calendar_type) %>
     </div>
     
-    <div class="col-6 columns cd-edit-form">
-        <%= f.label :client_id %><br>
-        <%= f.password_field :client_id %>
+    <div id="google_calendar_fields">
+        <div class="col-6 columns cd-edit-form">
+            <%= f.label :client_id %><br>
+            <%= f.password_field :client_id %>
+        </div>
+        
+        <div class="col-6 columns cd-edit-form">
+            <%= f.label :client_secret %><br>
+            <%= f.password_field :client_secret %>
+        </div>
+        
+        <div class="col-6 columns cd-edit-form">
+            <%= f.label :google_calendar_id %><br>
+            <%= f.text_field :google_calendar_id %>
+        </div>
+        
+        <div class="col-6 columns cd-edit-form">
+            <%= f.label :authorization_code %><br>
+            <%= f.text_field :authorization_code %>
+        </div>
     </div>
     
-    <div class="col-6 columns cd-edit-form">
-        <%= f.label :client_secret %><br>
-        <%= f.password_field :client_secret %>
-    </div>
-    
-    <div class="col-6 columns cd-edit-form">
-        <%= f.label :google_calendar_id %><br>
-        <%= f.text_field :google_calendar_id %>
-    </div>
-    
-    <div class="col-6 columns cd-edit-form">
-        <%= f.label :authorization_code %><br>
-        <%= f.text_field :authorization_code %>
-    </div>
-    
-    <div class="col-12 columns cd-edit-form">
+    <div class="col-8 columns cd-edit-form">
         <%= f.label :active %><br>
     </div>
     
-    <div class="col-12 columns cd-edit-form">
+    <div class="col-1 columns cd-edit-form">
         <label class="switch">
             <%= f.check_box :active %>
             <div class="slider round"></div>
@@ -58,3 +60,17 @@
     Click <%= link_to 'here', @calendar.authorization_url, target: '_blank' %> to authorize the application
   </p>
 <% end %>
+
+<script type="text/javascript">
+    document.getElementById("calendar_calendar_type").addEventListener("change", function()
+        {
+            if(this.value == "Google Calendar")
+            {
+                document.getElementById("google_calendar_fields").style.display = "block";
+            }
+            else
+            {
+                document.getElementById("google_calendar_fields").style.display = "none";
+            }
+        });
+</script>
