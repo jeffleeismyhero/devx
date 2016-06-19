@@ -107,6 +107,40 @@ $(function()
     }
   });
 
+  $("form:has(#cc_fields)").submit(function() {
+    var form = this;
+    // $(".submit").attr("disabled", true);
+    // $("#credit-card input, #credit-card select").attr("name", "");
+    // $("#credit-card-errors").hide();
+
+    // if (!$("#credit-card").is(":visible")) {
+    //   $("#credit-card input, #credit-card select").attr("disabled", true);
+    //   return true;
+    // }
+
+    var card = {
+      number:       $("#cc_number").val(),
+      expMonth:     $("#_expiry_date_2i").val(),
+      expYear:      $("#_expiry_date_1i").val(),
+      cvc:          $("#cvv").val(),
+      address_zip:  $("#zip_code").val(),
+      name:         $("#ch_name").val()
+    };
+
+    Stripe.createToken(card, function(status, response) {
+      if (status === 200) {
+        //$(".last-4-digits").val(response.card.last4);
+        $(".stripe-token").val(response.id);
+        form.submit();
+      } else {
+        //$("#stripe-error-message").text(response.error.message);
+        //$("#credit-card-errors").show();
+        $(".submit").attr("disabled", false);
+      }
+    });
+
+    return false;
+  });
 
 });
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615182316) do
+ActiveRecord::Schema.define(version: 20160619193501) do
 
   create_table "devx_account_transactions", force: :cascade do |t|
     t.integer  "user_id"
@@ -64,6 +64,13 @@ ActiveRecord::Schema.define(version: 20160615182316) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_article_subscriptions", force: :cascade do |t|
+    t.string   "category"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_articles", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
@@ -107,6 +114,13 @@ ActiveRecord::Schema.define(version: 20160615182316) do
     t.string   "accent_color_1"
     t.string   "accent_color_2"
     t.string   "accent_color_3"
+  end
+
+  create_table "devx_calendar_subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "calendar_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "devx_calendars", force: :cascade do |t|
@@ -156,6 +170,13 @@ ActiveRecord::Schema.define(version: 20160615182316) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_event_subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_events", force: :cascade do |t|
     t.integer  "venue_id"
     t.string   "name"
@@ -200,9 +221,12 @@ ActiveRecord::Schema.define(version: 20160615182316) do
     t.datetime "updated_at",      null: false
     t.string   "name"
     t.string   "slug"
+    t.string   "image"
   end
 
   create_table "devx_inventories", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -210,6 +234,7 @@ ActiveRecord::Schema.define(version: 20160615182316) do
   create_table "devx_javascripts", force: :cascade do |t|
     t.string   "name"
     t.text     "content"
+    t.string   "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

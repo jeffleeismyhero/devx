@@ -1,6 +1,8 @@
-<div class="large-<%= field.field_size %> columns cd-edit-form">
+<div id="cc_fields" class="large-<%= field.field_size %> columns cd-edit-form">
 
   <% if app_settings['stripe'] %>
+    <%= f.hidden_field :stripe_token, class: 'stripe-token' %>
+
     <div class="col-6 columns cd-edit-form">
         <%= label_tag :amount %>
         <%= f.number_field :amount, { step: '0.01', placeholder: 'Amount' } %>
@@ -8,7 +10,7 @@
 
     <div class="col-8 columns cd-edit-form">
     <%= label_tag :cc_type %>
-    <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), prompt: 'Select Card Type' %>
+    <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), { prompt: 'Select Card Type', class: 'select2-fixed' } %>
     </div>
     <div class="col-8 columns cd-edit-form">
     <%= label_tag :cc_number, 'Card Number' %>
@@ -28,6 +30,11 @@
     <div class="col-8 columns cd-edit-form">
     <%= label_tag :cvv, 'Security Code' %>
     <%= number_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off %>
+    </div>
+
+    <div class="col-8 columns cd-edit-form">
+    <%= label_tag :zip_code, 'Zip Code' %>
+    <%= number_field_tag :zip_code, '', placeholder: 'Zip Code', autocomplete: :off %>
     </div>
   <% end %>
 </div>

@@ -1,5 +1,7 @@
 module Devx
   class Event < ActiveRecord::Base
+    include ActiveModel::Dirty
+
     has_many :event_subscriptions
     belongs_to :calendar
     belongs_to :venue

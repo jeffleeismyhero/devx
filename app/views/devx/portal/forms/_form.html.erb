@@ -1,6 +1,12 @@
-<div class="col-4 columns no-padding cd-edit-form" style="margin-top:20px;">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-8 columns cd-edit-form">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="col-8 columns cd-edit-form">
+      <%= f.label :image %>
+      <%= f.file_field :image %>
+    </div>
 </div>
 
 <div class="col-12 columns no-padding">

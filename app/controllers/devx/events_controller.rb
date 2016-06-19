@@ -28,6 +28,11 @@ module Devx
 
     def update
       if @event.valid? && @event.update(event_params)
+        if @event.changed?
+          render plain: 'changed'
+          return
+        end
+
         redirect_to devx.events_path,
         notice: "Successfully updated event"
       else

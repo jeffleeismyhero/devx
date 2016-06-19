@@ -47,7 +47,7 @@ module Devx
     private
 
     def form_params
-      accessible = [ :name, :registration_id, fields_attributes: [ :id, :form_id, :name, :field_type, :field_size, :required, :_destroy ] ]
+      accessible = [ :name, :image, :registration_id, fields_attributes: [ :id, :form_id, :name, :field_type, :field_size, :required, :_destroy ] ]
       params.require(:form).permit(accessible)
     end 
   end

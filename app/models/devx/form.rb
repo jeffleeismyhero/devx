@@ -3,6 +3,8 @@ module Devx
     extend FriendlyId
     friendly_id :name, use: [ :slugged, :finders ]
 
+    mount_uploader :image, ImageUploader
+
     belongs_to :registration
     has_many :fields
 
