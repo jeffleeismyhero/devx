@@ -10,9 +10,13 @@ module Devx
     end
 
     def new
+      @users = Devx::User.all
+      @products = Devx::Product.all
     end
 
     def edit
+      @users = Devx::User.all
+      @products = Devx::Product.all
     end
 
     def create
@@ -50,6 +54,7 @@ module Devx
 
     def order_params
       accessible = [ :user_id,
+                    line_items_attributes: [ :id, :order_id, :_destroy ],
                     transactions_attributes: [ :id, :order_id, :payment_method, :amount, :comments, :_destroy ]
                   ]
       params.require(:order).permit(accessible)

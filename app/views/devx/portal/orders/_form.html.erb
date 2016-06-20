@@ -1,10 +1,34 @@
-<%= f.label :user_id, 'Customer name' %>
+<div class="col-8 columns no-padding">
+  <div class="col-8 columns cd-edit-form">
+    <%= f.label :user_id, 'Customer name' %>
 
-<% if @order.new_record? %>
-  <%= f.select :user_id, Devx::User.all.collect{ |x| [x.full_name, x.id] }, { include_blank: true } %>
-<% else %>
-  <%= @order.user.full_name %>
-<% end %>
+    <% if @order.new_record? %>
+      <%= f.select :user_id, @users.collect{ |x| [x.try(:full_name), x.id] }, { include_blank: true }, { class: 'select2-fixed' } %>
+    <% else %>
+      <%= @order.user.full_name %>
+    <% end %>    
+  </div>
+
+  <div class="col-8 columns">
+    <h3>Line Items</h3>
+  </div>
+
+  <div class="col-12 columns">
+    <%= f.fields_for :line_items, @order.line_items.build do |line_items| %>
+      <%= render partial: 'line_item_fields', locals: { f: line_items } %>
+    <% end %>
+    <%= link_to_add_fields 'Add Line Item', f, :line_items, nil, 'line_item_fields', '' %>
+  </div>
+
+  <div class="col-8 columns">
+    <div class="cd-update-form">
+      <%= f.submit %>
+    </div>
+  </div>
+</div>
+
+
+
 
 <% if !@order.new_record? %>
   <h3>Transactions</h3>
