@@ -1,3 +1,4 @@
+
 require_dependency "devx/application_controller"
 
 module Devx
@@ -47,6 +48,19 @@ module Devx
       end
     end
 
+    def approve
+      @article = Article.find(params[:id])
+
+      if @article.update_columns(approved_by: current_user, approved_at: Time.zone.now)
+        redirect_to devx.articles_path,
+        notice: "Approved"
+      else
+        redirect_to devx.articles_path,
+        notice: "Failed to approve"
+      end
+    end
+
+    
 
     private
 

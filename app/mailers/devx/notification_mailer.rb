@@ -17,5 +17,18 @@ module Devx
       mail to: @user.email,
            subject: @subject
     end
+
+    def subscription_confirmation(user, type, object)
+      @user = user
+      @subject = "#{type} Subscription"
+      @object = object
+
+      if type == 'Article'
+        @object.name = object.title
+      end
+
+      mail to: @user.email,
+        subject: @subject
+    end
   end
 end

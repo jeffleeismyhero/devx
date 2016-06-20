@@ -12,6 +12,7 @@ module Devx
       subscription = Devx::EventSubscription.new(event: @event, user: current_user)
 
       if subscription.valid? && subscription.save
+        Devx::NotificationMailer.subscription_confirmation(current_user, 'Event', @event)
         redirect_to devx.calendar_event_path(@calendar, @event),
         notice: "You have subscribed to this event"
       else

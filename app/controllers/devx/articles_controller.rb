@@ -7,60 +7,20 @@ module Devx
     def index
     end
 
-    def new
+    def show
     end
 
-    def edit
-    end
+    def subscribe
+      subscription = Devx::ArticleSubscription.new(category: @article.tag_list, user: current_user)
 
-    def create
-      if @article.save
-        redirect_to devx.articles_path,
-        notice: "Successfully created #{@article}"
+      if subscription.valid? && subscription.save
+        Devx::NotificationMailer.subscription_confirmation(current_user, 'News Feed', @article)
+        redirect_to devx.article_path(@article),
+        notice: "You have subscribed to this news feed"
       else
-        render :new,
-        notice: 'An error occurred'
+        redirect_to devx.article_path(@article),
+        notice: "You have already subscribed to this news feed"
       end
-    end
-
-    def update
-      if @article.update(article_params)
-        redirect_to devx.articles_path,
-        notice: "Successfully updated #{@article}"
-      else
-        render :edit,
-        notice: 'An error occurred'
-      end
-    end
-
-    def destroy
-      if @article.destroy
-        redirect_to devx.articles_path,
-        notice: "Successfully deleted #{@article.title}"
-      else
-        render :index,
-        notice: 'An error occurred'
-      end
-    end
-
-    def approve
-      @article = Article.find(params[:id])
-
-      if @article.update_columns(approved_by: current_user, approved_at: Time.zone.now)
-        redirect_to devx.articles_path,
-        notice: "Approved"
-      else
-        redirect_to devx.articles_path,
-        notice: "Failed to approve"
-      end
-    end
-
-
-    private
-
-    def article_params
-      accessible = [ :title, :slug, :short_description, :content, :image, :published_at, :approved_at, :approved_by ]
-      params.require(:article).permit(accessible)
     end
   end
 end

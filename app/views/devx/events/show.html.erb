@@ -1,3 +1,2 @@
-<%= flash.now[:notice] %>
 <%= @event.inspect %>
 <%= link_to 'Subscribe', devx.subscribe_calendar_event_path(calendar_id: @calendar.id, event: @event), method: :post %>

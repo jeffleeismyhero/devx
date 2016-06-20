@@ -1,1 +1,4 @@
-<%= @article.name %>
+<%= @article.title %>
+<%= @article.tag_list %>
+
+<%= link_to 'Subscribe', devx.subscribe_article_path(@article), method: :post %>

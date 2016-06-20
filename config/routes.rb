@@ -3,7 +3,11 @@ Devx::Engine.routes.draw do
     get '/login' => 'devise/sessions#new'
   end
 
-  resources :articles, except: :show
+  resources :articles, path: 'news', only: [ :index, :show ] do
+    member do
+      post 'subscribe' => 'articles#subscribe'
+    end
+  end
   resources :calendars do
     member do
       post 'subscribe' => 'calendars#subscribe'
