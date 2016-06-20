@@ -7,7 +7,7 @@ module Devx
     ## Title unit test
     describe 'user' do
       it 'should be invalid if user is blank' do
-        account_transaction.user = ''
+        account_transaction.user = nil
         expect(account_transaction).not_to be_valid
       end
 
@@ -41,11 +41,11 @@ module Devx
     describe 'amount' do
       it 'should be invalid if amount < 0.01' do
         account_transaction.amount = 0.00
-        expect(account_transaction.amount).not_to be_valid
+        expect(account_transaction).not_to be_valid
       end
 
       it 'should be valid if amount > 0.00' do
-        expect(account_transaction.amount).to be_valid
+        expect(account_transaction).to be_valid
       end
     end
 

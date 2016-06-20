@@ -4,7 +4,7 @@ FactoryGirl.define do
   end
 
   factory :devx_article_subscription, class: 'Devx::ArticleSubscription' do
-    user FactoryGirl.build(:devx_user) 
+    user { build(:devx_user) }
     category 'sports'
   end
 end
