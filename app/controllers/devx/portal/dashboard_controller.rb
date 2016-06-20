@@ -7,7 +7,6 @@ module Devx
     layout 'devx/portal'
 
     def index
-      flash.now[:notice] = "Test"
     end
   end
 end

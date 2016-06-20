@@ -1,5 +1,5 @@
 <% provide(:title, "Register for #{@registration.name}") %>
-<div class="container banner" style="margin-bottom:40px;background-image:url(<%= @registration.form.image.url %>);background-size:cover;background-attachment:fixed;">
+<div class="container banner" style="margin-bottom:40px;background-image:url(<%= @registration.form.image.try(:url) %>);background-size:cover;background-attachment:fixed;">
   <div style="padding:140px 0px;margin:0 auto;text-align:center">
     <h1 style="padding:0;margin:0;border:none;color:#fff;"><%= @registration.name %></h1>
   </div>
