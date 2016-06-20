@@ -71,8 +71,21 @@ ActiveRecord::Schema.define(version: 20160620171940) do
     t.datetime "updated_at", null: false
   end
 
-# Could not dump table "devx_articles" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "devx_articles", force: :cascade do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.string   "short_description"
+    t.text     "content"
+    t.string   "image"
+    t.datetime "published_at"
+    t.datetime "approved_at"
+    t.integer  "approved_by"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "user_id"
+  end
+
+  add_index "devx_articles", ["published_at"], name: "index_devx_articles_on_published_at"
 
   create_table "devx_attendances", force: :cascade do |t|
     t.integer  "registration_id"
@@ -347,8 +360,12 @@ ActiveRecord::Schema.define(version: 20160620171940) do
     t.datetime "updated_at",         null: false
   end
 
-# Could not dump table "devx_registrations" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "devx_registrations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
 
   create_table "devx_roles", force: :cascade do |t|
     t.string   "name"

@@ -1,6 +1,6 @@
 users = Devx::User.create([
   {
-    email: 'rashaad@jcwproductions.com',
+    email: 'demo@devxcms.com',
     first_name: 'Rashaad',
     last_name: 'Randall',
     password: 'password'

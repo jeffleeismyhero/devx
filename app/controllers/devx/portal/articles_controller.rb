@@ -21,6 +21,10 @@ module Devx
     def create
       @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
 
+      if @article.new_record?
+        @article.user_id = current_user.id
+      end
+
       if @article.save
         redirect_to devx.portal_articles_path,
         notice: "Successfully created #{@article.title}"
