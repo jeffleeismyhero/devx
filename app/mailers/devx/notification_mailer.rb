@@ -30,5 +30,14 @@ module Devx
       mail to: @user.email,
         subject: @subject
     end
+
+    def registration_completed(user, registration)
+      @user = user
+      @registration = registration
+      @subject = "Registration completed for #{@registation.name}"
+
+      mail to: @user.email,
+        subject: @subject
+    end
   end
 end

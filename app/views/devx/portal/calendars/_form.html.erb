@@ -17,12 +17,12 @@
     <div id="google_calendar_fields">
         <div class="col-6 columns cd-edit-form">
             <%= f.label :client_id %><br>
-            <%= f.password_field :client_id %>
+            <%= f.password_field :client_id, value: @calendar.client_id %>
         </div>
         
         <div class="col-6 columns cd-edit-form">
             <%= f.label :client_secret %><br>
-            <%= f.password_field :client_secret %>
+            <%= f.password_field :client_secret, value: @calendar.client_secret %>
         </div>
         
         <div class="col-6 columns cd-edit-form">
@@ -49,19 +49,23 @@
 </div>
 
 <div class="col-12 columns" style="margin-top:20px;">
+    <% if @calendar.authorization_url.present? && @calendar.refresh_token.blank? %>
+      <p>
+        Click <%= link_to 'here', @calendar.authorization_url, target: '_blank' %> to authorize the application
+      </p>
+    <% end %>
     <div class="cd-update-form">
         <%= f.submit %>
     </div>
 </div>
 
 
-<% if @calendar.authorization_url.present? && @calendar.refresh_token.blank? %>
-  <p>
-    Click <%= link_to 'here', @calendar.authorization_url, target: '_blank' %> to authorize the application
-  </p>
-<% end %>
-
 <script type="text/javascript">
+    if(document.getElementById("calendar_calendar_type").value == "Google Calendar")
+    {
+        document.getElementById("google_calendar_fields").style.display = "block";
+    }
+
     document.getElementById("calendar_calendar_type").addEventListener("change", function()
         {
             if(this.value == "Google Calendar")
