@@ -3,47 +3,20 @@ require_dependency "devx/application_controller"
 module Devx
   class EventsController < ApplicationController
     load_resource :event, class: 'Devx::Event'
-
-    def index
-    end
+    load_resource :calendar, class: 'Devx::Calendar'
 
     def show
     end
 
-    def new
-    end
+    def subscribe
+      subscription = Devx::EventSubscription.new(event: @event, user: current_user)
 
-    def edit
-    end
-
-    def create
-      if @event.valid? && @event.save
-        redirect_to devx.events_path,
-        notice: "Successfully created event"
+      if subscription.valid? && subscription.save
+        redirect_to devx.calendar_event_path(@calendar, @event),
+        notice: "You have subscribed to this event"
       else
-        render :new,
-        notice: "Failed to save event"
-      end
-    end
-
-    def update
-      if @event.valid? && @event.update(event_params)
-        if @event.changed?
-          render plain: 'changed'
-          return
-        end
-
-        redirect_to devx.events_path,
-        notice: "Successfully updated event"
-      else
-        render :edit,
-        notice: "Failed to update event"
-      end
-    end
-
-    def destroy
-      if @event.destroy
-        redirect_to devx.events_path
+        redirect_to devx.calendar_event_path(@calendar, @event),
+        notice: "You have already subscribed to this event"
       end
     end
 

@@ -4,7 +4,17 @@ Devx::Engine.routes.draw do
   end
 
   resources :articles, except: :show
-  resources :events
+  resources :calendars do
+    member do
+      post 'subscribe' => 'calendars#subscribe'
+    end
+
+    resources :events, only: [ :show ] do
+      member do
+        post 'subscribe' => 'events#subscribe'
+      end
+    end
+  end
   resources :registrations, only: [ :show, :create ]
   resources :stylesheets, only: :show, defaults: { format: 'css' }
   resources :javascripts, only: :show, defaults: { format: 'js' }

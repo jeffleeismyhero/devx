@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160619193501) do
+ActiveRecord::Schema.define(version: 20160620151955) do
 
   create_table "devx_account_transactions", force: :cascade do |t|
     t.integer  "user_id"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 20160619193501) do
     t.string   "authorization_code"
     t.string   "refresh_token"
     t.string   "time_zone"
+    t.string   "slug"
   end
 
   create_table "devx_child_registrations", force: :cascade do |t|
