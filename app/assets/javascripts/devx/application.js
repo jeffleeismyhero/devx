@@ -21,6 +21,13 @@
 $(function()
 {
 
+  // Notification
+  if($(".cd-notification").is(":visible"))
+  {
+    $(".cd-notification").delay(3000).fadeOut("slow");
+  }
+
+
   // Select2
   $(".select2").select2({ tags: true });
   $(".select2-multiple").select2({ tags: true, multiple: true });

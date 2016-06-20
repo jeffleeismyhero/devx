@@ -200,7 +200,6 @@
     </nav>
     <!-- END: SIDE NAVIGATION -->
 
-
     <!-- START: MAIN CONTENT -->
     <div class="content-wrapper">
       <div class="content">
@@ -211,6 +210,16 @@
 
   </main>
   <!-- END: CONTENT -->
+
+  <!-- START: NOTIFICATION ALERT -->
+    <div class="cd-notification-wrapper">
+      <% if flash.any? %>
+        <div class="cd-notification">
+          <%= notice %>
+        </div>
+      <% end %>
+    </div>
+  <!-- END: NOTIFICATION ALERT -->
 
 </body>
 </html>

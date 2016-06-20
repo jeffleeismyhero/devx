@@ -313,6 +313,23 @@ a.cd-logo {
   overflow:scroll;
 }
 
+.cd-notification-wrapper {
+  margin-left:-400px;
+  width:100%;
+  max-width:800px;
+  position:fixed;
+  top:0;left:50%;
+  z-index:20;
+}
+
+.cd-notification {
+  padding:20px;
+  background-color:#D9DDE3;
+  color:#084269;
+  font-weight:600;
+  text-align:center;
+}
+
 
 /** DESKTOP **/
 @media only screen and (min-width:768px) {
@@ -487,7 +504,6 @@ a.cd-logo {
   }
 
   .content-wrapper {
-    padding:80px 0px;
     margin-left:110px;
     min-height:100%;
     max-height:100vh;
@@ -531,6 +547,7 @@ a.cd-logo {
   }
 
   .content-wrapper {
+    padding:60px 0px;
     margin-left:200px;
   }
 }
