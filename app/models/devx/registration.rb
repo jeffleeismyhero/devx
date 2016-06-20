@@ -5,6 +5,7 @@ module Devx
     has_many :attendances
     has_one :form
     has_many :registration_submissions
+    belongs_to :user
 
     accepts_nested_attributes_for :attendances
     accepts_nested_attributes_for :form

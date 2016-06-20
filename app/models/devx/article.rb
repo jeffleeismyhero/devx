@@ -3,8 +3,11 @@ module Devx
     scope :published, -> { where.not(published_at: nil) }
     scope :latest, -> { order(published_at: :desc) }
 
+    belongs_to :user
+
     validates :title, presence: true
     validates :content, presence: true
+    validates :tag_list, presence: true
 
     before_create :add_publish_date
 

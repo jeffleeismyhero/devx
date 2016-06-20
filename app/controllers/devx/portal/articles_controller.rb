@@ -19,9 +19,11 @@ module Devx
     end
 
     def create
+      @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
+
       if @article.save
         redirect_to devx.portal_articles_path,
-        notice: "Successfully created #{@article}"
+        notice: "Successfully created #{@article.title}"
       else
         render :new,
         notice: 'An error occurred'
@@ -29,9 +31,11 @@ module Devx
     end
 
     def update
+      @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
+
       if @article.update(article_params)
         redirect_to devx.portal_articles_path,
-        notice: "Successfully updated #{@article}"
+        notice: "Successfully updated #{@article.title}"
       else
         render :edit,
         notice: 'An error occurred'
