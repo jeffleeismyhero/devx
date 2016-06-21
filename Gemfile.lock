@@ -42,7 +42,6 @@ PATH
       time_splitter
       twilio-ruby
       twitter
-      whenever
       will_paginate
       wow-rails
 
@@ -112,7 +111,6 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
-    chronic (0.10.2)
     ckeditor (4.1.6)
       cocaine
       orm_adapter (~> 0.5.0)
@@ -373,8 +371,6 @@ GEM
     unf_ext (0.0.7.2)
     warden (1.2.6)
       rack (>= 1.0)
-    whenever (0.9.7)
-      chronic (>= 0.6.3)
     will_paginate (3.1.0)
     wow-rails (0.0.1)
 

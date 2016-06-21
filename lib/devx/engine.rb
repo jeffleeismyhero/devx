@@ -29,16 +29,13 @@ module Devx
     end
 
     ## E-mail configuration
-    require 'Socket'
-    app_domain = Socket.gethostname
-
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
-    config.action_mailer.default_url_options = { host: app_domain }
+    config.action_mailer.default_url_options = { host: 'devxcms.com' }
     ActionMailer::Base.smtp_settings = {
       user_name: 'jcwproductions1',
       password: 'NolaProductions1284',
-      domain: app_domain,
+      domain: 'devxcms.com',
       address: 'smtp.sendgrid.net',
       port: 587,
       authentication: :plain,

@@ -7,6 +7,8 @@
     </div>
     <div class="col-12 columns">
       <%= link_to 'Back to pages', devx.portal_pages_path %>
+    </div>
+    <div class="col-12 columns"><h3>Page Information</h3></div>
       <%= form_for @page, url: devx.portal_page_path(@page) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
