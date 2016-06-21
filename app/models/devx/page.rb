@@ -35,6 +35,12 @@ module Devx
                 self.is_home = true
             end
         end
+
+
+        if self.is_home == true
+            self.active = true
+        end
+
     end
   end
 end

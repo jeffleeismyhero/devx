@@ -27,7 +27,8 @@
             <span><i class="fa fa-money"></i></span>
           </div>
           <div class="cd-accordion-body" style="text-align:center">
-            <span><strong>Balance: <%= number_to_currency current_user.balance %></strong></span>
+            <span><strong>Balance: <%= number_to_currency current_user.balance %></strong></span><br />
+            <%= link_to 'Add funds', devx.account_deposit_portal_user_path(current_user) %>
           </div>
         </div>
         <% end %>

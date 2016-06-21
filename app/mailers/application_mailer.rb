@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "noreply@devxcms.com"
+  default from: "noreply@#{request.domain}"
   layout 'mailer'
 end

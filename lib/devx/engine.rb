@@ -2,8 +2,9 @@ module Devx
   class Engine < ::Rails::Engine
     isolate_namespace Devx
 
+    ## Required modules
     require 'acts-as-taggable-on'
-    
+
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
 
     config.to_prepare do
