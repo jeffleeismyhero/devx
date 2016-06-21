@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to event.name, devx.edit_portal_calendar_event_path(@calendar, @event) %></td>
+  <td><%= link_to event.name, devx.edit_portal_calendar_event_path(calendar_id: @calendar.id, id: @event.id) %></td>
   <td><%= strip_tags(event.description) %></td>
   <td><%= event.start_time.try(:strftime, '%m/%d/%Y %I:%M %P') %></td>
   <td><%= event.end_time.try(:strftime, '%m/%d/%Y %I:%M %P') %></td>

@@ -29,7 +29,7 @@
           <% if @calendar.calendar_type == 'Standard' %>
             <% @calendar.events.try(:each) do |event| %>
               <tr>
-                <td style="padding:10px;border-bottom:1px solid #ccc;"><%= link_to event.name, edit_portal_calendar_event_path(calendar_id: @calendar.id, event: event) %></td>
+                <td style="padding:10px;border-bottom:1px solid #ccc;"><%= link_to event.name, edit_portal_calendar_event_path(calendar_id: @calendar, id: event.id) %></td>
                 <td style="padding:10px;border-bottom:1px solid #ccc;"><%= event.start_time.try(:strftime, '%m/%d/%Y %I:%M %P') %></td>
                 <td style="text-align:right; padding:10px;border-bottom:1px solid #ccc;">
                 <%= link_to 'Edit', devx.edit_portal_calendar_event_path(calendar_id: @calendar.id, event: event) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

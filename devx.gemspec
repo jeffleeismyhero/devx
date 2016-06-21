@@ -98,6 +98,11 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "rails_autolink"
 
 
+  ## Background Jobs
+  s.add_runtime_dependency "delayed_job"
+  s.add_runtime_dependency "delayed_job_active_record"
+  s.add_runtime_dependency "daemons", "~> 1.1.9"
+
 
   ## Development Gems
 

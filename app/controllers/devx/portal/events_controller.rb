@@ -22,7 +22,7 @@ module Devx
   	end
 
   	def create
-      @event.calendar_id = params[:calendar_id]
+      @event.calendar_id = Devx::Calendar.find(params[:calendar_id]).id
       
   		if @event.valid? && @event.save
   			redirect_to devx.portal_calendar_path(id: params[:calendar_id]),

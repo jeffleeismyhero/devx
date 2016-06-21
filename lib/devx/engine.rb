@@ -6,6 +6,7 @@ module Devx
     require 'acts-as-taggable-on'
 
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+    config.active_job.queue_adapter = :delayed_job
 
     config.to_prepare do
       Devise::SessionsController.layout 'devx/login'
@@ -24,6 +25,23 @@ module Devx
         end
       end
     end
+
+    ## E-mail configuration
+    require 'Socket'
+    app_domain = Socket.gethostname
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.default_url_options = { host: app_domain }
+    ActionMailer::Base.smtp_settings = {
+      user_name: 'jcwproductions1',
+      password: 'NolaProductions1284',
+      domain: app_domain,
+      address: 'smtp.sendgrid.net',
+      port: 587,
+      authentication: :plain,
+      enable_starttls_auto: true
+    }
 
   end
 end
