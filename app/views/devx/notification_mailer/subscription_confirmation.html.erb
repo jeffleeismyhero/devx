@@ -1,7 +1,7 @@
 <html>
 <body>
   <p><%= @user.first_name %>,</p>
-  <p>You have successfully subscribed to <%= @object.name %> <%= type %>.</p>
-  <p>You will now receive updates related to this <% type.downcase %>.
+  <p>You have successfully subscribed to <%= @object.name %> <%= @type %>.</p>
+  <p>You will now receive updates related to this <%= @type.to_s.try(:downcase) %>.
 </body>
 </html>

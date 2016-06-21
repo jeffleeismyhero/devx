@@ -7,6 +7,7 @@ module Devx
 
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
     config.active_job.queue_adapter = :delayed_job
+    # Delayed::Web::Job.backend = 'active_record'
 
     config.to_prepare do
       Devise::SessionsController.layout 'devx/login'
@@ -15,6 +16,7 @@ module Devx
     initializer 'devx.assets.precompile' do |app|
       app.config.assets.precompile += app.config.assets.precompile += %w( devx/devx_portal.css )
       app.config.assets.precompile += app.config.assets.precompile += %w( ckeditor/* )
+      app.config.assets.precompile += %w( dj_mon/dj_mon.js dj_mon/dj_mon.css)
       app.config.assets.precompile += app.config.assets.precompile += %w( devx/* )
     end
 

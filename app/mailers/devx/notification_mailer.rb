@@ -20,10 +20,11 @@ module Devx
 
     def subscription_confirmation(user, type, object)
       @user = user
-      @subject = "#{type} Subscription"
       @object = object
+      @type = type
+      @subject = "#{@type} Subscription"
 
-      if type == 'Article'
+      if @type == 'Article'
         @object.name = object.title
       end
 

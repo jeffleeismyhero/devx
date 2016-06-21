@@ -101,6 +101,7 @@ Gem::Specification.new do |s|
   ## Background Jobs
   s.add_runtime_dependency "delayed_job"
   s.add_runtime_dependency "delayed_job_active_record"
+  s.add_runtime_dependency "dj_mon"
   s.add_runtime_dependency "daemons", "~> 1.1.9"
 
 
