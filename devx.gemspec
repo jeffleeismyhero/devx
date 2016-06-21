@@ -100,7 +100,6 @@ Gem::Specification.new do |s|
 
 
   ## Background Jobs
-  s.add_runtime_dependency "whenever"
   s.add_runtime_dependency "delayed_job"
   s.add_runtime_dependency "delayed_job_active_record"
   s.add_runtime_dependency "delayed_job_web", "~> 1.0.3"
