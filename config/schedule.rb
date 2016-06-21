@@ -18,3 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+set :output, File.expand_path('../log/cron.log', __FILE__)
+every 1.minute do
+  rake "jobs:workoff"
+end
