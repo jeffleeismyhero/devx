@@ -19,6 +19,30 @@
             <div style="margin:4px 0;"><%= f.cktext_area :content %></div>
         </div>
     </div>
+
+    <div class="col-12 columns">
+        <h3>SEO Settings</h3>
+    </div>
+
+    <div class="col-4 columns cd-edit-form">
+        <%= f.label :meta_title %>
+        <%= f.text_field :meta_title %>
+    </div>
+
+    <div class="col-4 columns cd-edit-form">
+        <%= f.label :meta_keywords %>
+        <%= f.select :meta_keywords, {}, {}, { multiple: true, class: 'select2-multiple' } %>
+    </div>
+
+    <div class="col-4 columns cd-edit-form">
+        <%= f.label :meta_robots %>
+        <%= f.select :meta_robots, {}, {}, { multiple: true, class: 'select2-multiple' } %>
+    </div>
+
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :meta_description %>
+        <%= f.cktext_area :meta_description %>
+    </div>
 </div>
 
 <div class="col-4 columns cd-edit-form">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621154141) do
+ActiveRecord::Schema.define(version: 20160621213711) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -330,12 +330,16 @@ ActiveRecord::Schema.define(version: 20160621154141) do
     t.string   "slug"
     t.string   "content"
     t.boolean  "is_home"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "parent"
     t.string   "image"
     t.boolean  "active"
     t.integer  "parent_id"
+    t.string   "meta_title"
+    t.text     "meta_keywords"
+    t.string   "meta_robots"
+    t.string   "meta_description"
   end
 
   add_index "devx_pages", ["parent_id"], name: "index_devx_pages_on_parent_id"

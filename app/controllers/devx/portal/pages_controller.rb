@@ -46,7 +46,8 @@ module Devx
     private
 
     def page_params
-      accessible = [ :name, :content, :layout_id, :parent, :image, :active, :is_home ]
+      accessible = [ :name, :content, :layout_id, :parent, :image, :active, :is_home, :meta_title, :meta_description,
+                    meta_keywords: [], meta_robots: [] ]
       params.require(:page).permit(accessible)
     end
   end
