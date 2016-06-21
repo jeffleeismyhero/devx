@@ -17,7 +17,7 @@ module Devx
 
     def create
         if @product.valid? && @product.save
-            redirect_to devx.edit_portal_page_path(@product),
+            redirect_to devx.edit_portal_product_path(@product),
             notice: "Successfully saved product"
         else
             render :new,
@@ -27,7 +27,7 @@ module Devx
 
     def update
         if @product.valid? && @product.update(product_params)
-            redirect_to dev.edit_portal_page_path(@product),
+            redirect_to dev.edit_portal_product_path(@product),
             notice: "Successfully updated product"
         else
             render :edit,
@@ -37,7 +37,7 @@ module Devx
 
     def destroy
         if @product.destroy
-            redirect_to devx.edit_portal_page_path,
+            redirect_to devx.portal_products_path,
             notice: "Successfully deleted product"
         end
     end
@@ -45,7 +45,7 @@ module Devx
     private
 
     def product_params
-        accessible = [ :name, :slug, :content, :is_home ]
+        accessible = [ :name, :description, :sku, :price, :weight, :taxable, :stockable, :image ]
         params.require(:product).permit(accessible)
     end
   end

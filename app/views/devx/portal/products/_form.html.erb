@@ -1,0 +1,61 @@
+<div class="col-8 columns no-padding" style="margin-top:20px">
+
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :description %>
+    <%= f.cktext_area :description %>
+  </div>
+
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :sku, 'SKU' %>
+    <%= f.text_field :sku %>
+  </div>
+
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :price %>
+    <%= f.number_field :price, step: '0.01' %>
+  </div>
+
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :weight %>
+    <%= f.number_field :weight, step: '0.01' %>
+  </div>
+
+<div class="col-8 columns cd-edit-form">
+    <%= f.label :taxable %><br>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch">
+        <%= f.check_box :taxable %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
+<div class="col-8 columns cd-edit-form">
+    <%= f.label :stockable %><br>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch">
+        <%= f.check_box :stockable %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
+<div class="col-12 columns">
+  <div class="cd-update-form">
+    <%= f.submit %>
+  </div>
+</div>
+
+</div>

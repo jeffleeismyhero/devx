@@ -1,0 +1,31 @@
+<% provide(:title, '' + controller_name.classify.pluralize) %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 columns">
+            <h1><%= yield(:title) %></h1>
+        </div>
+        <div class="col-12 columns" style="padding-bottom:20px;">
+            <i class="fa fa-map-signs" aria-hidden="true"></i> <%= link_to 'Create Product', devx.new_portal_product_path %> 
+            <div style="float:right;">
+                <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
+            </div>
+        </div>
+        <div class="col-12 columns">
+            <table width="100%">
+                <thead>
+                    <tr style="background-color:#ACCC38;">
+                        <th style="color:#084269; padding:10px; text-align:left; width:10%;">Name</th>
+                        <th style="color:#084269; padding:10px; text-align:left; width:40%;">Price</th>
+                        <th style="color:#084269; padding:10px; text-align:left; width:20%;">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%= render partial: 'product', collection: @products %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

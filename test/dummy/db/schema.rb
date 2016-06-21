@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621024351) do
+ActiveRecord::Schema.define(version: 20160621142321) do
 
   create_table "devx_account_transactions", force: :cascade do |t|
     t.integer  "user_id"
@@ -351,6 +351,8 @@ ActiveRecord::Schema.define(version: 20160621024351) do
     t.boolean  "stockable"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "image"
+    t.datetime "deleted_at"
   end
 
   create_table "devx_registration_submissions", force: :cascade do |t|

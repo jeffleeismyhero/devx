@@ -22,5 +22,15 @@ module Devx
       return total
     end
 
+    def balance
+      payments = 0
+
+      self.transactions.try(:each) do |transaction|
+        payments += transaction.amount
+      end
+
+      return (self.total - payments)
+    end
+
   end
 end

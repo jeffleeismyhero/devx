@@ -10,7 +10,6 @@ module Devx
     end
 
     def show
-      @products = Devx::Product.all
     end
 
     def new
@@ -29,7 +28,7 @@ module Devx
 
       if @order.valid? && @order.save
         redirect_to devx.portal_order_path(@order),
-        notice: "Successfully created #{@order}"
+        notice: "Successfully created #{@order.id}"
       else
         render :new,
         notice: 'An error occurred'
@@ -40,9 +39,17 @@ module Devx
       @users = Devx::User.all
       @products = Devx::Product.all
 
+      if order_params.include?('transactions_attributes')
+        if order_params['transactions_attributes']['0']['amount'].to_f > @order.balance
+          redirect_to devx.portal_order_path(@order),
+          notice: "The payment amount cannot be higher than the balance"
+          return
+        end
+      end
+
       if @order.update(order_params)
         redirect_to devx.portal_order_path(@order),
-        notice: "Successfully updated #{@order}"
+        notice: "Successfully updated #{@order.id}"
       else
         render :edit,
         notice: 'An error occurred'
