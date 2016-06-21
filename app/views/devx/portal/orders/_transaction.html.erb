@@ -1,6 +1,6 @@
 <tr>
-  <td><%= transaction.created_at %></td>
-  <td><%= transaction.payment_method %></td>
-  <td><%= transaction.amount %></td>
-  <td><%= transaction.comments %></td>
+  <td style="padding:10px;border-bottom:1px solid #ccc;"><%= transaction.created_at.try(:strftime, '%m/%d/%Y %I:%M %P') %></td>
+  <td style="padding:10px;border-bottom:1px solid #ccc;"><%= transaction.payment_method %></td>
+  <td style="padding:10px;border-bottom:1px solid #ccc;"><%= number_to_currency transaction.amount %></td>
+  <td style="padding:10px;border-bottom:1px solid #ccc;"><%= transaction.comments %></td>
 </tr>

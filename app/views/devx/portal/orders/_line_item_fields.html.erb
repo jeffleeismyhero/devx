@@ -1,13 +1,13 @@
 <div class="col-12 columns no-padding">
 
   <div class="col-6 columns cd-edit-form">
-    <%= f.label :product %>
-    <%= f.select :product, @products.collect{ |x| [x.name, x.id] }, { include_blank: true }, { class: 'select2-fixed' } %>
+    <%= f.label :product_id %>
+    <%= f.select :product_id, @products.collect{ |x| [x.name, x.id] }, { include_blank: true }, { class: 'select2-fixed' } %>
   </div>
 
   <div class="col-2 columns cd-edit-form">
-    <%= f.label :quanity %>
-    <%= f.number_field :quanity, value: 1 %>
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity, value: 1 %>
   </div>
 
   <div class="col-2 columns cd-edit-form">

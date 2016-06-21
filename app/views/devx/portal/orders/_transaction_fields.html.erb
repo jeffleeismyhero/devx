@@ -1,6 +1,12 @@
+<div class="col-6 columns cd-edit-form">
 <%= f.label :payment_method %>
-<%= f.select :payment_method, options_for_select([ 'Cash', 'Credit Card', 'Check' ]), { prompt: 'Payment Method' } %>
+<%= f.select :payment_method, options_for_select([ 'Cash', 'Credit Card', 'Check' ]), { prompt: 'Payment Method' }, { class: 'select2-fixed' } %>
+</div>
+<div class="col-6 columns cd-edit-form">
 <%= f.label :amount %>
 <%= f.number_field :amount %>
+</div>
+<div class="col-12 columns">
 <%= f.label :comments %>
-<%= f.text_area :comments %>
+<%= f.cktext_area :comments %>
+</div>

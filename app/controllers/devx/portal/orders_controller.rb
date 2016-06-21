@@ -9,6 +9,10 @@ module Devx
     def index
     end
 
+    def show
+      @products = Devx::Product.all
+    end
+
     def new
       @users = Devx::User.all
       @products = Devx::Product.all
@@ -20,7 +24,10 @@ module Devx
     end
 
     def create
-      if @order.save
+      @users = Devx::User.all
+      @products = Devx::Product.all
+
+      if @order.valid? && @order.save
         redirect_to devx.portal_order_path(@order),
         notice: "Successfully created #{@order}"
       else
@@ -30,6 +37,9 @@ module Devx
     end
 
     def update
+      @users = Devx::User.all
+      @products = Devx::Product.all
+
       if @order.update(order_params)
         redirect_to devx.portal_order_path(@order),
         notice: "Successfully updated #{@order}"
@@ -54,8 +64,8 @@ module Devx
 
     def order_params
       accessible = [ :user_id,
-                    line_items_attributes: [ :id, :order_id, :_destroy ],
-                    transactions_attributes: [ :id, :order_id, :payment_method, :amount, :comments, :_destroy ]
+                    line_items_attributes: [ :id, :product_id, :quantity, :_destroy ],
+                    transactions_attributes: [ :id, :payment_method, :amount, :comments, :_destroy ]
                   ]
       params.require(:order).permit(accessible)
     end

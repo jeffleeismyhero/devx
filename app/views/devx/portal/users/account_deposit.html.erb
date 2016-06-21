@@ -16,7 +16,7 @@
 
     <div class="col-8 columns cd-edit-form">
     <%= label_tag :cc_type %>
-    <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), prompt: 'Select Card Type' %>
+    <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), { prompt: 'Select Card Type', class: 'select2-fixed' } %>
     </div>
     <div class="col-8 columns cd-edit-form">
     <%= label_tag :cc_number, 'Card Number' %>

@@ -7,16 +7,19 @@ module Devx
     validates :payment_method, presence: true
     validates :amount, presence: true, numericality: { greater_than: 0 }
 
+    def payeezy
+      require 'payeezy'
+
+      return Payeezy::Transactions.new(
+        url: 'https://api-cert.payeezy.com/v1/transactions',
+        apikey: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_key'],
+        apisecret: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_secret'],
+        token: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_token']
+      ) rescue nil
+    end
+
     def process(amount, cc_type, ch_name, cc_number, exp_date, cvv)
       if Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy']
-        require 'payeezy'
-
-        transaction = Payeezy::Transactions.new(
-          url: 'https://api-cert.payeezy.com/v1/transactions',
-          apikey: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_key'],
-          apisecret: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_secret'],
-          token: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_token']
-        ) rescue nil
 
         params = {
           method: 'credit_card',
@@ -31,7 +34,7 @@ module Devx
           }
         }
 
-        response = transaction.transact('purchase', params)
+        response = payeezy.transact('purchase', params)
 
         puts response.inspect
 

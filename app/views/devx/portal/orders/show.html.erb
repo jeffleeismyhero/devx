@@ -5,11 +5,75 @@
     <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
     </div>
-    <div class="col-12">
+    <div class="col-12 columns">
       <%= link_to 'Back to orders', devx.portal_orders_path %>
       <%= form_for @order, url: devx.portal_order_path(@order) do |f| %>
-        <%= render partial: 'form', locals: { f: f } %>
-      <% end %>
+        <div class="col-8 columns no-padding">
+          <div class="col-12 columns">
+            <h3>Order Details</h3>
+          </div>
+
+          <div class="col-12 columns" style="padding-bottom:80px">
+            <table width="100%">
+              <thead>
+                  <tr style="background-color:#ACCC38;">
+                      <th style="color:#084269; padding:10px; text-align:left; width:25%;">Product</th>
+                      <th style="color:#084269; padding:10px; text-align:left; width:20%;">Quantity</th>
+                      <th style="color:#084269; padding:10px; text-align:left; width:15%;">Price</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <% @order.line_items.try(:each) do |line_item| %>
+                  <tr style="padding:10px;border-bottom:1px solid #ccc;">
+                    <td><%= line_item.product.name %></td>
+                    <td><%= line_item.quantity %></td>
+                    <td><%= number_to_currency (line_item.product.price * line_item.quantity) %></td>
+                <% end %>
+                <tr style="padding:10px;border-bottom:1px solid #ccc;">
+                  <td colspan="3" style="text-align:right">Total: <%= number_to_currency @order.total %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+          <div class="col-12 columns">
+            <h3>Transactions</h3>
+          </div>
+
+          <div class="col-12 columns" style="padding-bottom:80px">
+            <table width="100%">
+              <thead>
+                  <tr style="background-color:#ACCC38;">
+                      <th style="color:#084269; padding:10px; text-align:left; width:25%;">Date</th>
+                      <th style="color:#084269; padding:10px; text-align:left; width:20%;">Payment Method</th>
+                      <th style="color:#084269; padding:10px; text-align:left; width:15%;">Amount</th>
+                      <th style="color:#084269; padding:10px; text-align:left; width:40%;">Comments</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <%= render partial: 'transaction', collection: @order.transactions %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col-12 columns">
+            <h3>Make a Payment</h3>
+          </div>
+
+          <div class="col-12 columns nested-attributes">
+            <%= f.fields_for :transactions, @order.transactions.build do |transaction| %>
+              <%= render partial: 'transaction_fields', locals: { f: transaction } %>
+            <% end %>
+          </div>
+
+          <div class="col-12 columns">
+            <div class="cd-update-form">
+              <%= f.submit %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

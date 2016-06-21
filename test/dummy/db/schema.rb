@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620171940) do
+ActiveRecord::Schema.define(version: 20160621024351) do
 
   create_table "devx_account_transactions", force: :cascade do |t|
     t.integer  "user_id"
@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(version: 20160620171940) do
   create_table "devx_line_items", force: :cascade do |t|
     t.integer  "order_id"
     t.integer  "product_id"
-    t.integer  "quanity"
+    t.integer  "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
