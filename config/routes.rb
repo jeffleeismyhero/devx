@@ -5,7 +5,7 @@ Devx::Engine.routes.draw do
   end
 
   authenticated :user, -> user { user.super_administrator? } do
-    mount DjMon::Engine, at: '/portal/jobs'
+    match '/portal/jobs', to: DelayedJobWeb, anchor: false, via: [ :get, :post ]
   end
 
   resources :articles, path: 'news', only: [ :index, :show ] do
@@ -13,7 +13,8 @@ Devx::Engine.routes.draw do
       post 'subscribe' => 'articles#subscribe'
     end
   end
-  resources :calendars do
+
+  resources :calendars, path: 'calendar', only: [ :index ] do
     member do
       post 'subscribe' => 'calendars#subscribe'
     end
@@ -24,6 +25,8 @@ Devx::Engine.routes.draw do
       end
     end
   end
+  match '/calendar', to: 'calendars#index', via: [ :get, :post ]
+
   resources :registrations, only: [ :show, :create ]
   resources :stylesheets, only: :show, defaults: { format: 'css' }
   resources :javascripts, only: :show, defaults: { format: 'js' }

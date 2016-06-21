@@ -41,6 +41,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "ransack"
   s.add_runtime_dependency "acts-as-taggable-on"
   s.add_runtime_dependency "will_paginate"
+  s.add_runtime_dependency "time_splitter"
 
 
   ## User Interface
@@ -99,9 +100,10 @@ Gem::Specification.new do |s|
 
 
   ## Background Jobs
+  s.add_runtime_dependency "whenever"
   s.add_runtime_dependency "delayed_job"
   s.add_runtime_dependency "delayed_job_active_record"
-  s.add_runtime_dependency "dj_mon"
+  s.add_runtime_dependency "delayed_job_web", "~> 1.0.3"
   s.add_runtime_dependency "daemons", "~> 1.1.9"
 
 

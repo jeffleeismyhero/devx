@@ -34,6 +34,9 @@ $(function()
   $(".select2-fixed").select2({ tags: false, multiple: false });
 
 
+  // JCW Accordion
+  $(".accordion").jcw_accordion();
+
 
   // Navigation
   var active_path = window.location.pathname;
@@ -149,16 +152,39 @@ $(function()
     return false;
   });
 
+
+/**
+  *
+  * Calendar View
+  *
+  **/
+
+  $("#list").on("click", function() {
+    
+    /* $(".listview").toggleClass("hide").toggleClass("show").fadeIn(1000, function() { }); */
+
+    if ($(".gridview").hasClass("show")) {
+      $(".gridview").removeClass("show").addClass("hide");
+      $(".listview").removeClass("hide").addClass("show");
+    }
+
+    else 
+      $(".listview").removeClass("hide").addClass("show");
+  });  
+
+
+  $("#grid").on("click", function() {
+
+    /* $(".gridview").toggleClass("show").toggleClass("hide").fadeIn(1000, function() { }); */
+
+    if ($(".listview").hasClass("show")) {
+      $(".listview").removeClass("show").addClass("hide");
+      $(".gridview").removeClass("hide").addClass("show");
+    }
+
+    else 
+      $(".gridview").removeClass("hide").addClass("show");
+
+  });
+
 });
-
-// $(function()
-// {
-//   Dropzone.autoDiscover = false;
-//   Dropzone.paramName = "medium[file]";
-
-//   var mediaDropzone = new Dropzone("#media-dropzone");
-//   return mediaDropzone.on("success", function(file, responseText)
-//   {
-//     var imageUrl = responseText.file_name.url;
-//   });
-// });

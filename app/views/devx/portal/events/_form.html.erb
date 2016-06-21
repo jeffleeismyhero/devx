@@ -26,6 +26,10 @@
 <%= f.label :contact_email %>
 <%= f.email_field :contact_email %>
 </div>
+<div class="col-6 columns">
+<%= f.label :tag_list, 'Category' %>
+<%= f.select :tag_list, Devx::Event.tag_counts_on(:tags).order(name: :asc), { include_blank: true }, { class: 'select2' } %>
+</div>
 <div class="col-12 columns">
 <%= f.submit %>
 </div>

@@ -5,9 +5,26 @@ module Devx
     load_resource :calendar, class: 'Devx::Calendar'
 
     def index
-    end
+      @q = @calendars.search(params[:q])
+      @calendar = @q.result.first
+      @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
 
-    def show
+      if app_settings['default_calendar'].present?
+        @calendar = Devx::Calendar.find(app_settings['default_calendar']) unless params[:q].present?
+      end
+
+      @events = @calendar.events.for(Time.now, Time.now)
+
+
+      @dates = []
+      @events.try(:each) do |event|
+        if !@dates.include?(event.start_time_date)
+          @dates.push(event.start_time_date)
+        end
+      end
+
+    # rescue
+    #   redirect_to '/404.html'
     end
 
     def subscribe
@@ -15,10 +32,10 @@ module Devx
 
       if subscription.valid? && subscription.save
         Devx::NotificationMailer.subscription_confirmation(current_user, 'Calendar', @calendar)
-        redirect_to devx.calendar_path(@calendar),
+        redirect_to devx.calendars_path,
         notice: "You have subscribed to this calendar"
       else
-        redirect_to devx.calendar_path(@calendar),
+        redirect_to devx.calendars_path,
         notice: "You have already subscribed to this calendar"
       end
     end

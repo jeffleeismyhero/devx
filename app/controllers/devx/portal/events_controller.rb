@@ -34,7 +34,7 @@ module Devx
   	end
 
   	def update
-      @event.calendar_id = params[:calendar_id]
+      @event.calendar_id = Devx::Calendar.find(params[:calendar_id]).id
       
   		if @event.valid? && @event.update(event_params)
   			redirect_to devx.portal_calendar_path(id: params[:calendar_id]),
@@ -54,7 +54,7 @@ module Devx
   	private
 
   		def event_params
-  			accessible = [ :calendar_id, :name, :description, :start_time, :end_time, :contact_name, :contact_email, :venue_id ]
+  			accessible = [ :name, :description, :start_time, :end_time, :contact_name, :contact_email, :venue_id, :tag_list ]
   			params.require(:event).permit(accessible)
   		end
 

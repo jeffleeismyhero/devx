@@ -7,7 +7,7 @@ module Devx
 
     def show
       if params[:id].present?
-        @page = Devx::Page.find(params[:id])
+        @page = Devx::Page.active.find(params[:id])
 
         add_breadcrumb 'Home', :root_path
 
@@ -19,7 +19,7 @@ module Devx
         add_breadcrumb @page.name
 
       else
-        @page = Devx::Page.find_by(is_home: true)
+        @page = Devx::Page.active.find_by(is_home: true)
 
         if @page.nil?
           @page = Devx::Page.create(name: 'Home', content: 'This is the default homepage for DevX', is_home: true, active: true)

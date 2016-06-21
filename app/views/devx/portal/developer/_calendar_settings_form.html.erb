@@ -1,0 +1,4 @@
+<div class="col-6 columns cd-edit-form">
+  <%= label_tag 'settings[default_calendar]', 'Default Calendar' %>
+  <%= select_tag 'settings[default_calendar]', options_from_collection_for_select(Devx::Calendar.all, 'id', 'name', @settings.settings['default_calendar']), { include_blank: true, class: 'select2-fixed' } %>
+</div>
