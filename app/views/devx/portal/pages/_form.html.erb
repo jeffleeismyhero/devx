@@ -30,13 +30,13 @@
     </div>
 
     <div class="col-4 columns cd-edit-form">
-        <%= f.label :meta_keywords %>
-        <%= f.select :meta_keywords, {}, {}, { multiple: true, class: 'select2-multiple' } %>
+        <%= f.label :meta_keyword_list, 'Meta keywords' %>
+        <%= f.select :meta_keyword_list, Devx::Page.tag_counts_on(:meta_keywords).order(name: :asc), {}, { multiple: true, class: 'select2-multiple' } %>
     </div>
 
     <div class="col-4 columns cd-edit-form">
-        <%= f.label :meta_robots %>
-        <%= f.select :meta_robots, {}, {}, { multiple: true, class: 'select2-multiple' } %>
+        <%= f.label :meta_robot_list, 'Meta robots' %>
+        <%= f.select :meta_robot_list, %w[index follow archive], {}, { multiple: true, class: 'select2-multiple-fixed' } %>
     </div>
 
     <div class="col-12 columns cd-edit-form">

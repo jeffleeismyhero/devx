@@ -14,6 +14,8 @@ module Devx
     validates :name, presence: true
     validates :content, presence: true
 
+    acts_as_taggable_on :meta_keywords, :meta_robots
+
     mount_uploader :image, Devx::ImageUploader
 
     before_save :check_if_home

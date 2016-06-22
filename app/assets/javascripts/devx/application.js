@@ -31,6 +31,7 @@ $(function()
   // Select2
   $(".select2").select2({ tags: true });
   $(".select2-multiple").select2({ tags: true, multiple: true });
+  $(".select2-multiple-fixed").select2({ tags: false, multiple: true });
   $(".select2-fixed").select2({ tags: false, multiple: false });
 
 

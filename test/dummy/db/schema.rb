@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621213711) do
+ActiveRecord::Schema.define(version: 20160622023658) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20160621213711) do
     t.string   "accent_color_1"
     t.string   "accent_color_2"
     t.string   "accent_color_3"
+    t.string   "site_name"
   end
 
   create_table "devx_calendar_subscriptions", force: :cascade do |t|

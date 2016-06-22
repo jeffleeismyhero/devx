@@ -19,6 +19,18 @@ module Devx
       end
     end
 
+    def meta_title(page)
+      if page.meta_title.present?
+        if page.is_home == true
+          page.meta_title
+        else
+          page.meta_title + ' | ' + app_branding.company_name
+        end
+      else
+        page.name + ' | ' + app_branding.company_name
+      end
+    end
+
     def sc_content(content)
       Shortcode.process(content)
     end
