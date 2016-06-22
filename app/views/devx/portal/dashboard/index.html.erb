@@ -1,13 +1,68 @@
 <% provide(:title, '' + controller_name.classify) %>
 
 <div class="container">
-
   <div class="row">
-
     <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
     </div>
-
   </div>
+</div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-12 columns flex">
+
+
+      <!-- START: Subscribed News -->
+      <div class="col-8 columns cd-dashboard-section">
+        <h4>Newsfeed Subscriptions</h4>
+        <% if current_user.article_subscriptions.any? %>
+          <% current_user.article_subscriptions.try(:each) do |subscription| %>
+            <% Devx::Article.published.tagged_with(subscription.category).try(:each) do |article| %>
+              <div class="subscribed-article">
+                <% if article.image.present? %>
+                  <div class="col-4 columns">
+                    <%= image_tag(article.image.try(:url), style: 'width:100%') %>
+                  </div>
+                <% end %>
+                <div class="col-8 columns">
+                  <h3><%= article.title %></h3>
+                  <span><small><em>Published <%= time_ago_in_words(article.published_at) %> ago</em></small></span><br />
+                  <span><%= strip_tags(article.content.try(:truncate, 140)) %></span>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+          <span>You are not subscribed to any newsfeeds</span>
+        <% end %>
+      </div>
+      <!-- END: Subscribed News -->
+
+
+
+      <!-- START: Subscribed Events -->
+      <div class="col-3 col-offset-1 columns cd-dashboard-section">
+        <h4>My Subscribed Events</h4>
+        <% if current_user.event_subscriptions.any? %>
+
+          <% event_list = [] %>
+          <% current_user.event_subscriptions.try(:each) do |subscription| %>
+            <% event_list.push(subscription.event) %>
+          <% end %>
+          <% event_list.sort_by{ |x| x.start_time }.try(:each) do |event| %>
+            <div class="cd-section-item">
+              <strong><%= link_to event.name, devx.calendar_event_path(event.calendar, event) %></strong><br />
+              <span><%= event.start_time.try(:strftime, '%B %d at %l:%M %P') %></span><br />
+
+            </div>
+          <% end %>
+        <% else %>
+          <span>You are not subscribed to any events</span>
+        <% end %>
+      </div>
+      <!-- END: Subscribed Events -->
+
+    </div>
+  </div>
 </div>
