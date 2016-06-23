@@ -5,12 +5,12 @@ module Devx
     load_resource :calendar, class: 'Devx::Calendar'
 
     def index
-      @q = @calendars.search(params[:q])
+      @q = @calendars.active.search(params[:q])
       @calendar = @q.result.first
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
 
       if app_settings['default_calendar'].present?
-        @calendar = Devx::Calendar.find(app_settings['default_calendar']) unless params[:q].present?
+        @calendar = Devx::Calendar.active.find(app_settings['default_calendar']) unless params[:q].present?
       end
 
       @events = @calendar.events.for(Time.now, Time.now)
@@ -23,8 +23,8 @@ module Devx
         end
       end
 
-    # rescue
-    #   redirect_to '/404.html'
+    rescue
+      redirect_to '/404.html'
     end
 
     def subscribe

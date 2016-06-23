@@ -5,7 +5,11 @@
     </div>
     <div class="col-12 columns cd-edit-form">
         <%= f.label :tag_list, 'Category' %><br>
-        <%= f.select :tag_list, @tags, { include_blank: true }, { class: 'select2' } %>
+        <%= f.select :tag_list, @tags, { }, { multiple:true, class: 'select2-multiple' } %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :keyword_list, 'Keywords' %><br>
+        <%= f.select :keyword_list, Devx::Article.tag_counts_on(:keywords), { }, { multiple:true, class: 'select2-multiple' } %>
     </div>
     <div class="col-12 columns cd-edit-form">
         <%= f.label :short_description %><br>
@@ -17,12 +21,20 @@
     </div>
 </div>
 
-<div class="col-4 columns cd-edit-form">
-    <%= f.label :image, 'Header image' %>
-    <%= f.file_field :image %>
+<div class="col-4 columns no-padding">
+    <% if @article.image.present? %>
+        <div class="col-12 columns">
+            <%= image_tag(@article.image.try(:url), style: 'width:50%') %>
+        </div>
+    <% end %>
+
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :image, 'Header image' %>
+        <%= f.file_field :image %>
+    </div>
 </div>
 
-<div class="col-12 columns cd-edit-form no-padding" style="margin-top:20px;">
+<div class="col-8 columns cd-edit-form no-padding" style="margin-top:20px;">
     <div class="col-12 columns">
         <%= f.label :content %><br>
         <div style="margin:4px 0;"><%= f.cktext_area :content %></div>

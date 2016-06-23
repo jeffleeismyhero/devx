@@ -4,6 +4,7 @@ module Devx
     friendly_id :name, use: [ :slugged, :finders ]
 
     scope :ordered, -> { order(position: :asc) }
+    scope :order_by_creation, -> { order(created_at: :asc) }
     scope :active, -> { where(active: true) }
 
     has_one :page, foreign_key: 'parent'

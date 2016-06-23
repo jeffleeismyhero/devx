@@ -24,6 +24,11 @@ module Devx
     accepts_nested_attributes_for :children,
       reject_if: proc{ |x| x['first_name'].blank? }
 
+
+    def self.get_user(email)
+      find_by(email: email).try(:id) || nil
+    end
+
     def full_name
       if !self.first_name.blank?
       "#{self.first_name} #{self.last_name}".squish 

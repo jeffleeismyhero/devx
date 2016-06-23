@@ -43,20 +43,22 @@
 
       <!-- START: Subscribed Events -->
       <div class="col-3 col-offset-1 columns cd-dashboard-section">
-        <h4>My Subscribed Events</h4>
+        <h4>My Subscribed Events <small style="float:right"><%= link_to 'View All', devx.calendar_path, target: '_blank' %></small></h4>
         <% if current_user.event_subscriptions.any? %>
 
           <% event_list = [] %>
           <% current_user.event_subscriptions.try(:each) do |subscription| %>
             <% event_list.push(subscription.event) %>
           <% end %>
-          <% event_list.sort_by{ |x| x.start_time }.try(:each) do |event| %>
-            <div class="cd-section-item">
-              <strong><%= link_to event.name, devx.calendar_event_path(event.calendar, event) %></strong><br />
-              <span><%= event.start_time.try(:strftime, '%B %d at %l:%M %P') %></span><br />
+          <ul class="cd-section-list">
+            <% event_list.sort_by{ |x| x.start_time }.try(:each) do |event| %>
+              <li class="cd-section-item">
+                <strong><%= link_to event.name, devx.calendar_event_path(event.calendar, event) %></strong><br />
+                <span><%= event.start_time.try(:strftime, '%B %d at %l:%M %P') %></span><br />
 
-            </div>
-          <% end %>
+              </li>
+            <% end %>
+          </ul>
         <% else %>
           <span>You are not subscribed to any events</span>
         <% end %>

@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <title><%= full_title(yield(:title)) %></title>
+  <title><%= sys_title(yield(:title)) %></title>
   <% stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
   <%= stylesheet_link_tag    "devx/application", media: "all" %>
   <%= stylesheet_link_tag    "devx/devx_portal", media: "all" %>
@@ -180,7 +180,7 @@
         </li>
         <ul class="child-nav" data-parent="admissions">
           <% if app_settings['student_management'] && current_user.administrator? %>
-            <li><%= link_to 'Student Database', devx.portal_administration_index_path %></li>
+            <li><%= link_to 'Administration CRM', devx.portal_administration_index_path %></li>
           <% end %>
         </ul>
         <% end %>

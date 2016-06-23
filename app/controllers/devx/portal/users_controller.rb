@@ -12,7 +12,7 @@ module Devx
       respond_to do |format|
         format.html
         format.xlsx do
-          render xlsx: 'index', filename: 'users.xlsx'
+          render xlsx: 'index', filename: 'users_export.xlsx'
         end
       end
   	end
@@ -96,6 +96,10 @@ module Devx
           puts @import.inspect
 
           if records = CSV.read(@import.file.path, headers: true)
+            logfile = File.open("#{Rails.root}/log/import.log", "a")
+            logfile.sync = true
+            logger = Logger.new(logfile)
+            
             records.each_with_index do |record, index|
               first_name = record[0].to_s.squish
               last_name = record[1].to_s.squish
@@ -112,8 +116,13 @@ module Devx
               puts user.inspect
 
               if user.valid?
+                logger.info "Expecting object to be valid: #{article.inspect}"
                 user.save
               else
+                logger.warn "Failed to import object: #{article.inspect}"
+                article.errors.full_messages.try(:each) do |error|
+                  logger.warn "#{error}"
+                end
                 @errors += 1
               end
             end

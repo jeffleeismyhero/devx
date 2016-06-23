@@ -2,6 +2,8 @@ module Devx
   class Calendar < ActiveRecord::Base
     extend FriendlyId
     friendly_id :name, use: [ :slugged, :finders ]
+
+    scope :active, -> { where(active: true) }
     
     has_many :events
     has_many :calendar_subscriptions

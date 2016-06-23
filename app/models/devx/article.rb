@@ -14,6 +14,7 @@ module Devx
     mount_uploader :image, ImageUploader
 
     acts_as_taggable
+    acts_as_taggable_on :keywords
 
     def add_publish_date
       unless self.published_at.present?

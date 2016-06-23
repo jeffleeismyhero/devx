@@ -19,6 +19,16 @@ module Devx
       end
     end
 
+    def sys_title(value = '')
+      base_title = app_branding.site_name
+
+      if value.present?
+        value + ' | ' + base_title
+      else
+        base_title
+      end
+    end
+
     def meta_title(page)
       if page.meta_title.present?
         if page.is_home == true

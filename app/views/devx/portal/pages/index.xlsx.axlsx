@@ -1,0 +1,19 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  header = style.add_style b: true
+
+  wb.add_worksheet(name: "Users") do |sheet|
+    # Add Header
+    sheet.add_row [
+      "Name", "Layout", "Parent ID", "Content", "Meta Title", "Meta Keywords", "Meta Robots", "Meta Description",
+      "Active", "Is Home Page?"
+    ], style: header
+
+    @pages.order_by_creation.each do |page|
+      sheet.add_row [
+        page.name, page.layout, page.parent, page.content, page.meta_title, page.meta_keyword_list, page.meta_robot_list,
+        page.meta_description, page.active, page.is_home
+      ]
+    end
+  end
+end

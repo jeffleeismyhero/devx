@@ -1,0 +1,18 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  header = style.add_style b: true
+
+  wb.add_worksheet(name: "Articles") do |sheet|
+    # Add Header
+    sheet.add_row [
+      "Title", "Description", "Content", "Published At",
+      "Author", "Categories", "Keywords"
+    ], style: header
+
+    @articles.each do |article|
+      sheet.add_row [
+        article.title, article.short_description, article.content, article.published_at, article.user.try(:email), article.tag_list, article.keyword_list
+      ]
+    end
+  end
+end

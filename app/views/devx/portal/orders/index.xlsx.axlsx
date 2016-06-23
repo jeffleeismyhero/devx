@@ -1,0 +1,23 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  header = style.add_style b: true
+
+  wb.add_worksheet(name: "Orders") do |sheet|
+    # Add Header
+    sheet.add_row [
+      "Order #", "Customer name", "Subtotal", "Line items", "Current balance"
+    ], style: header
+
+    @orders.each do |order|
+      line_items = []
+      order.line_items.try(:each) do |l|
+        line_items.push("#{l.product.name} (#{l.quantity})")
+      end
+
+      sheet.add_row [
+        order.id, order.user.try(:full_name), number_to_currency(order.total), line_items.join(', '),
+        number_to_currency(order.balance)
+      ]
+    end
+  end
+end

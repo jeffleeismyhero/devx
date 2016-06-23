@@ -7,6 +7,12 @@ module Devx
     load_and_authorize_resource :order, class: 'Devx::Order'
 
     def index
+      respond_to do |format|
+        format.html
+        format.xlsx do
+          render xlsx: 'index', filename: 'order_export.xlsx'
+        end
+      end
     end
 
     def show

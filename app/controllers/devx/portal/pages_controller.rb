@@ -7,6 +7,12 @@ module Devx
     load_and_authorize_resource :page, class: 'Devx::Page', except: :show
 
     def index
+      respond_to do |format|
+        format.html
+        format.xlsx do
+          render xlsx: 'index', filename: 'pages_export.xlsx'
+        end
+      end
     end
 
     def new
@@ -40,6 +46,10 @@ module Devx
         redirect_to devx.portal_pages_path,
         notice: "Successfully deleted page"
       end
+    end
+
+    def import
+      
     end
 
 
