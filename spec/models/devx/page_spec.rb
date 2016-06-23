@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Devx
   RSpec.describe Page, type: :model do
-    let(:page){ FactoryGirl.build(:devx_page) }
+    let(:page){ FactoryGirl.create(:devx_page) }
 
     ## Name unit tests
     describe 'name' do

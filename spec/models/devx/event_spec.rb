@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Devx
   RSpec.describe Event, type: :model do
-    let(:event){ FactoryGirl.build(:devx_event) }
+    let(:event){ FactoryGirl.create(:devx_event) }
 
     describe 'name' do
       it 'should be invalid if blank' do
