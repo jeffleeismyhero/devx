@@ -12,7 +12,7 @@ module Devx
       end
 
       it 'should be valid if user is present' do
-        puts attendance.registration.inspect
+        #puts attendance.registration.inspect
         expect(attendance).to be_valid
       end
     end
@@ -25,7 +25,7 @@ module Devx
 
       it 'should be valid if present' do
         expect(attendance).to be_valid
-        puts attendance.child.inspect
+        #puts attendance.child.inspect
       end
     end
 

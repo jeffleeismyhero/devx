@@ -4,6 +4,13 @@ users = Devx::User.create([
     first_name: 'Rashaad',
     last_name: 'Randall',
     password: 'password'
+  },
+
+  {
+    email: 'david@jcwproductions.com',
+    first_name: 'Dave',
+    last_name: 'Beatz',
+    password: 'password'
   }
 ])
 

@@ -12,23 +12,20 @@ module Devx
       end
 
       it 'should be valid if user is present' do
+        puts authorization.user.inspect
         expect(authorization).to be_valid
       end
     end
 
     describe 'role id' do
-      it 'should be invalid if role id < 10' do
-        if
-          authorization.role_id > 10
-          expect(authorization).to be_valid
-        end
+      it 'should be invalid if role id not present' do
+          authorization.role = nil
+          expect(authorization).not_to be_valid
+          puts authorization.role.inspect 
       end
 
-      it 'should be valid if role id  present' do
-        if
-          authorization.role_id < 10
-          expect(authorization).to be_valid
-        end
+      it 'should be valid if role id is present' do
+        expect(authorization).to be_valid
       end
     end
 
