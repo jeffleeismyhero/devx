@@ -65,7 +65,8 @@ module Devx
         @transaction.payment_method = 'Credit Card'
         @transaction.user = @user
 
-        exp_date = "#{params[:exp_month]}#{params[:exp_year]}"
+        exp_date = "%02d%02d" % [params['expiry_date(2i)'], params['expiry_date(1i)'].last(2)]
+
         if @transaction.valid?
           if @transaction.process(@transaction.amount.to_i, params[:cc_type], params[:ch_name], params[:cc_number], exp_date, params[:cvv])
             if @transaction.save

@@ -30,8 +30,7 @@
 
     <div class="col-8 columns cd-edit-form">
     <%= label_tag :exp_date, 'Expiration Date' %>
-    <%= text_field_tag :exp_month, '', placeholder: 'MM', autocomplete: :off %>
-    <%= text_field_tag :exp_year, '', placeholder: 'YY', autocomplete: :off %>
+    <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed' } %>
     </div>
 
     <div class="col-8 columns cd-edit-form">

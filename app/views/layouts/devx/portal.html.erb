@@ -38,22 +38,6 @@
         <% end %>
         <div class="cd-accordion-tab">
           <div class="cd-accordion-title">
-            <span><i class="fa fa-search"></i></span>
-          </div>
-          <div class="cd-accordion-body">
-            <div class="container">
-              <div class="row">
-                <div class="col-12 columns cd-edit-form">
-                  <%= search_form_for Devx::Page.ransack(params[:q]), url: devx.search_path do |f| %>
-                    <%= f.search_field :content_cont, placeholder: 'Search' %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="cd-accordion-tab">
-          <div class="cd-accordion-title">
             <span><i class="fa fa-question"></i></span>
           </div>
           <div class="cd-accordion-body">
@@ -84,22 +68,18 @@
     <!-- START: SIDE NAVIGATION -->
     <nav class="cd-side-nav">
       <ul>
-        <li class="cd-label">Primary Navigation</li>
         <li>
           <%= link_to '<i class="fa fa-tachometer"></i> <span>Dashboard</span>'.html_safe, devx.portal_dashboard_path, data: 'dashboard' %>
         </li>
 
         <% if can? :manage, Devx::User %>
         <li>
-          <%= link_to '<i class="fa fa-user"></i> <span>Users</span>'.html_safe, '#', class: 'has-children', data: 'users' %>
+          <%= link_to '<i class="fa fa-users"></i> <span>Users</span>'.html_safe, '#', class: 'has-children', data: 'users' %>
         </li>
         <ul class="child-nav" data-parent="users">
           <li><%= link_to 'Manage Users', devx.portal_users_path %></li>
           <% if current_user.super_administrator? %>
           <li><%= link_to 'Roles', devx.portal_roles_path %></li>
-          <% end %>
-          <% if app_settings['balance_tracking'] %>
-            <li><%= link_to 'Account Balance', devx.account_deposit_portal_user_path(current_user) %></li>
           <% end %>
         </ul>
         <% end %>
@@ -153,6 +133,16 @@
           <%= link_to '<i class="fa fa-newspaper-o"></i> <span>News</span>'.html_safe, devx.portal_articles_path, data: 'news' %>
         </li>
         <% end %>
+
+        <li>
+          <%= link_to '<i class="fa fa-user"></i> <span>Profile</span>'.html_safe, '#', class: 'has-children', data: 'user' %>
+        </li>
+        <ul class="child-nav" data-parent="user">
+          <li><%= link_to 'Edit Profile', devx.edit_portal_user_path(current_user) %></li>
+          <% if app_settings['balance_tracking'] %>
+            <li><%= link_to 'Account Balance', devx.account_deposit_portal_user_path(current_user) %></li>
+          <% end %>
+        </ul>
 
         <% if can? :manage, Devx::Branding %>
         <li>
