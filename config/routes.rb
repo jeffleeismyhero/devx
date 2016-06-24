@@ -1,5 +1,4 @@
 Devx::Engine.routes.draw do
-
   devise_for :users, class_name: "Devx::User", module: :devise, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' } do
     get '/login' => 'devise/sessions#new'
   end

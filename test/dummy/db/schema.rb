@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160622204429) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 20160622204429) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "devx_account_transactions", force: :cascade do |t|
     t.integer  "user_id"
@@ -101,7 +104,7 @@ ActiveRecord::Schema.define(version: 20160622204429) do
     t.integer  "user_id"
   end
 
-  add_index "devx_articles", ["published_at"], name: "index_devx_articles_on_published_at"
+  add_index "devx_articles", ["published_at"], name: "index_devx_articles_on_published_at", using: :btree
 
   create_table "devx_attendances", force: :cascade do |t|
     t.integer  "registration_id"
@@ -343,7 +346,7 @@ ActiveRecord::Schema.define(version: 20160622204429) do
     t.string   "meta_description"
   end
 
-  add_index "devx_pages", ["parent_id"], name: "index_devx_pages_on_parent_id"
+  add_index "devx_pages", ["parent_id"], name: "index_devx_pages_on_parent_id", using: :btree
 
   create_table "devx_people", force: :cascade do |t|
     t.string   "prefix"
@@ -441,7 +444,7 @@ ActiveRecord::Schema.define(version: 20160622204429) do
     t.string   "slug"
   end
 
-  add_index "devx_stylesheets", ["slug"], name: "index_devx_stylesheets_on_slug"
+  add_index "devx_stylesheets", ["slug"], name: "index_devx_stylesheets_on_slug", using: :btree
 
   create_table "devx_teams", force: :cascade do |t|
     t.integer  "sport_id"
@@ -513,11 +516,11 @@ ActiveRecord::Schema.define(version: 20160622204429) do
     t.integer  "person_id"
   end
 
-  add_index "devx_users", ["deleted_at"], name: "index_devx_users_on_deleted_at"
-  add_index "devx_users", ["email"], name: "index_devx_users_on_email", unique: true
-  add_index "devx_users", ["person_id"], name: "index_devx_users_on_person_id"
-  add_index "devx_users", ["reset_password_token"], name: "index_devx_users_on_reset_password_token", unique: true
-  add_index "devx_users", ["unlock_token"], name: "index_devx_users_on_unlock_token", unique: true
+  add_index "devx_users", ["deleted_at"], name: "index_devx_users_on_deleted_at", using: :btree
+  add_index "devx_users", ["email"], name: "index_devx_users_on_email", unique: true, using: :btree
+  add_index "devx_users", ["person_id"], name: "index_devx_users_on_person_id", using: :btree
+  add_index "devx_users", ["reset_password_token"], name: "index_devx_users_on_reset_password_token", unique: true, using: :btree
+  add_index "devx_users", ["unlock_token"], name: "index_devx_users_on_unlock_token", unique: true, using: :btree
 
   create_table "devx_venues", force: :cascade do |t|
     t.string   "name"
@@ -539,14 +542,14 @@ ActiveRecord::Schema.define(version: 20160622204429) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
 end
