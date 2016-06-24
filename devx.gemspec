@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.name        = "devx"
   s.version     = Devx::VERSION
   s.authors     = ["Rashaad R. Randall"]
-  s.email       = ["rashaad@jcwproductions.com"]
-  s.homepage    = "https://github.com/jcwproductions/devx"
+  s.email       = ["support@jcwproductions.com"]
+  s.homepage    = "http://devxcms.com"
   s.summary     = "DevX is a comprehensive Content Management System, powered by JCW Productions."
   s.description = "DevX is a comprehensive Content Management System, powered by JCW Productions."
   s.license     = "MIT"
@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   
   ## Base Gems
   s.add_runtime_dependency "rails", ">= 4.2"
-  s.add_runtime_dependency "sqlite3"
+  s.add_runtime_dependency "pg"
   s.add_runtime_dependency "jquery-rails"
   s.add_runtime_dependency "coffee-rails", "~> 4.1.0"
   s.add_runtime_dependency "sass-rails", "~> 5.0"

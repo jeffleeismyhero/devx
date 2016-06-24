@@ -35,3 +35,5 @@ users.each do |u|
   role = Devx::Role.find_by(name: 'Super Administrator')
   u.authorizations.create(role: role)
 end
+
+Devx::Branding.create(id: 1)

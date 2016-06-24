@@ -29,6 +29,8 @@ require 'capybara/rspec'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each {|f| require f }
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -40,6 +42,8 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
   config.include Capybara::DSL
+  config.include Features::GeneralHelpers, type: :feature
+  config.include Features::SessionHelpers, type: :feature
 
   config.before do
     FactoryGirl.definition_file_paths = [File.expand_path('../factories', __FILE__)]
@@ -48,6 +52,7 @@ RSpec.configure do |config|
 
   config.before(:all) do
     FactoryGirl.reload
+    DatabaseCleaner.start
   end
 
   config.before(:suite) do
@@ -56,13 +61,16 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    DatabaseCleaner.start
+    Capybara.javascript_driver = :selenium
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
     Capybara.reset_sessions!
     Capybara.use_default_driver
+  end
+
+  config.after(:all) do
+    DatabaseCleaner.clean    
   end
 
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -83,7 +91,5 @@ RSpec.configure do |config|
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
-  # config.filter_gems_from_backtrace("gem name")
-  
-  Capybara.javascript_driver = :selenium
+  # config.filter_gems_from_backtrace("gem name")  
 end
