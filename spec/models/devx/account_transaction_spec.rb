@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Devx
   RSpec.describe AccountTransaction, type: :model do
-    let(:account_transaction){ FactoryGirl.build(:devx_account_transaction) }
+    let(:account_transaction){ FactoryGirl.create(:devx_account_transaction) }
 
     ## Title unit test
     describe 'user' do

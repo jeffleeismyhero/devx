@@ -7,6 +7,8 @@ module Devx
     has_many :registration_submissions
     belongs_to :user
 
+    validates :name, presence: true
+
     accepts_nested_attributes_for :attendances
     accepts_nested_attributes_for :form
 

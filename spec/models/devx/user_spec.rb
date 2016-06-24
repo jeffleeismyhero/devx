@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Devx
   RSpec.describe User, type: :model do
-    let(:user){ FactoryGirl.build(:devx_user) }
+    let(:user){ FactoryGirl.create(:devx_user) }
 
     ## E-mail unit tests
     describe 'email' do

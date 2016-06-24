@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Devx
   RSpec.describe Calendar, type: :model do
-    let(:calendar){ FactoryGirl.build(:devx_calendar) }
+    let(:calendar){ FactoryGirl.create(:devx_calendar) }
 
     describe 'name' do
       it 'should be invalid if blank' do

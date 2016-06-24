@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
   factory :devx_account_transaction, class: 'Devx::AccountTransaction' do
-    user { build(:devx_user) }
+    user { create(:devx_user) }
     transaction_type 'debit'
     payment_method 'credit card'
     amount 1.00

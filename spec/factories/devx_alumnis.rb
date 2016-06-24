@@ -4,7 +4,7 @@ FactoryGirl.define do
   end
 
   factory :devx_alumni, class: 'Devx::Alumni' do
-  	prefix 'Dr.'
+  	prefix 'Mr'
     first_name 'John'
     last_name 'Doe'
     gender 'male'

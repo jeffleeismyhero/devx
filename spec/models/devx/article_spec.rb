@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Devx
   RSpec.describe Article, type: :model do
-    let(:article){ FactoryGirl.build(:devx_article) }
+    let(:article){ FactoryGirl.create(:devx_article) }
 
     ## Title unit test
     describe 'title' do
