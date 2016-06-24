@@ -8,19 +8,19 @@ module Devx
     scenario 'with valid e-mail and password' do
       skip
       sign_up 'demo@devxcms.com', 'password'
-      assert page.has_content?('Sign up successful'), 'Failed to sign up'
+      expect(page).to have_content?('Sign up successful')
     end
 
     scenario 'with invalid e-mail address' do
       skip
       sign_up 'demo', 'password'
-      assert page.has_content?('Failed to sign up'), 'No error message shown'
+      expect(page).to have_content?('Failed to sign up')
     end
 
     scenario 'with blank password' do
       skip
       sign_up 'demo', ''
-      assert page.has_content?('Failed to sign up'), 'No error message shown'
+      expect(page).to have_content?('Failed to sign up')
     end
   end
 end

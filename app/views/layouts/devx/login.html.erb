@@ -10,6 +10,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!-- START: NOTIFICATION ALERT -->
+    <div class="cd-notification-wrapper">
+      <div class="cd-notification">
+      </div>
+    </div>
+  <!-- END: NOTIFICATION ALERT -->
 
     <div class="cd-login-bkrd"></div>
 
@@ -24,6 +30,8 @@
         </div>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+
         <div class="field">
             <%= f.email_field :email, autofocus: true, placeholder:'Email' %>
         </div>
@@ -33,7 +41,7 @@
         </div>
         
         <div class="actions hvr-sweep-to-right">
-            <%= f.submit "LOGIN" %>
+            <%= f.submit "LOGIN", id: 'login' %>
         </div>
         <% end %>
 

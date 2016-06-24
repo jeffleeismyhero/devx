@@ -6,18 +6,19 @@ module Devx
     Capybara.current_session.driver.browser.manage.window.resize_to(1366, 768)
     
     scenario 'with valid e-mail and password' do
-      sign_in
-      assert page.has_content?('Sign up successful'), 'Failed to sign up'
+      @user = create(:devx_user)
+      sign_in @user
+      expect(page).to have_content('Dashboard')
     end
 
     scenario 'with invalid e-mail address' do
-      sign_in
-      assert page.has_content?('Failed to sign up'), 'No error message shown'
+      sign_in_with 'invalid_email', 'password'
+      expect(page).to have_selector(:link_or_button, 'LOGIN')
     end
 
     scenario 'with blank password' do
-      sign_in
-      assert page.has_content?('Failed to sign up'), 'No error message shown'
+      sign_in_with 'invalid_email', ''
+      expect(page).to have_selector(:link_or_button, 'LOGIN')
     end
   end
 end
