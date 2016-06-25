@@ -605,6 +605,11 @@ a.cd-logo {
     box-sizing:border-box;
 }
 
+.cd-edit-form textarea {
+  width:100%;
+  resize:none;
+}
+
 .cd-edit-form select {
     margin:4px 0;
     padding:20px 10px;

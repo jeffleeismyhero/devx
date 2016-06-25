@@ -3,18 +3,18 @@
       <%= f.label :summary %><br>
       <%= f.text_field :summary %>
   </div>
-  <div class="col-12 columns cd-edit-form" style="margin-top:20px;">
+  <div class="col-8 columns cd-edit-form" style="margin-top:20px;">
       <%= f.label :description %><br>
-      <%= f.cktext_area :description %>
+      <%= f.text_field :description %>
   </div>
 
   <div class="col-6 columns cd-edit-form" style="margin-top:20px;">
-      <%= f.label :location %><br>
+      <%= f.label :location, 'Page URL' %><br>
       <%= f.text_field :location %>
   </div>
 
   <div class="col-6 columns cd-edit-form" style="margin-top:20px;">
-      <%= f.label :file %><br>
+      <%= f.label :file, 'Upload an Example' %><br>
       <%= f.file_field :file %>
   </div>
 
