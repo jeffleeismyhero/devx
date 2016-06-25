@@ -39,11 +39,12 @@ Devx::Engine.routes.draw do
     ## Import paths
     match 'users/import', to: 'users#import', via: [ :get, :post ]
     match 'articles/import', to: 'articles#import', via: [ :get, :post ]
-    match 'pages/import', to: 'pages#import', via: [ :get, :post ]
 
     
     resources :pages
-    resources :menus
+    resources :menus do
+      collection { post :sort }
+    end
     resources :layouts
     resources :javascripts
     resources :stylesheets

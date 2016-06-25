@@ -1,4 +1,4 @@
-<% provide(:title, '' + controller_name.classify.pluralize) %>
+<% provide(:title, 'Support Tickets') %>
 
 <div class="container">
     <div class="row">
@@ -17,10 +17,12 @@
             <table width="100%">
                 <thead>
                     <tr style="background-color:#ACCC38;">
-                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">Summary</th>
-                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">Submitted By</th>
-                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">Created At</th>
-                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">&nbsp;</th>
+                        <th style="color:#084269; padding:10px; text-align:left;">Summary</th>
+                        <% if current_user.super_administrator? %>
+                            <th style="color:#084269; padding:10px; text-align:left;">Submitted By</th>
+                        <% end %>
+                        <th style="color:#084269; padding:10px; text-align:left;">Status</th>
+                        <th style="color:#084269; padding:10px; text-align:left;">Last Updated</th>
                     </tr>
                 </thead>
                 <tbody>

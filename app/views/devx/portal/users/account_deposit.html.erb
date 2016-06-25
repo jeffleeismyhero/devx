@@ -11,16 +11,16 @@
     <%= form_for @transaction, url: devx.account_deposit_portal_user_path(@user), method: :post do |f| %>
     <div class="col-6 columns cd-edit-form">
         <%= label_tag :amount %>
-        <%= f.number_field :amount, { step: '0.01', placeholder: 'Amount' } %>
+        <%= f.text_field :amount, { step: '0.01', placeholder: 'Amount' } %>
     </div>
 
     <div class="col-8 columns cd-edit-form">
-    <%= label_tag :cc_type %>
+    <%= label_tag :cc_type, 'Credit Card Type' %>
     <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), { prompt: 'Select Card Type', class: 'select2-fixed' } %>
     </div>
     <div class="col-8 columns cd-edit-form">
-    <%= label_tag :cc_number, 'Card Number' %>
-    <%= text_field_tag :cc_number, '', placeholder: 'Card Number', autocomplete: :off %>
+    <%= label_tag :cc_number, 'Credit Card Number' %>
+    <%= text_field_tag :cc_number, '', placeholder: 'Credit Card Number', autocomplete: :off %>
     </div>
 
     <div class="col-8 columns cd-edit-form">
@@ -30,19 +30,18 @@
 
     <div class="col-8 columns cd-edit-form">
     <%= label_tag :exp_date, 'Expiration Date' %>
-    <%= text_field_tag :exp_month, '', placeholder: 'MM', autocomplete: :off %>
-    <%= text_field_tag :exp_year, '', placeholder: 'YY', autocomplete: :off %>
+    <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed' } %>
     </div>
 
     <div class="col-8 columns cd-edit-form">
     <%= label_tag :cvv, 'Security Code' %>
-    <%= number_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off %>
+    <%= text_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off %>
     </div>
 
 
     <div class="col-12 columns">
       <div class="cd-update-form">
-          <%= f.submit 'Update application' %>
+          <%= f.submit 'Add Funds' %>
       </div>
     </div>
     <% end %>

@@ -1,5 +1,6 @@
 module Devx
   class MenuPage < ActiveRecord::Base
+    acts_as_list
 
     scope :ordered, -> { order(position: :asc) }
 

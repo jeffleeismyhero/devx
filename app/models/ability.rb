@@ -47,7 +47,5 @@ class Ability
 
     can [ :read, :create ], Devx::Ticket, user_id: user.id
     can [ :read, :create ], Devx::TicketUpdate, user_id: user.id
-    
-    can :manage, Devx::User
   end
 end

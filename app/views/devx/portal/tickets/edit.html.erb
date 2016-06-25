@@ -6,7 +6,11 @@
       <h1><%= yield(:title) %></h1>
     </div>
     <div class="col-12 columns">
+<<<<<<< HEAD
       <%= link_to 'Back to Tickets', devx.portal_tickets_path %>
+=======
+      <%= link_to 'View All Support Tickets', devx.portal_tickets_path %>
+>>>>>>> origin/master
       <%= form_for @ticket, url: devx.portal_ticket_path(@ticket) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
