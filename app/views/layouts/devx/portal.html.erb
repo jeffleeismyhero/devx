@@ -189,7 +189,11 @@
 
       <!-- START: FOOTER -->
       <footer class="cd-main-footer">
-        DevX <%= Devx::VERSION %> | Powered by <%= link_to 'JCW', '//jcwproductions.com' %>
+        <div style="padding-bottom:.5rem;">
+          <span><%= link_to 'Privacy Policy'.html_safe, devx.portal_privacy_policy_path %> </span> <br>
+          <span><%= link_to 'Terms of Service'.html_safe, devx.portal_terms_of_service_path %> </span>
+        </div>
+        <div>DevX <%= Devx::VERSION %> | Powered by <%= link_to 'JCW', '//jcwproductions.com' %></div>
       </footer>
       <!-- END: FOOTER -->  
     </nav>
