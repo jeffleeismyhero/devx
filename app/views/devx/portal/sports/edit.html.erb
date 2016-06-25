@@ -6,8 +6,8 @@
       <h1><%= yield(:title) %></h1>
     </div>
     <div class="col-12">
-      <%= link_to 'Back to Javascripts', devx.portal_javascripts_path %>
-      <%= form_for @javascript, url: devx.portal_javascript_path(@javascript) do |f| %>
+      <%= link_to 'Back to Sports', devx.portal_sports_path %>
+      <%= form_for @sport, url: devx.portal_sport_path(@sport) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
     </div>

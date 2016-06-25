@@ -6,7 +6,7 @@
       <h1><%= yield(:title) %></h1>
     </div>
     <div class="col-12 columns">
-      <%= link_to 'Back to users', devx.portal_users_path %>
+      <%= link_to 'Back to Users', devx.portal_users_path %>
       <%= form_for @user, url: devx.portal_users_path, method: :post do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
