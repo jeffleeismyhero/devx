@@ -41,6 +41,10 @@ module Devx
       end
     end
 
+    def ldate(date)
+      date.try(:strftime, '%b %d, %Y - %I:%M %p ')
+    end
+
     def sc_content(content)
       Shortcode.process(content)
     end

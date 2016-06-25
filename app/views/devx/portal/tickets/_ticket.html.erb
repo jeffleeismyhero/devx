@@ -1,5 +1,8 @@
 <tr>
-  <td><%= ticket.summary %></td>
-  <td><%= ticket.user.try(:full_name) %></td>
-  <td><%= ticket.created_at %></td>
+  <td><%= link_to ticket.summary, devx.portal_ticket_path(ticket) %></td>
+  <% if current_user.super_administrator? %>
+  	<td><%= ticket.user.try(:full_name) %></td>
+  <% end %>
+  <td><%= ticket.status %></td>
+  <td><%= time_ago_in_words ticket.updated_at %> ago</td>
 </tr>

@@ -52,6 +52,13 @@ module Devx
       end
     end
 
+    def sort
+      params[:menu_page].each_with_index do |id, index|
+        Devx::MenuPage.find(id).update_columns(position: index + 1)
+      end
+      render nothing: true
+    end
+
 
     private
 

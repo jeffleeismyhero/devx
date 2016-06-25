@@ -1,4 +1,4 @@
-<% provide(:title, '' + controller_name.classify.pluralize) %>
+<% provide(:title, 'Support Tickets') %>
 
 <div class="container">
     <div class="row">
@@ -6,7 +6,7 @@
             <h1><%= yield(:title) %></h1>
         </div>
         <div class="col-12 columns" style="padding-bottom:20px;">
-            <i class="fa fa-question-circle" aria-hidden="true"></i> <%= link_to 'Create Ticket', new_portal_ticket_path %>
+            <%= link_to 'Create Ticket', new_portal_ticket_path %>
             <div style="float:right;">
                 <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
                 <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
@@ -17,10 +17,12 @@
             <table width="100%">
                 <thead>
                     <tr style="background-color:#ACCC38;">
-                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">Summary</th>
-                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">Submitted By</th>
-                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">Created At</th>
-                        <th style="color:#084269; padding:10px; text-align:left; width:50%;">&nbsp;</th>
+                        <th style="color:#084269; padding:10px; text-align:left;">Summary</th>
+                        <% if current_user.super_administrator? %>
+                            <th style="color:#084269; padding:10px; text-align:left;">Submitted By</th>
+                        <% end %>
+                        <th style="color:#084269; padding:10px; text-align:left;">Status</th>
+                        <th style="color:#084269; padding:10px; text-align:left;">Last Updated</th>
                     </tr>
                 </thead>
                 <tbody>
