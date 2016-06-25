@@ -32,6 +32,8 @@ Devx::Engine.routes.draw do
 
   namespace :portal do
     get '/' => 'dashboard#index', as: :dashboard
+      get '/terms-of-service', to: 'dashboard#terms_of_service'
+      get '/privacy-policy', to: 'dashboard#privacy_policy'
     post 'developer/update', to: 'developer#update'
     match 'developer/commerce', to: 'developer#commerce_settings', via: [ :get, :post ]
     match 'developer/sms_alert', to: 'developer#sms_alert_settings', via: [ :get, :post ]
