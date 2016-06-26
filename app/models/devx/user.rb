@@ -1,5 +1,7 @@
 module Devx
   class User < ActiveRecord::Base
+    TEMP_EMAIL_PREFIX = 'change@me'
+    TEMP_EMAIL_REGEX = /\Achange@me/
     # Include default devise modules. Others available are:
     # :confirmable, :lockable, :timeoutable and :omniauthable
     devise :database_authenticatable, :registerable,
@@ -39,6 +41,13 @@ module Devx
       "#{self.first_name} #{self.last_name}".squish 
       else
         self.email
+      end
+    end
+
+    def full_name=(value)
+      if parts = value.rpartition(' ') rescue [value]
+        self.first_name = parts.first
+        self.last_name = parts.last
       end
     end
 
@@ -87,8 +96,7 @@ module Devx
           user = User.new(
             full_name: auth.extra.raw_info.name || email,
             email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-            password: Devise.friendly_token[0,20],
-            confirmed_at: Time.zone.now
+            password: Devise.friendly_token[0,20]
           )
           user.save!
         end
@@ -100,6 +108,10 @@ module Devx
         identity.save!
       end
       user
+    end
+
+    def email_verified?
+      self.email && self.email !~ TEMP_EMAIL_REGEX
     end
 
     def generate_password=(value)

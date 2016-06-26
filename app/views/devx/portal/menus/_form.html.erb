@@ -14,18 +14,26 @@
 <div class="col-12 columns">
 <% if !@menu.new_record? %>
   <h3>Current Navigation</h3>
-  <ul class="sortable" data-update-url="<%= sort_portal_menus_path %>">
-    <% @menu.menu_pages.try(:each) do |page| %>
-      <%= content_tag_for :li, page do %>
-        <%= Devx::Page.find(page.page_id).name %>
+  <ul class="sortable-menu" data-update-url="<%= sort_portal_menus_path %>">
+    <% @menu.menu_pages.try(:each) do |menu_page| %>
+      <%= content_tag_for :li, menu_page do %>
+        <%= menu_page.try(:page).try(:name) %>
+        <% if menu_page.try(:page).try(:children).any? %>
+          <ul class="sortable-menu-children" data-update-url="<%= sort_portal_menus_path %>">
+          <% menu_page.page.children.try(:each) do |child| %>
+            <%= content_tag_for :li, child do %>
+              <%= child.try(:name) %>
+            <% end %>
+          <% end %>
+          </ul>
+        <% end %>
       <% end %>
     <% end %>
   </ul>
 
   <div class="nested-attributes">
     <h3>Add Pages</h3>
-    <%= select_tag 'page[id]', options_from_collection_for_select(Devx::Page.all, 'id', 'name') %>
-    <%= number_field_tag 'page[position]' %>
+    <%= select_tag 'page[id]', options_for_select(Devx::Page.all.collect{ |x| [x.name, x.id] }) %>
   </div>
 <% end %>
 </div>

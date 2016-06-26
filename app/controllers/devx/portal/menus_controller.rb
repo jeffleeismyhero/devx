@@ -27,11 +27,13 @@ module Devx
 
     def update
       if @menu.valid? && @menu.update(menu_params)
-        
+        render plain: @menu.add(Devx::Page.find(params[:page][:id]))
+        return
 
-        if !@menu.add(params[:page])
-          redirect_to devx.edit_portal_menu_path
-          puts "Page already exists in the menu"
+        if !@menu.add(Devx::Page.find(params[:page][:id]))
+          redirect_to devx.edit_portal_menu_path,
+          notice: "Page already exists in the menu"
+          return
         end
 
         redirect_to devx.edit_portal_menu_path(@menu),
@@ -53,10 +55,13 @@ module Devx
     end
 
     def sort
-      params[:menu_page].each_with_index do |id, index|
+      list = params[:menu_page] || params[:page]
+      list.each_with_index do |id, index|
         Devx::MenuPage.find(id).update_columns(position: index + 1)
       end
       render nothing: true
+    rescue
+      Devx
     end
 
 

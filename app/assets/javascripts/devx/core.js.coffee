@@ -10,7 +10,12 @@ jQuery ->
     $(this).parent().parent().hide()
     event.preventDefault()
 
-  $(".sortable").sortable
+  $(".sortable-menu").sortable
+    axis: "y"
+    update: ->
+      $.post($(this).data("update-url"), $(this).sortable('serialize'))
+
+  $(".sortable-menu-children").sortable
     axis: "y"
     update: ->
       $.post($(this).data("update-url"), $(this).sortable('serialize'))

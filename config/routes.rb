@@ -1,6 +1,6 @@
 Devx::Engine.routes.draw do
   devise_for :users, class_name: "Devx::User", module: :devise,
-    controllers: { omniauth_callbacks: 'omniauth_callbacks' },
+    controllers: { omniauth_callbacks: 'devx/omniauth_callbacks' },
     path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
   authenticated :user, -> user { user.super_administrator? } do

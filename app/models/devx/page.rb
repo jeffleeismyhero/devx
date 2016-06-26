@@ -40,11 +40,13 @@ module Devx
             end
         end
 
-
         if self.is_home == true
             self.active = true
         end
+    end
 
+    def children
+        self.class.where(parent: self)
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160622204429) do
+ActiveRecord::Schema.define(version: 20160626212241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,14 @@ ActiveRecord::Schema.define(version: 20160622204429) do
     t.string   "image"
   end
 
+  create_table "devx_identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_inventories", force: :cascade do |t|
     t.integer  "product_id"
     t.integer  "amount"
@@ -314,6 +322,7 @@ ActiveRecord::Schema.define(version: 20160622204429) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "position"
+    t.integer  "parent_id"
   end
 
   create_table "devx_menus", force: :cascade do |t|
