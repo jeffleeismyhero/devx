@@ -32,6 +32,8 @@ Devx::Engine.routes.draw do
 
   namespace :portal do
     get '/' => 'dashboard#index', as: :dashboard
+      get '/terms-of-service', to: 'dashboard#terms_of_service'
+      get '/privacy-policy', to: 'dashboard#privacy_policy'
     post 'developer/update', to: 'developer#update'
     match 'developer/commerce', to: 'developer#commerce_settings', via: [ :get, :post ]
     match 'developer/sms_alert', to: 'developer#sms_alert_settings', via: [ :get, :post ]
@@ -39,11 +41,12 @@ Devx::Engine.routes.draw do
     ## Import paths
     match 'users/import', to: 'users#import', via: [ :get, :post ]
     match 'articles/import', to: 'articles#import', via: [ :get, :post ]
-    match 'pages/import', to: 'pages#import', via: [ :get, :post ]
 
     
     resources :pages
-    resources :menus
+    resources :menus do
+      collection { post :sort }
+    end
     resources :layouts
     resources :javascripts
     resources :stylesheets

@@ -1,10 +1,11 @@
 <% provide(:title, 'Edit Extracurricular') %>
 <div class="container">
   <div class="row">
-    <div class="medium-12 columns">
+    <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
     </div>
-    <div class="medium-12 columns">
+    <div class="col-12">
+      <%= link_to 'Back to Extracurriculars', devx.portal_extracurriculars_path %>
       <%= form_for @extracurricular, url: portal_extracurricular_path(@extracurricular) do |f| %>
         <% if @extracurricular.errors.any? %>
             <div id="error_explanation">

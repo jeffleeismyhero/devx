@@ -41,7 +41,7 @@
             <span><i class="fa fa-question"></i></span>
           </div>
           <div class="cd-accordion-body">
-            <%= link_to 'Submit a Ticket', devx.new_portal_ticket_path %><br />
+            <%= link_to 'Submit a Support Ticket', devx.new_portal_ticket_path %><br />
             <%= link_to 'View my Tickets', devx.portal_tickets_path %>
           </div>
         </div>
@@ -189,7 +189,11 @@
 
       <!-- START: FOOTER -->
       <footer class="cd-main-footer">
-        DevX <%= Devx::VERSION %> | Powered by <%= link_to 'JCW', '//jcwproductions.com' %>
+        <div style="padding-bottom:.5rem;">
+          <span><%= link_to 'Privacy Policy'.html_safe, devx.portal_privacy_policy_path %> </span> <br>
+          <span><%= link_to 'Terms of Service'.html_safe, devx.portal_terms_of_service_path %> </span>
+        </div>
+        <div>DevX <%= Devx::VERSION %> | Powered by <%= link_to 'JCW', '//jcwproductions.com' %></div>
       </footer>
       <!-- END: FOOTER -->  
     </nav>

@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "rails", ">= 4.2"
   s.add_runtime_dependency "pg"
   s.add_runtime_dependency "jquery-rails"
+  s.add_runtime_dependency "jquery-ui-rails"
   s.add_runtime_dependency "coffee-rails", "~> 4.1.0"
   s.add_runtime_dependency "sass-rails", "~> 5.0"
   s.add_runtime_dependency "flash_render"
@@ -40,6 +41,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "friendly_id"
   s.add_runtime_dependency "ransack"
   s.add_runtime_dependency "acts-as-taggable-on"
+  s.add_runtime_dependency "acts_as_list"
   s.add_runtime_dependency "will_paginate"
   s.add_runtime_dependency "time_splitter"
 

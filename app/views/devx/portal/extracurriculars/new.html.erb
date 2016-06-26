@@ -1,21 +1,34 @@
 <% provide(:title, 'New Extracurricular') %>
 <div class="container">
   <div class="row">
-    <div class="medium-12 columns">
+    <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
     </div>
-    <div class="medium-12 columns">
-      <%= form_for @extracurricular, url: portal_extracurriculars_path do |f| %>
+    <div class="col-12">
+      <%= link_to 'Back to Extracurriculars', devx.portal_extracurriculars_path %>
+
+      <%= form_for @extracurricular, url: portal_extracurriculars_path, method: :post do |f| %>
         <% if @extracurricular.errors.any? %>
-              <ul>
-                <% @extracurricular.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
+          <ul>
+            <% @extracurricular.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+

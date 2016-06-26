@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
-      <%= link_to 'Back to media', devx.portal_media_path %>
+      <%= link_to 'Back to Media', devx.portal_media_path %>
     </div>
     <div class="col-12 columns">
       <%= form_tag devx.portal_media_path, method: :post, id: 'media-dropzone', class: 'dropzone' do %>

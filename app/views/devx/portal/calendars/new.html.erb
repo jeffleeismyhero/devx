@@ -6,7 +6,7 @@
       <h1><%= yield(:title) %></h1>
     </div>
     <div class="col-12 columns">
-      <%= link_to 'Back to calendars', devx.portal_calendars_path %>
+      <%= link_to 'Back to Calendars', devx.portal_calendars_path %>
       <%= form_for @calendar, url: devx.portal_calendars_path, method: :post do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>

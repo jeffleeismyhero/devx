@@ -6,7 +6,7 @@
       <h1><%= yield(:title) %></h1>
     </div>
     <div class="col-12">
-      <%= link_to 'Back to stylesheets', devx.portal_stylesheets_path %>
+      <%= link_to 'Back to Stylesheets', devx.portal_stylesheets_path %>
       <%= form_for @stylesheet, url: devx.portal_stylesheet_path(@stylesheet) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
