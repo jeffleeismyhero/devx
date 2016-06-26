@@ -45,7 +45,7 @@ class Devx::ImageUploader < CarrierWave::Uploader::Base
     process :resize_to_fit => [1900, 450]
   end
   version :profile do
-    process :resize_to_fill => [100, 100]
+    process :resize_to_fill => [160, 200]
   end
 
   protected

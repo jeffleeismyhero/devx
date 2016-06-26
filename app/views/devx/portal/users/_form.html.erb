@@ -1,3 +1,20 @@
+
+<div class="col-4 columns" style="margin-top:20px;">
+    <div class="col-12 columns">
+        <% if @user.photo.present? %>
+            <% photo = @user.photo.profile.url %>
+        <% else %>
+            <% photo = image_path('devx/No-Name.jpg') %>
+        <% end %>
+
+        <%= image_tag(photo, style: 'max-width:100%;max-height:200px') %>
+    </div>
+    <div class="col-12 columns">
+        <%= f.label :photo %>
+        <%= f.file_field :photo %> 
+    </div>
+</div>
+
 <div class="col-8 columns no-padding" style="margin-top:20px;">
     <div class="col-6 columns cd-edit-form">
         <%= f.label :first_name %><br>
@@ -31,20 +48,14 @@
             <%= f.password_field :password_confirmation %>
         </div>
     <% end %>
-</div>
-<div class="col-4 columns" style="margin-top:20px;">
-    <div>
-        <%= f.label :photo %>
-        <%= f.file_field :photo %> 
-    </div>
-</div>
 
-<div class="col-8 columns" style="margin-top:20px;">
-    <h3>User Roles</h3>
-    <div class="col-12 columns no-padding">
-        <%= f.select :role_ids, Devx::Role.all.collect{ |x| [x.name, x.id] }, {  }, { multiple: true, class: 'select2' } %>
+    <div class="col-12 columns" style="margin-top:20px;">
+        <h3>User Roles</h3>
+        <div class="col-12 columns no-padding">
+            <%= f.select :role_ids, Devx::Role.all.collect{ |x| [x.name, x.id] }, {  }, { multiple: true, class: 'select2' } %>
+        </div>
     </div>
-</div> 
+</div>
 
 <% if @user.parent? || @user.super_administrator? %>
     <div class="col-12 columns" style="margin-top:20px;">
