@@ -8,6 +8,9 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   config.secret_key = '81a1023c147ec8e5fa7624aa03d37dcafee66cddc5994b59dfbd38966660e7932a1359dbe6aea44f4cf38ee78e1cda3846fdfad180348579a1421e7b34a8c5bb'
 
+  # ==> OmniAuth
+  config.omniauth :google_oauth2, '436828069769-nmbibo1bu5d2f2gvg3lro8ohrmm0j54m.apps.googleusercontent.com', 'EDW0006XcRWVF6i___72u-HA'
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class

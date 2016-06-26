@@ -1,8 +1,8 @@
 module Devx
   class NotificationMailer < ApplicationMailer
-  	def signup(user)
+  	def signup(user, password = nil)
   		@user = user
-
+      @password = password
   		@subject = "Thanks for signing up"
 
   		mail to: @user.email, 

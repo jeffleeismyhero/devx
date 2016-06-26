@@ -1,7 +1,7 @@
 Devx::Engine.routes.draw do
-  devise_for :users, class_name: "Devx::User", module: :devise, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' } do
-    get '/login' => 'devise/sessions#new'
-  end
+  devise_for :users, class_name: "Devx::User", module: :devise,
+    controllers: { omniauth_callbacks: 'omniauth_callbacks' },
+    path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
   authenticated :user, -> user { user.super_administrator? } do
     match '/portal/jobs', to: DelayedJobWeb, anchor: false, via: [ :get, :post ]
@@ -62,6 +62,7 @@ Devx::Engine.routes.draw do
     resources :branding
     resources :users do
       member do
+        patch 'reset-password', to: 'users#reset_password'
         match 'account-deposit', to: 'users#account_deposit', via: [ :get, :post ]
       end
     end

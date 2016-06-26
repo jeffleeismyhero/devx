@@ -3,7 +3,8 @@ module Devx
     # Include default devise modules. Others available are:
     # :confirmable, :lockable, :timeoutable and :omniauthable
     devise :database_authenticatable, :registerable,
-           :recoverable, :rememberable, :trackable, :validatable
+           :recoverable, :rememberable, :trackable, :validatable,
+           :lockable, :timeoutable, :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
     has_many :authorizations
     has_many :roles, through: :authorizations
@@ -18,6 +19,10 @@ module Devx
     belongs_to :person
 
     validates :email, presence: true
+
+    attr_accessor :generate_password
+
+    after_create :welcome
       
     mount_uploader :photo, ImageUploader
 
@@ -55,6 +60,19 @@ module Devx
 
     def faculty
       self.roles.exists?(name: 'Faculty')
+    end
+
+    def generate_password=(value)
+      if value == true || value == 'true'
+        self.password = Devise.friendly_token(12)
+        self.password_confirmation = self.password
+      end
+    end
+
+    def welcome
+      # if generate_password == true || generate_password == 'true'
+        Devx::NotificationMailer.delay.signup(self, self.password)
+      # end
     end
 
     def balance
