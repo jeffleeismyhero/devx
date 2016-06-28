@@ -5,7 +5,7 @@
     <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
     </div>
-    <div class="col-12">
+    <div class="col-12 columns">
       <%= link_to 'Back to Layouts', devx.portal_layouts_path %>
       <%= form_for @layout, url: devx.portal_layouts_path, method: :post do |f| %>
         <%= render partial: 'form', locals: { f: f } %>

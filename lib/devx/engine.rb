@@ -12,6 +12,8 @@ module Devx
 
     config.to_prepare do
       Devise::SessionsController.layout 'devx/login'
+      Devise::RegistrationsController.layout 'devx/sign_up'
+      Devise::PasswordsController.layout 'devx/forgot_password'
     end
 
     ## E-mail configuration

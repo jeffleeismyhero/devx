@@ -29,24 +29,36 @@
             <% end %>
         </div>
 
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
 
-        <div class="field">
-            <%= f.email_field :email, autofocus: true, placeholder:'Email' %>
-        </div>
+          <div class="cd-edit-form" style="min-height:auto">
+            <%= f.text_field :first_name, placeholder: 'First name' %>
+          </div>
 
-        <div class="field">
-            <%= f.password_field :password, autocomplete: "off", placeholder:'Password' %>
-        </div>
-        
-        <div class="actions hvr-sweep-to-right">
-            <%= f.submit "LOGIN", id: 'login' %>
-        </div>
+          <div class="cd-edit-form" style="min-height:auto">
+            <%= f.text_field :first_name, placeholder: 'Last name' %>
+          </div>
+
+          <div class="cd-edit-form" style="min-height:auto">
+            <%= f.email_field :email, placeholder: 'E-mail' %>
+          </div>
+
+          <div class="cd-edit-form" style="min-height:auto">
+            <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %>
+          </div>
+
+          <div class="cd-edit-form" style="min-height:auto">
+            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Confirm Password' %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "REGISTER" %>
+          </div>
         <% end %>
 
         <%- if controller_name != 'sessions' %>
-          <small><%= link_to "Log in", new_session_path(resource_name) %> | </small>
+          <small><%= link_to "Log in", new_session_path(resource_name) %></small>
         <% end -%>
 
         <%- if devise_mapping.registerable? && controller_name != 'registrations' %>

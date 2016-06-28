@@ -627,6 +627,7 @@ a.cd-logo {
 
 .cd-edit-form textarea {
   width:100%;
+  min-height:400px;
   resize:none;
 }
 
@@ -661,7 +662,7 @@ a.cd-logo {
 }
 
 .select2 {
-    width:100%;
+    max-width:100%!important;
 }
 
 #google_calendar_fields {
