@@ -41,6 +41,7 @@ class Ability
     end
 
     can :read, Devx::Dashboard
+    can :read, Devx::Article
     can [:edit, :update], Devx::User, id: user.id
     can [ :read, :update ], Devx::Order, user_id: user.id
     can :create, Devx::Transaction

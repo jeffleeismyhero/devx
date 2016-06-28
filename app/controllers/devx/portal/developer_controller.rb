@@ -8,6 +8,11 @@ module Devx
 
     def index
       @settings = app_settings
+      @timezones = []
+
+      ActiveSupport::TimeZone.us_zones.each do |zone|
+        @timezones << zone.name
+      end
     end
 
     def update
