@@ -139,6 +139,7 @@
     </label>
 </div>
 
+<%= render partial: 'social_media_settings_form' %>
 
 
 <div class="col-8 columns cd-edit-form">
@@ -152,5 +153,34 @@
     </label>
 </div>
 
+
 <%= render partial: 'sms_alert_settings_form' %>
 
+
+<script type="text/javascript">
+    $(".switch").on("change", function()
+    {
+        var o = $(this);
+        var d = $(this).attr("data");
+        var c = $(this).children("input");
+
+        if(c.is(":checked"))
+        {
+            $("." + d + "-child").show();
+            
+        }
+        else
+        {
+            $("." + d + "-child").hide();
+        }
+    });
+
+    $(".switch").each(function()
+    {
+        var o = $(this);
+        if(o.children("input").is(":checked"))
+        {
+            $("." + o.attr("data") + "-child").show();
+        }
+    });
+</script>

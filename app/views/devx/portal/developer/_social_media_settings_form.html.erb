@@ -1,0 +1,81 @@
+<div class="col-12 columns">
+	<h3>Social Media Settings</h3>
+</div>
+
+<div class="col-8 columns cd-edit-form">
+	<h4>Facebook</h4>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch" data="facebook">
+        <%= check_box_tag 'settings[facebook_feeds]', @settings.settings['facebook_feeds'], @settings.settings['facebook_feeds'] %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
+<div class="settings-child facebook-child">
+	<div class="col-6 columns cd-edit-form">
+	  <%= label_tag 'settings[facebook_app_id]', 'Facebook App ID' %>
+	  <%= password_field_tag 'settings[facebook_app_id]', @settings.settings['facebook_app_id'] %>
+	</div>
+
+
+	<div class="col-6 columns cd-edit-form">
+	  <%= label_tag 'settings[facebook_app_secret]', 'Facebook App Secret' %>
+	  <%= password_field_tag 'settings[facebook_app_secret]', @settings.settings['facebook_app_secret'] %>
+	</div>
+
+
+	<div class="col-6 columns cd-edit-form">
+	  <%= label_tag 'settings[facebook_app_callback]', 'Facebook App Callback URL' %>
+	  <%= text_field_tag 'settings[facebook_app_callback]', @settings.settings['facebook_app_callback'] %>
+	</div>
+
+
+	<div class="col-6 columns cd-edit-form">
+	  <%= label_tag 'settings[facebook_uid]', 'Facebook User ID' %>
+	  <%= text_field_tag 'settings[facebook_uid]', @settings.settings['facebook_uid'] %>
+	</div>
+</div>
+
+<div class="col-8 columns cd-edit-form">
+	<h4>Twitter</h4>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch" data="twitter">
+        <%= check_box_tag 'settings[twitter_feeds]', @settings.settings['twitter_feeds'], @settings.settings['twitter_feeds'] %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
+<div class="settings-child twitter-child">
+	<div class="col-6 columns cd-edit-form">
+	  <%= label_tag 'settings[twitter_consumer_key]', 'Twitter Consumer Key' %>
+	  <%= password_field_tag 'settings[twitter_consumer_key]', @settings.settings['twitter_consumer_key'] %>
+	</div>
+
+
+	<div class="col-6 columns cd-edit-form">
+	  <%= label_tag 'settings[twitter_consumer_secret]', 'Twitter Consumer Secret' %>
+	  <%= password_field_tag 'settings[twitter_consumer_secret]', @settings.settings['twitter_consumer_secret'] %>
+	</div>
+
+
+	<div class="col-6 columns cd-edit-form">
+	  <%= label_tag 'settings[twitter_access_token]', 'Twitter Access Token' %>
+	  <%= password_field_tag 'settings[twitter_access_token]', @settings.settings['twitter_access_token'] %>
+	</div>
+
+
+	<div class="col-6 columns cd-edit-form">
+	  <%= label_tag 'settings[twitter_access_token_secret]', 'Twitter Access Token Secret' %>
+	  <%= password_field_tag 'settings[twitter_access_token_secret]', @settings.settings['twitter_access_token_secret'] %>
+	</div>
+
+
+	<div class="col-6 columns cd-edit-form">
+	  <%= label_tag 'settings[twitter_timeline]', 'Twitter Timeline' %>
+	  <%= text_field_tag 'settings[twitter_timeline]', @settings.settings['twitter_timeline'] %>
+	</div>
+</div>

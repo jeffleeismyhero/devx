@@ -129,8 +129,14 @@ module Devx
           end
 
         end
-        redirect_to devx.portal_articles_path,
-        notice: "#{@errors} articles could not be imported due to errors"
+
+        if @errors > 0
+          redirect_to devx.portal_articles_path,
+          notice: "#{@errors} article(s) could not be imported due to errors"
+        else
+          redirect_to devx.portal_articles_path,
+          notice: "All articles imported successfully"
+        end
 
       end
     end

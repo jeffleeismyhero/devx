@@ -13,7 +13,9 @@ Shortcode.setup do |config|
     :submenu,
     :extracurriculars,
     :athletics,
-    :faqs
+    :faqs,
+    :twitter,
+    :facebook
   ]
 end
 
@@ -29,5 +31,7 @@ Shortcode.register_presenter(
   Devx::SubmenuPresenter,
   Devx::ExtracurricularsPresenter,
   Devx::AthleticsPresenter,
-  Devx::FaqsPresenter
+  Devx::FaqsPresenter,
+  Devx::FacebookPresenter,
+  Devx::TwitterPresenter
 )

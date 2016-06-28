@@ -8,7 +8,7 @@ module Devx
 
     belongs_to :user
 
-    validates :title, presence: true
+    validates :title, presence: true, uniqueness: { scope: :published_at }
     validates :content, presence: true
     validates :tag_list, presence: true
 
@@ -18,6 +18,10 @@ module Devx
 
     acts_as_taggable
     acts_as_taggable_on :keywords
+
+    def self.per_page
+      return 12
+    end
 
     def should_generate_new_friendly_id?
       title_changed?

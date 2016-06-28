@@ -10,7 +10,9 @@ module Devx
         @layout = Devx::Layout.find(app_settings['newsfeed_layout'])
       end
 
-      @articles = @articles.published.latest.page(params[:page])
+      @q = @articles.search(params[:q])
+      @q.sorts = 'published_at desc'
+      @articles = @q.result.published.latest.page(params[:page])
       @page = Devx::Page.new(name: 'News', layout: @layout)
     end
 

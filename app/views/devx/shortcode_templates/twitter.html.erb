@@ -1,0 +1,12 @@
+<% @attributes[:tweets].try(:each_with_index) do |tweet, index| %>
+    <div class="medium-8 medium-offset-2 columns tweet-container">
+        <div class="tweet">
+            <p><%= auto_link(tweet.full_text, link: :urls, html: { target: '_blank' }) %></p>
+            <span style="font-size:1.1rem">Posted <%= time_ago_in_words tweet.created_at %> ago</span>
+            <ul class="share_actions">
+                <li><%= link_to '<i class="fa fa-heart"></i>'.html_safe, "https://twitter.com/intent/like?tweet_id=#{tweet.id}" %></li>
+                <li><%= link_to '<i class="fa fa-share-square-o"></i>'.html_safe, "https://twitter.com/intent/retweet?tweet_id=#{tweet.id}" %></li>
+            </ul>
+        </div>
+    </div>
+<% end %>
