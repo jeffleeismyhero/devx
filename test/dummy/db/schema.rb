@@ -460,13 +460,6 @@ ActiveRecord::Schema.define(version: 20160628022413) do
 
   add_index "devx_stylesheets", ["slug"], name: "index_devx_stylesheets_on_slug", using: :btree
 
-  create_table "devx_teams", force: :cascade do |t|
-    t.integer  "sport_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "devx_ticket_updates", force: :cascade do |t|
     t.integer  "ticket_id"
     t.integer  "user_id"
