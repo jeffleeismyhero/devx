@@ -7,6 +7,10 @@ module Devx
     load_and_authorize_resource :order, class: 'Devx::Order'
 
     def index
+      @q = @orders.search(params[:q])
+      @q.sorts = 'name asc' if @q.sorts.empty?
+      @orders = @q.result(distinct: true)
+
       respond_to do |format|
         format.html
         format.xlsx do

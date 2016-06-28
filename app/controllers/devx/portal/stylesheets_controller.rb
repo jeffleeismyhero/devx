@@ -7,6 +7,9 @@ module Devx
     layout 'devx/portal'
 
     def index
+      @q = @stylesheets.search(params[:q])
+      @q.sorts = 'name asc' if @q.sorts.empty?
+      @stylesheets = @q.result(distinct: true)
     end
 
     def edit

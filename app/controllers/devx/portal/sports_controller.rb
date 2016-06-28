@@ -7,6 +7,9 @@ module Devx
     layout 'devx/portal'
 
     def index
+        @q = @sports.search(params[:q])
+        @q.sorts = 'name asc' if @q.sorts.empty?
+        @sports = @q.result(distinct: true)
     end
 
     def new
@@ -40,7 +43,8 @@ module Devx
     end
 
     def sport_params
-        accessible = [ :name ]
+        accessible = [ :name,
+                      sport_teams_attributes: [ :id, :jersey_number, :person_id, :position, :height, :weight, :_destroy ] ]
         params.require(:sport).permit(accessible)
     end
   end

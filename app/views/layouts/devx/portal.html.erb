@@ -42,7 +42,11 @@
           </div>
           <div class="cd-accordion-body">
             <%= link_to 'Submit a Support Ticket', devx.new_portal_ticket_path %><br />
-            <%= link_to 'View my Tickets', devx.portal_tickets_path %>
+            <% if current_user.super_administrator? %>
+              <%= link_to 'Manage Tickets', devx.portal_tickets_path %>
+            <% else %>
+              <%= link_to 'View my Tickets', devx.portal_tickets_path %>
+            <% end %>
           </div>
         </div>
         <div class="cd-accordion-tab">
@@ -89,9 +93,6 @@
           <%= link_to '<i class="fa fa-sitemap"></i> <span>Organizations</span>'.html_safe, '#', class: 'has-children', data: 'organizations' %>
         </li>
         <ul class="child-nav" data-parent="organizations">
-          <% if can? :manage, Devx::Member %>
-          <li><%= link_to 'Staff', devx.portal_members_path %></li>
-          <% end %>
           <li><%= link_to 'Sports', devx.portal_sports_path %></li>
           <li><%= link_to 'Extracurriculars', devx.portal_extracurriculars_path %></li>
           <% if app_settings['alumni_database'] %>
@@ -118,9 +119,9 @@
         </ul>
         <% end %>
 
-        <% if can? :manage, Devx::Event %>
+        <% if can? :manage, Devx::Calendar %>
         <li>
-          <%= link_to '<i class="fa fa-calendar"></i> <span>Events</span>'.html_safe, devx.portal_calendars_path, class: 'has-children', data: 'calendars' %>
+          <%= link_to '<i class="fa fa-calendar"></i> <span>Calendars</span>'.html_safe, devx.portal_calendars_path, class: 'has-children', data: 'calendars' %>
         </li>
         <ul class="child-nav" data-parent="calendars">
           <li><%= link_to 'Calendars', devx.portal_calendars_path %></li>
@@ -144,12 +145,6 @@
           <% end %>
         </ul>
 
-        <% if can? :manage, Devx::Branding %>
-        <li>
-          <%= link_to '<i class="fa fa-cogs"></i> <span>Settings</span>'.html_safe, devx.portal_branding_index_path, data: 'settings' %>
-        </li>
-        <% end %>
-
         <% if app_settings['commerce'] %>
         <li>
           <%= link_to '<i class="fa fa-shopping-cart"></i> <span>Commerce</span>'.html_safe, '#', class: 'has-children', data: 'commerce' %>
@@ -166,13 +161,18 @@
         
         <% if app_settings['admissions'] && current_user.administrator? %>
         <li>
-          <%= link_to '<i class="fa fa-graduation-cap"></i> <span>Admissions</span>'.html_safe, '#', class: 'has-children', data: 'admissions' %>
+          <%= link_to '<i class="fa fa-graduation-cap"></i> <span>Admissions</span>'.html_safe, '#' %>
         </li>
-        <ul class="child-nav" data-parent="admissions">
-          <% if app_settings['student_management'] && current_user.administrator? %>
-            <li><%= link_to 'Administration CRM', devx.portal_administration_index_path %></li>
-          <% end %>
-        </ul>
+        <% end %>
+
+        <% if app_settings['crm_module'] && current_user.administrator? %>
+          <li><%= link_to '<i class="fa fa-database"></i> CRM'.html_safe, devx.portal_administration_index_path %></li>
+        <% end %>
+
+        <% if can? :manage, Devx::Branding %>
+        <li>
+          <%= link_to '<i class="fa fa-cogs"></i> <span>Settings</span>'.html_safe, devx.portal_branding_index_path, data: 'settings' %>
+        </li>
         <% end %>
 
         <% if can? :manage, Devx::ApplicationSetting && current_user.super_administrator? %>

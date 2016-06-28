@@ -7,6 +7,9 @@ module Devx
     layout 'devx/portal'
 
     def index
+        @q = @calendars.search(params[:q])
+        @q.sorts = 'name asc' if @q.sorts.empty?
+        @calendars = @q.result(distinct: true)
     end
 
     def show

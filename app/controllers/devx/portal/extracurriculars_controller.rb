@@ -7,7 +7,9 @@ module Devx
     layout 'devx/portal'
 
     def index
-        @extracurriculars = @extracurriculars.page(params[:page])
+        @q = @extracurriculars.search(params[:q])
+        @q.sorts = 'name asc' if @q.sorts.empty?
+        @extracurriculars = @q.result(distinct: true).page(params[:page])
     end
 
     def new

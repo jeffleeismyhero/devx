@@ -7,6 +7,8 @@ module Devx
     layout 'devx/portal'
 
     def index
+      @q = @media.search(params[:q])
+      @media = @q.result(distinct: true)
     end
 
     def create

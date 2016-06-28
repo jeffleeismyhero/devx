@@ -1,0 +1,24 @@
+<div class="col-1 columns cd-edit-form">
+	<%= f.label :jersey_number, "Number" %>
+	<%= f.text_field :jersey_number %>
+</div>
+
+<div class="col-5 columns cd-edit-form">
+	<%= f.label :person_id %>
+	<%= f.select :person_id, Devx::Person.students.collect{ |x| [x.record_with_uuid, x.id] }, { prompt: 'Select student' }, class: 'select2-fixed' %>
+</div>
+
+<div class="col-2 columns cd-edit-form">
+	<%= f.label :position %>
+	<%= f.text_field :position %>
+</div>
+
+<div class="col-2 columns cd-edit-form">
+	<%= f.label :height %>
+	<%= f.text_field :height %>
+</div>
+
+<div class="col-2 columns cd-edit-form">
+	<%= f.label :weight %>
+	<%= f.text_field :weight %>
+</div>

@@ -99,6 +99,12 @@ $(function()
   });
 
 
+// Currency formatter
+$(".currency-field").on("blur", function()
+{
+  $(this).val(parseFloat(Math.abs($(this).val())).toFixed(2));
+})
+
 
   // DateTime Picker
   $(".datetimepicker").datetimepicker();

@@ -1,6 +1,6 @@
 <tr>
-    <td style="padding:10px;border-bottom:1px solid #ccc;"><%= link_to role.name, devx.edit_portal_role_path(role) %></td>
-    <td style="text-align:right; padding:10px;border-bottom:1px solid #ccc;">
+    <td><%= link_to role.name, devx.edit_portal_role_path(role) %></td>
+    <td>
     <%= link_to 'Edit', devx.edit_portal_role_path(role) %>  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
     <%= link_to 'Delete', devx.portal_role_path(role), method: :delete, data: { confirm: "Are you sure you want to delete #{role.try(:full_name)}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
     </td>

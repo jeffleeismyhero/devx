@@ -9,6 +9,9 @@ module Devx
   	load_and_authorize_resource :venue, class: 'Devx::Venue'
 
   	def index
+      @q = @venues.search(params[:q])
+      @q.sorts = 'name asc' if @q.sorts.empty?
+      @venues = @q.result(distinct: true)
   	end
 
   	def show

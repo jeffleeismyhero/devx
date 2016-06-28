@@ -34,6 +34,8 @@
         <%= f.label :gender %><br>
         <%= f.select :gender, %w[Male Female], { include_blank: true }, { class: 'select2-fixed' } %>
     </div>
+    
+
 </div>
 
 <div class="col-8 columns no-padding">
@@ -48,7 +50,7 @@
     </div>
     <div class="col-6 columns cd-edit-form">
         <%= f.label :state %>
-        <%= f.select :state, options_for_select(us_states), { include_blank: true }, class: 'select2-fixed' %>
+        <%= f.select :state, options_for_select(us_states, @administration.state), { include_blank: true, selected: @administration.state }, class: 'select2-fixed' %>
     </div>
     <div class="col-6 columns cd-edit-form">
         <%= f.label :zip %>
@@ -66,7 +68,30 @@
         <%= f.label :phone %>
         <%= f.phone_field :phone %>
     </div>
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :mobile_number %>
+        <%= f.phone_field :mobile_number %>
+    </div>
+    
+    <div class="col-6 columns cd-edit-form">
+        <%= f.label :association_list, 'Association' %><br>
+        <%= f.select :association_list, Devx::Person.tag_counts_on(:associations).order(name: :asc), { prompt: 'Select association' }, { class: 'select2' } %>
+    </div>
 </div>
+
+<div class="col-8 columns no-padding" style="margin-top:40px">
+    <div class="col-2 columns cd-edit-form">
+        <%= f.label :active %><br>
+    </div>
+
+    <div class="col-2 columns cd-edit-form">
+        <label class="switch">
+            <%= f.check_box :active %>
+            <div class="slider round"></div>
+        </label>
+    </div>
+</div>
+
 
 <div class="col-12 columns">
     <div class="cd-update-form">

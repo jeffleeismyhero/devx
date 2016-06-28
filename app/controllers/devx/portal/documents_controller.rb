@@ -7,6 +7,9 @@ module Devx
     layout 'devx/portal'
 
     def index
+      @q = @documents.search(params[:q])
+      @q.sorts = 'name asc' if @q.sorts.empty?
+      @documents = @q.result(distinct: true)
     end
 
     def create

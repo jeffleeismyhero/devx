@@ -54,7 +54,6 @@ Devx::Engine.routes.draw do
     resources :calendars do
       resources :events
     end
-    resources :members
     resources :alumni
     resources :faqs
     resources :products

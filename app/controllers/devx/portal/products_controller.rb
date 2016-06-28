@@ -7,6 +7,9 @@ module Devx
     load_and_authorize_resource :product, class: 'Devx::Product', except: :show
 
     def index
+        @q = @products.search(params[:q])
+        @q.sorts = 'name asc' if @q.sorts.empty?
+        @products = @q.result(distinct: true)
     end
 
     def new

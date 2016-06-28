@@ -11,7 +11,7 @@
     <%= form_for @transaction, url: devx.account_deposit_portal_user_path(@user), method: :post do |f| %>
     <div class="col-6 columns cd-edit-form">
         <%= label_tag :amount %>
-        <%= f.text_field :amount, { step: '0.01', placeholder: 'Amount' } %>
+        <%= f.text_field :amount, { step: '0.01', placeholder: 'Amount', class: 'currency-field' } %>
     </div>
 
     <div class="col-8 columns cd-edit-form">

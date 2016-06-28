@@ -6,9 +6,9 @@ module Devx
     require 'acts-as-taggable-on'
 
     ## Configuration
+    config.assets.paths << "#{Devx::Engine.root}/app/assets/documents"
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
     config.active_job.queue_adapter = :delayed_job
-    # Delayed::Web::Job.backend = 'active_record'
 
     config.to_prepare do
       Devise::SessionsController.layout 'devx/login'
@@ -36,6 +36,7 @@ module Devx
       app.config.assets.precompile += app.config.assets.precompile += %w( ckeditor/* )
       app.config.assets.precompile += %w( dj_mon/dj_mon.js dj_mon/dj_mon.css)
       app.config.assets.precompile += app.config.assets.precompile += %w( devx/* )
+      app.config.assets.precompile += app.config.assets.precompile += %w( documents/* )
     end
 
     initializer :append_migrations do |app|

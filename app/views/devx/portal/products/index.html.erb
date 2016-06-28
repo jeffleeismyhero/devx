@@ -11,15 +11,21 @@
                 <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
                 <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
                 <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
+              <div class="cd-edit-form">
+              <%= search_form_for @q, url: devx.portal_products_path do |f| %>
+                  <%= f.search_field :name_cont %>
+                  <%= f.submit %>
+              <% end %>
+              </div>
             </div>
         </div>
         <div class="col-12 columns">
-            <table width="100%">
+            <table>
                 <thead>
-                    <tr style="background-color:#ACCC38;">
-                        <th style="color:#084269; padding:10px; text-align:left; width:10%;">Name</th>
-                        <th style="color:#084269; padding:10px; text-align:left; width:40%;">Price</th>
-                        <th style="color:#084269; padding:10px; text-align:left; width:20%;">&nbsp;</th>
+                    <tr>
+                        <th><%= sort_link @q, :name %></th>
+                        <th><%= sort_link @q, :price %></th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>

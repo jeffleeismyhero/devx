@@ -11,7 +11,27 @@
         <%= f.label :image, 'Header image' %>
         <%= f.file_field :image %>
     </div>
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :moderators, 'Header image' %>
+        <%= f.select :moderators, Devx::Person.all.faculty, { }, { multiple: true, class: 'select2-multiple' } %>
+    </div>
 </div>
+
+<% if !@sport.new_record? %>
+    <div class="col-8 columns no-padding">
+        <div class="col-12 columns">
+            <h3>Roster</h3>
+        </div>
+
+      <%= content_tag 'div', class: 'nested-attributes' do %>
+        <%= f.fields_for :sport_teams do |l| %>
+          <%= render partial: 'sport_team_fields', locals: { f: l } %>
+        <% end %>
+      <% end %>
+      <%= link_to_add_fields 'Add Player', f, :sport_teams, nil, 'sport_team_fields', '' %>
+    </div>
+<% end %>
+
 <div class="col-12 columns cd-update-form" style="margin-top:20px;">
     <%= f.submit %>
 </div>

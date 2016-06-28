@@ -7,6 +7,9 @@ module Devx
     layout 'devx/portal'
 
     def index
+      @q = @roles.search(params[:q])
+      @q.sorts = 'name asc'
+      @roles = @q.result(distinct: true)
     end
 
     def edit

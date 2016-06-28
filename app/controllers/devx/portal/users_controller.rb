@@ -9,6 +9,10 @@ module Devx
   	load_and_authorize_resource :user, class: 'Devx::User'
   	
   	def index
+      @q = @users.search(params[:q])
+      @q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
+      @users = @q.result(distinct: true)
+
       respond_to do |format|
         format.html
         format.xlsx do

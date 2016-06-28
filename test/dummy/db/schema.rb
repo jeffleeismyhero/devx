@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160626212241) do
+ActiveRecord::Schema.define(version: 20160628022413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -212,12 +212,20 @@ ActiveRecord::Schema.define(version: 20160626212241) do
     t.integer  "calendar_id"
   end
 
+  create_table "devx_extracurricular_teams", force: :cascade do |t|
+    t.integer  "extracurricular_id"
+    t.integer  "person_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "devx_extracurriculars", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.string   "image"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "person_id"
   end
 
   create_table "devx_faqs", force: :cascade do |t|
@@ -298,24 +306,6 @@ ActiveRecord::Schema.define(version: 20160626212241) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "devx_members", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "position"
-    t.string   "department"
-    t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "phone"
-    t.string   "email"
-    t.string   "website"
-    t.string   "photo"
-    t.text     "biography"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "devx_menu_pages", force: :cascade do |t|
     t.integer  "menu_id"
     t.integer  "page_id"
@@ -370,9 +360,12 @@ ActiveRecord::Schema.define(version: 20160626212241) do
     t.integer  "zip"
     t.string   "email"
     t.string   "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "uuid"
+    t.string   "position"
+    t.boolean  "active"
+    t.string   "mobile_number"
   end
 
   create_table "devx_products", force: :cascade do |t|
@@ -433,10 +426,22 @@ ActiveRecord::Schema.define(version: 20160626212241) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_sport_teams", force: :cascade do |t|
+    t.integer  "sport_id"
+    t.integer  "person_id"
+    t.integer  "jersey_number"
+    t.string   "position"
+    t.string   "height"
+    t.string   "weight"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "devx_sports", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "person_id"
   end
 
   create_table "devx_students", force: :cascade do |t|

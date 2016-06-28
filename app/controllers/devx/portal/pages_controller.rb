@@ -7,6 +7,10 @@ module Devx
     load_and_authorize_resource :page, class: 'Devx::Page', except: :show
 
     def index
+      @q = @pages.search(params[:q])
+      @q.sorts = 'name asc' if @q.sorts.empty?
+      @pages = @q.result(distinct: true)
+      
       respond_to do |format|
         format.html
         format.xlsx do

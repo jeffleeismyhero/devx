@@ -151,7 +151,27 @@ h1 {
 }
 
 table {
-    border-spacing: 0px;
+  width:100%;
+  border-spacing: 0px;
+}
+
+table thead > tr {
+  background-color:#ACCC38;
+}
+
+table thead th {
+  padding:10px;
+  color:#084269;
+  text-align:left;
+}
+
+table tbody td {
+  padding:10px;
+  border-bottom:1px solid #ccc;
+}
+
+table tbody td:last-child {
+  text-align:right;
 }
 
 .primary {

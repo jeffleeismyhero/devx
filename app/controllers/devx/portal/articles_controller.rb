@@ -8,6 +8,10 @@ module Devx
     load_and_authorize_resource :article, class: 'Devx::Article'
 
     def index
+      @q = @articles.search(params[:q])
+      @q.sorts = 'title asc'
+      @articles = @q.result(distinct: true)
+      
       respond_to do |format|
         format.html
         format.xlsx do

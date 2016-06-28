@@ -7,6 +7,9 @@ module Devx
     load_and_authorize_resource :administration, class: 'Devx::Person'
 
     def index
+      @q = @administrations.search(params[:q])
+      @q.sorts = 'name asc' if @q.sorts.empty?
+      @administrations = @q.result(distinct: true)
     end
 
     def new
@@ -49,7 +52,7 @@ module Devx
     private
 
     def administration_params
-      accessible = [ :prefix, :first_name, :last_name, :suffix, :gender, :birthdate, :address, :city, :state, :zip, :email, :phone ]
+      accessible = [ :uuid, :prefix, :first_name, :last_name, :suffix, :gender, :birthdate, :address, :city, :state, :zip, :email, :phone, :mobile_number, :association_list, :active ]
       params.require(:person).permit(accessible)
     end
   end
