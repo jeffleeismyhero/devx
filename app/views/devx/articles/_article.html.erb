@@ -1,0 +1,32 @@
+<% @words = [] %>
+<% strip_tags(article.content).try(:split, ' ').try(:take, 100).each do |word| @words.push(word) end %>
+
+<% if app_settings['article_list_template'] == 'Blog Style 1' %>
+    <div class="medium-10 medium-offset-1 columns article wow fadeInUpBig">
+        <div class="medium-6 columns">
+            <h5><%= article.title %></h5>
+            <span style="font-family:Lato, sans-serif"><%= article.published_at %></span>
+            <p>
+                <%= article.content.try(:truncate_words, 40) %>
+            </p>
+            <a href="#" class="button primary small" style="margin-bottom:20px;">Read Post</a>
+        </div>
+        <div class="medium-6 columns" style="text-align:right">
+            <img src="http://placehold.it/300x225" width="100%">
+        </div>
+    </div>
+<% else %>
+    <div class="container article-post">
+        <div class="row">
+            <%= link_to "<div class=\"large-12 columns\">
+                <div class=\"large-1 columns\">
+                    <span style=\"font-size:2rem\">#{article.published_at.try(:strftime, '%m.%d.%y')}</span>
+                </div>
+                <div class=\"large-9 columns\">
+                    <span style=\"font-size:3rem;font-weight:600;line-height:3.2rem\">#{article.title}</span>
+                    <p style=\"margin:20px 0px 0px;max-width:100%\">#{@words.join(' ')}...</p>
+                </div>
+            </div>".html_safe, article_path(article) %>
+        </div>
+    </div>
+<% end %>

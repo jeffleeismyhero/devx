@@ -10,8 +10,18 @@
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[default_timezone]' %><br>
+    <%= label_tag 'settings[default_timezone]', 'Default Timezone' %><br>
     <%= select_tag 'settings[default_timezone]', options_for_select(ActiveSupport::TimeZone.us_zones), { prompt: 'Select timezone' } %>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+    <%= label_tag 'settings[article_list_template]', 'Article List Template' %><br>
+    <%= select_tag 'settings[article_list_template]', options_for_select(['List Style 1', 'Blog Style 1']), { prompt: 'Select Article List Style' } %>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+    <%= label_tag 'settings[article_view_template]', 'Article View Template' %><br>
+    <%= select_tag 'settings[article_view_template]', options_for_select(['Style 1']), { prompt: 'Select Article Style' } %>
 </div>
 
 

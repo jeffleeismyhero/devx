@@ -5,6 +5,7 @@ module Devx
     load_resource :article, class: 'Devx::Article'
 
     def index
+      @articles = @articles.page(params[:page])
     end
 
     def show
