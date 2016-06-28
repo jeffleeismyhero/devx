@@ -3,6 +3,8 @@ module Devx
   	extend FriendlyId
   	friendly_id :name, use: [ :slugged, :finders ]
 
+  	scope :active, -> { where(active: true) }
+
   	has_many :layout_javascript
   	has_many :layouts, through: :layout_javascript
 

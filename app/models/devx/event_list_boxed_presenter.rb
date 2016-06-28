@@ -25,7 +25,7 @@ module Devx
     private
 
     def calendar
-      Devx::Calendar.find(@attributes[:id])
+      Devx::Calendar.find_by(id: @attributes[:id])
     end
 
     def get_events

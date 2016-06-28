@@ -8,7 +8,7 @@
         <div class="slider round"></div>
     </label>
 </div>
-<%= Time.zone.now %>
+
 <div class="col-6 columns cd-edit-form">
     <%= label_tag 'settings[default_timezone]' %><br>
     <%= select_tag 'settings[default_timezone]', options_for_select(ActiveSupport::TimeZone.us_zones), { prompt: 'Select timezone' } %>

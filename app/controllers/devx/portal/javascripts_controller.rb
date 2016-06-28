@@ -51,7 +51,7 @@ module Devx
     private
 
     def javascript_params
-    	accessible = [ :name, :content ]
+    	accessible = [ :name, :content, :active ]
     	params.require(:javascript).permit(accessible)
     end
   end

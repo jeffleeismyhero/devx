@@ -10,7 +10,7 @@ module Devx
 
 
     def full_title(value = '')
-      base_title = app_branding.company_name
+      base_title = app_branding.company_name.to_s
 
       if value.present?
         value + ' | ' + base_title
@@ -20,7 +20,7 @@ module Devx
     end
 
     def sys_title(value = '')
-      base_title = app_branding.site_name
+      base_title = app_branding.site_name.to_s
 
       if value.present?
         value + ' | ' + base_title
@@ -34,10 +34,10 @@ module Devx
         if page.is_home == true
           page.meta_title
         else
-          page.meta_title + ' | ' + app_branding.company_name
+          page.meta_title + ' | ' + app_branding.company_name.to_s
         end
       else
-        page.name + ' | ' + app_branding.company_name
+        page.name + ' | ' + app_branding.company_name.to_s
       end
     end
 
