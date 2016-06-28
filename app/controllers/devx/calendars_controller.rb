@@ -3,8 +3,15 @@ require_dependency "devx/application_controller"
 module Devx
   class CalendarsController < ApplicationController
     load_resource :calendar, class: 'Devx::Calendar'
+    layout :determine_layout
 
     def index
+      if app_settings['newsfeed_layout'].present?
+        @layout = Devx::Layout.find(app_settings['newsfeed_layout'])
+      end
+
+      @page = Devx::Page.new(name: 'Calendar', layout: @layout)
+
       @q = @calendars.active.search(params[:q])
       @calendar = @q.result.first
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
@@ -37,6 +44,17 @@ module Devx
       else
         redirect_to devx.calendars_path,
         notice: "You have already subscribed to this calendar"
+      end
+    end
+
+    private
+
+
+    def determine_layout
+      if app_settings['newsfeed_layout'].present?
+        'devx/custom'
+      else
+        'devx/application'
       end
     end
   end

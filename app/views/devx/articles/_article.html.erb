@@ -7,9 +7,9 @@
             <h5><%= article.title %></h5>
             <span style="font-family:Lato, sans-serif"><%= ldate article.published_at %></span>
             <p>
-                <%= article.content.try(:truncate_words, 40) %>
+                <%= strip_tags(article.content).try(:truncate_words, 40) %>
             </p>
-            <a href="#" class="button primary small" style="margin-bottom:20px;">Read Post</a>
+            <%= link_to 'Read Post', devx.article_path(article), class: 'button primary small', style: 'margin-bottom:20px' %>
         </div>
         <% if article.image.present? %>
             <div class="medium-6 columns" style="text-align:right">

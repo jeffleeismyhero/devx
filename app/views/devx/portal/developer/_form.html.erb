@@ -24,6 +24,16 @@
     <%= select_tag 'settings[article_view_template]', options_for_select(['Style 1'], @settings.settings['article_view_template']), { prompt: 'Select Article Style' } %>
 </div>
 
+<div class="col-6 columns cd-edit-form">
+    <%= label_tag 'settings[newsfeed_layout]', 'Newsfeed Layout' %><br>
+    <%= select_tag 'settings[newsfeed_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['newsfeed_layout']), { prompt: 'Select Newsfeed Layout' } %>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+    <%= label_tag 'settings[calendar_layout]', 'Calendar Layout' %><br>
+    <%= select_tag 'settings[calendar_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['calendar_layout']), { prompt: 'Select Calendar Layout' } %>
+</div>
+
 
 <div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[admissions]', 'Admissions' %><br>

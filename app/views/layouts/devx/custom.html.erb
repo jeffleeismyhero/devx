@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
   <% end %>
   <%= stylesheet_link_tag "devx/application", media: "all" %>
-  <% @page.layout.stylesheets.try(:each) do |stylesheet| %>
+  <% @page.layout.try(:stylesheets).try(:each) do |stylesheet| %>
     <link rel="stylesheet" type="text/css" href="<%= stylesheet_path(stylesheet) %>.css">
   <% end %>
   <link rel="icon" type="image/png" href="<%= app_branding.favicon.try(:url) %>" />   
