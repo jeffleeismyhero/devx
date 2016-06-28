@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "font-awesome-rails"
   s.add_runtime_dependency "wow-rails"
   s.add_runtime_dependency "animate-rails"
+  s.add_runtime_dependency "owlcarousel-rails"
 
 
   ## WYSIWYG Editor

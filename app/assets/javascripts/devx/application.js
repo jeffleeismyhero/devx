@@ -16,11 +16,16 @@
 //= require ckeditor/init
 //= require select2
 //= require dropzone
+//= require owl.carousel
+//= require wow
 //= require_tree ./ckeditor
 //= require_tree .
 
 $(function()
 {
+
+  // Activate WOW
+  new WOW().init();
 
   // Notification
   if($(".cd-notification").is(":visible"))
