@@ -1,19 +1,21 @@
 <% provide(:title, 'News') %>
 
-<% if @articles.any? %>
-    <%= render @articles %>
-<% else %>
-    <div class="container" style="padding:120px 0px">
-        <div class="row">
-            <div class="large-12 columns">
-                <h4 style="text-align:center">No posts to display.</h4>
-            </div>
-        </div>
+
+<div class="container" style="padding:120px 0px">
+    <div class="row">
+		 <% if @articles.any? %>
+		    <%= render @articles %>
+		<% else %>
+	       <div class="large-12 columns">
+	            <h4 style="text-align:center">No posts to display.</h4>
+	        </div>
+	     <% end %>
     </div>
-<% end %>
+</div>
 
 <div class="container">
     <div class="row full-width">
+    	<div class="large-12 columns">
         <% if @articles.any? %>
             <%= will_paginate @articles, class: 'apple_pagination' %>
         <% end %>
