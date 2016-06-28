@@ -107,7 +107,7 @@ module Devx
                 title: title,
                 short_description: description,
                 content: content,
-                published_at: published_at,
+                published_at: published_at.to_datetime,
                 user_id: Devx::User.get_user(author),
                 tag_list: categories,
                 keyword_list: keywords

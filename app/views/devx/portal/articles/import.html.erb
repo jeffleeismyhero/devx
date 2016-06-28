@@ -6,7 +6,7 @@
             <h1><%= yield(:title) %></h1>
         </div>
         <div class="col-12 columns" style="padding:20px 0.9375em;">
-            <%= link_to '<small>Download Template</small>'.html_safe, '#' %>
+            <%= link_to '<small>Download Template</small>'.html_safe, asset_path('devx/article_import_template.csv'), target: '_blank' %>
         </div>
         <div class="col-12 columns" style="padding-bottom:20px;">
             <%= form_for @import, url: devx.portal_articles_import_path, method: :post do |f| %>

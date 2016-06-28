@@ -20,7 +20,7 @@ module Devx
     acts_as_taggable_on :keywords
 
     def should_generate_new_friendly_id?
-      name_changed?
+      title_changed?
     end
 
     def add_publish_date

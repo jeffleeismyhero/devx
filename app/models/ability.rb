@@ -23,7 +23,6 @@ class Ability
       can :manage, Devx::Event
       can :manage, Devx::Venue
       can :manage, Devx::Article
-      can :manage, Devx::Branding
 
       if Devx::ApplicationSetting.find_or_create_by(id: 1).settings['alumni_database']
         can :manage, Devx::Alumni
