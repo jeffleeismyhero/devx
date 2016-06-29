@@ -38,14 +38,70 @@
 <div class="container" style="margin-bottom:40px;" id="grid-view" class="calendar-view">
     <div class="row gridview show">
       <% @dates.try(:each) do |date| %>
-        <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
-            <div style="background-color: #fff;border:1px solid #384967;box-shadow: 0px 4px 4px #cccccc;overflow:hidden">
-                <div style="border-bottom:1px solid #384967; background-color:#DBE2E9;">
-                    <h6 style="display:inline-block; background-color:#384967; padding:10px; color:#fff; font-family:lato; margin:0; font-weight:100;"><%= date.try(:strftime, '%^a') %></h6>
-                    <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.try(:strftime, '%^b %d') %></h6>
+        <% if @calendar.calendar_type == 'Standard' %>
+          <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
+              <div style="background-color: #fff;border:1px solid #384967;box-shadow: 0px 4px 4px #cccccc;overflow:hidden">
+                  <div style="border-bottom:1px solid #384967; background-color:#DBE2E9;">
+                      <h6 style="display:inline-block; background-color:#384967; padding:10px; color:#fff; font-family:lato; margin:0; font-weight:100;"><%= date.try(:strftime, '%^a') %></h6>
+                      <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.try(:strftime, '%^b %d') %></h6>
+                  </div>
+                  <div style="height:180px;overflow-y:scroll">
+                      <ul class="accordion">
+                        <% @events.where('start_time > ? AND start_time < ?', date.beginning_of_day, date.end_of_day).try(:each) do |event| %>
+                          <li style="margin-bottom:.1rem; ">
+                            <div class="accordion-title"><%= event.name %></div>
+                            <div class="accordion-content">
+                              <span><%= event.start_time.try(:strftime, '%B %d %l:%M %P') %><%= event.end_time.try(:strftime, ' - %B %d %l:%M %P') %></span>
+                              <span><%= event.venue.try(:full_address) %></span>
+                            </div>
+                          </li>
+                        <% end %>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+        <% elsif @calendar.calendar_type == 'Google Calendar' %>
+          <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
+              <div style="background-color: #fff;border:1px solid #384967;box-shadow: 0px 4px 4px #cccccc;overflow:hidden">
+                  <div style="border-bottom:1px solid #384967; background-color:#DBE2E9;">
+                      <h6 style="display:inline-block; background-color:#384967; padding:10px; color:#fff; font-family:lato; margin:0; font-weight:100;"><%= date.to_date.try(:strftime, '%^a') %></h6>
+                      <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
+                  </div>
+                  <div style="height:180px;overflow-y:scroll">
+                      <ul class="accordion">
+                        <% @a.try(:each) do |event| %>
+                          <% if event[:start_time] > date.to_datetime.beginning_of_day && event[:start_time] < date.to_datetime.end_of_day %>
+                            <li style="margin-bottom:.1rem; ">
+                              <div class="accordion-title"><%= event[:name] %></div>
+                              <div class="accordion-content">
+                                <span><%= event[:start_time].try(:in_time_zone, app_settings['default_timezone']).try(:strftime, '%B %d %l:%M %P') %><%= event[:end_time].try(:in_time_zone, app_settings['default_timezone']).try(:strftime, ' - %B %d %l:%M %P') %></span>
+                                <span><%= event[:venue] %></span>
+                              </div>
+                            </li>
+                          <% end %>
+                        <% end %>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+</div>
+
+
+<div class="container" style="margin-bottom:40px;" id="list-view" class="calendar-view">
+    <div class="row listview hide">
+      <% @dates.try(:each) do |date| %>
+        <% if @calendar.calendar_type == 'Standard' %>
+          <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
+              <div style="box-shadow: 0px 4px 4px #cccccc;">
+                <div style="border:1px solid #384967; background-color:#DBE2E9;">
+                    <h6 style="display:inline-block; background-color:#384967; padding:10px; color:#fff; font-family:lato; margin:0; font-weight:100;"><%= date.to_date.try(:strftime, '%^a') %></h6>
+                    <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
                 </div>
-                <div style="height:180px;overflow-y:scroll">
-                    <ul class="accordion">
+                <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
+                    <ul class="accordion" style="margin:0;">
                       <% @events.where('start_time > ? AND start_time < ?', date.beginning_of_day, date.end_of_day).try(:each) do |event| %>
                         <li style="margin-bottom:.1rem; ">
                           <div class="accordion-title"><%= event.name %></div>
@@ -56,37 +112,34 @@
                         </li>
                       <% end %>
                     </ul>
-                </div>
-            </div>
-        </div>
-      <% end %>
-    </div>
-</div>
-
-<div class="container" style="margin-bottom:40px;" id="list-view" class="calendar-view">
-    <div class="row listview hide">
-      <% @dates.try(:each) do |date| %>
-        <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
-            <div style="box-shadow: 0px 4px 4px #cccccc;">
-              <div style="border:1px solid #384967; background-color:#DBE2E9;">
-                  <h6 style="display:inline-block; background-color:#384967; padding:10px; color:#fff; font-family:lato; margin:0; font-weight:100;">MON</h6>
-                  <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;">MAY 3</h6>
+                  </div>
               </div>
-              <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
-                  <ul class="accordion" style="margin:0;">
-                    <% @events.where('start_time > ? AND start_time < ?', date.beginning_of_day, date.end_of_day).try(:each) do |event| %>
-                      <li style="margin-bottom:.1rem; ">
-                        <div class="accordion-title"><%= event.name %></div>
-                        <div class="accordion-content">
-                          <span><%= event.start_time.try(:strftime, '%B %d %l:%M %P') %><%= event.end_time.try(:strftime, ' - %B %d %l:%M %P') %></span>
-                          <span><%= event.venue.try(:full_address) %></span>
-                        </div>
-                      </li>
-                    <% end %>
-                  </ul>
+          </div>
+        <% elsif @calendar.calendar_type == 'Google Calendar' %>
+          <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
+              <div style="box-shadow: 0px 4px 4px #cccccc;">
+                <div style="border:1px solid #384967; background-color:#DBE2E9;">
+                    <h6 style="display:inline-block; background-color:#384967; padding:10px; color:#fff; font-family:lato; margin:0; font-weight:100;"><%= date.to_date.try(:strftime, '%^a') %></h6>
+                    <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
                 </div>
-            </div>
-        </div>
+                <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
+                    <ul class="accordion" style="margin:0;">
+                      <% @a.try(:each) do |event| %>
+                        <% if event[:start_time] > date.to_datetime.beginning_of_day && event[:start_time] < date.to_datetime.end_of_day %>
+                          <li style="margin-bottom:.1rem; ">
+                            <div class="accordion-title"><%= event[:name] %></div>
+                            <div class="accordion-content">
+                              <span><%= event[:start_time].try(:in_time_zone, app_settings['default_timezone']).try(:strftime, '%B %d %l:%M %P') %><%= event[:end_time].try(:in_time_zone, app_settings['default_timezone']).try(:strftime, ' - %B %d %l:%M %P') %></span>
+                              <span><%= event[:venue] %></span>
+                            </div>
+                          </li>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                  </div>
+              </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
 </div>

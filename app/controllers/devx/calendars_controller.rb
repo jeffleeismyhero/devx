@@ -20,18 +20,34 @@ module Devx
         @calendar = Devx::Calendar.active.find(app_settings['default_calendar']) unless params[:q].present?
       end
 
-      @events = @calendar.events.for(Time.now, Time.now)
 
+      if @calendar.calendar_type == 'Standard'
+        @events = @calendar.events.for(Time.now, Time.now)
 
-      @dates = []
-      @events.try(:each) do |event|
-        if !@dates.include?(event.start_time_date)
-          @dates.push(event.start_time_date)
+        @dates = []
+        @events.try(:each) do |event|
+          if !@dates.include?(event.start_time_date)
+            @dates.push(event.start_time_date)
+          end
+        end     
+      elsif @calendar.calendar_type == 'Google Calendar'
+        @google_events = @calendar.get_google_events
+
+        @a = []
+        @google_events.try(:each) do |e|
+          hash = { name: e.title, date: e.start_time.to_datetime.strftime('%Y-%m-%d'), start_time: e.start_time.to_datetime, end_time: e.end_time.to_datetime, venue: e.location }
+          @a.push(hash)
+        end
+
+        @dates = []
+
+        @a.map{ |x| x[:date] }.uniq.try(:each) do |event|
+          @dates.push(event)
         end
       end
 
-    rescue
-      redirect_to '/404.html'
+    # rescue
+    #   redirect_to '/404.html'
     end
 
     def subscribe

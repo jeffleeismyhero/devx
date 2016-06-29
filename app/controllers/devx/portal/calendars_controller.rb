@@ -26,7 +26,7 @@ module Devx
 
     def create
         if @calendar.valid? && @calendar.save
-            redirect_to devx.portal_calendars_path,
+            redirect_to devx.edit_portal_calendar_path(@calendar),
             notice: "Successfully saved calendar"
         else
             render :new,
@@ -36,7 +36,7 @@ module Devx
 
     def update
         if @calendar.valid? && @calendar.update(calendar_params)
-            redirect_to devx.portal_calendars_path,
+            redirect_to devx.edit_portal_calendar_path(@calendar),
             notice: "Successfully updated calendar"
         else
             render :edit,
