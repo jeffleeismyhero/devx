@@ -6,8 +6,8 @@ module Devx
     layout :determine_layout
 
     def index
-      if app_settings['newsfeed_layout'].present?
-        @layout = Devx::Layout.find(app_settings['newsfeed_layout'])
+      if app_settings['calendar_layout'].present?
+        @layout = Devx::Layout.find(app_settings['calendar_layout'])
       end
 
       @page = Devx::Page.new(name: 'Calendar', layout: @layout)
