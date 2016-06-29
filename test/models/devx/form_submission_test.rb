@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Devx
-  class RegistrationSubmissionTest < ActiveSupport::TestCase
+  class FormSubmissionTest < ActiveSupport::TestCase
     # test "the truth" do
     #   assert true
     # end

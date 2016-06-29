@@ -1,8 +1,0 @@
-module Devx
-  class RegistrationSubmission < ActiveRecord::Base
-    belongs_to :registration
-    serialize :submission_content, Hash
-
-    validates :submission_content, presence: true
-  end
-end

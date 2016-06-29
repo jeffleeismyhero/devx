@@ -70,6 +70,7 @@ Devx::Engine.routes.draw do
     end
     resources :roles
     resources :venues
+    resources :forms
     resources :slideshows
     resources :media
     resources :administration

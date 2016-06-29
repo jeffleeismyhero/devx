@@ -46,8 +46,8 @@ module Devx
         end
       end
 
-    # rescue
-    #   redirect_to '/404.html'
+    rescue
+      redirect_to '/404.html'
     end
 
     def subscribe
