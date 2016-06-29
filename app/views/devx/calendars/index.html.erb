@@ -1,6 +1,5 @@
 <% provide(:title, 'Calendar') %>
-<%= @dates.inspect %>
-<%= @a.inspect %>
+
 <div class="container banner" style="margin-bottom:40px; padding-bottom:20px;background-color:#e9e9e9">
     <div class="row">
         <div class="medium-10 medium-offset-1 large-10 large-offset-1 columns" style="margin-bottom:20px;">
@@ -13,11 +12,11 @@
               <li style="display:inline-block;"><a id="grid" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-th-large" style="font-size:1.8rem;" aria-hidden="true"></i> Grid View</a></li>
               <li style="display:inline-block;"><a id="list" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-list-alt" style="font-size:1.8rem;" aria-hidden="true"></i></i> List View</a></li>
               <li style="display:inline-block;"><a href="#" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-print" style="font-size:1.8rem;" aria-hidden="true"></i> Print</a></li>
-              <% if user_signed_in? %>
-                <li style="display:inline-block;">
+              <li style="display:inline-block;">
+                <% if user_signed_in? %>
                   <%= link_to "<i class=\"fa fa-plus\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Subscribe".html_safe, devx.subscribe_calendar_path(@calendar), method: :post, style: 'font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;' %>
-                </li>
-              <% end %>
+                <% end %>
+              </li>
           </ul>
       </div>
       <div class="small-12 medium-10 medium-offset-1 large-10 large-offset-1 columns">
@@ -71,7 +70,7 @@
                   <div style="height:180px;overflow-y:scroll">
                       <ul class="accordion">
                         <% @a.try(:each) do |event| %>
-                          <% if event[:start_time].try(:in_time_zone, app_settings['default_timezone']) > date.to_datetime.beginning_of_day && event[:start_time].try(:in_time_zone, app_settings['default_timezone']) < date.to_datetime.end_of_day %>
+                          <% if event[:date] == date %>
                             <li style="margin-bottom:.1rem; ">
                               <div class="accordion-title"><%= event[:name] %></div>
                               <div class="accordion-content">
@@ -126,7 +125,7 @@
                 <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
                     <ul class="accordion" style="margin:0;">
                       <% @a.try(:each) do |event| %>
-                        <% if event[:start_time].try(:in_time_zone, app_settings['default_timezone']) > date.to_datetime.beginning_of_day && event[:start_time].try(:in_time_zone, app_settings['default_timezone']) < date.to_datetime.end_of_day %>
+                        <% if event[:date] == date %>
                           <li style="margin-bottom:.1rem; ">
                             <div class="accordion-title"><%= event[:name] %></div>
                             <div class="accordion-content">
