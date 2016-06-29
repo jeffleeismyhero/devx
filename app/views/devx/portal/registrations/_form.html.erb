@@ -1,7 +1,17 @@
-<div class="col-6 columns cd-edit-form">
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-</div>
-<div class="col-12 columns cd-update-form">
-  <%= f.submit %>
+<div class="col-8 columns no-padding">
+	<div class="col-6 columns cd-edit-form">
+	  <%= f.label :name %>
+	  <%= f.text_field :name %>
+	</div>
+	<div class="col-6 columns cd-edit-form">
+	  <%= f.label :cost %>
+	  <%= f.text_field :cost, class: 'currency-field' %>
+	</div>
+	<div class="col-6 columns cd-edit-form">
+	  <%= f.label :submission_recipients %>
+	  <%= f.text_field :submission_recipients %>
+	</div>
+	<div class="col-12 columns cd-update-form">
+	  <%= f.submit %>
+	</div>
 </div>

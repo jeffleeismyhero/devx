@@ -71,7 +71,7 @@ module Devx
     private
 
     def registration_params
-      accessible = [ :name ]
+      accessible = [ :name, :cost, :submission_recipients ]
       params.require(:registration).permit(accessible)
     end
   end

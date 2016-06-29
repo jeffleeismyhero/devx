@@ -32,12 +32,13 @@ module Devx
         subject: @subject
     end
 
-    def registration_completed(user, registration)
-      @user = user
+    def registration_completed(registration, submission, recipient)
+      @recipient = recipient
       @registration = registration
-      @subject = "Registration completed for #{@registation.name}"
+      @submission = submission
+      @subject = "Registration completed for #{@registration.name}"
 
-      mail to: @user.email,
+      mail to: @recipient,
         subject: @subject
     end
   end

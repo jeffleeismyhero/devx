@@ -22,6 +22,11 @@
           </tr>
         </thead>
         <tbody>
+          <% @registration.registration_submissions.try(:each) do |submission| %>
+            <tr>
+              <td><%= link_to 'View', devx.portal_registration_registration_submission_path(@registration, submission) %></td>
+            </tr>
+          <% end %>
           <% @registration.child_registrations.try(:each) do |child| %>
             <tr>
               <td><%= child.child.full_name %></td>
@@ -37,7 +42,7 @@
           <% end %>
         </tbody>
       </table>
-      <span>Total registered: <%= @registration.child_registrations.count %></span>
+      <span>Total registered: <%= @registration.registration_submissions.count %></span>
 
       <h3>Add Child</h3>
       <%= form_for @registration, url: devx.enroll_portal_registration_path(@registration), method: :post do |f| %>

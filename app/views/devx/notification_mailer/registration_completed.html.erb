@@ -1,6 +1,9 @@
 <html>
 <body>
-  <p><%= @user.first_name %>,</p>
-  <p>You have successfully registered for <%= @registration.name %>.</p>
+	<%= @registration.name %> has been submitted<br />
+
+	<% @submission.try(:each) do |key,value| %>
+		<%= "#{key}: #{value}" %>
+	<% end %>
 </body>
 </html>

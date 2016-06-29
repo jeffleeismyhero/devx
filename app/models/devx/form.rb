@@ -2,6 +2,7 @@ module Devx
   class Form < ActiveRecord::Base
     extend FriendlyId
     friendly_id :name, use: [ :slugged, :finders ]
+    serialize :submission_content, Hash
 
     mount_uploader :image, ImageUploader
 

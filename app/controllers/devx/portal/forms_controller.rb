@@ -20,7 +20,7 @@ module Devx
       @form.registration_id = params[:registration_id]
       
       if @form.valid? && @form.save
-        redirect_to devx.portal_registrations_path(@registration),
+        redirect_to devx.edit_portal_registration_form_path(@registration, @form),
         notice: "Successfully saved form"
       else
         render :new,
@@ -32,7 +32,7 @@ module Devx
       @form.registration_id = params[:registration_id]
       
       if @form.valid? && @form.update(form_params)
-        redirect_to devx.portal_registrations_path(@registration),
+        redirect_to devx.edit_portal_registration_form_path(@registration, @form),
         notice: "Successfully updated form"
       else
         render :new,

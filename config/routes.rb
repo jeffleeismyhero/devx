@@ -74,6 +74,7 @@ Devx::Engine.routes.draw do
     resources :media
     resources :administration
     resources :registrations do
+      resources :registration_submissions, path: 'submissions', only: :show
       resources :forms
       member do
         post 'enroll'
