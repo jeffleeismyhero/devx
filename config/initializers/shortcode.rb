@@ -15,7 +15,8 @@ Shortcode.setup do |config|
     :athletics,
     :faqs,
     :twitter,
-    :facebook
+    :facebook,
+    :form
   ]
 end
 
@@ -33,5 +34,6 @@ Shortcode.register_presenter(
   Devx::AthleticsPresenter,
   Devx::FaqsPresenter,
   Devx::FacebookPresenter,
-  Devx::TwitterPresenter
+  Devx::TwitterPresenter,
+  Devx::FormPresenter
 )

@@ -27,6 +27,7 @@ Devx::Engine.routes.draw do
   match '/calendar', to: 'calendars#index', via: [ :get, :post ]
 
   resources :registrations, only: [ :show, :create ]
+  resources :forms, only: [ :show, :create ]
   resources :stylesheets, only: :show, defaults: { format: 'css' }
   resources :javascripts, only: :show, defaults: { format: 'js' }
 
@@ -70,11 +71,16 @@ Devx::Engine.routes.draw do
     end
     resources :roles
     resources :venues
-    resources :forms
+    resources :forms do
+      member do
+        get 'submissions'
+      end
+    end
     resources :slideshows
     resources :media
     resources :administration
     resources :registrations do
+      resources :forms
       resources :registration_submissions, path: 'submissions', only: :show
       member do
         post 'enroll'

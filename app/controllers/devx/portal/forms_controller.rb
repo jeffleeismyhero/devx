@@ -4,6 +4,7 @@ module Devx
   class Portal::FormsController < ApplicationController
     before_filter :authenticate_user!
     load_and_authorize_resource :form, class: 'Devx::Form'
+    load_and_authorize_resource :form_submission, class: 'Devx::FormSubmission'
     layout 'devx/portal'
 
     def index
@@ -36,6 +37,11 @@ module Devx
     end
 
     def destroy
+    end
+
+
+    def submissions
+      @form = Devx::Form.find(param[:id])
     end
 
     
