@@ -4,7 +4,6 @@ module Devx
   class Portal::FormsController < ApplicationController
     before_filter :authenticate_user!
     load_and_authorize_resource :form, class: 'Devx::Form'
-    load_and_authorize_resource :registration, class: 'Devx::Registration'
     layout 'devx/portal'
 
     def index
@@ -17,10 +16,8 @@ module Devx
     end
 
     def create
-      @form.registration_id = params[:registration_id]
-      
       if @form.valid? && @form.save
-        redirect_to devx.edit_portal_registration_form_path(@registration, @form),
+        redirect_to devx.edit_portal_form_path(@form),
         notice: "Successfully saved form"
       else
         render :new,
@@ -28,11 +25,9 @@ module Devx
       end
     end
 
-    def update
-      @form.registration_id = params[:registration_id]
-      
+    def update      
       if @form.valid? && @form.update(form_params)
-        redirect_to devx.edit_portal_registration_form_path(@registration, @form),
+        redirect_to devx.edit_portal_form_path(@form),
         notice: "Successfully updated form"
       else
         render :new,
@@ -47,7 +42,7 @@ module Devx
     private
 
     def form_params
-      accessible = [ :name, :image, :registration_id, fields_attributes: [ :id, :form_id, :name, :field_type, :field_size, :required, :_destroy ] ]
+      accessible = [ :name, :image, fields_attributes: [ :id, :name, :field_type, :field_size, :required, :_destroy ] ]
       params.require(:form).permit(accessible)
     end 
   end
