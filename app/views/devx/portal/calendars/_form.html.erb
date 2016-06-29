@@ -61,23 +61,3 @@
         <%= f.submit %>
     </div>
 </div>
-
-
-<script type="text/javascript">
-    if(document.getElementById("calendar_calendar_type").value == "Google Calendar")
-    {
-        document.getElementById("google_calendar_fields").style.display = "block";
-    }
-
-    document.getElementById("calendar_calendar_type").addEventListener("change", function()
-    {
-        if(this.value == "Google Calendar")
-        {
-            document.getElementById("google_calendar_fields").style.display = "block";
-        }
-        else
-        {
-            document.getElementById("google_calendar_fields").style.display = "none";
-        }
-    });
-</script>

@@ -111,6 +111,24 @@ $(".currency-field").on("blur", function()
 })
 
 
+  // Calendar type onchange event
+  if($("#calendar_calendar_type").val() == "Google Calendar")
+  {
+      $("#google_calendar_fields").css("display", "block");
+  }
+
+  $("#calendar_calendar_type").on("change", function()
+  {
+      if($(this).val() == "Google Calendar")
+      {
+          $("#google_calendar_fields").css("display", "block");
+      }
+      else
+      {
+          $("#google_calendar_fields").css("display", "none");
+      }
+  });
+
 
   // DateTime Picker
   $(".datetimepicker").datetimepicker();
