@@ -36,6 +36,9 @@ module Devx
       @q = @pages.search(params[:q])
       @pages = @q.result
     end
+      
+    def not_found
+    end
 
     private
 

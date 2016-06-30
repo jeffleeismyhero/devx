@@ -82,6 +82,8 @@ Gem::Specification.new do |s|
   ## Social Networks
   s.add_runtime_dependency "twitter"
   s.add_runtime_dependency "koala"
+  s.add_runtime_dependency "social-share-button"
+  s.add_runtime_dependency "shareable"
 
 
   ## Google Calendar Integration

@@ -17,6 +17,7 @@
 //= require select2
 //= require dropzone
 //= require owl.carousel
+//= require social-share-button
 //= require fancybox
 //= require wow
 //= require_tree ./ckeditor
