@@ -48,6 +48,58 @@ module Devx
       end
     end
 
+    def import
+      require 'csv'
+
+      @import = Devx::Import.new(params[:import])
+      @errors = 0
+
+      if request.post?
+        if @import.valid?
+
+          if records = CSV.read(@import.file.path, headers: true)
+            logfile = File.open("#{Rails.root}/log/import.log", "a")
+            logfile.sync = true
+            logger = Logger.new(logfile)
+
+            records.each_with_index do |record, index|
+              if params[:import_type] == 'Faculty'
+                last_name = record[0].to_s.squish
+                first_name = record[1].to_s.squish
+                prefix = record[2].to_s.squish
+                position = record[3].to_s.squish
+                email = record[4].to_s.squish
+                department = record[5].to_s.squish
+
+                person = Devx::Person.new(
+                  prefix: prefix,
+                  first_name: first_name,
+                  last_name: last_name,
+                  email: email,
+                  position: position,
+                  department_list: department,
+                  association_list: 'Faculty'
+                )
+
+                if person.valid?
+                  logger.info "Expecting object to be valid #{person.inspect}"
+                  person.save
+                else
+                  logger.warn "Failed to import object: #{person.inspect}"
+                  person.errors.full_messages.try(:each) do |error|
+                    logger.warn "#{error}"
+                  end
+                  @errors += 1
+                end
+              end
+            end
+
+
+          end
+        end
+      end
+    end
+
 
     private
 

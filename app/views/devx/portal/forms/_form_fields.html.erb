@@ -2,11 +2,15 @@
 
   <div class="col-3 columns cd-edit-form">
     <%= f.label :field_type %>
-    <%= f.select :field_type, %w[text_field email_field check_box payment_fields text_area], {}, { class: 'select2-fixed' } %>
+    <%= f.select :field_type, %w[text_field email_field check_box payment_fields text_area select], {}, { class: 'select2-fixed' } %>
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :name %>
     <%= f.text_field :name %>
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <%= f.label :options %>
+    <%= f.select :options, '', { }, { class: 'select2-multiple' } %>
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :field_size %>

@@ -16,20 +16,6 @@ module Devx
       Devise::PasswordsController.layout 'devx/forgot_password'
     end
 
-    ## E-mail configuration
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.default_url_options = { host: 'devxcms.com' }
-    ActionMailer::Base.smtp_settings = {
-      user_name: 'jcwproductions1',
-      password: 'NolaProductions1284',
-      domain: 'devxcms.com',
-      address: 'smtp.sendgrid.net',
-      port: 587,
-      authentication: :plain,
-      enable_starttls_auto: true
-    }
-
 
     ## Initializers
 

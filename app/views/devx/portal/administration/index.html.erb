@@ -6,7 +6,7 @@
       <h1><%= yield(:title) %></h1>
     </div>
     <div class="col-12 columns" style="padding-bottom:20px;">
-        <i class="fa fa-user-plus" aria-hidden="true"></i> <%= link_to 'Add Person', new_portal_administration_path %>
+        <i class="fa fa-user-plus" aria-hidden="true"></i> <%= link_to 'Add Person', new_portal_administration_path %> <i class="fa fa-upload" aria-hidden="true"></i> <%= link_to 'Import Contact', devx.portal_administration_import_path %> <i class="fa fa-download"></i> <%= link_to 'Export Contact', devx.portal_administration_index_path(format: :xlsx) %>
         <div style="float:right;">
             <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
             <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>

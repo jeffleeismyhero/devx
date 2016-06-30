@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630182158) do
+ActiveRecord::Schema.define(version: 20160630213603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 20160630182158) do
     t.boolean  "required"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "options"
   end
 
   create_table "devx_form_submissions", force: :cascade do |t|

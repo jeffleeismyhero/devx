@@ -44,6 +44,7 @@ Devx::Engine.routes.draw do
     ## Import paths
     match 'users/import', to: 'users#import', via: [ :get, :post ]
     match 'articles/import', to: 'articles#import', via: [ :get, :post ]
+    match 'administration/import', to: 'administration#import', via: [ :get, :post ]
 
     
     resources :pages

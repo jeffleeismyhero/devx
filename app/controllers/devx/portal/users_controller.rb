@@ -150,8 +150,6 @@ module Devx
 
         if @import.valid?
 
-          puts @import.inspect
-
           if records = CSV.read(@import.file.path, headers: true)
             logfile = File.open("#{Rails.root}/log/import.log", "a")
             logfile.sync = true

@@ -39,6 +39,7 @@ class Ability
       end
     end
 
+    can :read, :all
     can :read, Devx::Dashboard
     can :read, Devx::Article
     can [:edit, :update], Devx::User, id: user.id
