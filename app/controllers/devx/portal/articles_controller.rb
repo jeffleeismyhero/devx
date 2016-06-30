@@ -146,7 +146,7 @@ module Devx
     private
 
     def article_params
-      accessible = [ :title, :slug, :short_description, :content, :image, :published_at, tag_list: [], keyword_list: [] ]
+      accessible = [ :title, :slug, :short_description, :content, :image, :document, :published_at, tag_list: [], keyword_list: [] ]
       params.require(:article).permit(accessible)
     end
   end
