@@ -10,19 +10,21 @@ module Devx
         @layout = Devx::Layout.find(app_settings['calendar_layout'])
       end
 
-      @page = Devx::Page.new(name: 'Calendar', layout: @layout)
-
-      @q = @calendars.active.search(params[:q])
-      @calendar = @q.result.first
+      @q = @calendars.search(params[:q])
+      @calendar = @q.result.first if @q.result.first.active == true
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
+
 
       if app_settings['default_calendar'].present?
         @calendar = Devx::Calendar.active.find(app_settings['default_calendar']) unless params[:q].present?
       end
 
 
+      @page = Devx::Page.new(name: 'Calendar', layout: @layout)
+
+
       if @calendar.calendar_type == 'Standard'
-        @events = @calendar.events.for(Time.now, Time.now)
+        @events = @calendars.events.for(Time.now, Time.now)
 
         @dates = []
         @events.try(:each) do |event|
@@ -46,8 +48,8 @@ module Devx
         end
       end
 
-    rescue
-      redirect_to '/404.html'
+    # rescue
+    #   redirect_to '/404.html'
     end
 
     def subscribe

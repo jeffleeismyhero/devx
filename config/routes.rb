@@ -24,7 +24,7 @@ Devx::Engine.routes.draw do
       end
     end
   end
-  match '/calendar', to: 'calendars#index', via: [ :get, :post ]
+  match '/calendar', to: 'calendars#show', via: [ :get, :post ]
 
   resources :registrations, only: [ :show, :create ]
   resources :forms, only: [ :show, :create ]
