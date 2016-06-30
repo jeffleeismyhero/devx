@@ -17,6 +17,7 @@
 //= require select2
 //= require dropzone
 //= require owl.carousel
+//= require fancybox
 //= require wow
 //= require_tree ./ckeditor
 //= require_tree .
@@ -39,6 +40,10 @@ $(function()
   $(".select2-multiple").select2({ tags: true, multiple: true });
   $(".select2-multiple-fixed").select2({ tags: false, multiple: true });
   $(".select2-fixed").select2({ tags: false, multiple: false });
+
+
+  // Fancybox
+  $("a.fancybox").fancybox();
 
 
   // JCW Accordion

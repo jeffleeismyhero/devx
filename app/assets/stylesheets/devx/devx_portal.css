@@ -783,3 +783,7 @@ input:checked + .slider:before {
   font-size: 30px;
   padding-bottom: 10px;
 }
+
+#add-funds {
+  display:none;
+}

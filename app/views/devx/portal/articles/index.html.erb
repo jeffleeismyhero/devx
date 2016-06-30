@@ -13,7 +13,8 @@
                 <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
               <div class="cd-edit-form">
               <%= search_form_for @q, url: devx.portal_articles_path do |f| %>
-                  <%= f.search_field :title_or_short_description_or_content_cont %>
+                  <%= f.search_field :title_or_short_description_or_content_or_keywords_name_cont, placeholder: 'Search articles'%>
+                  <%= f.select :tags_name_eq, @tags.collect{ |x| [x.name, x.name] }, { include_blank: true } %>
                   <%= f.submit %>
               <% end %>
               </div>
@@ -24,9 +25,9 @@
                 <thead>
                     <tr>
                         <th><%= sort_link @q, :title %></th>
-                        <th>Short Description</th>
-                        <th><%= sort_link @q, :user %></th>
-                        <th><%= sort_link @q, :published_at %></th>
+                        <th><%= sort_link @q, :tag_list, 'Category' %></th>
+                        <th><%= sort_link @q, :user, 'Author' %></th>
+                        <th><%= sort_link @q, :published_at, 'Publish date' %></th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -34,6 +35,11 @@
                     <%= render partial: 'article', collection: @articles %>
                 </tbody>
             </table>
+        </div>
+        <div class="col-12 columns">
+            <% if @articles.any? %>
+                <%= will_paginate @articles, class: 'apple_pagination' %>
+            <% end %>
         </div>
     </div>
 </div>

@@ -14,15 +14,15 @@ module Devx
     end
 
     def new
-        @tags = Faq.tag_counts_on(:tags)
+        @tags = Devx::Faq.tag_counts_on(:tags)
     end
 
     def edit
-        @tags = Faq.tag_counts_on(:tags)
+        @tags = Devx::Faq.tag_counts_on(:tags)
     end
 
     def create
-        @tags = Faq.tag_counts_on(:tags)
+        @tags = Devx::Faq.tag_counts_on(:tags)
         if @faq.save
             redirect_to portal_faqs_path,
             notice: 'Successfully saved FAQ'

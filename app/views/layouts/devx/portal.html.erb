@@ -32,7 +32,7 @@
           </div>
           <div class="cd-accordion-body" style="text-align:center">
             <span><strong>Balance: <%= number_to_currency current_user.balance %></strong></span><br />
-            <%= link_to 'Add funds', devx.account_deposit_portal_user_path(current_user) %>
+            <%= link_to 'Add funds', devx.portal_account_balance_path %>
           </div>
         </div>
         <% end %>
@@ -139,9 +139,9 @@
           <%= link_to '<i class="fa fa-user"></i> <span>Profile</span>'.html_safe, '#', class: 'has-children', data: 'user' %>
         </li>
         <ul class="child-nav" data-parent="user">
-          <li><%= link_to 'Edit Profile', devx.edit_portal_user_path(current_user) %></li>
+          <li><%= link_to 'Edit Profile', devx.portal_profile_path %></li>
           <% if app_settings['balance_tracking'] %>
-            <li><%= link_to 'Account Balance', devx.account_deposit_portal_user_path(current_user) %></li>
+            <li><%= link_to 'Account Balance', devx.portal_account_balance_path %></li>
           <% end %>
         </ul>
 

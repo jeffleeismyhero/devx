@@ -22,6 +22,7 @@ module Devx
   	end
   	
   	def show
+      @user ||= current_user
   	end
   	
   	def new
@@ -59,7 +60,8 @@ module Devx
   		end
   	end
 
-    def account_deposit
+    def account_balance
+      @user ||= current_user
 
       @transaction = AccountTransaction.new
 
