@@ -140,6 +140,62 @@ module Devx
       end
     end
 
+    def import_transactions
+      require 'csv'
+
+      @import = Devx::Import.new(params[:import])
+      @errors = 0;
+
+      if request.post?
+
+        if @import.valid?
+
+          puts @import.inspect
+
+          if records = CSV.read(@import.file.path, headers: true)
+            logfile = File.open("#{Rails.root}/log/import.log", "a")
+            logfile.sync = true
+            logger = Logger.new(logfile)
+            
+            records.each_with_index do |record, index|
+              created_at = record[0].to_s.squish
+              receipt_number = record[1].to_s.squish
+              transaction_type = record[2].to_s.squish
+              payment_method = record[3].to_s.squish
+              upc = record[4].to_s.squish
+              product = record[5].to_s.squish
+              amount = record[6].to_s.squish
+
+              user = Devx::User.new(
+                created_at: created_at,
+                receipt_number: receipt_number,
+                transaction_type: transaction_type,
+                payment_method: payment_method,
+                upc: upc,
+                product: product,
+                amount: amount,
+              )
+
+              puts user.inspect
+
+              if user.valid?
+                logger.info "Expecting object to be valid: #{article.inspect}"
+                user.save
+              else
+                logger.warn "Failed to import object: #{article.inspect}"
+                article.errors.full_messages.try(:each) do |error|
+                  logger.warn "#{error}"
+                end
+                @errors += 1
+              end
+            end
+          end
+        end
+          redirect_to devx.portal_users_path,
+          notice: "#{@errors} users could not be imported due to errors"
+      end
+    end
+
   	private
 
   		def user_params
