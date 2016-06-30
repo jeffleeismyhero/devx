@@ -10,7 +10,8 @@ module Devx
     def index
       @q = @articles.search(params[:q])
       @q.sorts = 'title asc'
-      @articles = @q.result(distinct: true)
+      @articles = @q.result(distinct: true).page(params[:page])
+      @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
       
       respond_to do |format|
         format.html
@@ -145,7 +146,7 @@ module Devx
     private
 
     def article_params
-      accessible = [ :title, :slug, :short_description, :content, :image, :published_at, tag_list: [], keyword_list: [] ]
+      accessible = [ :title, :slug, :short_description, :content, :image, :document, :published_at, tag_list: [], keyword_list: [] ]
       params.require(:article).permit(accessible)
     end
   end

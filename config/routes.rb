@@ -1,4 +1,7 @@
 Devx::Engine.routes.draw do
+    
+    get '/not-found', to: 'pages#not_found'
+    
   devise_for :users, class_name: "Devx::User", module: :devise,
     controllers: { omniauth_callbacks: 'devx/omniauth_callbacks' },
     path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
@@ -33,8 +36,10 @@ Devx::Engine.routes.draw do
 
   namespace :portal do
     get '/' => 'dashboard#index', as: :dashboard
-      get '/terms-of-service', to: 'dashboard#terms_of_service'
-      get '/privacy-policy', to: 'dashboard#privacy_policy'
+    get '/terms-of-service', to: 'dashboard#terms_of_service'
+    get '/privacy-policy', to: 'dashboard#privacy_policy'
+    get 'profile', to: 'users#show', as: :profile
+    get 'account-balance', to: 'users#account_balance', as: :account_balance
     post 'developer/update', to: 'developer#update'
     match 'developer/commerce', to: 'developer#commerce_settings', via: [ :get, :post ]
     match 'developer/sms_alert', to: 'developer#sms_alert_settings', via: [ :get, :post ]

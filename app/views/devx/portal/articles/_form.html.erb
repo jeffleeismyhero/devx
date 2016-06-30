@@ -29,8 +29,19 @@
     <% end %>
 
     <div class="col-12 columns cd-edit-form">
-        <%= f.label :image, 'Header image' %>
+        <%= f.label :image, 'Image' %>
         <%= f.file_field :image %>
+    </div>
+
+    <% if @article.document.present? %>
+        <div class="col-12 columns cd-edit-form">
+            <%= link_to 'View attachment', @article.document %>
+        </div>
+    <% end %>
+
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :document, 'Attachment' %>
+        <%= f.file_field :document %>
     </div>
 </div>
 

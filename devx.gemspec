@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "wow-rails"
   s.add_runtime_dependency "animate-rails"
   s.add_runtime_dependency "owlcarousel-rails"
+  s.add_runtime_dependency "fancybox2-rails"
 
 
   ## WYSIWYG Editor
