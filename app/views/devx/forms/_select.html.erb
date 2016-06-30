@@ -1,0 +1,5 @@
+<div class="large-<%= field.field_size %> columns cd-edit-form">
+  <%= f.label "#{field.name}" %>
+  <% @options = field.options.split(',') %>
+  <%= f.select "#{field.name}", options_for_select(@options), { include_blank: true }, { required: field.required } %>
+</div>
