@@ -4,12 +4,19 @@
             <h1 class="article-title"><%= @article.title %></h1>
             <span>Posted: <%= ldate @article.published_at %></span><br />
             <span>Category: <%= link_to @article.tag_list, articles_path(q: { tags_name_eq: @article.tag_list.to_s }) %></span><br />
-            <span><%= link_to 'Subscribe to feed', devx.subscribe_article_path(@article), method: :post %></span>
+
+            <!--
+            <div style="margin:10px 0px">
+                <%= social_share_button_tag(@article.title, popup: true) %>
+            </div>
+        	-->
+
+            <span><%= link_to 'Subscribe to feed', devx.subscribe_article_path(@article), method: :post, class: 'button primary small' %></span>
             <div style="margin:10px 0px">
 
             </div>
             <% if current_user && (current_user.administrator?) %>
-                <div>
+                <div style="margin-bottom: 15px;">
                 <%= link_to '<i class="fa fa-edit"></i> Edit'.html_safe, edit_portal_article_path(@article) %>
                 <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, portal_article_path(@article), method: :delete, data: { confirm: "Are you sure you want to delete \"#{@article.title}?\"" } %>
                 </div>
@@ -26,5 +33,34 @@
                 <%= image_tag(@article.image.large.url, style: 'margin:0 auto;max-width:100%;max-height:400px;float:right') %>
             </div>
         <% end %>
+        <% if @article.image.blank? %>
+            <div class="medium-6 columns">
+                <%= image_tag('/uploads/devx/medium/file/000/000/001/rosarian-modernfacilities-dramasuite.jpg', style:'margin:0 auto;max-width:100%;max-height:400px;float:right') %>
+            </div>
+        <% end %>
+
+    </div>
+</div>
+
+
+<div class="container" style="padding:120px 0px 40px">
+    <div class="row">
+        <div class="medium-12 columns">
+           <div class="small-12 medium-12 large-12 columns">
+                <div class="row">
+                    <div class="medium-12 columns">                
+                        <h5 style="font-weight:600; font-size: 22px;">RELATED ARTICLES</h5>
+                    </div>
+                    <% unless @related_articles.nil? %>
+                        <%= render partial: 'shared/article', collection: @related_articles %>
+                    <% end %>
+                </div>
+                <div class="row">
+                   <div>
+                       <%= link_to 'VIEW ALL', articles_path(q: { tags_name_eq: @article.tag_list.to_s }), class: 'button primary small' %>
+                   </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
