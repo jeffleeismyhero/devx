@@ -3,6 +3,7 @@ require_dependency "devx/application_controller"
 module Devx
   class AdministrationController < ApplicationController
   	load_resource :administration, class: 'Devx::Person'
+  	layout :determine_layout
 
   	def index
   		@administrations = Devx::Person.all
@@ -12,5 +13,13 @@ module Devx
 
   		@departments = Devx::Person.tag_counts_on(:departments).order(name: :asc)
   	end
+
+    def determine_layout
+      if app_settings['newsfeed_layout'].present?
+        'devx/custom'
+      else
+        'devx/application'
+      end
+    end
   end
 end
