@@ -2,7 +2,7 @@
     <div class="row">
         <div class="medium-10 medium-offset-1 large-10 large-offset-1 columns">
             <div class="small-12 medium-12 large-6 xlarge-6 columns">
-                <%= form_tag url: '/contact', method: :post do |f| %>
+                <form action="/contact" method="post" class="contact-form">
                     <center>
                         <%= text_field_tag 'contact[first_name]', '', placeholder: 'First name *' %>
                         <%= text_field_tag 'contact[last_name]', '', placeholder: 'Last name *' %>
@@ -10,7 +10,7 @@
                         <%= text_area_tag 'contact[message]', '', placeholder: 'Message', style: 'width:99.5%; margin:5px 0; padding:15px;' %>
                         <%= submit_tag 'Submit' %>
                     </center>
-                <% end %>
+                </form>
             </div>
             <% if app_branding.address.present? %>
                 <div class="small-12 medium-12 large-6 xlarge-6 columns maps" style="margin:20px 0;">
