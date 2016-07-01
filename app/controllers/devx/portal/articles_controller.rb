@@ -47,9 +47,7 @@ module Devx
 
     def update
       @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
-
-      render plain: params[:article][:image].count.inspect
-      return
+      
       if @article.update(article_params)
         redirect_to devx.portal_articles_path,
         notice: "Successfully updated #{@article.title}"
