@@ -6,6 +6,12 @@ module Devx
   	layout :determine_layout
 
   	def index
+      if app_settings['staff_directory'].present?
+        @layout = Devx::Layout.find(app_settings['staff_directory'])
+      end
+
+      	@page = Devx::Page.new(name: 'Staff Directory', layout: @layout)
+
   		@administrations = Devx::Person.all
   		@q = @administrations.search(params[:q])
   		@q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
@@ -15,7 +21,7 @@ module Devx
   	end
 
     def determine_layout
-      if app_settings['newsfeed_layout'].present?
+      if app_settings['staff_directory'].present?
         'devx/custom'
       else
         'devx/application'
