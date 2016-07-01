@@ -13,9 +13,11 @@
  *= require select2
  *= require fancybox
  *= require dropzone/dropzone
+ *= require owl.carousel
+ *= require owl.theme
+ *= require social-share-button
  * require_tree .
  *= require_self
- *= require social-share-button
  */
 
 @import "font-awesome";
