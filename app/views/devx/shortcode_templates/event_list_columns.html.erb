@@ -1,13 +1,11 @@
 <% @attributes[:events].try(:each) do |event| %>
-  <div class="medium-12 large-4 columns event-column">
-    <div class="event-square">
-      <div class="event-month">
-        <% if @attributes[:calendar_type] == 'Standard' %><%= event.start_time.try(:strftime, '%b') %><% else %><%= event.start_time.to_datetime.try(:strftime, '%b') %><% end %>
-      </div>
-      <div class="event-day">
-        <% if @attributes[:calendar_type] == 'Standard' %><%= event.try(:strftime, '%d') %><% else %><%= event.start_time.to_datetime.try(:strftime, '%d') %><% end %>
-      </div>
-    </div>
-    <div class="article-title" style="margin:40px 0 10px 0;"><% if @attributes[:calendar_type] == 'Standard' %><%= event.name %><% else %><%= event.title %><% end %></div>
+<div class="medium-12 large-4 columns" style="margin-top:40px;">
+  <div class="article-title"></div>
+
+  <div class="event-square small-3 medium-4 columns"><span class="event-month"><% if @attributes[:calendar_type] == 'Standard' %><%= event.start_time.try(:strftime, '%b') %><% else %><%= event.start_time.to_datetime.try(:strftime, '%b') %><% end %></span> <span class="event-date"><% if @attributes[:calendar_type] == 'Standard' %><%= event.try(:strftime, '%d') %><% else %><%= event.start_time.to_datetime.try(:strftime, '%d') %><% end %></span></div>
+
+  <div class="small-9 medium-8 columns"><span><%= event.start_time.to_datetime.try(:strftime, '%I:%M%P') %></span><br>
+    <span><% if @attributes[:calendar_type] == 'Standard' %><%= event.venue %><% else %><%= event.location %><% end %></span><br>
+    &nbsp;</div>
   </div>
 <% end %>

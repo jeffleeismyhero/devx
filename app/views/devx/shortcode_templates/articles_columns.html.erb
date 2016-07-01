@@ -1,8 +1,14 @@
 <% @attributes[:articles].try(:each) do |article| %>
-  <div class="medium-12 large-4 columns">
-    <div style="margin:40px 0 10px 0; font-size:16px; font-family:Lato; font-weight:600;"><%= article.title %></div>
-    <div style="background-color:#384967; background-image:url(<%= article.image.url %>); background-size:cover; background-repeat:no-repeat; height:120px; width:120px; margin:0 10px 2px 0;float:left;"></div>
-    <div style="padding:0px 28px;margin-bottom:20px;"><span><%= strip_tags(article.content.try(:truncate, 140)) %></span></div>
-    <a href="#" class="button primary small" style="margin-bottom:20px;">Read More</a>
-  </div>
+<div class="medium-12 large-4 columns">
+	<div class="medium-12 columns no-padding" style="margin-bottom:10px">
+		<div style="margin:40px 0 10px 0; font-size:16px; font-family:Lato; font-weight:600;"><%= article.title %></div>
+
+		<% if article.image.present? %>
+			<div style="background-color:#384967; background-image:url(<%= article.image.try(:url) %>); background-size: cover; height:120px; width:120px; margin:0 10px 2px 0;float:left;"></div>
+		<% end %>
+
+		<div style="padding:0px 28px;margin-bottom:20px;"><%= strip_tags(article.content).truncate_words(40) %></div>
+	</div>
+	<%= link_to 'Read More', "news/#{article.slug}", class: 'button primary small', style: 'margin-bottom:20px' %>
+</div>
 <% end %>

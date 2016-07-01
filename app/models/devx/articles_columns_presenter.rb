@@ -15,6 +15,7 @@ module Devx
 
     def attributes
       { articles: articles,
+        category: @attributes[:category],
         limit: @attributes[:limit] }
     end
 
@@ -22,7 +23,7 @@ module Devx
     private
 
     def articles
-      Devx::Article.published.latest.try(:limit, @attributes[:limit])
+      Devx::Article.try(:tagged_with, @attributes[:category]).published.latest.try(:limit, @attributes[:limit])
     end
   end
 end
