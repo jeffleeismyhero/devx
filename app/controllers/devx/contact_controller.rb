@@ -5,6 +5,13 @@ module Devx
   	layout :determine_layout
 
   	def show
+  		if request.post?
+  			@contact = params[:contact]
+  			
+			if @contact.present?
+  				Devx::ContactMailer.delay.submit_inquiry(@contact)
+  			end
+  		end
   	end
 
   	def determine_layout

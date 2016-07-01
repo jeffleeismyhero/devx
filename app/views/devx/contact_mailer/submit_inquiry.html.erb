@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<span>You have received a contact form submission from <%= "#{@contact['first_name']} #{@contact['last_name']}".squish %></span>
+	<p><%= @contact['message'] %></p>
+</body>
+</html>

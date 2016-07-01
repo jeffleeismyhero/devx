@@ -2,16 +2,15 @@
     <div class="row">
         <div class="medium-10 medium-offset-1 large-10 large-offset-1 columns">
             <div class="small-12 medium-12 large-6 xlarge-6 columns">
-                <form class="contact-form" style="margin:20px 0;">
+                <%= form_tag url: '/contact', method: :post do |f| %>
                     <center>
-                        <input type="text" name="firstname" placeholder="First Name*">
-                        <input type="text" name="lastname" placeholder="Last Name*">
-                        <input type="text" name="email" placeholder="E-mail Address*">
-                        <input type="text" name="phone" placeholder="Phone Number">
-                        <textarea name="message" placeholder="Message" style="width:99.5%; margin:5px 0; padding:15px;"></textarea>
-                        <input style="cursor:pointer; margin:10px 0 0 0; padding:0; color:#384967;" type="submit" value="Submit">
+                        <%= text_field_tag 'contact[first_name]', '', placeholder: 'First name *' %>
+                        <%= text_field_tag 'contact[last_name]', '', placeholder: 'Last name *' %>
+                        <%= email_field_tag 'contact[email]', '', placeholder: 'E-mail *' %>
+                        <%= text_area_tag 'contact[message]', '', placeholder: 'Message', style: 'width:99.5%; margin:5px 0; padding:15px;' %>
+                        <%= submit_tag 'Submit' %>
                     </center>
-                </form>
+                <% end %>
             </div>
             <% if app_branding.address.present? %>
                 <div class="small-12 medium-12 large-6 xlarge-6 columns maps" style="margin:20px 0;">
