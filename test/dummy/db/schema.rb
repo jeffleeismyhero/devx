@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701173327) do
+ActiveRecord::Schema.define(version: 20160701210432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,14 @@ ActiveRecord::Schema.define(version: 20160701173327) do
 
   create_table "devx_application_settings", force: :cascade do |t|
     t.text     "settings"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "devx_article_media", force: :cascade do |t|
+    t.integer  "article_id"
+    t.integer  "medium_id"
+    t.integer  "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -181,6 +189,11 @@ ActiveRecord::Schema.define(version: 20160701173327) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_contact_submissions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_contacts", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -216,6 +229,7 @@ ActiveRecord::Schema.define(version: 20160701173327) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "calendar_id"
+    t.string   "location"
   end
 
   create_table "devx_extracurricular_teams", force: :cascade do |t|

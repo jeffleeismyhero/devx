@@ -155,6 +155,14 @@ $(".currency-field").on("blur", function()
     }
   });
 
+  $("#article-media-dropzone").dropzone({
+    paramName: "article[image]",
+    queuecomplete: function()
+    {
+      //location.reload();
+    }
+  });
+
   $("form:has(#cc_fields)").submit(function() {
     var form = this;
     // $(".submit").attr("disabled", true);

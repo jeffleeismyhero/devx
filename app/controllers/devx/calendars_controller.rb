@@ -24,7 +24,7 @@ module Devx
 
 
       if @calendar.calendar_type == 'Standard'
-        @events = @calendars.events.for(Time.now, Time.now)
+        @events = @calendar.events.for(Time.now, Time.now)
 
         @dates = []
         @events.try(:each) do |event|

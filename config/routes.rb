@@ -60,7 +60,11 @@ Devx::Engine.routes.draw do
     resources :layouts
     resources :javascripts
     resources :stylesheets
-    resources :articles
+    resources :articles do
+      member do
+        post 'gallery', to: 'articles#add_to_gallery', as: :gallery
+      end
+    end
     resources :calendars do
       resources :events
     end

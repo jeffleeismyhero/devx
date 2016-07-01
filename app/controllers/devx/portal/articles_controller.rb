@@ -48,6 +48,8 @@ module Devx
     def update
       @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
 
+      render plain: params[:article][:image].count.inspect
+      return
       if @article.update(article_params)
         redirect_to devx.portal_articles_path,
         notice: "Successfully updated #{@article.title}"
@@ -146,7 +148,8 @@ module Devx
     private
 
     def article_params
-      accessible = [ :title, :slug, :short_description, :content, :image, :document, :published_at, tag_list: [], keyword_list: [] ]
+      accessible = [ :title, :slug, :short_description, :content, :document, :published_at, tag_list: [], keyword_list: [],
+                      article_media_attributes: []]
       params.require(:article).permit(accessible)
     end
   end

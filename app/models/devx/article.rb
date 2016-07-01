@@ -6,6 +6,8 @@ module Devx
     scope :published, -> { where.not(published_at: nil) }
     scope :latest, -> { order(published_at: :desc) }
 
+    has_many :article_media
+    has_many :media, through: :article_media
     belongs_to :user
 
     validates :title, presence: true, uniqueness: { scope: :published_at }

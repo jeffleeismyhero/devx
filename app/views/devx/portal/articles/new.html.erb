@@ -5,8 +5,11 @@
     <div class="col-12 columns">
       <h1><%= yield(:title) %></h1>
     </div>
-    <div class="col-12">
+    <div class="col-12 columns">
       <%= link_to 'Back to Articles', devx.portal_articles_path %>
+    </div>
+
+    <div class="col-12 columns">
       <%= form_for @article, url: devx.portal_articles_path, method: :post do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
