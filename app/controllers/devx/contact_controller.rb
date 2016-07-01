@@ -6,7 +6,7 @@ module Devx
 
   	def show
       if app_settings['contact_form_layout'].present?
-        @layout = Devx::Layout.find(app_settings['calendar_layout'])
+        @layout = Devx::Layout.find(app_settings['contact_form_layout'])
       end
       @page = Devx::Page.new(name: 'Contact Us', layout: @layout)
 
