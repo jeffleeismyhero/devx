@@ -3,6 +3,7 @@ require_dependency "devx/application_controller"
 module Devx
   class FormsController < ApplicationController
     load_resource :form, class: 'Devx::Form'
+    layout :determine_layout
 
     def show
     end
@@ -21,6 +22,14 @@ module Devx
         render :show
       end
 
+    end
+
+    def determine_layout
+      if app_settings['newsfeed_layout'].present?
+        'devx/custom'
+      else
+        'devx/application'
+      end
     end
   end
 end
