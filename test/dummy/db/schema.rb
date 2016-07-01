@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701015127) do
+ActiveRecord::Schema.define(version: 20160701173327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20160701015127) do
     t.string   "accent_color_2"
     t.string   "accent_color_3"
     t.string   "site_name"
+    t.string   "address"
   end
 
   create_table "devx_calendar_subscriptions", force: :cascade do |t|

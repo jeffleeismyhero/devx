@@ -24,8 +24,8 @@ module Devx
       else
         render :show
       end
-
     end
+
 
     def determine_layout
       @form = Devx::Form.find(params[:id])

@@ -30,6 +30,7 @@ Devx::Engine.routes.draw do
 
   get '/directory', to: 'administration#index'
   match '/calendar', to: 'calendars#show', via: [ :get, :post ]
+  match '/contact', to: 'contact#show', via: [ :get, :post ]
 
   resources :registrations, only: [ :show, :create ]
   resources :forms, only: [ :show, :create ]
