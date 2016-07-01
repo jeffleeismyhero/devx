@@ -5,6 +5,11 @@ module Devx
   	layout :determine_layout
 
   	def show
+      if app_settings['contact_form_layout'].present?
+        @layout = Devx::Layout.find(app_settings['calendar_layout'])
+      end
+      @page = Devx::Page.new(name: 'Contact Us', layout: @layout)
+
   		if request.post?
   			@contact = params[:contact]
   			
