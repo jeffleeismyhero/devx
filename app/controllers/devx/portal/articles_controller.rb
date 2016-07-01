@@ -9,7 +9,7 @@ module Devx
 
     def index
       @q = @articles.search(params[:q])
-      @q.sorts = 'title asc'
+      @q.sorts = 'title asc' if @q.sorts.empty?
       @articles = @q.result(distinct: true).page(params[:page])
       @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
       

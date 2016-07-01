@@ -72,13 +72,15 @@ module Devx
                 department = record[5].to_s.squish
 
                 person = Devx::Person.new(
+                  uuid: SecureRandom.uuid,
                   prefix: prefix,
                   first_name: first_name,
                   last_name: last_name,
                   email: email,
                   position: position,
                   department_list: department,
-                  association_list: 'Faculty'
+                  association_list: 'Faculty',
+                  active: true
                 )
 
                 if person.valid?
@@ -93,9 +95,9 @@ module Devx
                 end
               end
             end
-
-
           end
+          redirect_to devx.portal_administration_index_path,
+          notice: "#{@errors} users could not be imported due to errors"
         end
       end
     end

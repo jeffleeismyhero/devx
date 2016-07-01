@@ -34,6 +34,11 @@
     <%= select_tag 'settings[calendar_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['calendar_layout']), { prompt: 'Select Calendar Layout' } %>
 </div>
 
+<div class="col-6 columns cd-edit-form">
+    <%= label_tag 'settings[staff_directory]', 'Staff Directory Layout' %><br>
+    <%= select_tag 'settings[staff_directory]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['staff_directory']), { prompt: 'Select Staff Directory Layout' } %>
+</div>
+
 
 <div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[admissions]', 'Admissions' %><br>

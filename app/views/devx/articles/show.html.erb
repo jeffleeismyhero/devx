@@ -1,15 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="medium-12 columns article-header">
-            <h1 class="article-title"><%= @article.title %></h1>
+            <h1><%= @article.title %></h1>
             <span>Posted: <%= ldate @article.published_at %></span><br />
             <span>Category: <%= link_to @article.tag_list, articles_path(q: { tags_name_eq: @article.tag_list.to_s }) %></span><br />
-
-            <!--
-            <div style="margin:10px 0px">
-                <%= social_share_button_tag(@article.title, popup: true) %>
-            </div>
-        	-->
 
             <span><%= link_to 'Subscribe to feed', devx.subscribe_article_path(@article), method: :post, class: 'button primary small' %></span>
             <div style="margin:10px 0px">
@@ -39,28 +33,5 @@
             </div>
         <% end %>
 
-    </div>
-</div>
-
-
-<div class="container" style="padding:120px 0px 40px">
-    <div class="row">
-        <div class="medium-12 columns">
-           <div class="small-12 medium-12 large-12 columns">
-                <div class="row">
-                    <div class="medium-12 columns">                
-                        <h5 style="font-weight:600; font-size: 22px;">RELATED ARTICLES</h5>
-                    </div>
-                    <% unless @related_articles.nil? %>
-                        <%= render partial: 'shared/article', collection: @related_articles %>
-                    <% end %>
-                </div>
-                <div class="row">
-                   <div>
-                       <%= link_to 'VIEW ALL', articles_path(q: { tags_name_eq: @article.tag_list.to_s }), class: 'button primary small' %>
-                   </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

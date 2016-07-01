@@ -27,6 +27,8 @@ Devx::Engine.routes.draw do
       end
     end
   end
+
+  get '/directory', to: 'administration#index'
   match '/calendar', to: 'calendars#show', via: [ :get, :post ]
 
   resources :registrations, only: [ :show, :create ]

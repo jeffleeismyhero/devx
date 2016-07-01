@@ -1,0 +1,45 @@
+<% provide(:title, 'Directory') %>
+<div class="container">
+    <div class="row full-width">
+        <div class="medium-12 columns banner generic">
+            <center>
+                <h1 class="page-title"><%= yield(:title) %></h1>
+            </center>
+        </div>
+    </div>
+</div>
+
+  <div class="container banner texture" style="padding-bottom:40px;">
+      <div class="row">
+          <div class="medium-10 medium-offset-1 large-10 large-offset-1 columns">
+              <div class="page-header">STAFF DIRECTORY</div>
+          </div>
+      </div>
+  </div>
+
+<div class="container">
+  <div class="row full-width">
+      <% @departments.each do |tag| %>
+        <% s = @administrations.tagged_with(tag) %>
+        <ul class="sub-pages-6">
+          <li data="adv-giving" class="small-12 medium-12 large-12 columns sub-page-title">
+            <div class="medium-12 large-12 small-12 columns">
+              <h4><%= tag.name.try(:titleize) %></h4>
+            </div>
+          </li>
+          <div id="adv-giving-desc" class="sub-page-desc small-12 medium-12 large-12 columns">
+            <% s.each do |staff| %>
+              <div class="medium-4 columns" style="margin-bottom:15px;min-height:160px; margin-top:30px;">
+                <div class="medium-8 columns">
+                  <h6><%= staff.try(:full_name) %></h6>
+                  <p><%= staff.try(:position) %></p>
+                  <p><%= staff.try(:email) %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

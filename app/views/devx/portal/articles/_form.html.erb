@@ -35,7 +35,7 @@
 
     <% if @article.document.present? %>
         <div class="col-12 columns cd-edit-form">
-            <%= link_to 'View attachment', @article.document %>
+            <%= link_to 'View attachment', @article.document.try(:url) %>
         </div>
     <% end %>
 

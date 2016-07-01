@@ -2,14 +2,12 @@
   <div class="medium-12 large-4 columns event-column">
     <div class="event-square">
       <div class="event-month">
-        <%= event.start_time.try(:strftime, '%b') %>
+        <% if @attributes[:calendar_type] == 'Standard' %><%= event.start_time.try(:strftime, '%b') %><% else %><%= event.start_time.to_datetime.try(:strftime, '%b') %><% end %>
       </div>
       <div class="event-day">
-        <%= event.start_time.try(:strftime, '%d') %>
+        <% if @attributes[:calendar_type] == 'Standard' %><%= event.try(:strftime, '%d') %><% else %><%= event.start_time.to_datetime.try(:strftime, '%d') %><% end %>
       </div>
     </div>
-    <div class="article-title" style="margin:40px 0 10px 0;"><%= event.name %></div>
-    <div style="padding:0px 28px;margin-bottom:20px;"><%= event.description %></div>
-    <a href="#" class="button primary small" style="margin-bottom:20px;">Learn More</a>
+    <div class="article-title" style="margin:40px 0 10px 0;"><% if @attributes[:calendar_type] == 'Standard' %><%= event.name %><% else %><%= event.title %><% end %></div>
   </div>
 <% end %>
