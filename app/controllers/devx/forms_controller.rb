@@ -6,6 +6,8 @@ module Devx
     layout :determine_layout
 
     def show
+
+      @page = Devx::Page.new(name: @form.name, layout: @form.layout)
     end
 
     def create
@@ -17,7 +19,8 @@ module Devx
           #Devx::NotificationMailer.delay.registration_completed(@registration, @submission, recipient)
         #end
 
-        render plain: 'saved'
+        render devx.root_path,
+        notice: 'Successfully submitted form'
       else
         render :show
       end
@@ -25,7 +28,9 @@ module Devx
     end
 
     def determine_layout
-      if app_settings['newsfeed_layout'].present?
+      @form = Devx::Form.find(params[:id])
+
+      if @form.layout.present?
         'devx/custom'
       else
         'devx/application'

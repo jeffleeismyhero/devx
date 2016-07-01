@@ -5,7 +5,7 @@ module Devx
 
     mount_uploader :image, ImageUploader
 
-    has_many :layouts
+    belongs_to :layout
     has_many :fields
     has_many :form_submissions
 

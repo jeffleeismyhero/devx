@@ -5,7 +5,7 @@
     </div>
     <div class="col-6 columns cd-edit-form">
       <%= f.label :layout_id %>
-      <%= f.select :layout_id, Devx::Layout.all.collect{ |x| [x.name, x.id] }, { include_blank: true }, { class: 'select2-fixed' } %>
+      <%= f.select :layout_id, options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @form.layout_id), { include_blank: true }, { class: 'select2-fixed' } %>
     </div>
     <div class="col-8 columns cd-edit-form">
       <%= f.label :image %>
