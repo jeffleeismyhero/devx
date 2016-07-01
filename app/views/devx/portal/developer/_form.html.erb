@@ -116,6 +116,19 @@
 
 
 <div class="col-8 columns cd-edit-form">
+    <%= label_tag 'settings[form_builder]', 'Form Builder' %><br>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch">
+        <%= check_box_tag 'settings[form_builder]', @settings.settings['form_builder'], @settings.settings['form_builder'] %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
+
+
+<div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[registrations]', 'Registrations' %><br>
 </div>
 

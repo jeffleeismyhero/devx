@@ -119,6 +119,10 @@
         </ul>
         <% end %>
 
+        <% if can? :manage, Devx::Form && app_settings['form_builder'] %>
+          <li><%= link_to '<i class="fa fa-file-text-o"></i> <span>Form Builder</span>'.html_safe, devx.portal_forms_path %></li>
+        <% end %>
+
         <% if can? :manage, Devx::Calendar %>
         <li>
           <%= link_to '<i class="fa fa-calendar"></i> <span>Calendars</span>'.html_safe, devx.portal_calendars_path, class: 'has-children', data: 'calendars' %>

@@ -8,7 +8,7 @@
 <div class="container">
   <div class="row">
     <div class="large-12 columns">
-      <%= form_for @form, url: devx.forms_path, method: :post do |f| %>
+      <%= form_for @form, url: devx.forms_path, method: :post, html: { class: 'form-builder' } do |f| %>
         <%= f.fields_for :submission_content do |submission| %>
           <% @form.fields.try(:each) do |field| %>
             <%= render "#{field.field_type}", field: field, f: submission %>

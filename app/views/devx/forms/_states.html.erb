@@ -1,0 +1,4 @@
+<div class="large-<%= field.field_size %> columns cd-edit-form">
+  <%= f.label "#{field.name}" %>
+  <%= f.select "#{field.name}", options_for_select(us_states), { include_blank: true }, { required: field.required } %>
+</div>

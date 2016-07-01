@@ -1,0 +1,4 @@
+<div class="large-<%= field.field_size %> columns cd-edit-form">
+  <%= f.label "#{field.name}" %>
+  <%= f.text_area "#{field.name}", value: "#{field.options}", disabled: true, readonly: true, style: 'resize:none;min-height:150px' %>
+</div>
