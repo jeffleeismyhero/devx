@@ -58,8 +58,6 @@ module Devx
     def import
       require 'csv'
 
-      @calendar = 
-
       @import = Devx::Import.new(params[:import])
       @errors = 0;
 
@@ -109,17 +107,15 @@ module Devx
         end
 
         if @errors > 0
-          redirect_to devx.portal_articles_path,
-          notice: "#{@errors} article(s) could not be imported due to errors"
+          redirect_to devx.portal_calendars_path,
+          notice: "#{@errors} event(s) could not be imported due to errors"
         else
-          redirect_to devx.portal_articles_path,
-          notice: "All articles imported successfully"
+          redirect_to devx.portal_calendars_path,
+          notice: "All events imported successfully"
         end
 
       end
     end
-
-
     private
 
     def calendar_params

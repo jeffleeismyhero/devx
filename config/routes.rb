@@ -50,6 +50,7 @@ Devx::Engine.routes.draw do
     ## Import paths
     match 'users/import', to: 'users#import', via: [ :get, :post ]
     match 'articles/import', to: 'articles#import', via: [ :get, :post ]
+    match 'calendars/:id/import', to: 'calendars#import', via: [ :get, :post ], as: :calendar_import
     match 'administration/import', to: 'administration#import', via: [ :get, :post ]
 
     
@@ -60,11 +61,7 @@ Devx::Engine.routes.draw do
     resources :layouts
     resources :javascripts
     resources :stylesheets
-    resources :articles do
-      member do
-        post 'gallery', to: 'articles#add_to_gallery', as: :gallery
-      end
-    end
+    resources :articles
     resources :calendars do
       resources :events
     end

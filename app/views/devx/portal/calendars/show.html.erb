@@ -9,7 +9,7 @@
       <%= link_to 'Back to Calendars', portal_calendars_path %>
       <h3>Events</h3>
         <div class="col-12 columns" style="padding-bottom:20px;">
-          <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> <%= link_to 'Create Event', devx.new_portal_calendar_event_path(@calendar) %> 
+          <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> <%= link_to 'Create Event', devx.new_portal_calendar_event_path(@calendar) %>  <%= link_to 'Import Events', devx.portal_calendar_import_path %> <i class="fa fa-download"></i>
           <div style="float:right;">
               <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
               <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
