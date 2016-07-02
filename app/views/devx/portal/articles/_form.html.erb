@@ -33,12 +33,6 @@
         <%= f.file_field :image, multiple: true %>
     </div>
 
-    <% if @article.document.present? %>
-        <div class="col-12 columns cd-edit-form">
-            <%= link_to 'View attachment', @article.document.try(:url) %>
-        </div>
-    <% end %>
-
     <div class="col-12 columns cd-edit-form">
         <%= f.label :document, 'Attachment' %>
         <%= f.file_field :document %>
