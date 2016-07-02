@@ -10,6 +10,18 @@
   text-align:center;
 }
 
+.flexbox {
+  display:flex;
+  display:-webkit-flex;
+  flex-wrap:wrap;
+  flex-direction:row;
+  -webkit-flex-direction:row;
+}
+
+.flexbox .flex {
+
+}
+
 h1.page-title {
   font-size: 3.8rem;
   line-height: 3.8rem;

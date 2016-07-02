@@ -23,22 +23,16 @@
       <% @departments.each do |tag| %>
         <% s = @administrations.tagged_with(tag) %>
         <% if s.count > 0 %>
-          <div class="small-12 medium-12 large-12 columns">
-            <div class="medium-12 large-12 small-12 columns">
-              <h4><%= tag.name.try(:titleize) %></h4>
+          <div class="small-12 medium-12 large-12 columns flexbox">
+            <h4><%= tag.name.try(:titleize) %></h4>
+          </div>
+          <% s.each do |staff| %>
+            <div class="small-12 medium-6 large-4 columns flex" style="margin:30px 0px 15px">
+              <h6><%= staff.try(:full_name) %></h6>
+              <p><%= staff.try(:position) %></p>
+              <p><%= link_to staff.try(:email), "mailto:#{staff.email}" %></p>
             </div>
-          </div>
-          <div class="small-12 medium-12 large-12 columns">
-            <% s.each do |staff| %>
-              <div class="small-12 medium-6 large-4 columns" style="margin-bottom:15px;min-height:160px; margin-top:30px;">
-                <div class="medium-8 columns">
-                  <h6><%= staff.try(:full_name) %></h6>
-                  <p><%= staff.try(:position) %></p>
-                  <p><%= link_to staff.try(:email), "mailto:#{staff.email}" %></p>
-                </div>
-              </div>
-            <% end %>
-          </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
