@@ -64,12 +64,17 @@ module Devx
 
             records.each_with_index do |record, index|
               if params[:import_type] == 'Faculty'
-                last_name = record[0].to_s.squish
+                prefix = record[0].to_s.squish
                 first_name = record[1].to_s.squish
-                prefix = record[2].to_s.squish
-                position = record[3].to_s.squish
-                email = record[4].to_s.squish
+                last_name = record[2].to_s.squish
+                email = record[3].to_s.squish
+                position = record[4].to_s.squish
                 department = record[5].to_s.squish
+                phone = record[6].to_s.squish
+                address = record[7].to_s.squish
+                city = record[8].to_s.squish
+                state = record[9].to_s.squish
+                zip = record[10].to_s.squish
 
                 person = Devx::Person.new(
                   uuid: SecureRandom.uuid,
@@ -79,6 +84,11 @@ module Devx
                   email: email,
                   position: position,
                   department_list: department,
+                  phone: phone,
+                  address: address,
+                  city: city,
+                  state: state,
+                  zip: zip,
                   association_list: 'Faculty',
                   active: true
                 )
