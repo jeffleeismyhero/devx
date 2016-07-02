@@ -37,3 +37,17 @@ h1.page-title {
   padding-bottom:20px;
   border-bottom:1px solid #cccccc;
 }
+
+.calendar-event.datebar {
+  background-color:#DDDDDD;
+  border-bottom:1px solid #384967;
+}
+
+.calendar-event.month {
+  display:inline-block;
+  padding:10px;
+  margin:0;
+  background-color:#AAAAAA;
+  color:#fff;
+  font-weight:100;
+}

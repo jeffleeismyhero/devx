@@ -24,13 +24,24 @@
         <% s = @administrations.tagged_with(tag) %>
         <% if s.count > 0 %>
           <div class="small-12 medium-12 large-12 columns flexbox">
-            <h4><%= tag.name.try(:titleize) %></h4>
+            <h4 style="padding:40px 0px 20px"><%= tag.name.try(:titleize) %></h4>
           </div>
           <% s.each do |staff| %>
-            <div class="small-12 medium-6 large-4 columns flex" style="margin:30px 0px 15px">
-              <h6><%= staff.try(:full_name) %></h6>
-              <p><%= staff.try(:position) %></p>
-              <p><%= link_to staff.try(:email), "mailto:#{staff.email}" %></p>
+            <div class="small-12 medium-6 large-4 columns flex">
+              <div class="small-4 columns">
+                  <% if staff.photo.present? %>
+                      <% photo = staff.photo.profile.url %>
+                  <% else %>
+                      <% photo = image_path('devx/No-Name.jpg') %>
+                  <% end %>
+
+                  <%= image_tag(photo, style: 'max-width:100%;max-height:200px') %>
+              </div>
+              <div class="small-8 columns">
+                <h6 style="margin-bottom:0.5rem"><%= staff.try(:full_name) %></h6>
+                <p style="margin-bottom:0px;font-size:1.2rem"><%= staff.try(:position) %><br />
+                <%= link_to staff.try(:email), "mailto:#{staff.email}" %></p>
+              </div>
             </div>
           <% end %>
         <% end %>

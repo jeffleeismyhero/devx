@@ -14,6 +14,8 @@ module Devx
       @q.sorts = 'published_at desc'
       @articles = @q.result.published.latest.page(params[:page])
       @page = Devx::Page.new(name: 'News', layout: @layout)
+
+      @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
     end
 
     def show
