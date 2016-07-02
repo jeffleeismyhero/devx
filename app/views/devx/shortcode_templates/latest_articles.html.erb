@@ -1,5 +1,4 @@
 <% @attributes[:articles].try(:each) do |article| %>
-<%= article.inspect %>
 <% @text = nil %>
 <% article.content.try(:split, ' ').try(:take, 30).each do |word| %>
     <% @text = "#{@text} " + word.html_safe %>
