@@ -2,9 +2,9 @@
 	<tr>
 	    <td><%= user.first_name %></td>
 	    <td><%= user.last_name %></td>
-	    <td><%= link_to user.email, devx.edit_portal_user_path(user) %></td>
+	    <td><%= link_to user.email, devx.portal_user_path(user) %></td>
 	    <td>
-	    <%= link_to 'Edit', devx.edit_portal_user_path(user) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+	    <%= link_to 'Edit', devx.portal_user_path(user) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 	    <%= link_to 'Delete', devx.portal_user_path(user), method: :delete, data: { confirm: "Are you sure you want to delete #{user.email}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
 	    </td>
 	</tr>
@@ -12,9 +12,9 @@
 	<tr>
 	    <td><%= user.first_name %></td>
 	    <td><%= user.last_name %></td>
-	    <td><%= link_to user.email, devx.edit_portal_user_path(user) %></td>
+	    <td><%= link_to user.email, devx.portal_user_path(user) %></td>
 	    <td>
-	    <%= link_to 'Edit', devx.edit_portal_user_path(user) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+	    <%= link_to 'Edit', devx.portal_user_path(user) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 	    <%= link_to 'Delete', devx.portal_user_path(user), method: :delete, data: { confirm: "Are you sure you want to delete #{user.email}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
 	    </td>
 	</tr>

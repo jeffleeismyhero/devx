@@ -116,7 +116,7 @@ module Devx
     private
 
     def administration_params
-      accessible = [ :uuid, :prefix, :first_name, :last_name, :suffix, :gender, :birthdate, :address, :city, :state, :zip, :email, :phone, :mobile_number, :association_list, :active ]
+      accessible = [ :uuid, :prefix, :photo, :first_name, :last_name, :suffix, :gender, :birthdate, :address, :city, :state, :zip, :email, :phone, :mobile_number, :association_list, :active ]
       params.require(:person).permit(accessible)
     end
   end

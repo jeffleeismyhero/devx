@@ -13,6 +13,9 @@ module Devx
     acts_as_taggable_on :associations
     acts_as_taggable_on :departments
 
+
+    mount_uploader :photo, ImageUploader
+
     def full_name
       "#{self.first_name} #{self.last_name}".squish
     end

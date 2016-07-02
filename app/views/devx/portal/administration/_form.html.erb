@@ -1,3 +1,19 @@
+<div class="col-4 columns" style="margin-top:20px;">
+    <div class="col-12 columns">
+        <% if @administration.photo.present? %>
+            <% photo = @administration.photo.profile.url %>
+        <% else %>
+            <% photo = image_path('devx/No-Name.jpg') %>
+        <% end %>
+
+        <%= image_tag(photo, style: 'max-width:100%;max-height:200px') %>
+    </div>
+    <div class="col-12 columns">
+        <%= f.label :photo %>
+        <%= f.file_field :photo %> 
+    </div>
+</div>
+
 <div class="col-8 columns no-padding" style="margin-top:20px;">
     <div class="col-4 columns cd-edit-form">
         <%= f.label :uuid, 'UUID' %>
@@ -36,9 +52,6 @@
     </div>
     
 
-</div>
-
-<div class="col-8 columns no-padding">
     <div class="col-12 columns"><h3>Mailing Address</h3></div>
     <div class="col-6 columns cd-edit-form">
         <%= f.label :address %>
@@ -56,9 +69,8 @@
         <%= f.label :zip %>
         <%= f.text_field :zip %>
     </div>
-</div>
 
-<div class="col-8 columns no-padding">
+
     <div class="col-12 columns"><h3>Contact Information</h3></div>
     <div class="col-6 columns cd-edit-form">
         <%= f.label :email %>
@@ -77,9 +89,8 @@
         <%= f.label :association_list, 'Association' %><br>
         <%= f.select :association_list, Devx::Person.tag_counts_on(:associations).order(name: :asc), { prompt: 'Select association' }, { class: 'select2' } %>
     </div>
-</div>
 
-<div class="col-8 columns no-padding">
+
     <div class="col-12 columns"><h3>Employment Information</h3></div>
     <div class="col-6 columns cd-edit-form">
         <%= f.label :department_list %>
@@ -89,9 +100,8 @@
         <%= f.label :position %>
         <%= f.text_field :position %>
     </div>
-</div>
 
-<div class="col-8 columns no-padding" style="margin-top:40px">
+
     <div class="col-2 columns cd-edit-form">
         <%= f.label :active %><br>
     </div>
@@ -102,7 +112,7 @@
             <div class="slider round"></div>
         </label>
     </div>
-</div>
+
 
 
 <div class="col-12 columns">
