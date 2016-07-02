@@ -27,7 +27,7 @@
             <h4 style="padding:40px 0px 20px"><%= tag.name.try(:titleize) %></h4>
           </div>
           <% s.each do |staff| %>
-            <div class="small-12 medium-6 large-4 columns flex">
+            <div class="small-12 medium-6 large-4 columns flex" style="margin:20px 0px">
               <div class="small-4 columns">
                   <% if staff.photo.present? %>
                       <% photo = staff.photo.profile.url %>
