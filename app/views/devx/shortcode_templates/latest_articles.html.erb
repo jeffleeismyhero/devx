@@ -1,4 +1,5 @@
 <% @attributes[:articles].try(:each) do |article| %>
+<%= article.inspect %>
 <% @text = nil %>
 <% article.content.try(:split, ' ').try(:take, 30).each do |word| %>
     <% @text = "#{@text} " + word.html_safe %>
@@ -16,5 +17,5 @@
         <span>#{article.title}</span>
         </div>
     </div>
-</div>".html_safe, '#' %>
+</div>".html_safe, "/news/#{article.slug}" %>
 <% end %>
