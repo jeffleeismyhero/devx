@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title><%= meta_title(@page) %></title>
   <% if app_settings['boilerplate'] %>
-    <%= stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
+    <%= stylesheet_link_tag "boilerplate.min.css", media: "all" %>
   <% end %>
   <%= stylesheet_link_tag "devx/application", media: "all" %>
   <% @page.layout.try(:stylesheets).try(:each) do |stylesheet| %>
@@ -12,10 +12,6 @@
   <% end %>
   <link rel="icon" type="image/png" href="<%= app_branding.favicon.try(:url) %>" />   
   <%= javascript_include_tag "devx/application" %>
-  <link rel="stylesheet" type="text/css" href="//cdn.jcwproductions.com/plugins/slideshow/slideshow.css">
-  <script type="text/javascript" src="//cdn.jcwproductions.com/plugins/slideshow/slideshow.jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="//cdn.jcwproductions.com/plugins/accordion/accordion.css">
-  <script type="text/javascript" src="//cdn.jcwproductions.com/plugins/accordion/accordion.jquery.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
