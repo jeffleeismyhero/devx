@@ -28,6 +28,7 @@ Devx::Engine.routes.draw do
     end
   end
 
+  get '/branding.css', to: 'stylesheets#branding'
   get '/directory', to: 'administration#index'
   match '/calendar', to: 'calendars#show', via: [ :get, :post ]
   match '/contact', to: 'contact#show', via: [ :get, :post ]

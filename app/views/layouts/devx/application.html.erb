@@ -7,6 +7,7 @@
   <% if app_settings['boilerplate'] %>
     <%= stylesheet_link_tag "boilerplate.min.css", media: "all" %>
   <% end %>
+  <%= stylesheet_link_tag "devx/branding.css", media: "all" %>
   <%= stylesheet_link_tag "devx/application", media: "all" %>
   <% Devx::Stylesheet.all.try(:each) do |stylesheet| %>
     <link rel="stylesheet" type="text/css" href="<%= stylesheet_path(stylesheet) %>.css">
