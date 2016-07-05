@@ -66,8 +66,8 @@
         <% elsif @calendar.calendar_type == 'Google Calendar' %>
           <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
               <div style="background-color: #fff;border:1px solid #384967;box-shadow: 0px 4px 4px #cccccc;overflow:hidden">
-                  <div style="border-bottom:1px solid #384967; background-color:#DBE2E9;">
-                      <h6 style="display:inline-block; background-color:#384967; padding:10px; color:#fff; font-family:lato; margin:0; font-weight:100;"><%= date.to_date.try(:strftime, '%^a') %></h6>
+                  <div class="calendar-event datebar">
+                      <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
                       <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
                   </div>
                   <div style="height:180px;overflow-y:scroll">
@@ -101,8 +101,8 @@
         <% if @calendar.calendar_type == 'Standard' %>
           <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
               <div style="box-shadow: 0px 4px 4px #cccccc;">
-                <div style="border:1px solid #384967; background-color:#DBE2E9;">
-                    <h6 style="display:inline-block; background-color:#384967; padding:10px; color:#fff; font-family:lato; margin:0; font-weight:100;"><%= date.to_date.try(:strftime, '%^a') %></h6>
+                <div class="calendar-event datebar">
+                    <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
                     <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
                 </div>
                 <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
@@ -125,8 +125,8 @@
         <% elsif @calendar.calendar_type == 'Google Calendar' %>
           <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
               <div style="box-shadow: 0px 4px 4px #cccccc;">
-                <div style="border:1px solid #384967; background-color:#DBE2E9;">
-                    <h6 style="display:inline-block; background-color:#384967; padding:10px; color:#fff; font-family:lato; margin:0; font-weight:100;"><%= date.to_date.try(:strftime, '%^a') %></h6>
+                <div class="calendar-event datebar">
+                    <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
                     <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
                 </div>
                 <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
