@@ -8,7 +8,7 @@ module Devx
 
     def index
       @q = @administrations.search(params[:q])
-      @q.sorts = 'name asc' if @q.sorts.empty?
+      @q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
       @administrations = @q.result(distinct: true)
     end
 
@@ -20,7 +20,7 @@ module Devx
 
     def create
       if @administration.valid? && @administration.save
-        redirect_to devx.portal_administration_index_path,
+        redirect_to devx.edit_portal_administration_path(@administration),
         notice: "Successfully created #{@administration.try(:full_name)}"
       else
         render :new,
@@ -30,7 +30,7 @@ module Devx
 
     def update
       if @administration.valid? && @administration.update(administration_params)
-        redirect_to devx.portal_administration_index_path,
+        redirect_to devx.edit_portal_administration_path(@administration),
         notice: "Successfully updated #{@administration.try(:full_name)}"
       else
         render :edit,
@@ -116,7 +116,8 @@ module Devx
     private
 
     def administration_params
-      accessible = [ :uuid, :prefix, :photo, :first_name, :last_name, :suffix, :gender, :birthdate, :address, :city, :state, :zip, :email, :phone, :mobile_number, :association_list, :active ]
+      accessible = [ :uuid, :prefix, :photo, :first_name, :last_name, :suffix, :gender, :birthdate, :address, :city, :state, :zip, :email, :phone, :mobile_number, :association_list, :active,
+                    department_list: [] ]
       params.require(:person).permit(accessible)
     end
   end
