@@ -30,7 +30,7 @@
 
     <div id="add-funds" class="col-12 columns">
         <h2>Add Money to Your Account</h2>
-        <%= form_for @transaction, url: devx.account_deposit_portal_user_path(@user), method: :post do |f| %>
+        <%= form_for @transaction, url: devx.portal_account_balance_path(@user), method: :post do |f| %>
         <div class="col-12 columns no-padding">
             <div class="col-2 columns cd-edit-form">
                 <%= label_tag :amount %>

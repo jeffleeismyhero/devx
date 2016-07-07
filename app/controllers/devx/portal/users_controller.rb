@@ -63,6 +63,8 @@ module Devx
     def account_balance
       @user ||= current_user
 
+      @account_transactions = Devx::AccountTransaction.where(user: @user)
+
       @transaction = AccountTransaction.new
 
       if request.post?
@@ -76,14 +78,14 @@ module Devx
         if @transaction.valid?
           if @transaction.process(@transaction.amount.to_i, params[:cc_type], params[:ch_name], params[:cc_number], exp_date, params[:cvv])
             if @transaction.save
-              redirect_to devx.account_deposit_portal_user_path(@user),
+              redirect_to devx.portal_account_balance_path,
               notice: "Your transaction has been processed successfully"
             else
-              redirect_to devx.account_deposit_portal_user_path(@user),
+              redirect_to devx.portal_account_balance_path,
               notice: "Transaction was complete but the balance could not be updated"
             end
           else
-            render :account_deposit,
+            render :account_balance,
             notice: "Your transaction could not be processed"
           end
         end

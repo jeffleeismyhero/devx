@@ -43,7 +43,7 @@ Devx::Engine.routes.draw do
     get '/terms-of-service', to: 'dashboard#terms_of_service'
     get '/privacy-policy', to: 'dashboard#privacy_policy'
     get 'profile', to: 'users#show', as: :profile
-    get 'account-balance', to: 'users#account_balance', as: :account_balance
+    match 'account-balance', to: 'users#account_balance', via: [ :get, :post ], as: :account_balance
     post 'developer/update', to: 'developer#update'
     match 'developer/commerce', to: 'developer#commerce_settings', via: [ :get, :post ]
     match 'developer/sms_alert', to: 'developer#sms_alert_settings', via: [ :get, :post ]
