@@ -15,9 +15,21 @@
 </div>
 
 <div class="col-8 columns no-padding" style="margin-top:20px;">
-    <div class="col-4 columns cd-edit-form">
+    <div class="col-6 columns cd-edit-form">
         <%= f.label :uuid, 'UUID' %>
         <%= f.text_field :uuid %>
+    </div>
+
+
+    <div class="col-8 columns cd-edit-form">
+        <%= f.label :active %><br>
+    </div>
+
+    <div class="col-2 columns cd-edit-form">
+        <label class="switch">
+            <%= f.check_box :active %>
+            <div class="slider round"></div>
+        </label>
     </div>
 
     <div class="col-12 columns"><h3>Personal Information</h3></div>
@@ -99,18 +111,6 @@
     <div class="col-6 columns cd-edit-form">
         <%= f.label :position %>
         <%= f.text_field :position %>
-    </div>
-
-
-    <div class="col-2 columns cd-edit-form">
-        <%= f.label :active %><br>
-    </div>
-
-    <div class="col-2 columns cd-edit-form">
-        <label class="switch">
-            <%= f.check_box :active %>
-            <div class="slider round"></div>
-        </label>
     </div>
 
 
