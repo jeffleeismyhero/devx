@@ -26,6 +26,8 @@ module Devx
         end
       end
 
+      @shortcodes = process_shortcode(@page.content)
+
     rescue ActiveRecord::RecordNotFound
       redirect_to '/404.html'
       return
@@ -48,6 +50,10 @@ module Devx
       else
         'devx/application'
       end
+    end
+
+    def process_shortcode(content)
+      content.scan(/\[.*?\]/)
     end
   end
 end
