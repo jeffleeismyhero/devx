@@ -1,9 +1,8 @@
 <% provide(:title, "#{@form.name}") %>
 
-  <div style="padding:140px 0px;margin:0 auto;text-align:center">
+<!--   <div style="padding:140px 0px;margin:0 auto;text-align:center">
     <h1 style="padding:0;margin:0;border:none;color:#000;"><%= @form.name %></h1>
-  </div>
-</div>
+  </div> -->
 
 <div class="container notify">
   <div class="row">
@@ -19,16 +18,17 @@
   <div class="row">
     <div class="large-12 columns">
       <%= form_for @form, url: devx.forms_path, method: :post, html: { class: 'form-builder' } do |f| %>
+        <div class="large-12 columns">
         <%= f.hidden_field :id %>
         <%= f.fields_for :submission_content do |submission| %>
           <% @form.fields.try(:each) do |field| %>
             <%= render "#{field.field_type}", field: field, f: submission %>
           <% end %>
         <% end %>
-     </div>
-      <div class="large-12 columns">
-        <%= f.submit %>
-      </div>
+        </div>
+        <div class="large-12 columns">
+          <%= f.submit 'Submit' %>
+        </div>
     <% end %>
   </div>
 </div>
