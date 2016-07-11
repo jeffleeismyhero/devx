@@ -44,6 +44,11 @@
     <%= select_tag 'settings[contact_form_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['contact_form_layout']), { prompt: 'Select Contact Form Layout' } %>
 </div>
 
+<div class="col-6 columns cd-edit-form">
+    <%= label_tag 'settings[contact_form_recipient]', 'Contact Form Recipient' %><br>
+    <%= text_field_tag 'settings[contact_form_recipient]', @settings.settings['contact_form_recipient'] %>
+</div>
+
 
 <div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[admissions]', 'Admissions' %><br>

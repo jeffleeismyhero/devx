@@ -1,6 +1,6 @@
 module Devx
   class ContactMailer < ApplicationMailer
-  	def submit_inquiry(contact, recipient = 'cara@rosarian.org')
+  	def submit_inquiry(contact, recipient = 'info@jcwproductions.com')
   		@contact = contact
   		@recipient = recipient
 

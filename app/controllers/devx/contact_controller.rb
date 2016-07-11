@@ -14,7 +14,7 @@ module Devx
   			@contact = params[:contact]
   			
 			if @contact.present?
-  				Devx::ContactMailer.delay.submit_inquiry(@contact)
+  				Devx::ContactMailer.delay.submit_inquiry(@contact, app_settings['contact_form_recipient'])
   			end
   		end
   	end
