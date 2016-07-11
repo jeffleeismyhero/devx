@@ -11,18 +11,19 @@ module Devx
     end
 
     def create
-
+      @form = Devx::Form.find(params[:form][:id])
       @submission = Devx::FormSubmission.new(form_id: params[:form][:id], submission_content: params[:form][:submission_content])
 
       if @submission.valid? && @submission.save
-        #@form.submission_recipients.split(',').try(:each) do |recipient|
-          #Devx::NotificationMailer.delay.registration_completed(@registration, @submission, recipient)
-        #end
+        @form.submission_recipients.split(',').try(:each) do |recipient|
+          Devx::NotificationMailer.delay.form_submission(recipient, @form, @submission.submission_content)
+        end
 
-        render devx.root_path,
+        redirect_to devx.form_path(@form),
         notice: 'Successfully submitted form'
       else
-        render :show
+        render :show,
+        notice: 'An error occurred. Please check your submission and try again.'
       end
     end
 

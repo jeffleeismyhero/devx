@@ -1,0 +1,11 @@
+<html>
+<body>
+  <p>You have received a submission for <%= @subject.name %></p>
+  
+  <p>
+    <% @submission.try(:each) do |key,value| %>
+      <%= "#{key}: #{value}" %><br />
+    <% end %>
+  </p>
+</body>
+</html>

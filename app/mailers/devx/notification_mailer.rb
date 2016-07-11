@@ -9,6 +9,15 @@ module Devx
   		     subject: @subject
   	end
 
+    def form_submission(recipient, subject, submission)
+      @recipient = recipient
+      @subject = subject
+      @submission = submission
+
+      mail to: @recipient,
+           subject: "Submission for #{@subject.name}"
+    end
+
     def notify(user, subject, content)
       @user = user
       @subject = subject
