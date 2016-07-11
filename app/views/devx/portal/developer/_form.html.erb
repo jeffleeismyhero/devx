@@ -25,6 +25,11 @@
 </div>
 
 <div class="col-6 columns cd-edit-form">
+    <%= label_tag 'settings[article_layout]', 'Article Layout' %><br>
+    <%= select_tag 'settings[article_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['article_layout']), { prompt: 'Select Article Layout' } %>
+</div>
+
+<div class="col-6 columns cd-edit-form">
     <%= label_tag 'settings[newsfeed_layout]', 'Newsfeed Layout' %><br>
     <%= select_tag 'settings[newsfeed_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['newsfeed_layout']), { prompt: 'Select Newsfeed Layout' } %>
 </div>

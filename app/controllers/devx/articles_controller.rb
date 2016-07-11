@@ -20,7 +20,7 @@ module Devx
 
     def show
       if app_settings['newsfeed_layout'].present?
-        @layout = Devx::Layout.find(app_settings['newsfeed_layout'])
+        @layout = Devx::Layout.find(app_settings['article_layout'])
       end
 
       @page = Devx::Page.new(name: @article.title, layout: @layout)

@@ -24,8 +24,10 @@
           <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View calendar:</p>
           <%= f.select :id_eq, Devx::Calendar.all.collect{ |x| [ x.name, x.id ] }, { include_blank: true }, { class: 'select2-fixed' } %>
 
-          <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View category:</p>
-          <%= f.select :events_tags_name_eq, options_from_collection_for_select(@tags, 'name', 'name', @q.events_tags_name_eq), { include_blank: true }, { class: 'select2' } %>
+          <% if @tags.any? %>
+            <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View category:</p>
+            <%= f.select :events_tags_name_eq, options_from_collection_for_select(@tags, 'name', 'name', @q.events_tags_name_eq), { include_blank: true }, { class: 'select2' } %>
+          <% end %>
           
           <div style="margin-top:30px"><%= f.submit %></div>
         <% end %>
