@@ -12,7 +12,7 @@
 <body>
 
   <!-- START: HEADER -->
-  <header class="cd-main-header">
+  <header class="cd-main-header no-print">
 
     <!-- START: LOGO -->
       <%= link_to (app_branding.site_name || 'Site Name'), devx.portal_root_path, class: 'cd-logo' %>
@@ -21,7 +21,7 @@
     <!-- START: TOP NAVIGATION -->
     <nav class="cd-nav">
       <div class="cd-top-nav cd-horizontal-accordion">
-        <% if app_settings['balance_tracking'] && !current_user.parent? %>
+        <% if app_settings['balance_tracking'] && !current_user.parent? && current_user.person.present? %>
         <div class="cd-accordion-tab">
           <div class="cd-accordion-title">
             <span><i class="fa fa-money"></i></span>
@@ -50,7 +50,7 @@
             <span><%= current_user.try(:full_name) %></span>
           </div>
           <div class="cd-accordion-body">
-            <%= link_to 'Edit Profile', devx.edit_portal_user_path(current_user) %><br />
+            <%= link_to 'Edit Profile', devx.portal_profile_path %><br />
             <%= link_to 'Logout', devx.destroy_user_session_path, method: :delete %>
           </div>
         </div>
@@ -167,6 +167,10 @@
 
         <% if app_settings['crm_module'] && current_user.administrator? %>
           <li><%= link_to '<i class="fa fa-database"></i> CRM'.html_safe, devx.portal_administration_index_path %></li>
+        <% end %>
+
+        <% if app_settings['balance_tracking'] %>
+          <li><%= link_to '<i class="fa fa-credit-card"></i> School Acct. Reports'.html_safe, devx.portal_account_transactions_path %></li>
         <% end %>
 
         <% if can? :manage, Devx::Branding %>

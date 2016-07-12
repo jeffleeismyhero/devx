@@ -1,0 +1,6 @@
+<%= f.select :person_id, Devx::Person.all.collect{ |x| [x.try(:record_with_school_id), x.id] }, { include_blank: true }, class: 'select2-fixed' %>
+
+  <div class="nested-actions pull-right buttons">
+    <%= f.hidden_field :_destroy, class: 'remove-field' %>
+    <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, '#', class: 'remove_fields' %>
+  </div>

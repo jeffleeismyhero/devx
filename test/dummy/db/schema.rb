@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160702195549) do
+ActiveRecord::Schema.define(version: 20160712042333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160702195549) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "devx_account_transactions", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "person_id"
     t.string   "transaction_type"
     t.string   "payment_method"
     t.float    "amount"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160702195549) do
     t.string   "receipt_number"
     t.string   "upc"
     t.string   "product"
+    t.string   "cardholder"
   end
 
   create_table "devx_alumnis", force: :cascade do |t|
@@ -330,6 +331,13 @@ ActiveRecord::Schema.define(version: 20160702195549) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_linked_accounts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_media", force: :cascade do |t|
     t.string   "name"
     t.string   "file"
@@ -398,6 +406,7 @@ ActiveRecord::Schema.define(version: 20160702195549) do
     t.boolean  "active"
     t.string   "mobile_number"
     t.string   "photo"
+    t.string   "school_id"
   end
 
   create_table "devx_products", force: :cascade do |t|

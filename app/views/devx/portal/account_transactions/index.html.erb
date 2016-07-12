@@ -1,0 +1,53 @@
+<% provide(:title, 'School Account Transactions') %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 columns">
+            <h1><%= yield(:title) %></h1>
+        </div>
+        <div class="col-12 columns no-print" style="padding-bottom:20px;">
+            <i class="fa fa-upload" aria-hidden="true"></i> <%= link_to 'Import account_transactions', devx.portal_transactions_import_path %> <i class="fa fa-download"></i> <%= link_to 'Export account_transactions', devx.portal_account_transactions_path(format: :xlsx) %>
+            <div style="float:right;">
+                <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
+              <div class="cd-edit-form">
+              <%= search_form_for @q, url: devx.portal_account_transactions_path do |f| %>
+                <div class="form-group">
+                    <%= f.label 'Date Range' %>
+                </div>
+                <div class="medium-6 columns" style="padding:0">
+                    <div class="filter-option">
+                        <%= f.date_field :created_at_gteq %>
+                    </div>
+                </div>
+                <div class="medium-6 columns" style="padding:0">
+                    <div class="filter-option">
+                        <%= f.date_field :created_at_lteq %>
+                    </div>
+                </div>
+                  <%= f.submit %>
+              <% end %>
+              </div>
+            </div>
+        </div>
+        <div class="col-12 columns">
+            <table>
+                <thead>
+                    <tr>
+                        <th><%= sort_link @q, :created_at, 'Date' %></th>
+                        <th><%= sort_link @q, :user, 'Customer Name' %></th>
+                        <th><%= sort_link @q, :id, 'ID' %></th>
+                        <th><%= sort_link @q, :cardholder_name, 'Cardholder' %></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%= render partial: 'account_transaction', collection: @account_transactions %>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 columns">
+            <% if @account_transactions.any? %>
+                <%= will_paginate @account_transactions, class: 'apple_pagination' %>
+            <% end %>
+        </div>
+    </div>
+</div>

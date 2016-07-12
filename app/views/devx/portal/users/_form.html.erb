@@ -15,6 +15,12 @@
 </div>
 
 <div class="col-8 columns no-padding" style="margin-top:20px;">
+    <% if current_user.administrator? %>
+        <div class="col-12 columns cd-edit-form">
+            <%= f.label :person_id, 'Linked CRM Record' %><br>
+            <%= f.select :person_id, Devx::Person.all.collect{ |x| [x.try(:record_with_school_id), x.id] }, { include_blank: true }, { class: 'select2-fixed' } %>
+        </div>
+    <% end %>
     <div class="col-6 columns cd-edit-form">
         <%= f.label :first_name %><br>
         <%= f.text_field :first_name %>
@@ -56,24 +62,22 @@
             </div>
         </div>
     <% end %>
+    <div class="col-12 columns">
+        <h3>Linked Accounts</h3>
+        <% if @user.parent? || @user.super_administrator? %>
+          <%= content_tag 'div', class: 'nested-attributes' do %>
+            <%= f.fields_for :linked_accounts do |l| %>
+              <%= render partial: 'linked_account_fields', locals: { f: l } %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if current_user.administrator? %>
+          <%= link_to_add_fields 'Link Account', f, :linked_accounts, nil, 'linked_account_fields', '' %>
+        <% end %>
+    </div>
 </div>
 
-<% if @user.parent? || @user.super_administrator? %>
-    <div class="col-12 columns" style="margin-top:20px;">
-        <h3>Children</h3>
-        <table width="100%">
-          <thead>
-            <tr style="background-color:#ACCC38;">
-              <th style="color:#084269; padding:10px; text-align:left; width:50%;">First Name</th>
-              <th style="color:#084269; padding:10px; text-align:left; width:50%;">Last Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render partial: 'child', collection: @user.children %>
-          </tbody>
-        </table>
-    </div>
-<% end %>
+
 
 
 <div class="col-12 columns" style="margin-top:20px;">

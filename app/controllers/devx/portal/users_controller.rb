@@ -33,7 +33,7 @@ module Devx
 
   	def create
   		if @user.valid? && @user.save
-  			redirect_to devx.edit_portal_user_path(@user),
+  			redirect_to devx.portal_user_path(@user),
   			notice: "Successfully saved user"
 
   		else
@@ -44,7 +44,7 @@ module Devx
 
   	def update
   		if @user.valid? && @user.update(user_params)
-  			redirect_to devx.edit_portal_user_path(@user),
+  			redirect_to devx.portal_user_path(@user),
   			notice: "Successfully updated user"
 
   		else
@@ -63,7 +63,17 @@ module Devx
     def account_balance
       @user ||= current_user
 
-      @account_transactions = Devx::AccountTransaction.where(user: @user)
+      @linked_accounts = {}
+
+      if @user.person_id.present?
+        @linked_accounts[@user.person_id] = @user.person.try(:record_with_school_id)
+      end
+
+      @user.linked_accounts.try(:each) do |linked_account|
+        @linked_accounts[linked_account.person.id] = linked_account.person.try(:record_with_school_id)
+      end
+
+      @account_transactions = Devx::AccountTransaction.where(person: @user.person)
 
       @transaction = AccountTransaction.new
 
@@ -71,7 +81,8 @@ module Devx
         @transaction.amount = params[:account_transaction][:amount]
         @transaction.transaction_type = 'Credit'
         @transaction.payment_method = 'Credit Card'
-        @transaction.user = @user
+        @transaction.person_id = params[:account_transaction][:person_id]
+        @transaction.cardholder = params[:ch_name]
 
         exp_date = "%02d%02d" % [params['expiry_date(2i)'], params['expiry_date(1i)'].last(2)]
 
@@ -199,8 +210,9 @@ module Devx
   	private
 
   		def user_params
-  			accessible = [ :email, :first_name, :last_name, :generate_password, :photo, role_ids: [],
-                      children_attributes: [ :id, :first_name, :last_name, :_destroy ]
+  			accessible = [ :person_id, :email, :first_name, :last_name, :generate_password, :photo, role_ids: [],
+                      children_attributes: [ :id, :first_name, :last_name, :_destroy ],
+                      linked_accounts_attributes: [ :id, :user_id, :person_id, :_destroy ]
                     ]
 
   			#adds the below params to the above var except when the user and password fields are blank

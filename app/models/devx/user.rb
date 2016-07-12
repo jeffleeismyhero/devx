@@ -11,16 +11,19 @@ module Devx
            :recoverable, :rememberable, :trackable, :validatable,
            :lockable, :timeoutable, :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
+    acts_as_paranoid
+
     has_many :authorizations
     has_many :roles, through: :authorizations
     has_many :children
     has_many :child_registrations
     has_many :registrations, through: :child_registrations
     has_many :attendances
-    has_many :account_transactions
     has_many :calendar_subscriptions
     has_many :event_subscriptions
     has_many :article_subscriptions
+    has_many :linked_accounts
+    has_many :people, through: :linked_accounts
     belongs_to :person
 
     validates :email, presence: true
@@ -33,6 +36,8 @@ module Devx
 
     accepts_nested_attributes_for :children,
       reject_if: proc{ |x| x['first_name'].blank? }
+
+    accepts_nested_attributes_for :linked_accounts, allow_destroy: true
 
 
     def self.get_user(email)
@@ -131,20 +136,11 @@ module Devx
     end
 
     def balance
-      debit_bal = 0
-      credit_bal = 0
-      credits = self.account_transactions.where(transaction_type: 'Credit')
-      debits = self.account_transactions.where(transaction_type: 'Debit')
-
-      debits.try(:each) do |d|
-        debit_bal += d.amount
+      if self.person.present?
+        self.person.balance
+      else
+        0
       end
-
-      credits.try(:each) do |c|
-        credit_bal += c.amount
-      end
-
-      return credit_bal - debit_bal
     end
   end
 end

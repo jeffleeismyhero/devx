@@ -38,6 +38,12 @@ secondary
     padding:0!important;
 }
 
+@media only print {
+  .no-print {
+    display:none;
+  }
+}
+
 .col-1 {
   width: 8.33333%; }
 

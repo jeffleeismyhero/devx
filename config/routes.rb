@@ -53,8 +53,9 @@ Devx::Engine.routes.draw do
     match 'articles/import', to: 'articles#import', via: [ :get, :post ]
     match 'calendars/:id/import', to: 'calendars#import', via: [ :get, :post ], as: :calendar_import
     match 'administration/import', to: 'administration#import', via: [ :get, :post ]
+    match 'transactions/import', to: 'account_transactions#import', via: [ :get, :post ]
 
-    
+    resources :account_transactions, path: 'transactions', only: [ :index ]
     resources :pages
     resources :menus do
       collection { post :sort }
