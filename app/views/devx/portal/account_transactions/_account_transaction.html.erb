@@ -2,5 +2,6 @@
   <td><%= ldate account_transaction.created_at %></td>
   <td><%= account_transaction.person.full_name %></td>
   <td><%= account_transaction.person.school_id %></td>
+  <td><%= number_to_currency account_transaction.amount %></td>
   <td><%= account_transaction.cardholder %></td>
 </tr>
