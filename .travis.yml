@@ -7,5 +7,5 @@ rvm:
 
 script: bundle exec rspec spec/models
 
-env:
-  - DB=postgres
+#env:
+#  - DB=postgres
