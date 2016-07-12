@@ -1,0 +1,1 @@
+CKEDITOR.config.enterMode=CKEDITOR.ENTER_BR,CKEDITOR.config.entities=!1,CKEDITOR.config.allowedContent=!0,CKEDITOR.config.protectedSource.push(/<i[^>]*><\/i>/g),CKEDITOR.dtd.$removeEmpty.i=!1;

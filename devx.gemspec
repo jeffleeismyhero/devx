@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "coffee-rails", "~> 4.1.0"
   s.add_runtime_dependency "sass-rails", "~> 5.0"
   s.add_runtime_dependency "flash_render"
+  s.add_runtime_dependency "uglifier", ">= 1.3.0"
 
 
   ## Authentication

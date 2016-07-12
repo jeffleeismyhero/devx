@@ -6,6 +6,7 @@ module Devx
     Capybara.current_session.driver.browser.manage.window.resize_to(1366, 768)
     
     scenario 'with all fields' do
+      skip
       @user = create(:devx_user)
       sign_in @user
       authorize_as_super_administrator @user
