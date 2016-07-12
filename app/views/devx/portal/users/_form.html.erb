@@ -42,7 +42,7 @@
         <% end %>
     </div>
 
-    <% if current_user == @user %>
+    <% if current_user == @user || current_user.super_administrator? %>
         <div class="col-6 columns cd-edit-form">
             <%= f.label :password %><br>
             <%= f.password_field :password %>
