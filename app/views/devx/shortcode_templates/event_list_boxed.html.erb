@@ -9,11 +9,10 @@
             </div>
         </div>
         <div class=\"event-text\">
-            <p class=\"event-title\">#{link_to event.name.try(:upcase), '#'}</p>
+            <p class=\"event-title\">#{event.name.try(:upcase)}</p>
             <p class=\"event-desc\">#{event.start_time.try(:strftime, '%I:%M%p')}</p>
             <p class=\"event-desc\">#{event.venue.try(:upcase)}</p>
         </div>
     </li>".html_safe %>
-
     <% end %>
 </ul>

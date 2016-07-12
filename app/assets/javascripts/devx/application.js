@@ -216,6 +216,8 @@ $(".currency-field").on("blur", function()
 
     else 
       $(".listview").removeClass("hide").addClass("show");
+
+    return false;
   });  
 
 
@@ -230,6 +232,8 @@ $(".currency-field").on("blur", function()
 
     else 
       $(".gridview").removeClass("hide").addClass("show");
+
+    return false;
 
   });
 

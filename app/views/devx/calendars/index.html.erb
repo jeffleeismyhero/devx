@@ -109,17 +109,19 @@
                 </div>
                 <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
                     <ul class="accordion" style="margin:0;">
-                      <% @events.where('start_time > ? AND start_time < ?', date.beginning_of_day, date.end_of_day).try(:each) do |event| %>
-                        <li style="margin-bottom:.1rem; ">
-                          <div class="accordion-title">
-                            <%= event.name %>  
-                          </div>
-                          <div class="accordion-content">
-                            <span><%= event.start_time.try(:strftime, '%B %d %l:%M %P') %><%= event.end_time.try(:strftime, ' - %B %d %l:%M %P') %></span>
-                            <span><%= event.venue.try(:full_address) %></span>
-                          </div>
-                        </li>
-                      <% end %>
+                        <% @events.try(:each) do |event| %>
+                          <% if event.start_time.try(:strftime, '%Y-%m-%d').to_s == date.to_s %>
+                            <li style="margin-bottom:.1rem; ">
+                              <div class="accordion-title">
+                                <%= event.name %>  
+                              </div>
+                              <div class="accordion-content">
+                                <span><%= event.start_time.try(:strftime, '%B %d %l:%M %P') %><%= event.end_time.try(:strftime, ' - %B %d %l:%M %P') %></span>
+                                <span><%= event.venue.try(:full_address) %></span>
+                              </div>
+                            </li>
+                          <% end %>
+                        <% end %>
                     </ul>
                   </div>
               </div>
