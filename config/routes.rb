@@ -38,7 +38,8 @@ Devx::Engine.routes.draw do
   resources :stylesheets, only: :show, defaults: { format: 'css' }
   resources :javascripts, only: :show, defaults: { format: 'js' }
 
-  namespace :portal do
+  constraints  subdomain: 'portal'  do
+    scope module: 'portal', as: 'portal' do
     get '/' => 'dashboard#index', as: :dashboard
     get '/terms-of-service', to: 'dashboard#terms_of_service'
     get '/privacy-policy', to: 'dashboard#privacy_policy'
@@ -108,6 +109,7 @@ Devx::Engine.routes.draw do
     resources :developer, only: :index
     
     root 'dashboard#index'
+    end
   end
 
   get '/search' => 'pages#search'

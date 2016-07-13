@@ -1,21 +1,21 @@
 module Features
   module SessionHelpers
     def sign_in(user)
-      ensure_on devx.portal_dashboard_path
+      ensure_on devx.portal_dashboard_url(subdomain: 'portal')
       find(:css, '#user_email').set user.email
       find(:css, '#user_password').set user.password
       click_button 'LOGIN'
     end
 
     def sign_in_with(email, password)
-      ensure_on devx.portal_dashboard_path
+      ensure_on devx.portal_dashboard_url(subdomain: 'portal')
       find(:css, '#user_email').set email
       find(:css, '#user_password').set password
       click_button 'LOGIN'
     end
 
     def sign_up(email, password)
-      ensure_on devx.new_user_registration_path
+      ensure_on devx.new_user_registration_url(subdomain: 'portal')
       find(:css, '#user_email').set email
       find(:css, '#user_password').set password
       find(:css, '#user_password_confirmation').set password
