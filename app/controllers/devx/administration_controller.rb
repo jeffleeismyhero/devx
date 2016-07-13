@@ -12,7 +12,7 @@ module Devx
 
       @page = Devx::Page.new(name: 'Staff Directory', layout: @layout)
 
-  		@administrations = Devx::Person.all
+  		@administrations = Devx::Person.faculty.active
   		@q = @administrations.search(params[:q])
   		@q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
   		@administrations = @q.result(distinct: true)

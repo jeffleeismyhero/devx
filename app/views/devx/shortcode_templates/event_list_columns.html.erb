@@ -4,7 +4,7 @@
 
   <div class="event-square small-3 medium-4 columns"><span class="event-month"><% if @attributes[:calendar_type] == 'Standard' %><%= event.start_time.try(:strftime, '%b') %><% else %><%= event.start_time.to_datetime.try(:strftime, '%b') %><% end %></span> <span class="event-date"><% if @attributes[:calendar_type] == 'Standard' %><%= event.try(:strftime, '%d') %><% else %><%= event.start_time.to_datetime.try(:strftime, '%d') %><% end %></span></div>
 
-  <div class="small-9 medium-8 columns"><span><%= event.start_time.to_datetime.try(:strftime, '%I:%M%P') %></span><br>
+  <div class="small-9 medium-8 columns"><span><%= event.start_time.to_datetime.try(:in_time_zone, Time.zone.name).try(:strftime, '%I:%M%P') %></span><br>
     <span><% if @attributes[:calendar_type] == 'Standard' %><%= event.venue %><% else %><%= event.location %><% end %></span><br>
     &nbsp;</div>
   </div>
