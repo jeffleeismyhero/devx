@@ -42,7 +42,11 @@ module Devx
     end
 
     def ldate(date)
-      date.try(:in_time_zone, app_settings['default_timezone']).try(:strftime, '%b %d, %Y - %I:%M %p ')
+      date.try(:strftime, '%b %d, %Y - %I:%M %p ')
+    end
+
+    def google_date(date)
+      date.try(:strftime, '%b %d, %Y - %I:%M %p ')
     end
 
     def sc_content(content)

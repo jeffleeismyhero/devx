@@ -30,7 +30,7 @@
             <% @calendar.events.try(:each) do |event| %>
               <tr>
                 <td><%= link_to event.name, edit_portal_calendar_event_path(@calendar, id: event.id) %></td>
-                <td><%= event.start_time.try(:strftime, '%m/%d/%Y %I:%M %P') %></td>
+                <td><%= ldate event.start_time %></td>
                 <td>
                 <%= link_to 'Edit', devx.edit_portal_calendar_event_path(@calendar, id: event) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 <%= link_to 'Delete', devx.portal_calendar_event_path(@calendar, id: event), method: :delete, data: { confirm: "Are you sure you want to delete #{event.name}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
@@ -41,7 +41,7 @@
             <% @google_events.try(:each) do |event| %>
               <tr>
                 <td style="padding:10px;border-bottom:1px solid #ccc;"><%= event.title %></td>
-                <td style="padding:10px;border-bottom:1px solid #ccc;"><%= event.start_time.try(:to_datetime).try(:in_time_zone, @calendar.time_zone).try(:strftime, '%m/%d/%Y %I:%M %P') %></td>
+                <td style="padding:10px;border-bottom:1px solid #ccc;"><%= google_date event.start_time.try(:to_datetime) %></td>
                 <td style="padding:10px;border-bottom:1px solid #ccc;">&nbsp;</td>
               </tr>
             <% end %>
