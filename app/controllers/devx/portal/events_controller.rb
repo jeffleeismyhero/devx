@@ -54,7 +54,8 @@ module Devx
   	private
 
   		def event_params
-  			accessible = [ :name, :description, :start_time, :end_time, :contact_name, :contact_email, :venue_id, :tag_list ]
+  			accessible = [ :name, :description, :start_time, :end_time, :contact_name, :contact_email, :venue_id, :tag_list,
+                      schedules_attributes: [ :id, :start_time, :end_time, :all_day, :repeat, :_destroy, :days ] ]
   			params.require(:event).permit(accessible)
   		end
 

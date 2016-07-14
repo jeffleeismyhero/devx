@@ -1,11 +1,9 @@
 module Devx
   class Event < ActiveRecord::Base
-    extend TimeSplitter::Accessors
-    split_accessor :start_time
-
     acts_as_taggable
 
     has_many :event_subscriptions
+    has_many :schedules
     belongs_to :calendar
     belongs_to :venue
 
@@ -14,6 +12,12 @@ module Devx
     scope :uniq_dates, -> { uniq.pluck(:start_time) }
 
     validates :name, presence: true
-    validates :start_time, presence: true
+
+    accepts_nested_attributes_for :schedules, allow_destroy: true,
+        reject_if: proc{ |x| x['start_time'].blank? }
+
+    def self.per_page
+        10
+    end
   end
 end

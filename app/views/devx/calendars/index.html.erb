@@ -52,18 +52,16 @@
                   </div>
                   <div style="height:180px;overflow-y:scroll">
                       <ul class="accordion">
-                        <% @events.try(:each) do |event| %>
-                          <% if event.start_time.try(:strftime, '%Y-%m-%d').to_s == date.to_s %>
+                        <% @scheduled_events[date].try(:each) do |schedule| %>
                             <li style="margin-bottom:.1rem; ">
                               <div class="accordion-title">
-                                <%= event.name %>  
+                                <%= schedule.event.name %>  
                               </div>
                               <div class="accordion-content">
-                                <span><%= ldate event.start_time %> - <%= ldate event.end_time %></span>
-                                <span><%= event.venue.try(:full_address) %></span>
+                                <span><% if schedule.all_day == true %>All day<% else %><%= ldate schedule.start_time %> - <%= ldate schedule.end_time %><% end %></span>
+                                <span><%= schedule.event.venue.try(:full_address) %></span>
                               </div>
                             </li>
-                          <% end %>
                         <% end %>
                       </ul>
                   </div>

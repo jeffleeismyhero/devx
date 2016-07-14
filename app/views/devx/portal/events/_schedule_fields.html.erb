@@ -1,0 +1,25 @@
+<div class="col-12 columns no-padding">
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :start_time %>
+    <%= f.text_field :start_time, class: 'datetimepicker' %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :end_time %>
+    <%= f.text_field :end_time, class: 'datetimepicker' %>
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <%= f.check_box :all_day %> All-day
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <%= f.check_box :repeat %> Repeat
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :days %>
+    <%= f.select :days, %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday], { }, { multiple: true, class: 'select2-multiple-fixed' } %>
+  </div>
+
+  <div class="col-12 columns nested-actions pull-right buttons">
+    <%= f.hidden_field :_destroy, class: 'remove-field' %>
+    <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, '#', class: 'remove_fields' %>
+  </div>
+</div>

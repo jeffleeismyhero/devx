@@ -22,6 +22,7 @@
 //= require wow
 //= require_tree ./ckeditor
 //= require_tree .
+//= require_self
 
 $(function()
 {

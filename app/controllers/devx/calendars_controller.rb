@@ -21,32 +21,61 @@ module Devx
 
 
       @page = Devx::Page.new(name: 'Calendar', layout: @layout)
+      @dates = []
 
+      (DateTime.now.beginning_of_month..DateTime.now.end_of_month).each do |date|
+        @dates.push(date.to_date)
+      end
 
       if @calendar.calendar_type == 'Standard'
-        @events = @calendar.events.for(Time.now, Time.now).upcoming
+        @events = Devx::Schedule.for_calendar(@calendar)
+      end
 
-        @dates = []
-        @events.try(:each) do |event|
-          if !@dates.include?(event.start_time_date)
-            @dates.push(event.start_time_date)
+      @scheduled_events = {}
+      @dates.each do |date|
+        puts date
+        @events.each do |event|
+          event.schedules.each do |schedule|
+            if schedule.end_time_date >= date
+              if schedule.start_time_date <= date
+                @scheduled_events[date] = []
+                @scheduled_events[date].push(schedule)
+              end
+            end
           end
-        end     
-      elsif @calendar.calendar_type == 'Google Calendar'
-        @google_events = @calendar.get_google_events
-
-        @a = []
-        @google_events.try(:each) do |e|
-          hash = { name: e.title, date: e.start_time.to_datetime.strftime('%Y-%m-%d'), start_time: e.start_time.to_datetime, end_time: e.end_time.to_datetime, venue: e.location }
-          @a.push(hash)
-        end
-
-        @dates = []
-
-        @a.map{ |x| x[:date] }.uniq.try(:each) do |event|
-          @dates.push(event)
         end
       end
+
+      # if @calendar.calendar_type == 'Standard'
+      #   @events = Devx::Schedule.for_calendar(@calendar)
+
+
+      #   # render plain: Devx::Schedule.for_calendar(@calendar).inspect
+      #   # return
+
+      #   @events.try(:each) do |event|
+      #     event.schedules.try(:each) do |schedule|
+      #       if !@dates.include?(schedule.start_time_date)
+      #         @dates.push(schedule.start_time_date)
+      #       end
+      #     end
+      #   end     
+      # elsif @calendar.calendar_type == 'Google Calendar'
+      #   @google_events = @calendar.get_google_events
+
+      #   @a = []
+      #   @google_events.try(:each) do |e|
+      #     hash = { name: e.title, date: e.start_time.to_datetime.strftime('%Y-%m-%d'), start_time: e.start_time.to_datetime, end_time: e.end_time.to_datetime, venue: e.location }
+      #     @a.push(hash)
+      #   end
+
+      #   @a.map{ |x| x[:date] }.uniq.try(:each) do |event|
+      #     @dates.push(event)
+      #   end
+      # end
+
+      # render plain: @dates.inspect
+      # return
 
     # rescue
     #   redirect_to '/404.html'
