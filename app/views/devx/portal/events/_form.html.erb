@@ -19,8 +19,16 @@
     <%= f.select :tag_list, Devx::Event.tag_counts_on(:tags).order(name: :asc), { include_blank: true }, { class: 'select2' } %>
   </div>
   <div class="col-6 columns cd-edit-form">
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
     <%= f.label :venue %>
     <%= f.select :venue_id, Devx::Venue.all.collect{ |x| [x.name, x.id] }, { include_blank: true }, { class: 'select2-fixed' } %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :private %>
+    <%= f.check_box :private %>
   </div>
   <div class="col-12 columns cd-edit-form">
     <%= f.label :description %>
@@ -30,7 +38,7 @@
   <div class="col-12 columns no-padding">
     <h3>Event Schedules</h3>
     <%= content_tag 'div', class: 'nested-attributes' do %>
-      <%= f.fields_for :schedules do |schedule| %>
+      <%= f.fields_for :schedules, @event.schedules.new do |schedule| %>
         <%= render partial: 'schedule_fields', locals: { f: schedule } %>
       <% end %>
     <% end %>

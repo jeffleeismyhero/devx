@@ -19,27 +19,30 @@ module Devx
         @calendar = Devx::Calendar.active.find(app_settings['default_calendar']) unless params[:q].present?
       end
 
+      start_date = params[:start_date]
+      start_date ||= DateTime.now
 
       @page = Devx::Page.new(name: 'Calendar', layout: @layout)
       @dates = []
 
-      (DateTime.now.beginning_of_month..DateTime.now.end_of_month).each do |date|
+      (start_date.beginning_of_month..start_date.end_of_month).each do |date|
         @dates.push(date.to_date)
       end
 
       if @calendar.calendar_type == 'Standard'
-        @events = Devx::Schedule.for_calendar(@calendar)
+        @events = Devx::Schedule.for_calendar(@calendar, start_date)
       end
 
       @scheduled_events = {}
       @dates.each do |date|
-        puts date
+        @scheduled_events[date] = []
         @events.each do |event|
-          event.schedules.each do |schedule|
+          event.schedules.each_with_index do |schedule, index|
             if schedule.end_time_date >= date
               if schedule.start_time_date <= date
-                @scheduled_events[date] = []
-                @scheduled_events[date].push(schedule)
+                if !@scheduled_events[date].include?(schedule)
+                  @scheduled_events[date].push(schedule)
+                end
               end
             end
           end

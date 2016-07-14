@@ -78,24 +78,105 @@ module Devx
 
             records.each_with_index do |record, index|
 
+              ## Event details
               name = record[0].to_s.squish
-              start_time = record[1].to_s.squish
-              end_time = record[2].to_s.squish
-              description = record[3].to_s.squish
-              location = record[4].to_s.squish
-              contact_name = record[5].to_s.squish
+              description = record[1].to_s.squish
 
+              if record[2].present? && record[2] != 'NULL'
+                category = record[2].to_s.squish
+              end
+              
+              location = record[3].to_s.squish
+              contact_name = record[4].to_s.squish
+              contact_email = record[5].to_s.squish
+              private_event = record[6].to_s.squish
+
+              ## Event schedule
+              if record[9] != 'NULL'
+                start_time = "#{record[7].to_date} #{record[9].to_datetime.strftime('%H:%M:%S')}"
+              else
+                start_time = "#{record[7].to_date} 00:00:00"
+              end
+
+              if record[10] != 'NULL'
+                end_time = "#{record[8].to_date} #{record[10].to_datetime.strftime('%H:%M:%S')}"
+              else
+                end_time = "#{record[8].to_date} 11:59:59"
+              end
+
+              if record[11] == '0'
+                all_day = false
+              elsif (record[11] == '1') || (start_time.to_datetime.strftime('%H:%M:%S') == '00:00:00' && end_time.to_datetime.strftime('%H:%M:%S') == '11:59:59')
+                all_day = true
+              end
+
+              if record[12] == '0'
+                repeat = false
+              elsif record[12] == '1'
+                repeat = true
+              end
+
+              days = []
+              if record[13] == '1'
+                days.push('Sunday')
+              end
+              if record[14] == '1'
+                days.push('Monday')
+              end
+              if record[15] == '1'
+                days.push('Tuesday')
+              end
+              if record[16] == '1'
+                days.push('Wednesday')
+              end
+              if record[17] == '1'
+                days.push('Thursday')
+              end
+              if record[18] == '1'
+                days.push('Friday')
+              end
+              if record[19] == '1'
+                days.push('Saturday')
+              end
+
+              ## Event Creation
               event = Devx::Event.new(
                 calendar_id: @calendar.id,
                 name: name,
                 description: description,
-                start_time: start_time.to_datetime,
-                end_time: end_time.to_datetime,
+                tag_list: category,
                 location: location,
-                contact_name: contact_name
+                contact_name: contact_name,
+                private: private_event
               )
 
-              if event.valid?
+              schedule = event.schedules.new(
+                start_time: start_time.to_datetime,
+                end_time: end_time.to_datetime,
+                all_day: all_day,
+                repeat: repeat,
+                days: days
+              )
+
+              ## Original import code
+              # name = record[0].to_s.squish
+              # start_time = record[1].to_s.squish
+              # end_time = record[2].to_s.squish
+              # description = record[3].to_s.squish
+              # location = record[4].to_s.squish
+              # contact_name = record[5].to_s.squish
+
+              # event = Devx::Event.new(
+              #   calendar_id: @calendar.id,
+              #   name: name,
+              #   description: description,
+              #   start_time: start_time.to_datetime,
+              #   end_time: end_time.to_datetime,
+              #   location: location,
+              #   contact_name: contact_name
+              # )
+
+              if event.valid? && schedule.valid?
                 logger.info "Expecting object to be valid: #{event.inspect}"
                 event.save
               else
@@ -107,7 +188,7 @@ module Devx
               end
 
             end
-
+            return
           end
 
         end

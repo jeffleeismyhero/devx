@@ -6,10 +6,6 @@ Devx::Engine.routes.draw do
     controllers: { omniauth_callbacks: 'devx/omniauth_callbacks' },
     path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
-  authenticated :user, -> user { user.super_administrator? } do
-    match '/portal/jobs', to: DelayedJobWeb, anchor: false, via: [ :get, :post ]
-  end
-
   resources :articles, path: 'news', only: [ :index, :show ] do
     member do
       post 'subscribe' => 'articles#subscribe'
@@ -40,6 +36,11 @@ Devx::Engine.routes.draw do
 
   constraints  subdomain: 'portal'  do
     scope module: 'portal', as: 'portal' do
+
+    authenticated :user, -> user { user.super_administrator? } do
+      match 'jobs', to: DelayedJobWeb, anchor: false, via: [ :get, :post ]
+    end
+
     get '/' => 'dashboard#index', as: :dashboard
     get '/terms-of-service', to: 'dashboard#terms_of_service'
     get '/privacy-policy', to: 'dashboard#privacy_policy'
