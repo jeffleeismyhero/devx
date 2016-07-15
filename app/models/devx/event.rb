@@ -22,19 +22,16 @@ module Devx
     end
 
     def check_for_duplicates
-        duplicates = Devx::Event.where(name: self.name)
-        found = 0
-        duplicates.try(:each_with_index) do |duplicate, index|
-            if self.schedules.first.start_time == duplicate.schedules.first.start_time
-                found += 1
-            end
-        end
 
-        if found == 0
-            return true
-        else
-            return false
-        end
+        # Devx::Event.all.each do |e|
+        #     e = Devx::Event.where(name: e.name)
+        #     found = 0
+        #     e.try(:each_with_index) do |duplicate, index|
+        #         if e.schedules.first.start_time == duplicate.schedules.first.start_time
+        #             found += 1
+        #         end
+        #     end
+        # end
     end
   end
 end
