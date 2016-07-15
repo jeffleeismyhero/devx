@@ -1,2 +1,40 @@
-<%= @event.inspect %>
-<%= link_to 'Subscribe', devx.subscribe_calendar_event_path(calendar_id: @calendar.id, event: @event), method: :post %>
+<% provide(:title, @event.name) %>
+<div class="container" style="margin-bottom:40px;">
+  <div class="row">
+    <% if @calendar.calendar_type == 'Standard' %>
+    <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
+      <div style="box-shadow: 0px 4px 4px #cccccc;">
+        <div class="calendar-event datebar">
+        <h6 class="calendar-event event-title"><%= @event.name %></h6>
+          <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= @event.schedules.first.try(:strftime, '%^b %d') %></h6>
+        </div>
+        <div style="padding:10px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;">
+            <p>
+              <%= link_to 'Subscribe', devx.subscribe_calendar_event_path(calendar_id: @calendar.id, event: @event), method: :post, class: 'button primary small' %>
+            </p>
+          <% if @event.schedules.first.all_day == true %>
+            <p>
+              <span><strong>Event Time:</strong> All Day Event</span>
+            </p>
+          <% else %>
+            <p>
+              <span><strong>Event Time:</strong> <%= ldate @event.schedules.first.start_time %> - <%= ldate @event.schedules.first.end_time %></span>
+            </p>
+          <% end %>
+          <% if @event.location.present? %>
+            <p>
+            <span><strong>Location:</strong> <%= @event.location %></span>
+            </p>
+          <% end %>
+          <% if @event.contact_name.present? %>
+            <p>
+            <span><strong>Contact Name:</strong> <%= @event.contact_name %></span>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+

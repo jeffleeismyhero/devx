@@ -210,8 +210,8 @@ $(".currency-field").on("blur", function()
     
     /* $(".listview").toggleClass("hide").toggleClass("show").fadeIn(1000, function() { }); */
 
-    if ($(".gridview").hasClass("show")) {
-      $(".gridview").removeClass("show").addClass("hide");
+    if ($(".gridview, .monthview").hasClass("show")) {
+      $(".gridview, .monthview").removeClass("show").addClass("hide");
       $(".listview").removeClass("hide").addClass("show");
     }
 
@@ -226,13 +226,30 @@ $(".currency-field").on("blur", function()
 
     /* $(".gridview").toggleClass("show").toggleClass("hide").fadeIn(1000, function() { }); */
 
-    if ($(".listview").hasClass("show")) {
-      $(".listview").removeClass("show").addClass("hide");
+    if ($(".listview, .monthview").hasClass("show")) {
+      $(".listview, .monthview").removeClass("show").addClass("hide");
       $(".gridview").removeClass("hide").addClass("show");
     }
 
     else 
       $(".gridview").removeClass("hide").addClass("show");
+
+    return false;
+
+  });
+
+
+  $("#month").on("click", function() {
+
+    /* $(".gridview").toggleClass("show").toggleClass("hide").fadeIn(1000, function() { }); */
+
+    if ($(".listview, .gridview").hasClass("show")) {
+      $(".listview, .gridview").removeClass("show").addClass("hide");
+      $(".monthview").removeClass("hide").addClass("show");
+    }
+
+    else 
+      $(".monthview").removeClass("hide").addClass("show");
 
     return false;
 

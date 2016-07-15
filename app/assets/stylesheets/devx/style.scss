@@ -52,6 +52,24 @@ h1.page-title {
   font-weight:100;
 }
 
+.calendar-event.event-title {
+  padding:12px;
+  color:#fff;
+}
+
+.simple-calendar .calendar-heading {
+  display:none!important;
+}
+
+.calendar-navigation > div {
+  display:inline-block;
+  padding:14px 0px;
+}
+
+.next-link {
+  float:right;
+}
+
 .notify {
   padding:18px 0px;
   margin-bottom:40px;

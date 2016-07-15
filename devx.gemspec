@@ -54,6 +54,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "animate-rails"
   s.add_runtime_dependency "owlcarousel-rails"
   s.add_runtime_dependency "fancybox2-rails"
+  s.add_runtime_dependency "simple_calendar", "~> 2.0"
 
 
   ## WYSIWYG Editor

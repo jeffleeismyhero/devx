@@ -6,6 +6,12 @@ module Devx
     load_resource :calendar, class: 'Devx::Calendar'
 
     def show
+      if app_settings['calendar_layout'].present?
+        @layout = Devx::Layout.find(app_settings['calendar_layout'])
+      end
+
+      @page = Devx::Page.new(name: @event.name, layout: @layout)
+
     end
 
     def subscribe

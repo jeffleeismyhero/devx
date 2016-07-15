@@ -14,6 +14,10 @@ module Devx
     validates :start_time, presence: true, uniqueness: { scope: [ :event_id ] }
     #validates :event, presence: true
 
+    def self.per_page
+      10
+    end
+
     def self.for_calendar(calendar, start_time = Time.zone.now)
       events = []
       self.for_month(start_time).ordered.each do |s|

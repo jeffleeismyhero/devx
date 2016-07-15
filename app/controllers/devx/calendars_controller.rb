@@ -19,18 +19,33 @@ module Devx
         @calendar = Devx::Calendar.active.find(app_settings['default_calendar']) unless params[:q].present?
       end
 
-      start_date = params[:start_date]
-      start_date ||= DateTime.now
-
+      if !params['month_select(2i)'].blank? && !params['month_select(1i)'].blank?
+        @start_date = "#{params['month_select(1i)']}-#{params['month_select(2i)']}-01".to_datetime
+        params[:start_date] = @start_date
+      else
+        @start_date = params[:start_date].to_datetime unless params[:start_date].nil?
+        @start_date ||= DateTime.now
+      end
+      
       @page = Devx::Page.new(name: 'Calendar', layout: @layout)
       @dates = []
 
-      (start_date.beginning_of_month..start_date.end_of_month).each do |date|
+      (@start_date.beginning_of_month..@start_date.end_of_month).each do |date|
         @dates.push(date.to_date)
       end
 
       if @calendar.calendar_type == 'Standard'
-        @events = Devx::Schedule.for_calendar(@calendar, start_date)
+        @events = Devx::Schedule.for_calendar(@calendar, @start_date)
+        @schedules = Devx::Schedule.for_month(@start_date)
+
+
+        @years = []
+
+        Devx::Schedule.all.ordered.try(:each) do |s|
+          if !@years.include?(s.start_time.try(:strftime, '%Y'))
+            @years.push(s.start_time.try(:strftime, '%Y'))
+          end
+        end
       end
 
       @scheduled_events = {}
@@ -46,6 +61,25 @@ module Devx
               end
             end
           end
+        end
+      end
+
+      respond_to do |format|
+        format.html
+        format.ics do
+          ical = Icalendar::Calendar.new
+
+          Devx::Schedule.upcoming.try(:each) do |s|
+            event = Icalendar::Event.new
+            event.dtstart = s.start_time
+            event.dtend = s.end_time
+            event.summary = s.event.name
+            event.description = s.event.description
+
+            ical.add_event(event)
+          end
+
+          render text: ical.to_ical
         end
       end
 
