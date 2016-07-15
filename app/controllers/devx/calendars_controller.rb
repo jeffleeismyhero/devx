@@ -19,8 +19,8 @@ module Devx
         @calendar = Devx::Calendar.active.find(app_settings['default_calendar']) unless params[:q].present?
       end
 
-      if !params['month_select(2i)'].blank? && !params['month_select(1i)'].blank?
-        @start_date = "#{params['month_select(1i)']}-#{params['month_select(2i)']}-01".to_datetime
+      if !params['month_select'].blank? && !params['year_select'].blank?
+        @start_date = "#{params['year_select']}-#{params['month_select']}-01".to_datetime
         params[:start_date] = @start_date
       else
         @start_date = params[:start_date].to_datetime unless params[:start_date].nil?

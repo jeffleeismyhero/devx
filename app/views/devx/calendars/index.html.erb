@@ -34,8 +34,8 @@
           <% end %>
 
           <p style="margin-bottom:8px; font-family:lato; font-weight:600;">Select month:</p>
-          <%= date_select '', :month_select, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: @years.first.to_i, end_year: @years.last.to_i, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed' } %>
-
+          <%= select '', :month_select, %w[01 02 03 04 05 06 07 08 09 10 11 12], { prompt: 'Month' }, { class: 'select2-fixed' } %>
+          <%= select '', :year_select, options_for_select(@years), { prompt: 'Year' }, { class: 'select2-fixed' } %>
           
           <div style="margin-top:30px"><%= f.submit %></div>
         <% end %>
