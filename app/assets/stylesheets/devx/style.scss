@@ -38,6 +38,7 @@ h1.page-title {
   border-bottom:1px solid #cccccc;
 }
 
+
 .calendar-event.datebar {
   background-color:#DDDDDD;
   border-bottom:1px solid #384967;
@@ -59,6 +60,15 @@ h1.page-title {
 
 .simple-calendar .calendar-heading {
   display:none!important;
+}
+
+.simple-calendar th {
+  padding:10px!important;
+  text-align:center;
+}
+
+.simple-calendar .day {
+  padding:12px!important;
 }
 
 .calendar-navigation > div {
