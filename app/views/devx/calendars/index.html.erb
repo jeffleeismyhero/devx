@@ -12,8 +12,8 @@
               <li style="display:inline-block;"><a id="month" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-calendar" style="font-size:1.8rem;" aria-hidden="true"></i> Month View</a></li>
               <li style="display:inline-block;"><a id="grid" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-th-large" style="font-size:1.8rem;" aria-hidden="true"></i> Grid View</a></li>
               <li style="display:inline-block;"><a id="list" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-list-alt" style="font-size:1.8rem;" aria-hidden="true"></i></i> List View</a></li>
-              <li style="display:inline-block;"><a href="javascript:window.print()" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-print" style="font-size:1.8rem;" aria-hidden="true"></i> Print</a></li>
-              <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export Upcoming Events".html_safe, devx.calendar_path(format: :ics), style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
+              <li style="display:inline-block;"><a href="javascript:window.print()" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-print" style="font-size:1.8rem;" aria-hidden="true"></i> Print</a></li>
+              <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export Upcoming Events".html_safe, devx.calendar_path(format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
               <li style="display:inline-block;">
                 <% if user_signed_in? %>
                   <%= link_to "<i class=\"fa fa-plus\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Subscribe".html_safe, devx.subscribe_calendar_path(@calendar), method: :post, style: 'font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;' %>
@@ -62,8 +62,8 @@
   </div>
 </div>
 
-<div class="container" class="month-view">
-  <div class="row monthview show">
+<div class="container" class="month-view hide-for-medium-down">
+  <div class="row monthview hide">
     <div class="large-12 columns">
     <%= month_calendar events: @schedules do |date, schedules| %>
       <%= date.try(:strftime, '%d') %>

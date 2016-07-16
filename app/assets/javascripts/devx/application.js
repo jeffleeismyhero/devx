@@ -255,4 +255,13 @@ $(".currency-field").on("blur", function()
 
   });
 
+  if ($(window).outerWidth() >= 1024)
+  {
+    $(".monthview").removeClass("hide").addClass("show");
+  }
+  else
+  {
+    $(".gridview").removeClass("hide").addClass("show");
+  }
+
 });
