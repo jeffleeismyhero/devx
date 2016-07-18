@@ -30,7 +30,7 @@ module Devx
 
     def get_events
       if calendar.calendar_type == 'Standard'
-        return events = Devx::Schedule.upcoming.try(:limit, @attributes[:limit])
+        return events = Devx::Schedule.upcoming.ordered.try(:limit, @attributes[:limit])
       end
     end
 
