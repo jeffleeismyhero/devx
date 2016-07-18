@@ -34,8 +34,8 @@
           <% end %>
 
           <p style="margin-bottom:8px; font-family:lato; font-weight:600;">Select month:</p>
-          <%= select '', :month_select, options_for_select(%w[01 02 03 04 05 06 07 08 09 10 11 12]), { include_blank: true }, { class: 'select2-fixed' } %>
-          <%= select '', :year_select, options_for_select(@years), { include_blank: true }, { class: 'select2-fixed' } %>
+          <%= select '', :month_select, options_for_select(%w[01 02 03 04 05 06 07 08 09 10 11 12]), { include_blank: true }, { style: 'max-width:300px' } %>
+          <%= select '', :year_select, options_for_select(@years), { include_blank: true }, { style: 'max-width:300px' } %>
           
           <div style="margin-top:30px"><%= f.submit %></div>
         <% end %>
@@ -86,7 +86,12 @@ ul.event-list {
           <% if (schedule.repeat == false) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
              <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
                 <li class="event-listing">
-                  <%= link_to schedule.event.name, devx.calendar_event_path(@calendar, schedule.event) %>
+                  <% if schedule.all_day == true %>
+                    <% start = 'All day' %>
+                  <% else %>
+                    <% start = schedule.start_time.try(:strftime, '%I:%M%p') %>
+                  <% end %>
+                  <%= link_to "#{schedule.event.name} - #{start}", devx.calendar_event_path(@calendar, schedule.event) %>
                 </li>
             <% end %>
           <% end %>

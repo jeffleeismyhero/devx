@@ -20,7 +20,7 @@ module Devx
           @q.sorts = 'start_time asc'
           #@events = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
 
-          @schedules = Devx::Schedule.upcoming.paginate(page: params[:page])
+          @schedules = Devx::Schedule.upcoming.ordered.paginate(page: params[:page])
 
       end
     end
