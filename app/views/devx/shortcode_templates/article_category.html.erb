@@ -1,0 +1,20 @@
+<% @attributes[:articles].try(:each) do |article| %>
+<% @text = nil %>
+<% article.content.try(:split, ' ').try(:take, 30).each do |word| %>
+    <% @text = "#{@text} " + word.html_safe %>
+<% end %>
+
+<% if article.image.blank? %>
+    <% @image = image_path('news/default.jpg') %>
+<% else %>
+    <% @image = article.image.url %>
+<% end %>
+
+<%= link_to "<div class=\"small-12 medium-3 large-3 columns\">
+    <div class=\"featured-news\" style=\"background-image:url('#{@image}');position:relative\">
+        <div class=\"featured-title\">
+        <span>#{article.title}</span>
+        </div>
+    </div>
+</div>".html_safe, "/news/#{article.slug}" %>
+<% end %>

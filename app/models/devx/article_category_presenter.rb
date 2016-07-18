@@ -1,7 +1,7 @@
 module Devx
-  class LatestArticlesColumnsPresenter
+  class ArticleCategoryPresenter
     def self.for
-      :latest_articles_columns
+      :article_category
     end
 
     def initialize(attributes, content, additional_attributes)
@@ -15,7 +15,6 @@ module Devx
 
     def attributes
       { articles: articles,
-        category: @attributes[:category],
         limit: @attributes[:limit] }
     end
 
