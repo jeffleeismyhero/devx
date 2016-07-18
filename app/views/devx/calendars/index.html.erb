@@ -34,8 +34,8 @@
           <% end %>
 
           <p style="margin-bottom:8px; font-family:lato; font-weight:600;">Select month:</p>
-          <%= select '', :month_select, %w[01 02 03 04 05 06 07 08 09 10 11 12], { prompt: 'Month' }, { class: 'select2-fixed' } %>
-          <%= select '', :year_select, options_for_select(@years), { prompt: 'Year' }, { class: 'select2-fixed' } %>
+          <%= select_tag 'month_select', options_for_select(%w[01 02 03 04 05 06 07 08 09 10 11 12]), { prompt: 'Month', class: 'select2-fixed' } %>
+          <%= select_tag 'year_select', options_for_select(@years), { prompt: 'Year', class: 'select2-fixed' } %>
           
           <div style="margin-top:30px"><%= f.submit %></div>
         <% end %>
@@ -61,21 +61,37 @@
     </div>
   </div>
 </div>
+<style>
+li.event-listing::before {
+  content:"";
+  margin:0;
+}
+
+li.event-listing {
+  list-style-type:initial;
+}
+
+ul.event-list {
+  padding-left:10px;
+}
+</style>
 
 <div class="container" class="month-view hide-for-medium-down">
   <div class="row monthview hide">
     <div class="large-12 columns">
     <%= month_calendar events: @schedules do |date, schedules| %>
       <%= date.try(:strftime, '%d') %>
-      <% @schedules.try(:each) do |schedule| %>
-        <% if schedule.start_time_date == date %>
-          <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
-            <div class="event-listing">
-              <%= link_to schedule.event.name, devx.calendar_event_path(@calendar, schedule.event) %>
-            </div>
+      <ul class="event-list">
+        <% @scheduled_events[date].try(:each) do |schedule| %>
+          <% if (schedule.repeat == false) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
+             <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
+                <li class="event-listing">
+                  <%= link_to schedule.event.name, devx.calendar_event_path(@calendar, schedule.event) %>
+                </li>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
+      </ul>
     <% end %>
     </div>
   </div>
@@ -95,16 +111,18 @@
                       <ul class="accordion">
                         <% @scheduled_events[date].try(:each) do |schedule| %>
                           <% if (schedule.repeat == false) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
-                            <li style="margin-bottom:.1rem; ">
-                              <div class="accordion-title">
-                                <%= schedule.event.name %>  
-                              </div>
-                              <div class="accordion-content">
-                                <span><% if schedule.all_day == true %>All day event<% else %>Start Time: <%= ldate schedule.start_time %><br />End Time: <%= ldate schedule.end_time %><% end %></span><br />
-                                <% if schedule.event.location.present? %><span>Location: <%= schedule.event.location %></span><br /><% end %>
-                                <span><%= schedule.event.venue.try(:full_address) %></span>
-                              </div>
-                            </li>
+                             <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
+                              <li style="margin-bottom:.1rem; ">
+                                <div class="accordion-title">
+                                  <%= schedule.event.name %>  
+                                </div>
+                                <div class="accordion-content">
+                                  <span><% if schedule.all_day == true %>All day event<% else %>Start Time: <%= ldate schedule.start_time %><br />End Time: <%= ldate schedule.end_time %><% end %></span><br />
+                                  <% if schedule.event.location.present? %><span>Location: <%= schedule.event.location %></span><br /><% end %>
+                                  <span><%= schedule.event.venue.try(:full_address) %></span>
+                                </div>
+                              </li>
+                            <% end %>
                           <% end %>
                         <% end %>
                       </ul>

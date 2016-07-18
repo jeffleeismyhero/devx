@@ -13,15 +13,16 @@ module Devx
     end
 
     def show
-        if @calendar.calendar_type == 'Google Calendar'
-            @google_events = @calendar.get_google_events
-          else
-            @q = Devx::Event.all.search(params[:q])
-            @q.sorts = 'start_time asc'
-            #@events = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
+      if @calendar.calendar_type == 'Google Calendar'
+          @google_events = @calendar.get_google_events
+        else
+          @q = Devx::Event.all.search(params[:q])
+          @q.sorts = 'start_time asc'
+          #@events = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
 
-            @schedules = Devx::Schedule.upcoming.paginate(page: params[:page])
-        end
+          @schedules = Devx::Schedule.upcoming.paginate(page: params[:page])
+
+      end
     end
 
     def new
