@@ -4,6 +4,8 @@ module Devx
     split_accessor :start_time
     split_accessor :end_time
 
+    acts_as_paranoid
+
     CURRENT_TIME = Time.zone.now
 
     scope :upcoming, -> { where('(start_time < ? OR start_time >= ?) AND end_time >= ?', CURRENT_TIME,CURRENT_TIME,CURRENT_TIME) }
