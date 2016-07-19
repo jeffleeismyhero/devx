@@ -55,6 +55,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "owlcarousel-rails"
   s.add_runtime_dependency "fancybox2-rails"
   s.add_runtime_dependency "simple_calendar", "~> 2.0"
+  s.add_runtime_dependency "velocityjs-rails"
 
 
   ## WYSIWYG Editor
@@ -105,6 +106,7 @@ Gem::Specification.new do |s|
 
   ## Miscellaneous
   s.add_runtime_dependency "rails_autolink"
+  s.add_runtime_dependency "curb-fu"
 
 
   ## Background Jobs
