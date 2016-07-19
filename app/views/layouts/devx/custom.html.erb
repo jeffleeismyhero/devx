@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title><%= meta_title(@page) %></title>
   <% if app_settings['boilerplate'] %>
-    <%= stylesheet_link_tag "boilerplate.min.css", media: "all" %>
+    <%= stylesheet_link_tag "boilerplate.css", media: "all" %>
   <% end %>
   <%= stylesheet_link_tag "devx/application", media: "all" %>
   <% @page.layout.try(:stylesheets).try(:each) do |stylesheet| %>
