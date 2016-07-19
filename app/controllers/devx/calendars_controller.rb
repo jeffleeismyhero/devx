@@ -34,7 +34,7 @@ module Devx
         @dates.push(date.to_date)
       end
 
-      if @calendar.calendar_type == 'Standard'
+      if @calendar.calendar_type.present?# == 'Standard'
         @events = Devx::Schedule.for_calendar(@calendar, @start_date)
         @schedules = Devx::Schedule.for_month(@start_date)
 
@@ -46,22 +46,25 @@ module Devx
             @years.push(s.start_time.try(:strftime, '%Y'))
           end
         end
-      end
 
-      @scheduled_events = {}
-      @dates.each do |date|
-        @scheduled_events[date] = []
-        @events.each do |event|
-          event.schedules.each_with_index do |schedule, index|
-            if schedule.end_time_date >= date
-              if schedule.start_time_date <= date
-                if !@scheduled_events[date].include?(schedule)
-                  @scheduled_events[date].push(schedule)
+        @scheduled_events = {}
+        @dates.each do |date|
+          @scheduled_events[date] = []
+          @events.each do |event|
+            event.schedules.each_with_index do |schedule, index|
+              if schedule.end_time_date >= date
+                if schedule.start_time_date <= date
+                  if !@scheduled_events[date].include?(schedule)
+                    @scheduled_events[date].push(schedule)
+                  end
                 end
               end
             end
           end
         end
+
+      # elsif @calendar.calendar_type == 'Google Calendar'
+        # @events = @calendar.get_google_events
       end
 
       respond_to do |format|
