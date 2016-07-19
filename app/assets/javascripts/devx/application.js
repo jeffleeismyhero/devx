@@ -19,6 +19,7 @@
 //= require owl.carousel
 //= require social-share-button
 //= require fancybox
+//= require velocity
 //= require wow
 //= require_tree ./ckeditor
 //= require_tree .
