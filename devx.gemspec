@@ -56,6 +56,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "fancybox2-rails"
   s.add_runtime_dependency "simple_calendar", "~> 2.0"
   s.add_runtime_dependency "velocityjs-rails"
+  s.add_runtime_dependency "typedjs-rails", "~> 1.0.3"
 
 
   ## WYSIWYG Editor
