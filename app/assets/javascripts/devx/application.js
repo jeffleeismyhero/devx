@@ -21,6 +21,7 @@
 //= require fancybox
 //= require velocity
 //= require wow
+//= require typed
 //= require_tree ./ckeditor
 //= require_tree .
 //= require_self
