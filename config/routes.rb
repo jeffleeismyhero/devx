@@ -6,33 +6,6 @@ Devx::Engine.routes.draw do
     controllers: { omniauth_callbacks: 'devx/omniauth_callbacks' },
     path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
-  resources :articles, path: 'news', only: [ :index, :show ] do
-    member do
-      post 'subscribe' => 'articles#subscribe'
-    end
-  end
-
-  resources :calendars, path: 'calendar', only: [ :index ] do
-    member do
-      post 'subscribe' => 'calendars#subscribe'
-    end
-
-    resources :events, only: [ :show ] do
-      member do
-        post 'subscribe' => 'events#subscribe'
-      end
-    end
-  end
-
-  get '/branding.css', to: 'stylesheets#branding'
-  get '/directory', to: 'administration#index'
-  match '/calendar', to: 'calendars#show', via: [ :get, :post ]
-  match '/contact', to: 'contact#show', via: [ :get, :post ]
-
-  resources :registrations, only: [ :show, :create ]
-  resources :forms, only: [ :show, :create ]
-  resources :stylesheets, only: :show, defaults: { format: 'css' }
-  resources :javascripts, only: :show, defaults: { format: 'js' }
 
   constraints  subdomain: 'portal'  do
     scope module: 'portal', as: 'portal' do
@@ -63,8 +36,8 @@ Devx::Engine.routes.draw do
       collection { post :sort }
     end
     resources :layouts
-    resources :javascripts
-    resources :stylesheets
+    resources :javascripts, except: :show
+    resources :stylesheets, except: :show
     resources :articles
     resources :calendars do
       resources :events
@@ -112,6 +85,37 @@ Devx::Engine.routes.draw do
     root 'dashboard#index'
     end
   end
+
+  ## Public-facing
+  resources :articles, path: 'news', only: [ :index, :show ] do
+    member do
+      post 'subscribe' => 'articles#subscribe'
+    end
+  end
+
+  resources :calendars, path: 'calendar', only: [ :index ] do
+    member do
+      post 'subscribe' => 'calendars#subscribe'
+    end
+
+    resources :events, only: [ :show ] do
+      member do
+        post 'subscribe' => 'events#subscribe'
+      end
+    end
+  end
+
+  get '/branding.css', to: 'stylesheets#branding'
+  get '/directory', to: 'administration#index'
+  match '/calendar', to: 'calendars#show', via: [ :get, :post ]
+  match '/contact', to: 'contact#show', via: [ :get, :post ]
+
+  resources :registrations, only: [ :show, :create ]
+  resources :forms, only: [ :show, :create ]
+  resources :stylesheets, only: :show, defaults: { format: 'css' }
+  resources :javascripts, only: :show, defaults: { format: 'js' }
+
+
 
   get '/search' => 'pages#search'
   match '/:id' => 'pages#show', via: [ :get, :post ], as: :page
