@@ -106,7 +106,7 @@ Gem::Specification.new do |s|
 
   ## Miscellaneous
   s.add_runtime_dependency "rails_autolink"
-  s.add_runtime_dependency "curb-fu"
+  #s.add_runtime_dependency "curb-fu"
 
 
   ## Background Jobs
