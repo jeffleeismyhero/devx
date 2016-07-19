@@ -67,7 +67,6 @@ module Devx
     def update_from_google
       self.get_all_google_events.try(:each) do |event|
         r = Devx::Event.where(google_event_id: event.id)
-        puts r.inspect
         if r.empty?
           e = Devx::Event.new(
             calendar_id: self.id,
@@ -87,6 +86,29 @@ module Devx
           end
         end
       end
+
+      self.get_google_events.try(:each) do |event|
+        r = Devx::Event.where(google_event_id: event.id)
+        if r.empty?
+          e = Devx::Event.new(
+            calendar_id: self.id,
+            google_event_id: event.id,
+            name: event.raw['summary'],
+            description: event.description,
+            location: event.location
+          )
+
+          e.schedules.new(
+            start_time: event.start_time.to_datetime,
+            end_time: event.end_time.to_datetime
+          )
+
+          if e.valid?
+            e.save
+          end
+        end
+      end
+
     end
 
   end
