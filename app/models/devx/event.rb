@@ -23,7 +23,6 @@ module Devx
     end
 
     def check_for_duplicates
-        total_duplicates = 0
         duplicates = Devx::Event.where(name: self.name)
         duplicates.try(:each) do |duplicate|
             if duplicate != self
