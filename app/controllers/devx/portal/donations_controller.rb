@@ -11,8 +11,8 @@ module Devx
     end
 
     def create
-      # render plain: @donation.inspect
-      # return
+      @donation.user = current_user
+      
       if @donation.valid?
         exp_date = "%02d%02d" % [params['expiry_date(2i)'], params['expiry_date(1i)'].last(2)]
         if app_settings['diamond_mind'].present?
