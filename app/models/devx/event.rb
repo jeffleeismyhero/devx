@@ -1,6 +1,7 @@
 module Devx
   class Event < ActiveRecord::Base
     acts_as_taggable
+    acts_as_paranoid
 
     has_many :event_subscriptions
     has_many :schedules, dependent: :destroy
@@ -22,16 +23,19 @@ module Devx
     end
 
     def check_for_duplicates
-
-        # Devx::Event.all.each do |e|
-        #     e = Devx::Event.where(name: e.name)
-        #     found = 0
-        #     e.try(:each_with_index) do |duplicate, index|
-        #         if e.schedules.first.start_time == duplicate.schedules.first.start_time
-        #             found += 1
-        #         end
-        #     end
-        # end
+        total_duplicates = 0
+        duplicates = Devx::Event.where(name: self.name)
+        duplicates.try(:each) do |duplicate|
+            if duplicate != self
+                duplicate.schedules.try(:each) do |dup_schedule|
+                    self.schedules.try(:each) do |schedule|
+                        if dup_schedule.start_time == schedule.start_time
+                            errors.add(:schedules, 'must be unique for each event')
+                        end
+                    end
+                end
+            end
+        end
     end
   end
 end
