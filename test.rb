@@ -1,18 +1,19 @@
-@schedules = Devx::Schedule.all
+events = Devx::Event.all
 
-@schedules.try(:each) do |schedule|
-  @duplicates = Devx::Schedule.where('start_time = ?', schedule.start_time)
-  @duplicates.try(:each) do |duplicate|
-    if schedule.event.name == duplicate.event.name
-      if schedule.id != duplicate.id
-        # duplicate.event.destroy
+events.try(:each) do |event|
+  if !event.check_for_duplicates
+    duplicates = Devx::Event.where(name: event.name)
+
+    duplicates.try(:each) do |duplicate|
+      if event != duplicate
+        duplicate.schedules.try(:each) do |dup_schedule|
+          event.schedules.try(:each) do |schedule|
+            if schedule.start_time == dup_schedule.start_time
+              duplicate.destroy
+            end
+          end
+        end
       end
     end
   end
-end
-
-
-## RESTORE
-@restore = Devx::Schedule.with_deleted.each do |s|
-  s.restore
 end

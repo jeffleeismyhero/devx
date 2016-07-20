@@ -30,6 +30,7 @@ module Devx
                     self.schedules.try(:each) do |schedule|
                         if dup_schedule.start_time == schedule.start_time
                             errors.add(:schedules, 'must be unique for each event')
+                            return false
                         end
                     end
                 end
