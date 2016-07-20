@@ -2,7 +2,11 @@ require "devx/engine"
 require "devx/version"
 
 Gem.loaded_specs['devx'].runtime_dependencies.each do |d|
- require d.name
+  if d.name == 'addressable'
+    require 'addressable/uri'
+  else
+    require d.name
+  end
 end
 
 module Devx
