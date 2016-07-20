@@ -17,6 +17,7 @@ Devx::Engine.routes.draw do
     get '/' => 'dashboard#index', as: :dashboard
     get '/terms-of-service', to: 'dashboard#terms_of_service'
     get '/privacy-policy', to: 'dashboard#privacy_policy'
+    get '/donate', to: 'donations#donate'
     get 'profile', to: 'users#show', as: :profile
     match 'account-balance', to: 'users#account_balance', via: [ :get, :post ], as: :account_balance
     post 'developer/update', to: 'developer#update'
@@ -43,6 +44,7 @@ Devx::Engine.routes.draw do
       resources :events
     end
     resources :alumni
+    resources :donations
     resources :faqs
     resources :products
     resources :documents

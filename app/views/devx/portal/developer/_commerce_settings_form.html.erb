@@ -23,6 +23,29 @@
 
 
 <div class="col-8 columns cd-edit-form">
+    <%= label_tag 'settings[diamond_mind]', 'DiamondMind' %><br>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch">
+        <%= check_box_tag 'settings[diamond_mind]', @settings.settings['diamond_mind'], @settings.settings['diamond_mind'] %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+  <%= label_tag 'settings[diamond_mind_username]', 'DiamondMind Username' %>
+  <%= password_field_tag 'settings[diamond_mind_username]', @settings.settings['diamond_mind_username'] %>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+  <%= label_tag 'settings[diamond_mind_password]', 'DiamondMind Password' %>
+  <%= password_field_tag 'settings[diamond_mind_password]', @settings.settings['diamond_mind_password'] %>
+</div>
+
+
+
+<div class="col-8 columns cd-edit-form">
     <%= label_tag 'settings[payeezy]', 'Payeezy' %><br>
 </div>
 

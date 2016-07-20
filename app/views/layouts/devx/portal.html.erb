@@ -6,13 +6,14 @@
   <% stylesheet_link_tag "boilerplate.min.css", media: "all" %>
   <%= stylesheet_link_tag    "devx/application", media: "all" %>
   <%= stylesheet_link_tag    "devx/devx_portal", media: "all" %>
+  <%= stylesheet_link_tag    "devx/branding", media: "all" %>
   <%= javascript_include_tag "devx/application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
   <!-- START: HEADER -->
-  <header class="cd-main-header no-print">
+  <header class="cd-main-header primary no-print">
 
     <!-- START: LOGO -->
       <%= link_to (app_branding.site_name || 'Site Name'), devx.portal_root_path, class: 'cd-logo' %>
@@ -66,7 +67,7 @@
   <main class="cd-main-content">
 
     <!-- START: SIDE NAVIGATION -->
-    <nav class="cd-side-nav">
+    <nav class="cd-side-nav secondary">
       <ul>
         <li>
           <%= link_to '<i class="fa fa-tachometer"></i> <span>Dashboard</span>'.html_safe, devx.portal_dashboard_path, data: 'dashboard' %>

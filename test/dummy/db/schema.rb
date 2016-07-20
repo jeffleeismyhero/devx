@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720143132) do
+ActiveRecord::Schema.define(version: 20160720191934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -212,15 +212,26 @@ ActiveRecord::Schema.define(version: 20160720143132) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "devx_event_schedules", force: :cascade do |t|
-    t.integer  "event_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.boolean  "repeat"
-    t.boolean  "all_day"
-    t.string   "days"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "devx_donations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.float    "amount"
+    t.string   "cardholder_first_name"
+    t.string   "cardholder_last_name"
+    t.string   "billing_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "phone_number"
+    t.string   "affiliation"
+    t.boolean  "class_participation"
+    t.boolean  "in_memorium"
+    t.string   "dedicated_to"
+    t.string   "email_to_notify"
+    t.boolean  "company_match"
+    t.string   "company_name"
+    t.string   "company_email_to_notify"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "devx_event_subscriptions", force: :cascade do |t|

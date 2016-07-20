@@ -141,31 +141,31 @@ module DiamondMind
 
 
 
-        def self.process
+        def self.process(username, password, user, donation, credit_card_number, expiration_date, cvv)
           gw = DiamondMind::Processor.new()
           # NOTE: your username and password should replace the ones below
-          gw.setLogin("demo", "password");
+          gw.setLogin(username, password);
 
-          gw.setBilling("John","Smith","Acme, Inc.","123 Main St","Suite 200", "Beverly Hills",
-                  "CA","90210","US","555-555-5555","555-555-5556","support@example.com",
-                  "www.example.com")
+          gw.setBilling(donation.cardholder_first_name,donation.cardholder_last_name,"",donation.billing_address,"", donation.city,
+                  donation.state,donation.zip_code,"US",donation.phone_number,"",user.email,
+                  "")
 
           # gw.setShipping("Mary","Smith","na","124 Shipping Main St","Suite Ship", "Beverly Hills",
                   # "CA","90210","US","support@example.com")
 
-          gw.setOrder("1234","Big Order",1, 2, "PO1234","65.192.14.10")
+          # gw.setOrder("1234","Big Order",1, 2, "PO1234","65.192.14.10")
 
-          r = gw.doSale("5.00","4111111111111111","1212",'999')
+          r = gw.doSale(donation.amount,credit_card_number,expiration_date,cvv)
           myResponses = gw.getResponses
 
-          print myResponses['response'] + "  "
+          # print myResponses['response'] + "  "
 
           if (myResponses['response'] == '1')
-              print "Approved \n"
+              return "Approved"
           elsif (myResponses['response'] == '2')
-              print "Declined \n"
+              return "Declined"
           elsif (myResponses['response'] == '3')
-              print "Error \n"
+              return "Error"
           end
         end
     end
