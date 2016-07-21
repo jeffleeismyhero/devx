@@ -141,7 +141,7 @@ module DiamondMind
 
 
 
-        def self.process(username, password, user, donation, credit_card_number, expiration_date, cvv)
+        def self.process(username, password, donation, credit_card_number, expiration_date, cvv)
           gw = DiamondMind::Processor.new()
           # NOTE: your username and password should replace the ones below
           gw.setLogin(username, password);
