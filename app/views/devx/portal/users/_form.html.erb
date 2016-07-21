@@ -63,12 +63,20 @@
         </div>
     <% end %>
     <div class="col-12 columns">
+        <% if (@user.parent? && @user.linked_accounts.any?) || current_user.administrator? %>
         <h3>Linked Accounts</h3>
-        <% if @user.parent? || @user.super_administrator? %>
-          <%= content_tag 'div', class: 'nested-attributes' do %>
-            <%= f.fields_for :linked_accounts do |l| %>
-              <%= render partial: 'linked_account_fields', locals: { f: l } %>
-            <% end %>
+          <% if current_user.administrator? %>
+              <%= content_tag 'div', class: 'nested-attributes' do %>
+                <%= f.fields_for :linked_accounts do |l| %>
+                  <%= render partial: 'linked_account_fields', locals: { f: l } %>
+                <% end %>
+              <% end %>
+          <% else %>
+            <ul>
+              <% @user.linked_accounts.try(:each) do |linked_account| %>
+                <li><%= linked_account.person.try(:full_name) %></li>
+              <% end %>
+            </ul>
           <% end %>
         <% end %>
         <% if current_user.administrator? %>

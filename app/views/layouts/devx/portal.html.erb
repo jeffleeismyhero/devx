@@ -170,7 +170,7 @@
           <li><%= link_to '<i class="fa fa-database"></i> CRM'.html_safe, devx.portal_administration_index_path %></li>
         <% end %>
 
-        <% if app_settings['balance_tracking'] %>
+        <% if app_settings['balance_tracking'] && (current_user.balance_manager? || current_user.super_administrator?) %>
           <li><%= link_to '<i class="fa fa-credit-card"></i> School Acct. Reports'.html_safe, devx.portal_account_transactions_path %></li>
         <% end %>
 

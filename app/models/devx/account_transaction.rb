@@ -2,6 +2,8 @@ module Devx
   class AccountTransaction < ActiveRecord::Base
     belongs_to :person
 
+    scope :pending, -> { where(processed_at: nil) }
+
     validates :person, presence: true
     validates :transaction_type, presence: true
     validates :payment_method, presence: true
@@ -27,7 +29,7 @@ module Devx
 
         params = {
           method: 'credit_card',
-          amount: amount,
+          amount: (amount * 100),
           currency_code: 'USD',
           credit_card: {
             type: cc_type,

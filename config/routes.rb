@@ -31,7 +31,13 @@ Devx::Engine.routes.draw do
     match 'administration/import', to: 'administration#import', via: [ :get, :post ]
     match 'transactions/import', to: 'account_transactions#import', via: [ :get, :post ]
 
-    resources :account_transactions, path: 'transactions', only: [ :index ]
+    resources :account_transactions, path: 'transactions', only: [ :index ] do
+      member do
+        post 'process_transaction'
+      end
+    end
+    post 'transactions/process-all', to: 'account_transactions#process_all'
+
     resources :pages
     resources :menus do
       collection { post :sort }

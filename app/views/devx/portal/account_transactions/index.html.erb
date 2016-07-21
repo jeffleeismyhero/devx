@@ -6,7 +6,7 @@
             <h1><%= yield(:title) %></h1>
         </div>
         <div class="col-12 columns no-print" style="padding-bottom:20px;">
-            <i class="fa fa-upload" aria-hidden="true"></i> <%= link_to 'Import account_transactions', devx.portal_transactions_import_path %> <i class="fa fa-download"></i> <%= link_to 'Export account_transactions', devx.portal_account_transactions_path(format: :xlsx) %> <i class="fa fa-print"></i> <%= link_to 'Print', 'javascript:window.print()' %>
+            <i class="fa fa-upload" aria-hidden="true"></i> <%= link_to 'Import account transactions', devx.portal_transactions_import_path %> <i class="fa fa-download"></i> <%= link_to 'Export account transactions', devx.portal_account_transactions_path(format: :xlsx) %> <i class="fa fa-print"></i> <%= link_to 'Print', 'javascript:window.print()' %>
             <div style="float:right;">
                 <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
               <div class="cd-edit-form">
@@ -38,12 +38,16 @@
                         <th><%= sort_link @q, :id, 'ID' %></th>
                         <th><%= sort_link @q, :amount %></th>
                         <th><%= sort_link @q, :cardholder_name, 'Cardholder' %></th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
                     <%= render partial: 'account_transaction', collection: @account_transactions %>
                 </tbody>
             </table>
+            <% if @account_transactions.any? %>
+                <%= link_to 'Process all transactions', devx.portal_transactions_process_all_path, method: :post %>
+            <% end %>
         </div>
         <div class="col-12 columns">
             <% if @account_transactions.any? %>

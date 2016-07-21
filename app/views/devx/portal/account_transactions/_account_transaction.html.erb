@@ -4,4 +4,5 @@
   <td><%= account_transaction.person.school_id %></td>
   <td><%= number_to_currency account_transaction.amount %></td>
   <td><%= account_transaction.cardholder %></td>
+  <td><% if account_transaction.processed_at.nil? %><%= link_to 'Process', devx.process_transaction_portal_account_transaction_path(account_transaction), method: :post %><% else %>&nbsp;<% end %></td>
 </tr>
