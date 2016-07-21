@@ -147,7 +147,7 @@ module DiamondMind
           gw.setLogin(username, password);
 
           gw.setBilling(donation.cardholder_first_name,donation.cardholder_last_name,"",donation.billing_address,"", donation.city,
-                  donation.state,donation.zip_code,"US",donation.phone_number,"",user.email,
+                  donation.state,donation.zip_code,"US",donation.phone_number,"",donation.user.email,
                   "")
 
           # gw.setShipping("Mary","Smith","na","124 Shipping Main St","Suite Ship", "Beverly Hills",
