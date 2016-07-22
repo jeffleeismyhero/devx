@@ -42,7 +42,7 @@ module Devx
     end
 
     def ldate(date)
-      date#.try(:strftime, '%b %d, %Y - %I:%M %p ')
+      date.try(:strftime, '%b %d, %Y - %I:%M %p ')
     end
 
     def google_date(date)
