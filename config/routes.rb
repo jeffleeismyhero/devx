@@ -103,7 +103,8 @@ Devx::Engine.routes.draw do
 
   resources :calendars, path: 'calendar', only: [ :index ] do
     member do
-      post 'subscribe' => 'calendars#subscribe'
+      get 'export-all', to: 'calendars#export_all'
+      post 'subscribe', to: 'calendars#subscribe'
     end
 
     resources :events, only: [ :show ] do

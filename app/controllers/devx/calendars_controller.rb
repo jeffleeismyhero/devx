@@ -63,8 +63,6 @@ module Devx
           end
         end
 
-      # elsif @calendar.calendar_type == 'Google Calendar'
-        # @events = @calendar.get_google_events
       end
 
       respond_to do |format|
@@ -73,13 +71,20 @@ module Devx
           ical = Icalendar::Calendar.new
 
           Devx::Schedule.upcoming.try(:each) do |s|
+
             event = Icalendar::Event.new
             event.dtstart = s.start_time
             event.dtend = s.end_time
             event.summary = s.event.name
             event.description = s.event.description
 
-            ical.add_event(event)
+            if params[:category].present?
+              if s.event.tag_list.to_s == params[:category].to_s
+                ical.add_event(event)
+              end
+            else
+              ical.add_event(event)
+            end
           end
 
           render text: ical.to_ical
@@ -119,6 +124,26 @@ module Devx
 
     # rescue
     #   redirect_to '/404.html'
+    end
+
+    def export_all
+      respond_to do |format|
+        format.ics do
+          ical = Icalendar::Calendar.new
+
+          Devx::Schedule.upcoming.try(:each) do |s|
+            event = Icalendar::Event.new
+            event.dtstart = s.start_time
+            event.dtend = s.end_time
+            event.summary = s.event.name
+            event.description = s.event.description
+
+            ical.add_event(event)
+          end
+
+          render text: ical.to_ical
+        end
+      end
     end
 
     def subscribe

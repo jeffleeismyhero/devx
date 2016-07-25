@@ -13,7 +13,10 @@
               <li style="display:inline-block;"><a id="grid" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-th-large" style="font-size:1.8rem;" aria-hidden="true"></i> Grid View</a></li>
               <li style="display:inline-block;"><a id="list" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-list-alt" style="font-size:1.8rem;" aria-hidden="true"></i></i> List View</a></li>
               <li style="display:inline-block;"><a href="javascript:window.print()" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-print" style="font-size:1.8rem;" aria-hidden="true"></i> Print</a></li>
-              <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export Upcoming Events".html_safe, devx.calendar_path(format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
+              <% if params[:category].present? %>
+                <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export this category".html_safe, devx.calendar_path(category: params[:category], format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
+              <% end %>
+              <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export full calendar".html_safe, devx.export_all_calendar_path(@calendar, format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
               <li style="display:inline-block;">
                 <% if user_signed_in? %>
                   <%= link_to "<i class=\"fa fa-plus\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Subscribe".html_safe, devx.subscribe_calendar_path(@calendar), method: :post, style: 'font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;' %>
@@ -52,10 +55,10 @@
       <h3 style="text-align:center"><%= @start_date.strftime('%B %Y') %></h3>
       <div class="calendar-navigation">
         <div class="previous-link">
-          <%= link_to "<i class=\"fa fa-arrow-left\"></i> Previous".html_safe, start_date: @start_date - 1.month %>
+          <%= link_to "<i class=\"fa fa-arrow-left\"></i> Previous".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date - 1.month) %>
         </div>
         <div class="next-link">
-          <%= link_to "Next <i class=\"fa fa-arrow-right\"></i>".html_safe, start_date: @start_date + 1.month %>
+          <%= link_to "Next <i class=\"fa fa-arrow-right\"></i>".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date + 1.month) %>
         </div>
       </div>
     </div>
