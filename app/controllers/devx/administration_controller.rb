@@ -12,12 +12,12 @@ module Devx
 
       @page = Devx::Page.new(name: 'Staff Directory', layout: @layout)
 
-  		@administrations = Devx::Person.all
+  		@administrations = Devx::Person.faculty.active
   		@q = @administrations.search(params[:q])
   		@q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
   		@administrations = @q.result(distinct: true)
 
-  		@departments = Devx::Person.all.tag_counts_on(:departments).order(name: :asc)
+  		@departments = Devx::Person.tag_counts_on(:departments).order(name: :asc)
   	end
 
     def determine_layout

@@ -2,6 +2,8 @@ module Devx
   class AccountTransaction < ActiveRecord::Base
     belongs_to :person
 
+    scope :pending, -> { where(processed_at: nil) }
+
     validates :person, presence: true
     validates :transaction_type, presence: true
     validates :payment_method, presence: true
@@ -15,7 +17,7 @@ module Devx
       require 'payeezy'
 
       return Payeezy::Transactions.new(
-        url: 'https://api-cert.payeezy.com/v1/transactions',
+        url: 'https://api.payeezy.com/v1/transactions',
         apikey: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_key'],
         apisecret: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_secret'],
         token: Devx::ApplicationSetting.find_or_create_by(id: 1).settings['payeezy_api_token']
@@ -27,7 +29,7 @@ module Devx
 
         params = {
           method: 'credit_card',
-          amount: amount,
+          amount: (amount * 100),
           currency_code: 'USD',
           credit_card: {
             type: cc_type,

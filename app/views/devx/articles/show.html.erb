@@ -5,7 +5,7 @@
             <span>Posted: <%= ldate @article.published_at %></span><br />
             <span>Category: <%= link_to @article.tag_list, articles_path(q: { tags_name_eq: @article.tag_list.to_s }) %></span><br />
 
-            <span><%= link_to 'Subscribe to feed', devx.subscribe_article_path(@article), method: :post, class: 'button primary small' %></span>
+            <span><%= link_to 'Subscribe to Feed', devx.subscribe_article_path(@article), method: :post, class: 'button primary small' %></span>
             <div style="margin:10px 0px">
 
             </div>

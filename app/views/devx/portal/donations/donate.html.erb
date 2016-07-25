@@ -1,0 +1,15 @@
+<% provide(:title, 'Donate Today') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+
+    <div class="col-12 columns">
+      <%= form_for @donation, url: devx.portal_donations_path, method: :post do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

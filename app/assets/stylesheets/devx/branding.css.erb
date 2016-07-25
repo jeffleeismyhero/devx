@@ -1,7 +1,7 @@
 <% @branding = Devx::Branding.find_or_create_by(id: 1) %>
-
 .primary { background-color:<% if @branding.primary_color.to_s.present? %><%= @branding.primary_color.to_s %><% else %>#084269<% end %>; }
-.secondary { background-color:<% if @branding.secondary_color.to_s.present? %><%= @branding.secondary_color.to_s %><% else %>#accc38<% end %>; }
+.secondary { background-color:<% if @branding.secondary_color.to_s.present? %><%= @branding.secondary_color.to_s %><% else %>#D9DDE3<% end %>; }
 .accent_1 { background-color:<% if @branding.primary_color.to_s.present? %><%= @branding.primary_color.to_s %><% else %>#d9dde3<% end %>; }
-.accent_2 { background-color:<% if @branding.primary_color.to_s.present? %><%= @branding.primary_color.to_s %><% else %>#d9dde3<% end %>; }
+.accent_2 { background-color:<% if @branding.primary_color.to_s.present? %><%= @branding.primary_color.to_s %><% else %>#accc38<% end %>; }
 .accent_3 { background-color:<% if @branding.primary_color.to_s.present? %><%= @branding.primary_color.to_s %><% else %>#d9dde3<% end %>; }
+@media only screen and (min-width: 768px){.cd-side-nav ul > li a { color:<% if @branding.primary_color.to_s.present? %><%= @branding.primary_color.to_s %><% else %>#084269<% end %>; }}

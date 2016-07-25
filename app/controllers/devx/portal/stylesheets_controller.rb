@@ -16,6 +16,9 @@ module Devx
     end
 
     def new
+      
+    rescue
+      @stylesheet ||= Devx::Stylesheet.build
     end
 
     def create

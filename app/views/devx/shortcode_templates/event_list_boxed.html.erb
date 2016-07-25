@@ -1,19 +1,18 @@
 <ul id="event-list" style="margin-bottom:20px">
-    <% @attributes[:events].try(:each) do |event| %>
+    <% @attributes[:events].try(:each) do |schedule| %>
         <%= "<li class=\"event\">
         <div class=\"event-square\">
             <div class=\"event-date\">
-                <h6 class=\"event-month\">#{event.start_time.try(:strftime, '%b')}<br />
-                    <span class=\"event-number\">#{event.start_time.try(:strftime, '%d')}</span>
+                <h6 class=\"event-month\">#{schedule.start_time.try(:strftime, '%b')}<br />
+                    <span class=\"event-number\">#{schedule.start_time.try(:strftime, '%d')}</span>
                 </h6>
             </div>
         </div>
         <div class=\"event-text\">
-            <p class=\"event-title\">#{link_to event.name.try(:upcase), '#'}</p>
-            <p class=\"event-desc\">#{event.start_time.try(:strftime, '%I:%M%p')}</p>
-            <p class=\"event-desc\">#{event.venue.try(:upcase)}</p>
+            <p class=\"event-title\">#{schedule.event.name.try(:upcase)}</p>
+            <p class=\"event-desc\">#{schedule.start_time.try(:strftime, '%I:%M%p')}</p>
+            <p class=\"event-desc\">#{schedule.event.venue.try(:upcase)}</p>
         </div>
     </li>".html_safe %>
-
     <% end %>
 </ul>

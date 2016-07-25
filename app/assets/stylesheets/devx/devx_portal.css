@@ -179,7 +179,7 @@ table tbody td {
 table tbody td:last-child {
   text-align:right;
 }
-
+/*
 .primary {
     background-color:#084269;
 }
@@ -190,7 +190,7 @@ table tbody td:last-child {
 
 .accent {
     background-color:#d9dde3;
-}
+}*/
 
 .divider {
     background-color:#cccccc;
@@ -322,7 +322,6 @@ table tbody td:last-child {
 **/
 
 .cd-main-header {
-  background-color:#084269;
   width:100%;
   position:absolute;
   top:0;
@@ -348,7 +347,6 @@ a.cd-logo {
 
 .cd-side-nav {
   padding:80px 0px 0px;
-  background:#D9DDE3;
   max-height:100vh;
   position:absolute;
   top:0;
@@ -629,6 +627,10 @@ a.cd-logo {
     font-size:1rem;
     width:100%;
     box-sizing:border-box;
+}
+
+.cd-edit-form input[type=checkbox] {
+  width:auto;
 }
 
 .cd-edit-form textarea {

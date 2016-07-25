@@ -61,7 +61,14 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
+  DEFAULT_HOST = "devxcms.dev"
+  DEFAULT_PORT = 3000
+
   config.before(:each) do
+    Capybara.default_host = "http://#{DEFAULT_HOST}"
+    Capybara.server_port = DEFAULT_PORT
+    default_url_options[:host] = "#{Capybara.default_host}:#{Capybara.server_port}"
+    Capybara.app_host = "http://#{DEFAULT_HOST}:#{Capybara.server_port}"
     Capybara.javascript_driver = :selenium
   end
 

@@ -1,11 +1,10 @@
 module Devx
   class Event < ActiveRecord::Base
-    extend TimeSplitter::Accessors
-    split_accessor :start_time
-
     acts_as_taggable
+    acts_as_paranoid
 
     has_many :event_subscriptions
+    has_many :schedules, dependent: :destroy
     belongs_to :calendar
     belongs_to :venue
 
@@ -14,6 +13,29 @@ module Devx
     scope :uniq_dates, -> { uniq.pluck(:start_time) }
 
     validates :name, presence: true
-    validates :start_time, presence: true
+    validate :check_for_duplicates
+
+    accepts_nested_attributes_for :schedules, allow_destroy: true,
+        reject_if: proc{ |x| x['start_time'].blank? }
+
+    def self.per_page
+        10
+    end
+
+    def check_for_duplicates
+        duplicates = Devx::Event.where(name: self.name)
+        duplicates.try(:each) do |duplicate|
+            if duplicate != self
+                duplicate.schedules.try(:each) do |dup_schedule|
+                    self.schedules.try(:each) do |schedule|
+                        if dup_schedule.start_time == schedule.start_time
+                            errors.add(:schedules, 'must be unique for each event')
+                            return false
+                        end
+                    end
+                end
+            end
+        end
+    end
   end
 end

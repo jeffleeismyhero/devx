@@ -3,15 +3,20 @@
 <div class="container banner" style="margin-bottom:40px; padding-bottom:20px;background-color:#e9e9e9">
     <div class="row">
         <div class="medium-10 medium-offset-1 large-10 large-offset-1 columns" style="margin-bottom:20px;">
-          <h1 class="page-title calendar-title">CALENDAR</h1>
+          <h1 class="page-title calendar-title">Calendar</h1>
         </div>
     </div>
     <div class="row">
       <div class="small-12 medium-10 medium-offset-1 large-10 large-offset-1 columns">
           <ul>
+              <li style="display:inline-block;"><a id="month" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-calendar" style="font-size:1.8rem;" aria-hidden="true"></i> Month View</a></li>
               <li style="display:inline-block;"><a id="grid" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-th-large" style="font-size:1.8rem;" aria-hidden="true"></i> Grid View</a></li>
               <li style="display:inline-block;"><a id="list" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-list-alt" style="font-size:1.8rem;" aria-hidden="true"></i></i> List View</a></li>
-              <li style="display:inline-block;"><a href="#" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-print" style="font-size:1.8rem;" aria-hidden="true"></i> Print</a></li>
+              <li style="display:inline-block;"><a href="javascript:window.print()" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-print" style="font-size:1.8rem;" aria-hidden="true"></i> Print</a></li>
+              <% if params[:category].present? %>
+                <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export this category".html_safe, devx.calendar_path(category: params[:category], format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
+              <% end %>
+              <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export full calendar".html_safe, devx.export_all_calendar_path(@calendar, format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
               <li style="display:inline-block;">
                 <% if user_signed_in? %>
                   <%= link_to "<i class=\"fa fa-plus\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Subscribe".html_safe, devx.subscribe_calendar_path(@calendar), method: :post, style: 'font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;' %>
@@ -21,77 +26,116 @@
       </div>
       <div class="small-12 medium-10 medium-offset-1 large-10 large-offset-1 columns">
         <%= search_form_for @q do |f| %>
-          <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View calendar:</p>
-          <%= f.select :id_eq, Devx::Calendar.all.collect{ |x| [ x.name, x.id ] }, { include_blank: true }, { class: 'select2-fixed' } %>
+          <% if @calendars.count > 1 %>
+            <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View calendar:</p>
+            <%= f.select :id_eq, Devx::Calendar.all.collect{ |x| [ x.name, x.id ] }, { include_blank: true }, { class: 'select2-fixed' } %>
+          <% end %>
 
           <% if @tags.any? %>
             <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View category:</p>
-            <%= f.select :events_tags_name_eq, options_from_collection_for_select(@tags, 'name', 'name', @q.events_tags_name_eq), { include_blank: true }, { class: 'select2' } %>
+            <%= select '', :category, options_from_collection_for_select(@tags, 'name', 'name', params['category']), { include_blank: true }, { class: 'select2' } %>
           <% end %>
+
+          <p style="margin-bottom:8px; font-family:lato; font-weight:600;">Select month:</p>
+          <%= select '', :month_select, options_for_select([['January', '1'], ['February', '2'], ['March', '3'], ['April', '4'], ['May', '5'], ['June', '6'], ['July', '7'], ['August', '8'], ['September', '9'], ['October', '10'], ['November', '11'], ['December', '12']]), { prompt: 'Select Month' }, { style: 'max-width:300px' } %>
+          <%= select '', :year_select, options_for_select(@years), { prompt: 'Select Year' }, { style: 'max-width:300px' } %>
           
           <div style="margin-top:30px"><%= f.submit %></div>
         <% end %>
-        <%= link_to 'Back to Today', devx.calendars_path, class: 'button primary small' %>
+        <% if params[:start_date] %>
+          <%= link_to 'Back to Today', devx.calendars_path, class: 'button primary small' %>
+        <% end %>
       </div>
     </div>
 </div>
 
-<div class="container" style="margin-bottom:40px;" id="grid-view" class="calendar-view">
-    <div class="row gridview show">
-      <% @dates.try(:each) do |date| %>
-        <% if @calendar.calendar_type == 'Standard' %>
-          <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
-              <div style="background-color: #fff;border:1px solid #384967;box-shadow: 0px 4px 4px #cccccc;overflow:hidden">
-                  <div class="calendar-event datebar">
-                      <h6 class="calendar-event month"><%= date.try(:strftime, '%^a') %></h6>
-                      <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.try(:strftime, '%^b %d') %></h6>
-                  </div>
-                  <div style="height:180px;overflow-y:scroll">
-                      <ul class="accordion">
-                        <% @events.try(:each) do |event| %>
-                          <% if event.start_time.try(:strftime, '%Y-%m-%d').to_s == date.to_s %>
-                            <li style="margin-bottom:.1rem; ">
-                              <div class="accordion-title">
-                                <%= event.name %>  
-                              </div>
-                              <div class="accordion-content">
-                                <span><%= event.start_time.try(:strftime, '%B %d %l:%M %P') %><%= event.end_time.try(:strftime, ' - %B %d %l:%M %P') %></span>
-                                <span><%= event.venue.try(:full_address) %></span>
-                              </div>
-                            </li>
-                          <% end %>
-                        <% end %>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-        <% elsif @calendar.calendar_type == 'Google Calendar' %>
-          <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
-              <div style="background-color: #fff;border:1px solid #384967;box-shadow: 0px 4px 4px #cccccc;overflow:hidden">
-                  <div class="calendar-event datebar">
-                      <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
-                      <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
-                  </div>
-                  <div style="height:180px;overflow-y:scroll">
-                      <ul class="accordion">
-                        <% @a.try(:each) do |event| %>
-                          <% if event[:date] == date %>
-                            <li style="margin-bottom:.1rem; ">
-                              <div class="accordion-title">
-                                <%= event[:name] %>  
-                              </div>
-                              <div class="accordion-content">
-                                <span><%= event[:start_time].try(:in_time_zone, app_settings['default_timezone']).try(:strftime, '%B %d %l:%M %P') %><%= event[:end_time].try(:in_time_zone, app_settings['default_timezone']).try(:strftime, ' - %B %d %l:%M %P') %></span>
-                                <span><%= event[:venue] %></span>
-                              </div>
-                            </li>
-                          <% end %>
-                        <% end %>
-                      </ul>
-                  </div>
-              </div>
-          </div>
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h3 style="text-align:center"><%= @start_date.strftime('%B %Y') %></h3>
+      <div class="calendar-navigation">
+        <div class="previous-link">
+          <%= link_to "<i class=\"fa fa-arrow-left\"></i> Previous".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date - 1.month) %>
+        </div>
+        <div class="next-link">
+          <%= link_to "Next <i class=\"fa fa-arrow-right\"></i>".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date + 1.month) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+li.event-listing::before {
+  content:"";
+  margin:0;
+}
+
+li.event-listing {
+  list-style-type:initial;
+}
+
+ul.event-list {
+  padding-left:10px;
+}
+</style>
+
+<div class="container" class="month-view hide-for-medium-down">
+  <div class="row monthview hide">
+    <div class="large-12 columns">
+    <%= month_calendar events: @schedules do |date, schedules| %>
+      <%= date.try(:strftime, '%d') %>
+      <ul class="event-list">
+        <% @scheduled_events[date].try(:each) do |schedule| %>
+          <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
+             <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
+                <li class="event-listing">
+                  <% if schedule.all_day == true %>
+                    <% start = 'All day' %>
+                  <% else %>
+                    <% start = schedule.start_time.try(:strftime, '%I:%M%p') %>
+                  <% end %>
+                  <%= link_to "#{schedule.event.name} - #{start}", devx.calendar_event_path(@calendar, schedule.event) %>
+                </li>
+            <% end %>
+          <% end %>
         <% end %>
+      </ul>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="margin-bottom:40px;" id="grid-view" class="calendar-view">
+    <div class="row gridview hide">
+      <% @dates.try(:each) do |date| %>
+        <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
+            <div style="background-color: #fff;border:1px solid #384967;box-shadow: 0px 4px 4px #cccccc;overflow:hidden">
+                <div class="calendar-event datebar">
+                    <h6 class="calendar-event month"><%= date.try(:strftime, '%^a') %></h6>
+                    <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.try(:strftime, '%^b %d') %></h6>
+                </div>
+                <div style="height:180px;overflow-y:scroll">
+                    <ul class="accordion">
+                      <% @scheduled_events[date].try(:each) do |schedule| %>
+                        <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
+                           <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
+                            <li style="margin-bottom:.1rem; ">
+                              <div class="accordion-title">
+                                <%= schedule.event.name %>  
+                              </div>
+                              <div class="accordion-content">
+                                <span><% if schedule.all_day == true %>All day event<% else %>Start Time: <%= ldate schedule.start_time %><br />End Time: <%= ldate schedule.end_time %><% end %></span><br />
+                                <% if schedule.event.location.present? %><span>Location: <%= schedule.event.location %></span><br /><% end %>
+                                <span><%= schedule.event.venue.try(:full_address) %></span>
+                              </div>
+                            </li>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
       <% end %>
     </div>
 </div>
@@ -100,57 +144,32 @@
 <div class="container" style="margin-bottom:40px;" id="list-view" class="calendar-view">
     <div class="row listview hide">
       <% @dates.try(:each) do |date| %>
-        <% if @calendar.calendar_type == 'Standard' %>
-          <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
-              <div style="box-shadow: 0px 4px 4px #cccccc;">
-                <div class="calendar-event datebar">
-                    <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
-                    <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
-                </div>
-                <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
-                    <ul class="accordion" style="margin:0;">
-                      <% @events.where('start_time > ? AND start_time < ?', date.beginning_of_day, date.end_of_day).try(:each) do |event| %>
-                        <li style="margin-bottom:.1rem; ">
-                          <div class="accordion-title">
-                            <%= event.name %>  
-                          </div>
-                          <div class="accordion-content">
-                            <span><%= event.start_time.try(:strftime, '%B %d %l:%M %P') %><%= event.end_time.try(:strftime, ' - %B %d %l:%M %P') %></span>
-                            <span><%= event.venue.try(:full_address) %></span>
-                          </div>
-                        </li>
-                      <% end %>
-                    </ul>
-                  </div>
+        <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
+            <div style="box-shadow: 0px 4px 4px #cccccc;">
+              <div class="calendar-event datebar">
+                  <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
+                  <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
               </div>
-          </div>
-        <% elsif @calendar.calendar_type == 'Google Calendar' %>
-          <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
-              <div style="box-shadow: 0px 4px 4px #cccccc;">
-                <div class="calendar-event datebar">
-                    <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
-                    <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
-                </div>
-                <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
-                    <ul class="accordion" style="margin:0;">
-                      <% @a.try(:each) do |event| %>
-                        <% if event[:date] == date %>
+              <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
+                  <ul class="accordion" style="margin:0;">
+                      <% @scheduled_events[date].try(:each) do |schedule| %>
+                        <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
                           <li style="margin-bottom:.1rem; ">
                             <div class="accordion-title">
-                              <%= event[:name] %>  
+                              <%= schedule.event.name %>  
                             </div>
                             <div class="accordion-content">
-                              <span><%= event[:start_time].try(:in_time_zone, app_settings['default_timezone']).try(:strftime, '%B %d %l:%M %P') %><%= event[:end_time].try(:in_time_zone, app_settings['default_timezone']).try(:strftime, ' - %B %d %l:%M %P') %></span>
-                              <span><%= event[:venue] %></span>
+                              <span><% if schedule.all_day == true %>All day event<% else %>Start Time: <%= ldate schedule.start_time %><br />End Time: <%= ldate schedule.end_time %><% end %></span><br />
+                              <% if schedule.event.location.present? %><span>Location: <%= schedule.event.location %></span><br /><% end %>
+                              <span><%= schedule.event.venue.try(:full_address) %></span>
                             </div>
                           </li>
                         <% end %>
                       <% end %>
-                    </ul>
-                  </div>
-              </div>
-          </div>
-        <% end %>
+                  </ul>
+                </div>
+            </div>
+        </div>
       <% end %>
     </div>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712042333) do
+ActiveRecord::Schema.define(version: 20160721143407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160712042333) do
     t.string   "upc"
     t.string   "product"
     t.string   "cardholder"
+    t.datetime "processed_at"
   end
 
   create_table "devx_alumnis", force: :cascade do |t|
@@ -212,6 +213,28 @@ ActiveRecord::Schema.define(version: 20160712042333) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_donations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.float    "amount"
+    t.string   "cardholder_first_name"
+    t.string   "cardholder_last_name"
+    t.string   "billing_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "phone_number"
+    t.string   "affiliation"
+    t.boolean  "class_participation"
+    t.boolean  "in_memorium"
+    t.string   "dedicated_to"
+    t.string   "email_to_notify"
+    t.boolean  "company_match"
+    t.string   "company_name"
+    t.string   "company_email_to_notify"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
   create_table "devx_event_subscriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "event_id"
@@ -227,10 +250,13 @@ ActiveRecord::Schema.define(version: 20160712042333) do
     t.datetime "end_time"
     t.string   "contact_name"
     t.string   "contact_email"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "calendar_id"
     t.string   "location"
+    t.boolean  "private"
+    t.string   "google_event_id"
+    t.datetime "deleted_at"
   end
 
   create_table "devx_extracurricular_teams", force: :cascade do |t|
@@ -436,6 +462,18 @@ ActiveRecord::Schema.define(version: 20160712042333) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "devx_schedules", force: :cascade do |t|
+    t.integer  "event_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean  "repeat"
+    t.boolean  "all_day"
+    t.text     "days",       default: [],              array: true
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.datetime "deleted_at"
   end
 
   create_table "devx_sections", force: :cascade do |t|

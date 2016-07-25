@@ -5,7 +5,15 @@ module Devx
     load_resource :event, class: 'Devx::Event'
     load_resource :calendar, class: 'Devx::Calendar'
 
+    layout :determine_layout
+
     def show
+      if app_settings['calendar_layout'].present?
+        @layout = Devx::Layout.find(app_settings['calendar_layout'])
+      end
+
+      @page = Devx::Page.new(name: @event.name, layout: @layout)
+
     end
 
     def subscribe
@@ -24,9 +32,12 @@ module Devx
 
     private
 
-    def event_params
-      accessible = [ :name, :description, :start_time, :end_time, :contact_name, :contact_email, :venue_id ]
-      params.require(:event).permit(accessible)
+    def determine_layout
+      if app_settings['calendar_layout'].present?
+        'devx/custom'
+      else
+        'devx/application'
+      end
     end
   end
 end

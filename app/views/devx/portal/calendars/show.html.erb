@@ -11,29 +11,29 @@
         <div class="col-12 columns" style="padding-bottom:20px;">
           <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> <%= link_to 'Create Event', devx.new_portal_calendar_event_path(@calendar) %>  <%= link_to 'Import Events', devx.portal_calendar_import_path %> <i class="fa fa-download"></i>
           <div style="float:right;">
-              <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-              <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
               <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
           </div>
         </div>
       <table>
         <thead>
           <tr>
-              <th>Name</th>
-              <th>Date of Event</th>
+              <th><%= 'Name' %></th>
+              <th><%= 'Start' %></th>
+              <th><%= 'End' %></th>
               <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
 
           <% if @calendar.calendar_type == 'Standard' %>
-            <% @calendar.events.try(:each) do |event| %>
+            <% @schedules.try(:each) do |schedule| %>
               <tr>
-                <td><%= link_to event.name, edit_portal_calendar_event_path(@calendar, id: event.id) %></td>
-                <td><%= event.start_time.try(:strftime, '%m/%d/%Y %I:%M %P') %></td>
+                <td><%= schedule.event.name %></td>
+                <td><%= ldate schedule.start_time %></td>
+                <td><%= ldate schedule.end_time %></td>
                 <td>
-                <%= link_to 'Edit', devx.edit_portal_calendar_event_path(@calendar, id: event) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                <%= link_to 'Delete', devx.portal_calendar_event_path(@calendar, id: event), method: :delete, data: { confirm: "Are you sure you want to delete #{event.name}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
+                <%= link_to 'Edit', devx.edit_portal_calendar_event_path(@calendar, id: schedule.event) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <%= link_to 'Delete', devx.portal_calendar_event_path(@calendar, id: schedule.event), method: :delete, data: { confirm: "Are you sure you want to delete #{schedule.event.name}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
                 </td>
               </tr>
             <% end %>
@@ -41,7 +41,8 @@
             <% @google_events.try(:each) do |event| %>
               <tr>
                 <td style="padding:10px;border-bottom:1px solid #ccc;"><%= event.title %></td>
-                <td style="padding:10px;border-bottom:1px solid #ccc;"><%= event.start_time.try(:to_datetime).try(:in_time_zone, @calendar.time_zone).try(:strftime, '%m/%d/%Y %I:%M %P') %></td>
+                <td style="padding:10px;border-bottom:1px solid #ccc;"><%= google_date event.start_time.try(:to_datetime) %></td>
+                <td style="padding:10px;border-bottom:1px solid #ccc;"><%= google_date event.end_time.try(:to_datetime) %></td>
                 <td style="padding:10px;border-bottom:1px solid #ccc;">&nbsp;</td>
               </tr>
             <% end %>
@@ -50,4 +51,12 @@
       </table>
     </div>
   </div>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col-12 columns">
+        <% if @schedules.any? %>
+            <%= will_paginate @schedules, class: 'apple_pagination' %>
+        <% end %>
+    </div>
 </div>

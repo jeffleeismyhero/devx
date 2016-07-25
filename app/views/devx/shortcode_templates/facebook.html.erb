@@ -6,7 +6,7 @@
             </div>
         <% end %>
         <div class="fb_text large-12 xlarge-5 columns" style="padding-left:10px;">
-            <p style="color:#384967;line-height:2.4rem">
+            <p style="line-height:2.4rem">
                 <%= post['message'].try(:truncate_words, 20, omission: '...') %>
             </p>
             <a target="_blank" href="<%= post['link'] %>" class="button primary small" style="margin-bottom:20px;">View Post</a>

@@ -29,7 +29,8 @@ module Devx
     end
 
     def get_events
-      calendar.upcoming_events.try(:limit, @attributes[:limit])
+      return Devx::Schedule.coming_up.ordered.try(:limit, @attributes[:limit])
     end
+
   end
 end

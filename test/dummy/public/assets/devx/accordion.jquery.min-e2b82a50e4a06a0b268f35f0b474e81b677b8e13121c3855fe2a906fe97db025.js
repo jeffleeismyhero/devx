@@ -1,1 +1,0 @@
-!function(i){i.fn.jcw_accordion=function(){i(this).children("li").children(".accordion-title").on("click",function(){i(this).parent("li").toggleClass("active")})}}(jQuery);

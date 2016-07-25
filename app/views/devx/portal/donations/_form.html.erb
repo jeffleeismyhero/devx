@@ -1,0 +1,94 @@
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-4 columns cd-edit-form">
+        <%= f.label :amount, 'Donation amount' %><br>
+        <%= f.text_field :amount, { step: '0.01', placeholder: 'Amount', class: 'currency-field' } %>
+    </div>
+</div>
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+  <h3>Billing Information</h3>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :cardholder_first_name %>
+    <%= f.text_field :cardholder_first_name %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :cardholder_last_name %>
+    <%= f.text_field :cardholder_last_name %>
+  </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :billing_address %>
+    <%= f.text_field :billing_address %>
+  </div>
+  <div class="col-4 columns cd-edit-form">
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </div>
+  <div class="col-4 columns cd-edit-form">
+    <%= f.label :state %>
+    <%= f.select :state, options_for_select(us_states, @donation.state), { include_blank: true, selected: @donation.state }, class: 'select2-fixed' %>
+  </div>
+  <div class="col-4 columns cd-edit-form">
+    <%= f.label :zip_code %>
+    <%= f.text_field :zip_code %>
+  </div>
+  <div class="col-4 columns cd-edit-form">
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number %>
+  </div>
+</div>
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+  <h3>Payment Details</h3>
+  <div class="col-8 columns cd-edit-form">
+  <%= label_tag :cc_number, 'Credit Card Number' %>
+  <%= text_field_tag :cc_number, '', placeholder: 'Credit Card Number', autocomplete: :off %>
+  </div>
+  <div class="col-5 columns cd-edit-form">
+  <%= label_tag :exp_date, 'Expiration Date' %>
+  <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed', required: true } %>
+  </div>
+
+  <div class="col-3 columns cd-edit-form">
+  <%= label_tag :cvv, 'Security Code' %>
+  <%= text_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off %>
+  </div>
+</div>
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+  <h3>Donation Details</h3>
+  <div class="col-8 columns cd-edit-form">
+    <%= f.label :affiliation %>
+    <%= f.select :affiliation, options_for_select(['Current Parent', 'Grandparent', 'Friend', 'Alumni', 'Past Parent', 'Faculty/Staff', 'Other']), { prompt: 'Select one' }, { class: 'select2-fixed' } %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.check_box :class_participation %> 
+    <%= f.label :class_participation, 'Credit for class participation' %>
+  </div>
+</div>
+<div class="col-8 columns no-padding" style="margin-top:20px">
+
+  <h3>Company Matching</h3>
+  <div class="col-8 columns cd-edit-form">
+    <%= f.check_box :company_match %> 
+    <%= f.label :company_match, 'This gift will be matched by a company' %>
+  </div>
+  <div id="company-match" style="display:none">
+    <div class="col-6 columns cd-edit-form">
+      <%= f.label :company_name %> 
+      <%= f.text_field :company_name %>
+    </div>
+    <div class="col-6 columns cd-edit-form">
+      <%= f.label :company_email_to_notify, 'E-mail of person to notify' %> 
+      <%= f.text_field :company_email_to_notify %>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-12 columns cd-update-form" style="margin-top:20px;">
+    <%= f.submit 'Send donation' %>
+</div>
+
+<script type="text/javascript">
+  $("#donation_company_match").on("click", function()
+  {
+    $("#company-match").toggle();
+  });
+</script>

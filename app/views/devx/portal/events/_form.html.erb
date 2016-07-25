@@ -1,35 +1,51 @@
-<div class="col-12 columns">
-<%= f.label :name %>
-<%= f.text_field :name %>
+<div class="col-8 columns no-padding">
+  <% @event.errors.full_messages.each do |e| %>
+    <%= e %><br />
+  <% end %>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :contact_name %>
+    <%= f.text_field :contact_name %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :contact_email %>
+    <%= f.text_field :contact_email %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :tag_list, 'Category' %>
+    <%= f.select :tag_list, Devx::Event.tag_counts_on(:tags).order(name: :asc), { include_blank: true }, { class: 'select2' } %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :venue %>
+    <%= f.select :venue_id, Devx::Venue.all.collect{ |x| [x.name, x.id] }, { include_blank: true }, { class: 'select2-fixed' } %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :private %>
+    <%= f.check_box :private %>
+  </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :description %>
+    <%= f.cktext_area :description, ckeditor: { toolbar: 'mini' } %>
+  </div>
+
+  <div class="col-12 columns no-padding">
+    <h3>Event Schedules</h3>
+    <%= content_tag 'div', class: 'nested-attributes' do %>
+      <%= f.fields_for :schedules do |schedule| %>
+        <%= render partial: 'schedule_fields', locals: { f: schedule } %>
+      <% end %>
+    <% end %>
+    <%= link_to_add_fields 'Add Schedule', f, :schedules, nil, 'schedule_fields', '' %>
+  </div>
 </div>
-<div class="col-12 columns">
-<%= f.label :description %>
-<%= f.cktext_area :description %>
-</div>
-<div class="col-6 columns">
-<%= f.label :start_time %>
-<%= f.text_field :start_time, class: 'datetimepicker' %>
-</div>
-<div class="col-6 columns">
-<%= f.label :end_time %>
-<%= f.text_field :end_time, class: 'datetimepicker' %>
-</div>
-<div class="col-12 columns">
-<%= f.label :venue %>
-<%= f.select :venue_id, Devx::Venue.all.collect{ |x| [x.name, x.id] }, { include_blank: true } %>
-</div>
-<div class="col-6 columns">
-<%= f.label :contact_name %>
-<%= f.text_field :contact_name %>
-</div>
-<div class="col-6 columns">
-<%= f.label :contact_email %>
-<%= f.email_field :contact_email %>
-</div>
-<div class="col-6 columns">
-<%= f.label :tag_list, 'Category' %>
-<%= f.select :tag_list, Devx::Event.tag_counts_on(:tags).order(name: :asc), { include_blank: true }, { class: 'select2' } %>
-</div>
-<div class="col-12 columns">
+
+<div class="col-12 columns cd-update-form">
 <%= f.submit %>
 </div>

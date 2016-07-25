@@ -38,6 +38,7 @@ h1.page-title {
   border-bottom:1px solid #cccccc;
 }
 
+
 .calendar-event.datebar {
   background-color:#DDDDDD;
   border-bottom:1px solid #384967;
@@ -50,6 +51,33 @@ h1.page-title {
   background-color:#AAAAAA;
   color:#fff;
   font-weight:100;
+}
+
+.calendar-event.event-title {
+  padding:12px;
+  color:#fff;
+}
+
+.simple-calendar .calendar-heading {
+  display:none!important;
+}
+
+.simple-calendar th {
+  padding:10px!important;
+  text-align:center;
+}
+
+.simple-calendar .day {
+  padding:12px!important;
+}
+
+.calendar-navigation > div {
+  display:inline-block;
+  padding:14px 0px;
+}
+
+.next-link {
+  float:right;
 }
 
 .notify {
