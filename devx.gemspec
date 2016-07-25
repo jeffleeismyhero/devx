@@ -54,19 +54,13 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "animate-rails"
   s.add_runtime_dependency "owlcarousel-rails"
   s.add_runtime_dependency "fancybox2-rails"
-<<<<<<< HEAD
-<<<<<<< HEAD
   s.add_runtime_dependency "photoswipe-rails", "~> 4.1", ">= 4.1.1"
-=======
   s.add_runtime_dependency "simple_calendar", "~> 2.0"
   s.add_runtime_dependency "velocityjs-rails"
   s.add_runtime_dependency "typedjs-rails", "~> 1.0.3"
->>>>>>> origin/master
-=======
   s.add_runtime_dependency "simple_calendar", "~> 2.0"
   s.add_runtime_dependency "velocityjs-rails"
   s.add_runtime_dependency "typedjs-rails", "~> 1.0.3"
->>>>>>> origin/master
 
 
   ## WYSIWYG Editor
