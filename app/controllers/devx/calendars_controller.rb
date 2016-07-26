@@ -34,7 +34,7 @@ module Devx
         @dates.push(date.to_date)
       end
 
-      if @calendar.calendar_type.present?# == 'Standard'
+      if @calendar.calendar_type.present?
         @events = Devx::Schedule.for_calendar(@calendar, @start_date)
         @schedules = Devx::Schedule.for_month(@start_date)
 
@@ -51,9 +51,9 @@ module Devx
         @dates.each do |date|
           @scheduled_events[date] = []
           @events.each do |event|
-            event.schedules.each_with_index do |schedule, index|
-              if schedule.end_time_date >= date
-                if schedule.start_time_date <= date
+            event.schedules.try(:each_with_index) do |schedule, index|
+              if schedule.end_time_date.present? && schedule.end_time_date >= date
+                if schedule.start_time_date.present? && schedule.start_time_date <= date
                   if !@scheduled_events[date].include?(schedule)
                     @scheduled_events[date].push(schedule)
                   end
