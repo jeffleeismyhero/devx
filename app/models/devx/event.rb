@@ -13,6 +13,7 @@ module Devx
     scope :uniq_dates, -> { uniq.pluck(:start_time) }
 
     validates :name, presence: true
+    validates :schedules, presence: true
     validate :check_for_duplicates
 
     accepts_nested_attributes_for :schedules, allow_destroy: true,

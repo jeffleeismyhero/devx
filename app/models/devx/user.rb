@@ -23,7 +23,7 @@ module Devx
     has_many :event_subscriptions
     has_many :article_subscriptions
     has_many :linked_accounts
-    has_many :people, through: :linked_accounts
+    has_many :children, through: :linked_accounts, class_name: 'Devx::Person'
     belongs_to :person
 
     validates :email, presence: true
@@ -147,8 +147,11 @@ module Devx
     end
 
     def update_crm_record
-      self.person.email = self.email
-      self.person.active = true
+      self.person = Devx::Person.new unless self.person.present?
+      self.person.first_name = self.first_name unless self.person.first_name.present?
+      self.person.last_name = self.last_name unless self.person.last_name.present?
+      self.person.email = self.email unless self.person.email.present?
+      self.person.active = true unless self.person.active.present?
 
       if person.valid? && person.save
         puts "Successfully created CRM record #{person.inspect}"

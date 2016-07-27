@@ -122,13 +122,30 @@ module Devx
             logger = Logger.new(logfile)
             
             records.each_with_index do |record, index|
-              email = record[0].to_s.squish
+              uuid = record[0].to_s
+              school_id = record[1].to_s
+              email = record[2].to_s
+              prefix = record[3].to_s
+              first_name = record[4].to_s
+              last_name = record[5].to_s
+              suffix = record[6].to_s
+              address = record[7].to_s
+              city = record[8].to_s
+              state = record[9].to_s
+              zip_code = record[10].to_s
+              phone = record[11].to_s
+              mobile_phone = record[12].to_s
+              association = record[13].to_s
+              department = record[14].to_s
+              position = record[15].to_s
+              active = record[16].to_s
 
               user = Devx::User.new(
-                email: email
+                email: email,
+                password: Devise.friendly_token(12)
               )
 
-              user.person.new(
+              person = Devx::Person.new(
                 uuid: uuid,
                 school_id: school_id,
                 first_name: first_name,
@@ -146,14 +163,16 @@ module Devx
                 active: active
               )
 
+              user.person = person
+
               puts user.inspect
 
               if user.valid?
-                logger.info "Expecting object to be valid: #{article.inspect}"
+                logger.info "Expecting object to be valid: #{user.inspect}"
                 user.save
               else
-                logger.warn "Failed to import object: #{article.inspect}"
-                article.errors.full_messages.try(:each) do |error|
+                logger.warn "Failed to import object: #{user.inspect}"
+                user.errors.full_messages.try(:each) do |error|
                   logger.warn "#{error}"
                 end
                 @errors += 1
