@@ -26,6 +26,7 @@ module Devx
   	end
   	
   	def new
+      @person = Devx::Person.new
   	end
   	
   	def edit
@@ -121,16 +122,28 @@ module Devx
             logger = Logger.new(logfile)
             
             records.each_with_index do |record, index|
-              first_name = record[0].to_s.squish
-              last_name = record[1].to_s.squish
-              email = record[2].to_s.squish
-              password = record[3].to_s.squish
+              email = record[0].to_s.squish
 
               user = Devx::User.new(
+                email: email
+              )
+
+              user.person.new(
+                uuid: uuid,
+                school_id: school_id,
                 first_name: first_name,
                 last_name: last_name,
                 email: email,
-                password: password,
+                address: address,
+                city: city,
+                state: state,
+                zip: zip_code,
+                phone: phone,
+                mobile_number: mobile_phone,
+                association_list: association,
+                department_list: department,
+                position: position,
+                active: active
               )
 
               puts user.inspect
@@ -212,7 +225,8 @@ module Devx
   		def user_params
   			accessible = [ :person_id, :email, :first_name, :last_name, :generate_password, :photo, role_ids: [],
                       children_attributes: [ :id, :first_name, :last_name, :_destroy ],
-                      linked_accounts_attributes: [ :id, :user_id, :person_id, :_destroy ]
+                      linked_accounts_attributes: [ :id, :user_id, :person_id, :_destroy ],
+                      person_attributes: [ :id, :first_name, :last_name, :photo ]
                     ]
 
   			#adds the below params to the above var except when the user and password fields are blank

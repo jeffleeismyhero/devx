@@ -10,6 +10,12 @@ module Devx
       @q = @administrations.search(params[:q])
       @q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
       @administrations = @q.result(distinct: true)
+      respond_to do |format|
+        format.html
+        format.xlsx do
+          render xlsx: 'index', filename: 'crm_export.xlsx'
+        end
+      end
     end
 
     def new

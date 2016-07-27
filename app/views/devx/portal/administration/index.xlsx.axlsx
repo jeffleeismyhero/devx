@@ -1,0 +1,21 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  header = style.add_style b: true
+
+  wb.add_worksheet(name: "Users") do |sheet|
+    # Add Header
+    sheet.add_row [
+      "UUID", "School ID", "First Name", "Last Name", "E-mail Address", "Address",
+      "City", "State", "Zip Code", "Phone Number", "Mobile Number", "Association",
+      "Departments", "Position", "Active"
+    ], style: header
+
+    @administrations.each do |person|
+      sheet.add_row [
+        person.uuid, person.school_id, person.first_name, person.last_name, person.email,
+        person.address, person.city, person.state, person.zip, person.phone, person.mobile_number,
+        person.association_list, person.department_list, person.position, person.active
+      ]
+    end
+  end
+end

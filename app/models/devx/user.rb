@@ -31,13 +31,14 @@ module Devx
     attr_accessor :generate_password
 
     after_create :welcome
+    after_create :update_crm_record
       
     mount_uploader :photo, ImageUploader
 
-    accepts_nested_attributes_for :children,
-      reject_if: proc{ |x| x['first_name'].blank? }
-
+    accepts_nested_attributes_for :person
+      # reject_if: proc{ |x| x['first_name'].blank? }
     accepts_nested_attributes_for :linked_accounts, allow_destroy: true
+
 
 
     def self.get_user(email)
@@ -134,9 +135,7 @@ module Devx
     end
 
     def welcome
-      # if generate_password == true || generate_password == 'true'
-        Devx::NotificationMailer.delay.signup(self, self.password)
-      # end
+      Devx::NotificationMailer.delay.signup(self, self.password)
     end
 
     def balance
@@ -146,5 +145,19 @@ module Devx
         0
       end
     end
+
+    def update_crm_record
+      self.person.email = self.email
+      self.person.active = true
+
+      if person.valid? && person.save
+        puts "Successfully created CRM record #{person.inspect}"
+        return true
+      else
+        puts "Failed to create CRM record #{person.inspect}"
+        return false
+      end
+    end
+
   end
 end

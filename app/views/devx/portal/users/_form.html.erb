@@ -1,17 +1,21 @@
 <div class="col-4 columns" style="margin-top:20px;">
     <div class="col-12 columns">
-        <% if @user.photo.present? %>
-            <% photo = @user.photo.profile.url %>
+        <% if @user.person.try(:photo).present? %>
+            <% photo = @user.person.try(:photo).profile.url %>
         <% else %>
             <% photo = image_path('devx/No-Name.jpg') %>
         <% end %>
 
         <%= image_tag(photo, style: 'max-width:100%;max-height:200px') %>
     </div>
-    <div class="col-12 columns">
-        <%= f.label :photo %>
-        <%= f.file_field :photo %> 
-    </div>
+    <% if current_user.administrator? %>
+        <%= f.fields_for :person, @person do |p| %>
+            <div class="col-12 columns">
+                <%= p.label :photo %>
+                <%= p.file_field :photo %> 
+            </div>
+        <% end %>
+    <% end %>
 </div>
 
 <div class="col-8 columns no-padding" style="margin-top:20px;">
@@ -21,15 +25,17 @@
             <%= f.select :person_id, Devx::Person.all.collect{ |x| [x.try(:record_with_school_id), x.id] }, { include_blank: true }, { class: 'select2-fixed' } %>
         </div>
     <% end %>
-    <div class="col-6 columns cd-edit-form">
-        <%= f.label :first_name %><br>
-        <%= f.text_field :first_name %>
-    </div>
-    
-    <div class="col-6 columns cd-edit-form">
-        <%= f.label :last_name %><br>
-        <%= f.text_field :last_name %>
-    </div>
+    <%= f.fields_for :person, @person do |p| %>
+        <div class="col-6 columns cd-edit-form">
+            <%= p.label :first_name %><br>
+            <%= p.text_field :first_name %>
+        </div>
+        
+        <div class="col-6 columns cd-edit-form">
+            <%= p.label :last_name %><br>
+            <%= p.text_field :last_name %>
+        </div>
+    <% end %>
     
     <div class="col-12 columns cd-edit-form">
         <%= f.label :email %><br>
@@ -54,7 +60,7 @@
         </div>
     <% end %>
 
-    <% if current_user != @user && current_user.administrator? %>
+    <% if (current_user != @user && current_user.administrator?) || current_user.super_administrator? %>
         <div class="col-12 columns" style="margin-top:20px;">
             <h3>User Roles</h3>
             <div class="col-12 columns no-padding">
