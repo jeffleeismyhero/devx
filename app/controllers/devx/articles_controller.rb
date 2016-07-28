@@ -27,10 +27,10 @@ module Devx
     end
 
     def subscribe
-      subscription = Devx::ArticleSubscription.new(category: @article.tag_list, user: current_user)
+      subscription = Devx::ArticleSubscription.new(category: @article.tag_list, user_id: params[:user])
 
       if subscription.valid? && subscription.save
-        Devx::NotificationMailer.subscription_confirmation(current_user, 'News Feed', @article)
+        #Devx::NotificationMailer.subscription_confirmation(current_user, 'News Feed', @article)
         redirect_to devx.article_path(@article),
         notice: "You have subscribed to this news feed"
       else

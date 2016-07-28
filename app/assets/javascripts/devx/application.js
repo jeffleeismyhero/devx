@@ -54,6 +54,13 @@ $(function()
   $(".accordion").jcw_accordion();
 
 
+  // Owl Carousel
+  $(".devx-owl").owlCarousel({
+    items: 1,
+    singleItem: true
+  });
+
+
   // Navigation
   var active_path = window.location.pathname;
 

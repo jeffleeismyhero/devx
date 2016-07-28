@@ -17,8 +17,9 @@
       <div class="col-8 columns cd-dashboard-section">
         <h4>Newsfeed Subscriptions</h4>
         <% if current_user.article_subscriptions.any? %>
-          <% current_user.article_subscriptions.limit(1).try(:each) do |subscription| %>
-            <% Devx::Article.published.tagged_with(subscription.category).try(:each) do |article| %>
+          <div class="newsfeed-subscriptions devx-owl">
+          <% current_user.article_subscriptions.try(:each) do |subscription| %>
+            <% Devx::Article.published.tagged_with(subscription.category).limit(1).try(:each) do |article| %>
               <div class="subscribed-article">
                 <% if article.image.present? %>
                   <div class="col-4 columns">
@@ -33,6 +34,7 @@
               </div>
             <% end %>
           <% end %>
+          </div>
         <% else %>
           <span>You are not subscribed to any newsfeeds</span>
         <% end %>
@@ -51,10 +53,10 @@
             <% event_list.push(subscription.event) %>
           <% end %>
           <ul class="cd-section-list">
-            <% event_list.sort_by{ |x| x.start_time }.try(:each) do |event| %>
+            <% event_list.sort_by{ |x| x.schedules.try(:upcoming).try(:first).try(:start_time) }.try(:each) do |event| %>
               <li class="cd-section-item">
                 <strong><%= link_to event.name, devx.calendar_event_path(event.calendar, event) %></strong><br />
-                <span><%= event.start_time.try(:strftime, '%B %d at %l:%M %P') %></span><br />
+                <span><%= event.schedules.try(:upcoming).try(:first).try(:start_time).try(:strftime, '%B %d at %l:%M %P') %></span><br />
 
               </li>
             <% end %>
