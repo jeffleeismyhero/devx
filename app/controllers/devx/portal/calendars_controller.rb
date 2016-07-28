@@ -14,10 +14,10 @@ module Devx
 
     def show
           #@events = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
-          @schedules = Devx::Schedule.coming_up.ordered.paginate(page: params[:page])
+          @schedules = Devx::Schedule.coming_up
           @q = @schedules.search(params[:q])
           @q.sorts = 'start_time asc'
-          @schedules = @q.result
+          @schedules = @q.result.ordered.paginate(page: params[:page])
     end
 
     def new
