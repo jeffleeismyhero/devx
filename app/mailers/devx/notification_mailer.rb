@@ -15,7 +15,6 @@ module Devx
       @subject = "Introducing the new myCHS!"
 
       mail to: @user.email,
-           from: 'info@catholichigh.org',
            subject: @subject
     end
 
