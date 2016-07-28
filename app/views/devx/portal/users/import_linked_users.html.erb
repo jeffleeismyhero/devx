@@ -1,0 +1,24 @@
+<% provide(:title, '' + controller_name.classify.pluralize) %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 columns">
+            <h1><%= yield(:title) %></h1>
+        </div>
+        <div class="col-12 columns" style="padding:20px 0.9375em;">
+            <%= link_to '<small>Download Template</small>'.html_safe, asset_path('devx/user_import_template.csv'), target: '_blank' %>
+        </div>
+        <div class="col-12 columns" style="padding-bottom:20px;">
+            <%= form_for @import, url: devx.portal_users_import_linked_path, method: :post do |f| %>
+                <%= f.label :file %>
+                <%= f.file_field :file %>
+
+                <div class="col-12 columns" style="margin-top:20px;">
+                    <div class="cd-update-form">
+                        <%= submit_tag 'Import ' + controller_name.classify.pluralize %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

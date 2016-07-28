@@ -135,7 +135,7 @@ module Devx
     end
 
     def welcome
-      Devx::NotificationMailer.delay.signup(self, self.password)
+      #Devx::NotificationMailer.delay.signup(self, self.password)
     end
 
     def balance

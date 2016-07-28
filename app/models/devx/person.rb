@@ -24,6 +24,14 @@ module Devx
 
     accepts_nested_attributes_for :user
 
+    def is_faculty?
+      if self.tagged_with('Faculty', on: :associations).any?
+        return true
+      else
+        return false
+      end
+    end
+
     def full_name
       "#{self.first_name} #{self.last_name}".squish
     end

@@ -17,7 +17,7 @@
       <div class="col-8 columns cd-dashboard-section">
         <h4>Newsfeed Subscriptions</h4>
         <% if current_user.article_subscriptions.any? %>
-          <% current_user.article_subscriptions.try(:each) do |subscription| %>
+          <% current_user.article_subscriptions.limit(1).try(:each) do |subscription| %>
             <% Devx::Article.published.tagged_with(subscription.category).try(:each) do |article| %>
               <div class="subscribed-article">
                 <% if article.image.present? %>

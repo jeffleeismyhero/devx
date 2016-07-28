@@ -9,6 +9,16 @@ module Devx
   		     subject: @subject
   	end
 
+    def mychs(user, password)
+      @user = user
+      @password = password
+      @subject = "Introducing the new myCHS!"
+
+      mail to: @user.email,
+           from: 'info@catholichigh.org',
+           subject: @subject
+    end
+
     def form_submission(recipient, subject, submission)
       @recipient = recipient
       @subject = subject

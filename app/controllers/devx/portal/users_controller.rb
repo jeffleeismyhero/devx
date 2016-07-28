@@ -145,6 +145,12 @@ module Devx
                 password: Devise.friendly_token(12)
               )
 
+              if association == 'Faculty'
+                user.authorizations.new(role: Devx::Role.find_or_create_by(name: 'Faculty'))
+              elsif association == 'Student'
+                user.authorizations.new(role: Devx::Role.find_or_create_by(name: 'Student'))
+              end
+
               person = Devx::Person.new(
                 uuid: uuid,
                 school_id: school_id,
@@ -170,6 +176,7 @@ module Devx
               if user.valid?
                 logger.info "Expecting object to be valid: #{user.inspect}"
                 user.save
+                Devx::NotificationMailer.delay.mychs(user, user.password)
               else
                 logger.warn "Failed to import object: #{user.inspect}"
                 user.errors.full_messages.try(:each) do |error|
@@ -182,6 +189,83 @@ module Devx
         end
           redirect_to devx.portal_users_path,
           notice: "#{@errors} users could not be imported due to errors"
+      end
+    end
+
+    def import_linked_users
+      require 'csv'
+
+      @import = Devx::Import.new(params[:import])
+
+      @errors = 0;
+
+      if request.post?
+        if @import.valid?
+
+          if records = CSV.read(@import.file.path, headers: true)
+            logfile = File.open("#{Rails.root}/log/import.log", "a")
+            logfile.sync = true
+            logger = Logger.new(logfile)
+
+            records.each_with_index do |record, index|
+              school_id = record[0].to_s
+              email = record[1].to_s
+              prefix = record[2].to_s
+              first_name = record[3].to_s
+              last_name = record[4].to_s
+              suffix = record[5].to_s
+
+              user = Devx::User.new(
+                email: email,
+                password: Devise.friendly_token(12)
+              )
+
+              user.authorizations.new(role: Devx::Role.find_or_create_by(name: 'Parent'))
+
+              if Devx::Person.find_by(email: email).nil?
+                person = Devx::Person.new(
+                  prefix: prefix,
+                  first_name: first_name,
+                  last_name: last_name,
+                  email: email,
+                  suffix: suffix,
+                  association_list: 'Parent'
+                )
+              else
+                person = Devx::Person.find_by(email: email)
+                person.association_list.add('Parent')
+              end
+
+              user.person = person
+
+              if user.valid?
+                logger.info "Expecting object to be valid: #{user.inspect}"
+                user.save
+
+                user.linked_accounts.new(person: Devx::Person.find_by(school_id: school_id))
+                logger.info "Expecting linked object to be valid: #{user.linked_accounts.inspect}"
+
+                if !user.save
+                  logger.warn "#{Failed to save linked object}"
+                  user.errors.full_messages.try(:each) do |error|
+                    logger.warn "#{error}"
+                  end
+                else
+                  Devx::NotificationMailer.delay.mychs(user, user.password)
+                end
+              else
+                logger.warn "Failed to import object: #{user.inspect}"
+                user.errors.full_messages.try(:each) do |error|
+                  logger.warn "#{error}"
+                end
+                @errors += 1
+              end
+            end
+          end
+
+        end
+        redirect_to devx.portal_users_path,
+        notice: "#{@errors} users could not be imported due to errors"
       end
     end
 
