@@ -48,7 +48,10 @@ module Devx
     def destroy
       if @page.destroy
         redirect_to devx.portal_pages_path,
-        notice: "Successfully deleted page"
+        notice: "Successfully deleted the page."
+      else
+        redirect_to devx.portal_pages_path,
+        notice: "Failed to delete the page."
       end
     end
 

@@ -13,6 +13,7 @@ Devx::Engine.routes.draw do
       match 'jobs', to: DelayedJobWeb, anchor: false, via: [ :get, :post ]
     end
 
+
     get '/' => 'dashboard#index', as: :dashboard
     get '/terms-of-service', to: 'dashboard#terms_of_service'
     get '/privacy-policy', to: 'dashboard#privacy_policy'
@@ -50,6 +51,7 @@ Devx::Engine.routes.draw do
       resources :events
     end
     resources :alumni
+    resources :classrooms
     resources :donations
     resources :faqs
     resources :products
