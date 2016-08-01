@@ -30,7 +30,7 @@ module Devx
     end
 
     def get_events
-      return Devx::Schedule.coming_up.ordered.try(:limit, @attributes[:limit])
+      return Devx::Schedule.coming_up.try(:ordered).try(:limit, @attributes[:limit])
     end
 
   end
