@@ -8,7 +8,7 @@
   <tbody>
   <% counter = 0 %>
   <% @attributes[:events].try(:each) do |schedule| %>
-    <% if counter <= @attributes[:limit].to_i %>
+    <% if counter <= 5 %>
       <% if schedule.event.try(:tag_list).to_s == @attributes[:category].to_s %>
         <tr>
           <td><%= schedule.start_time.to_datetime.try(:strftime, '%m/%d %I:%M%P') %></td>
