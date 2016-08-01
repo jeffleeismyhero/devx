@@ -20,9 +20,3 @@
   <% end %>
   </tbody>
 </table>
-
-Devx::Schedule.coming_up.try(:ordered).try(:each) do |schedule|
-if schedule.event.try(:tag_list).to_s == "Men's Club".to_s
-puts "true"
-end
-end
