@@ -82,7 +82,7 @@ ul.event-list {
 <div class="container" class="month-view hide-for-medium-down">
   <div class="row monthview hide">
     <div class="large-12 columns">
-    <%= calendar events: @schedules, partial: 'simple_calendar/calendar' do |date, schedules| %>
+    <%= month_calendar events: @schedules do |date, schedules| %>
       <%= date.try(:strftime, '%d') %>
       <ul class="event-list">
         <% @scheduled_events[date].try(:each) do |schedule| %>
@@ -105,7 +105,7 @@ ul.event-list {
   </div>
 </div>
 
-<div class="container" class="week-view hide-for-medium-down">
+<!-- <div class="container" class="week-view hide-for-medium-down">
   <div class="row weekview hide">
     <div class="large-12 columns">
     <%= week_calendar events: @schedules do |date, schedules| %>
@@ -129,7 +129,7 @@ ul.event-list {
     <% end %>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="container" style="margin-bottom:40px;" id="grid-view" class="calendar-view">
     <div class="row gridview hide">
