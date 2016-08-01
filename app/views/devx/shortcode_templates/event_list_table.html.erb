@@ -1,0 +1,18 @@
+<table width="100%">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Event</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @attributes[:events].try(:each) do |schedule| %>
+    <% if schedule.event.try(:tag_list).to_s == @attributes[:category].to_s %>
+      <tr>
+        <td><%= schedule.start_time.to_datetime.try(:strftime, '%m/%d %I:%M%P') %></td>
+        <td><%= schedule.event.name %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>

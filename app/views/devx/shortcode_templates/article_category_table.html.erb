@@ -1,0 +1,9 @@
+<table width="100%">
+  <tbody>
+  <% @attributes[:articles].try(:each) do |article| %>
+    <tr>
+      <td><%= link_to article.title, "/news/#{article.slug}" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

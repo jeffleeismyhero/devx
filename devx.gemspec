@@ -61,7 +61,7 @@ Gem::Specification.new do |s|
 
 
   ## WYSIWYG Editor
-  s.add_runtime_dependency "ckeditor", "~> 4.1"  
+  s.add_runtime_dependency "ckeditor", "~> 4.1"
 
 
   ## Image Processing
