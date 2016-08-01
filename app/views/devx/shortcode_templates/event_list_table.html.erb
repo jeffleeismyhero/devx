@@ -6,13 +6,23 @@
     </tr>
   </thead>
   <tbody>
+  <% counter = 0 %>
   <% @attributes[:events].try(:each) do |schedule| %>
-    <% if schedule.event.try(:tag_list).to_s == @attributes[:category].to_s %>
-      <tr>
-        <td><%= schedule.start_time.to_datetime.try(:strftime, '%m/%d %I:%M%P') %></td>
-        <td><%= schedule.event.name %></td>
-      </tr>
+    <% if counter != @attributes[:limit] %>
+      <% if schedule.event.try(:tag_list).to_s == @attributes[:category].to_s %>
+        <tr>
+          <td><%= schedule.start_time.to_datetime.try(:strftime, '%m/%d %I:%M%P') %></td>
+          <td><%= schedule.event.name %></td>
+        </tr>
+        counter += 1
+      <% end %>
     <% end %>
   <% end %>
   </tbody>
 </table>
+
+Devx::Schedule.coming_up.try(:ordered).try(:each) do |schedule|
+if schedule.event.try(:tag_list).to_s == "Men's Club".to_s
+puts "true"
+end
+end
