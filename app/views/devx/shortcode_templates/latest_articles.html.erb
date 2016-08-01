@@ -5,7 +5,7 @@
 <% end %>
 
 <% if article.image.blank? %>
-    <% @image = app_branding.alternate_logo.try(:url) %>
+    <% @image = nil %>
 <% else %>
     <% @image = article.image.url %>
 <% end %>
