@@ -27,7 +27,7 @@ module Devx
   	end
 
   	def update
-  		if @class_gallery.valid? && @class_gallery.save
+  		if @class_gallery.valid? && @class_gallery.update
   			redirect_to devx.portal_class_gallery_path(class_gallery_params),
   			notice: "Class gallery has been successfully updated."
   		else

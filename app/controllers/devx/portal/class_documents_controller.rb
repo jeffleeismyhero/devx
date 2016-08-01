@@ -27,7 +27,7 @@ module Devx
   	end
 
   	def update
-  		if @class_document.valid? && @class_document.save
+  		if @class_document.valid? && @class_document.update
   			redirect_to devx.portal_class_document_path(class_document_params),
   			notice: "Class document was successfully updated."
   		else

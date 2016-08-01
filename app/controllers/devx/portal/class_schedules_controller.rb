@@ -27,7 +27,7 @@ module Devx
   	end
 
   	def update
-  		if @class_schedule.valid? && @class_schedule.save
+  		if @class_schedule.valid? && @class_schedule.update
   			redirect_to devx.portal_class_schedule_path(class_schedule_params),
   			notice: "Class schedule was successfully updated."
   		else

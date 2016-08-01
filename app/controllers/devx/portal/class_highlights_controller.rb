@@ -27,7 +27,7 @@ module Devx
   	end
 
   	def update
-  		if @class_highlight.valid? && @class_highlight.save
+  		if @class_highlight.valid? && @class_highlight.update
   			redirect_to devx.portal_class_highligh_path(class_highlight_params),
   			notice: "Class highlight was successfully updated."
   		else
