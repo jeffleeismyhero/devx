@@ -51,7 +51,12 @@ Devx::Engine.routes.draw do
       resources :events
     end
     resources :alumni
-    resources :classrooms
+    resources :classrooms do
+      resources :class_schedules
+      resources :class_galleries
+      resources :class_highlights
+      resources :class_documents
+    end
     resources :donations
     resources :faqs
     resources :products

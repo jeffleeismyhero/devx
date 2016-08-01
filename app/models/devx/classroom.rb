@@ -1,5 +1,8 @@
 module Devx
   class Classroom < ActiveRecord::Base
+  	extend FriendlyId
+  	friendly_id :name, use: [ :slugged, :finders ]
+
   	has_many :classroom_teachers
   	has_many :people, through: :classroom_teachers
   	has_many :class_galleries
