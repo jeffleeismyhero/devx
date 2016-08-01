@@ -14,8 +14,8 @@ module DiamondMind
         end
 
         def setLogin(username, password)
-          @login['username'] = 'demo'
-          @login['password'] = 'password'
+          @login['username'] = username
+          @login['password'] = password
         end
 
         def setOrder( orderid, orderdescription, tax, shipping, ponumber,ipadress)
