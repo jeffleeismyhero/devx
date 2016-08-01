@@ -4,7 +4,7 @@
             <%= search_form_for @q, html: { class: 'df_search_form' } do |f| %>
                 <%= f.label :search %>
                 <%= f.search_field :title_or_short_description_or_content_or_keywords_name_cont %>
-                <%= f.select :tags_name_eq, @tags.collect{ |x| [x.name, x.name] }, { include_blank: true }, { class: 'select2-fixed' } %>
+                <%= f.select :tags_name_eq, @tags.collect{ |x| [x.name, x.name] }, { include_blank: true } %>
                 <%= f.submit %>
             <% end %>
         </div>
