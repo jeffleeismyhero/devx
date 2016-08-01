@@ -14,7 +14,7 @@
           <td><%= schedule.start_time.to_datetime.try(:strftime, '%m/%d %I:%M%P') %></td>
           <td><%= schedule.event.name %></td>
         </tr>
-        counter += 1
+        <% counter += 1 %>
       <% end %>
     <% end %>
   <% end %>
