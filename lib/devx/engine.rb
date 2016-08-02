@@ -29,6 +29,10 @@ module Devx
       app.config.assets.precompile += app.config.assets.precompile += %w( documents/* )
     end
 
+    initializer 'devx_session_store' do |app|
+      app.config.session_store :cookie_store, key: '_devx_session', domain: :all
+    end
+
     initializer :append_migrations do |app|
       unless app.root.to_s.match root.to_s
         config.paths['db/migrate'].expanded.each do |expanded_path|
