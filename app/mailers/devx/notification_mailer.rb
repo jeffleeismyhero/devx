@@ -9,7 +9,7 @@ module Devx
   		     subject: @subject
   	end
 
-    def mychs(subject, user)
+    def mychs_reminder(subject, user)
       @user = user
       @subject = subject
 
