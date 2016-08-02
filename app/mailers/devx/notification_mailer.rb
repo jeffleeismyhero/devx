@@ -9,10 +9,9 @@ module Devx
   		     subject: @subject
   	end
 
-    def mychs(user, password)
+    def mychs(subject, user)
       @user = user
-      @password = password
-      @subject = "Orientation begins tomorrow - Have you checked your student account?"
+      @subject = subject
 
       mail to: @user.email,
            subject: @subject
