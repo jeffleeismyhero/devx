@@ -9,6 +9,14 @@ module Devx
   		     subject: @subject
   	end
 
+    def mychs(user, password)
+      @user = user
+      @subject = subject
+
+      mail to: @user.email,
+           subject: @subject
+    end
+
     def mychs_reminder(subject, user)
       @user = user
       @subject = subject
