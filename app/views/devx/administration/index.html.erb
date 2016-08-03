@@ -12,7 +12,7 @@
       <div class="large-12 columns">
         <div class="staff-search">
           <%= search_form_for @q, url: devx.directory_path do |f| %>
-            <%= f.search_field :first_name_or_last_name_or_email_or_departments_name_cont %>
+            <%= f.search_field :first_name_or_last_name_or_email_or_departments_name_or_position_cont %>
             <%= f.submit %>
           <% end %>
         </div>
