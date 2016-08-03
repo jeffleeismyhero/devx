@@ -20,6 +20,7 @@
 //= require social-share-button
 //= require fancybox
 //= require velocity
+//= require photoswipe
 //= require wow
 //= require typed
 //= require_tree ./ckeditor
