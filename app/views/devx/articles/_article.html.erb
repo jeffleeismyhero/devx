@@ -20,15 +20,14 @@
 <% else %>
     <div class="container article-post">
         <div class="row">
-            <%= link_to "<div class=\"large-12 columns\">
+            <%= link_to "
                 <div class=\"large-1 columns\">
                     <span style=\"font-size:2rem\">#{article.published_at.try(:strftime, '%m.%d.%y')}</span>
                 </div>
                 <div class=\"large-9 columns\">
                     <span style=\"font-size:3rem;font-weight:600;line-height:3.2rem\">#{article.title}</span>
                     <p style=\"margin:20px 0px 0px;max-width:100%\">#{@words.join(' ')}...</p>
-                </div>
-            </div>".html_safe, article_path(article) %>
+                </div>".html_safe, article_path(article) %>
         </div>
     </div>
 <% end %>
