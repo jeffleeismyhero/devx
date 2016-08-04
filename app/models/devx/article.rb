@@ -16,7 +16,8 @@ module Devx
 
     before_create :add_publish_date
 
-    mount_uploader :image, ImageUploader
+    mount_uploader :image, Devx::ImageUploader
+    mount_uploader :document, Devx::DocumentUploader
 
     acts_as_taggable
     acts_as_taggable_on :keywords
