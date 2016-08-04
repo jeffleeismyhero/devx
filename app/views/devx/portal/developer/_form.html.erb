@@ -78,6 +78,18 @@
     </label>
 </div>
 
+
+<div class="col-8 columns cd-edit-form">
+    <%= label_tag 'settings[classroom_profiles]', 'Classroom Profiles' %><br>
+</div>
+
+<div class="col-1 columns cd-edit-form">
+    <label class="switch">
+        <%= check_box_tag 'settings[classroom_profiles]', @settings.settings['classroom_profiles'], @settings.settings['classroom_profiles'] %>
+        <div class="slider round"></div>
+    </label>
+</div>
+
 <%= render partial: 'calendar_settings_form' %>
 
 <div class="col-8 columns cd-edit-form">

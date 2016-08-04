@@ -170,6 +170,24 @@
           <li><%= link_to '<i class="fa fa-database"></i> CRM'.html_safe, devx.portal_administration_index_path %></li>
         <% end %>
 
+        <% if app_settings['classroom_profiles'] && (current_user.faculty? || current_user.administrator?) %>
+         <li>
+            <%= link_to '<i class="fa fa-pencil"></i> <span>Classroom</span>'.html_safe, '#', class: 'has-children', data: 'classroom-profile' %>
+          </li>
+          <ul class="child-nav" data-parent="classroom-profile">
+            <% if current_user.administrator? %>
+              <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
+            <% end %>
+            <% if current_user.person.try(:classroom).present? %>
+              <li><%= link_to 'My Classroom', devx.portal_classroom_path(current_user.person.classroom) %></li>
+              <li><%= link_to 'Classroom Galleries', devx.portal_classroom_class_galleries_path(current_user.person.classroom) %></li>
+              <li><%= link_to 'Classroom Documents', devx.portal_classroom_class_documents_path(current_user.person.classroom) %></li>
+              <li><%= link_to 'Classroom Highlights', devx.portal_classroom_class_highlights_path(current_user.person.classroom) %></li>
+              <li><%= link_to 'Classroom Schedules', devx.portal_classroom_class_schedules_path(current_user.person.classroom) %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
         <% if app_settings['balance_tracking'] && (current_user.balance_manager? || current_user.super_administrator?) %>
           <li><%= link_to '<i class="fa fa-credit-card"></i> School Acct. Reports'.html_safe, devx.portal_account_transactions_path %></li>
         <% end %>

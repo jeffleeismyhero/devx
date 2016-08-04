@@ -9,7 +9,8 @@ module Devx
   	scope :active, -> { where(active: true) }
 
     has_one :user
-    has_one :classroom, through: :classroom_teachers
+    has_one :classroom_teacher
+    has_one :classroom, through: :classroom_teacher
 
     has_many :classroom_teachers
     has_many :linked_accounts

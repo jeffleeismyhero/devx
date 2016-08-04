@@ -76,7 +76,7 @@ module Devx
       self.roles.exists?(name: 'Parent')
     end
 
-    def faculty
+    def faculty?
       self.roles.exists?(name: 'Faculty')
     end
 

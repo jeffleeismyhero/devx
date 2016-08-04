@@ -1,6 +1,6 @@
 <tr>
 	<td> <%= class_document.name %> </td>
-	<td> <%= class_document.filename %> </td>
+	<td> <%= link_to 'View document', class_document.filename.try(:url), target: '_blank' %> </td>
 	<td> <%= ldate class_document.created_at %> </td>
 	<td> 
 		<%= link_to 'Edit', devx.edit_portal_classroom_class_document_path(@classroom, class_document) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

@@ -1,7 +1,7 @@
 <tr>
 	<td> <%= class_highlight.title %> </td>
-	<td> <%= class_highlight.content %> </td>
-	<td> <%= class_highlight.image %> </td>
+	<td> <%= class_highlight.content.try(:truncate, 30) %> </td>
+	<td> <%= link_to image_tag(class_highlight.image.try(:thumbnail).try(:url)), class_highlight.image.try(:url), target: '_blank' %> </td>
 	<td> <%= ldate class_highlight.created_at %> </td>
 	<td> 
 		<%= link_to 'Edit', devx.edit_portal_classroom_class_highlight_path(@classroom, class_highlight) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

@@ -6,5 +6,7 @@ module Devx
 
   	validates :title, presence: true
   	validates :content, presence: true
+
+    mount_uploader :image, Devx::ImageUploader
   end
 end

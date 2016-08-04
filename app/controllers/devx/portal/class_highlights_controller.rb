@@ -32,8 +32,8 @@ module Devx
   	end
 
   	def update
-  		if @class_highlight.valid? && @class_highlight.update
-  			redirect_to devx.portal_class_highligh_path(class_highlight_params),
+  		if @class_highlight.valid? && @class_highlight.update(class_highlight_params)
+  			redirect_to devx.edit_portal_classroom_class_highlight_path(@classroom, @class_highlight),
   			notice: "Class highlight was successfully updated."
   		else
   			render :edit,

@@ -5,11 +5,7 @@
     </div>
     <div class="col-12 columns cd-edit-form">
         <%= f.label :filename %>
-        <%= f.text_field :filename %>
-    </div>
-    <div class="col-6 columns cd-edit-form">
-        <%= f.label :created_at %>
-        <%= f.text_field :created_at, class: 'datetimepicker' %>
+        <%= f.file_field :filename %>
     </div>
 </div>
 

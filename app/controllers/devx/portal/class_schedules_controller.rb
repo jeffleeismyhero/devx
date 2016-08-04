@@ -32,8 +32,8 @@ module Devx
   	end
 
   	def update
-  		if @class_schedule.valid? && @class_schedule.update
-  			redirect_to devx.portal_class_schedule_path(class_schedule_params),
+  		if @class_schedule.valid? && @class_schedule.update(class_schedule_params)
+  			redirect_to devx.edit_portal_classroom_class_schedule_path(@classroom, @class_schedule),
   			notice: "Class schedule was successfully updated."
   		else
   			render :edit,

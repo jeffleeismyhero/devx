@@ -4,8 +4,8 @@ module Devx
   class Portal::ClassroomsController < ApplicationController
   	before_filter :authenticate_user!
   	load_and_authorize_resource :classroom, class: 'Devx::Classroom'
+    layout 'devx/portal'
 
-  	layout 'devx/portal'
 
   	def index
   	end
@@ -37,6 +37,7 @@ module Devx
   	end
 
   	def show
+      @page = Devx::Page.new(name: @classroom.name, layout: Devx::Layout.new(content: '{{page_content}}'))
   	end
 
   	def destroy
@@ -52,7 +53,7 @@ module Devx
   	private
 
   	def classroom_params
-  		accessible = [:name, :welcome_message, :policies_and_procedures]
+  		accessible = [ :name, :welcome_message, :policies_and_procedures, :layout_id, classroom_teachers: [] ]
   		params.require(:classroom).permit(accessible)
   	end
 

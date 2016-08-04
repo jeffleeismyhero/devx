@@ -32,8 +32,8 @@ module Devx
   	end
 
   	def update
-  		if @class_document.valid? && @class_document.update
-  			redirect_to devx.portal_class_document_path(class_document_params),
+  		if @class_document.valid? && @class_document.update(class_document_params)
+  			redirect_to devx.edit_portal_classroom_class_document_path(@classroom, @class_document),
   			notice: "Class document was successfully updated."
   		else
   			render :edit,
