@@ -15,9 +15,13 @@
         <%= f.label :short_description %><br>
         <%= f.text_field :short_description %>
     </div>
-    <div class="col-12 columns cd-edit-form">
-        <%= f.label :published_at %><br>
-        <%= f.text_field :published_at, class: 'datetimepicker' %>
+    <div class="col-3 columns cd-edit-form">
+      <%= f.label :published_at_date, "Publish Date" %>
+      <%= f.text_field :published_at_date, value: date_value(f.object.published_at_date), placeholder: date_value(Date.today), class: 'datepicker' %>
+    </div>
+    <div class="col-3 columns cd-edit-form">
+      <%= f.label :published_at_time, "Publish Time" %>
+      <%= f.text_field :published_at_time, value: time_value(f.object.published_at_time), placeholder: time_value(Time.now), class: 'timepicker' %>
     </div>
 </div>
 

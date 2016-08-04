@@ -1,5 +1,8 @@
 module Devx
   class Article < ActiveRecord::Base
+    extend TimeSplitter::Accessors
+    split_accessor :published_at
+
     extend FriendlyId
     friendly_id :title, use: [ :slugged, :finders ]
 
@@ -14,7 +17,7 @@ module Devx
     validates :content, presence: true
     validates :tag_list, presence: true
 
-    before_create :add_publish_date
+    before_validation :add_publish_date
 
     mount_uploader :image, Devx::ImageUploader
     mount_uploader :document, Devx::DocumentUploader
@@ -31,9 +34,7 @@ module Devx
     end
 
     def add_publish_date
-      unless self.published_at.present?
-        self.published_at = Time.zone.now
-      end
+      self.published_at ||= Time.zone.now
     end
   end
 end
