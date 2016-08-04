@@ -82,8 +82,8 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: 'devxcms.com' }
   ActionMailer::Base.smtp_settings = {
-    user_name: 'devxcms',
-    password: 'devxDEMO1',
+    user_name: Rails.application.secrets.sendgrid_username,
+    password: Rails.application.secrets.sendgrid_password,
     domain: 'devxcms.com',
     address: 'smtp.sendgrid.net',
     port: 587,
