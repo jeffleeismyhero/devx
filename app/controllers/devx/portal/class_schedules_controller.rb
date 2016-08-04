@@ -4,18 +4,23 @@ module Devx
   class Portal::ClassSchedulesController < ApplicationController
   	before_filter :authenticate_user!
   	load_and_authorize_resource :class_schedule, class: 'Devx::ClassSchedule'
+    load_and_authorize_resource :classroom, class: 'Devx::Classroom'
 
   	layout 'devx/portal'
 
   	def index
+      @class_schedules = Devx::ClassSchedule.where(classroom: @classroom)
   	end
 
   	def new
   	end
 
   	def create
+
+      @class_schedule.classroom = @classroom
+
   		if @class_schedule.valid? && @class_schedule.save
-  			redirect_to devx.portal_class_schedule_path(@class_schedule),
+  			redirect_to devx.portal_classroom_class_schedules_path,
   			notice: "Class schedule has been successfully created."
   		else
   			render :new,
@@ -41,10 +46,10 @@ module Devx
 
   	def destroy
   		if @class_schedule.destroy
-  			redirect_to devx.portal_class_schedules_path,
+  			redirect_to devx.portal_classroom_class_schedules_path,
   			notice: "Class schedule has been successfully deleted."
   		else
-  			redirect_to devx.portal_class_schedules_path,
+  			redirect_to devx.portal_classroom_class_schedules_path,
   			notice: "Class schedule failed to delete."
   		end
   	end

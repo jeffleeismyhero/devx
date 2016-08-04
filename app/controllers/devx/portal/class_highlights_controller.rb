@@ -4,18 +4,23 @@ module Devx
   class Portal::ClassHighlightsController < ApplicationController
   	before_filter :authenticate_user!
   	load_and_authorize_resource :class_highlight, class: 'Devx::ClassHighlight'
+    load_and_authorize_resource :classroom, class: 'Devx::Classroom'
 
   	layout 'devx/portal'
 
   	def index
+      @class_highlights = Devx::ClassHighlight.where(classroom: @classroom)
   	end
 
   	def new
   	end
 
   	def create
+
+      @class_highlight.classroom = @classroom
+
   		if @class_highlight.valid? && @class_highlight.save
-  			redirect_to devx.portal_class_highlight_path(@class_highlight),
+  			redirect_to devx.portal_classroom_class_highlights_path,
   			notice: "Class highlight was successfully created."
   		else
   			render :new,
@@ -41,10 +46,10 @@ module Devx
 
   	def destroy
   		if @class_highlight.destroy
-  			redirect_to devx.portal_class_highlights_path,
+  			redirect_to devx.portal_classroom_class_highlights_path,
   			notice: "Class highlight was successfully deleted."
   		else
-  			redirect_to devx.portal_class_highlights_path,
+  			redirect_to devx.portal_classroom_class_highlights_path,
   			notice: "Class highlight failed to delete."
   		end
   	end

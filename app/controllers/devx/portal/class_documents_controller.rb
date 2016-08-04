@@ -4,18 +4,23 @@ module Devx
   class Portal::ClassDocumentsController < ApplicationController
   	before_filter :authenticate_user!
   	load_and_authorize_resource :class_document, class: 'Devx::ClassDocument'
+    load_and_authorize_resource :classroom, class: 'Devx::Classroom'
 
   	layout 'devx/portal'
 
   	def index
+      @class_documents = Devx::ClassDocument.where(classroom: @classroom)
   	end
 
   	def new
   	end
 
   	def create
+
+      @class_document.classroom = @classroom
+
   		if @class_document.valid? && @class_document.save
-  			redirect_to devx.portal_class_document_path(@class_document),
+  			redirect_to devx.portal_classroom_class_documents_path,
   			notice: "Class document was successfully created."
   		else
   			render :new,
@@ -41,10 +46,10 @@ module Devx
 
   	def destroy
   		if @class_document.destroy
-  			redirect_to devx.portal_class_documents_path,
+  			redirect_to devx.portal_classroom_class_documents_path,
   			notice: "Class document was successfully deleted."
   		else
-  			redirect_to devx.portal_class_documents_path,
+  			redirect_to devx.portal_classroom_class_documents_path,
   			notice: "Class document failed to delete."
   		end
   	end

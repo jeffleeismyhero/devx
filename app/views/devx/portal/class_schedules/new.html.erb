@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 columns">
+      <h1>Create Class Schedule</h1>
+    </div>
+    <div class="col-12 columns">
+      <%= link_to 'Back to Class Schedules', devx.portal_classroom_class_schedules_path %>
+    </div>
+
+    <div class="col-12 columns">
+      <%= form_for @class_schedule, url: devx.portal_classroom_class_schedules_path(@classroom), method: :post do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

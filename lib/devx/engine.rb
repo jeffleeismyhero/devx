@@ -9,11 +9,16 @@ module Devx
     config.assets.paths << "#{Devx::Engine.root}/app/assets/documents"
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
     config.active_job.queue_adapter = :delayed_job
+<<<<<<< Updated upstream
 
     if ENV["RAILS_ENV"] == "production"
       config.assets.css_compressor = :yui
       config.assets.js_compressor = :yui
     end
+=======
+    # config.assets.css_compressor = :yui
+    # config.assets.js_compressor = :yui
+>>>>>>> Stashed changes
 
     config.to_prepare do
       Devise::SessionsController.layout 'devx/login'

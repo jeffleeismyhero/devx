@@ -1,0 +1,15 @@
+<% provide(:title, 'Edit ' + controller_name.classify) %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="col-12 columns">
+      <%= link_to 'Back to Class Schedules', devx.portal_classroom_class_schedules_path %>
+      <%= form_for @class_schedule, url: devx.portal_classroom_class_schedule_path(@classroom, @class_schedule) do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

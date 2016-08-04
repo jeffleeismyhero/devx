@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802204801) do
+ActiveRecord::Schema.define(version: 20160803210801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -248,6 +248,8 @@ ActiveRecord::Schema.define(version: 20160802204801) do
     t.datetime "updated_at",              null: false
     t.text     "welcome_message"
     t.text     "policies_and_procedures"
+    t.string   "slug"
+    t.string   "name"
   end
 
   create_table "devx_contact_submissions", force: :cascade do |t|

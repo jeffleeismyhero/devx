@@ -1,0 +1,19 @@
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
+    <div class="col-2 columns cd-edit-form">
+        <%= f.label :active %><br>
+    </div>
+    <div class="col-2 columns cd-edit-form">
+        <label class="switch">
+            <%= f.check_box :active %>
+            <div class="slider round"></div>
+        </label>
+    </div>
+
+</div>
+<div class="col-12 columns cd-update-form" style="margin-top:20px;">
+    <%= f.submit %>
+</div>

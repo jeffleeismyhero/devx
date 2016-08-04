@@ -52,7 +52,7 @@ module Devx
   	private
 
   	def classroom_params
-  		accessible = []
+  		accessible = [:name, :welcome_message, :policies_and_procedures]
   		params.require(:classroom).permit(accessible)
   	end
 

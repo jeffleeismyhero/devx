@@ -1,0 +1,18 @@
+<% provide(:title, 'Create ' + controller_name.classify) %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="col-12 columns">
+      <%= link_to 'Back to Classroom', devx.portal_classrooms_path %>
+    </div>
+
+    <div class="col-12 columns">
+      <%= form_for @classroom, url: devx.portal_classrooms_path, method: :post do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

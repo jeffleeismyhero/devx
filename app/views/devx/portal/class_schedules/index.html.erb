@@ -1,14 +1,13 @@
-<% provide(:title, '' + controller_name.classify.pluralize) %>
 
 <div class="container">
 	<div class="row">
 
 		<div class="col-12 columns">
-			<h1><%= yield(:title) %></h1>
+			<h1>Class Schedules</h1>
 		</div>
 
 		<div class="col-12 columns" style="padding-bottom:20px;">
-			<i class="fa fa-map-signs" aria-hidden="true"></i> <%=link_to 'Create Classroom', devx.new_portal_classroom_path %>
+			<i class="fa fa-map-signs" aria-hidden="true"></i> <%=link_to 'Create Class Schedule', devx.new_portal_classroom_class_schedule_path %>
 
 			<div style="float:right;">
 				<span style="padding:0; 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i> </span>
@@ -20,15 +19,16 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Class Name</th>
-						<th># of Teachers</th>
-						<th>Publish Date</th>
+						<th>Schedule Name</th>
+						<th>Description</th>
+						<th>Start Time</th>
+						<th>End Time</th>
 						<th>&nbsp</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<%= render partial: 'classroom', collection: @classrooms %>
+					<%= render partial: 'class_schedule', collection: @class_schedules %>	
 				</tbody>
 			</table>
 		</div>

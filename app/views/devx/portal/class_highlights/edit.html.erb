@@ -1,0 +1,15 @@
+<% provide(:title, 'Edit ' + controller_name.classify) %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="col-12 columns">
+      <%= link_to 'Back to Class Highlights', devx.portal_classroom_class_highlights_path %>
+      <%= form_for @class_highlight, url: devx.portal_classroom_class_highlight_path(@classroom, @class_highlight) do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>
