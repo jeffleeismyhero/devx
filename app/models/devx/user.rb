@@ -32,7 +32,7 @@ module Devx
 
     after_create :welcome
     after_create :update_crm_record
-      
+
     mount_uploader :photo, ImageUploader
 
     accepts_nested_attributes_for :person
@@ -47,7 +47,7 @@ module Devx
 
     def full_name
       if !self.first_name.blank?
-      "#{self.first_name} #{self.last_name}".squish 
+      "#{self.first_name} #{self.last_name}".squish
       else
         self.email
       end
@@ -135,7 +135,7 @@ module Devx
     end
 
     def welcome
-      #Devx::NotificationMailer.delay.signup(self, self.password)
+      Devx::NotificationMailer.delay.signup(self, self.password)
     end
 
     def balance
