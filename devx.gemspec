@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
   s.test_files = Dir["spec/**/*"]
 
-  
+
   ## Base Gems
   s.add_runtime_dependency "rails", ">= 4.2"
   s.add_runtime_dependency "pg"
@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "acts_as_list"
   s.add_runtime_dependency "will_paginate"
   s.add_runtime_dependency "time_splitter"
+  s.add_runtime_dependency "american_date"
 
 
   ## User Interface
@@ -74,7 +75,7 @@ Gem::Specification.new do |s|
   ## Payment solutions
   s.add_runtime_dependency "stripe"
   s.add_runtime_dependency "payeezy", "~> 1.1"
-  
+
 
   ## Data Import/Export
   s.add_runtime_dependency "axlsx"

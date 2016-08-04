@@ -148,7 +148,12 @@ $(".currency-field").on("blur", function()
 
 
   // DateTime Picker
-  $(".datetimepicker").datetimepicker();
+  $('.datepicker').datetimepicker({timepicker: false, format: 'm/d/Y'});
+  $('.timepicker').timepicker({
+    'timeFormat': 'g:i a',
+    selectOnBlur: true,
+    scrollDefaultNow: true
+  });
 
   $("#media-dropzone").dropzone({
     paramName: "medium[file]",
@@ -217,7 +222,7 @@ $(".currency-field").on("blur", function()
   **/
 
   $("#list").on("click", function() {
-    
+
     /* $(".listview").toggleClass("hide").toggleClass("show").fadeIn(1000, function() { }); */
 
     if ($(".gridview, .monthview").hasClass("show")) {
@@ -225,11 +230,11 @@ $(".currency-field").on("blur", function()
       $(".listview").removeClass("hide").addClass("show");
     }
 
-    else 
+    else
       $(".listview").removeClass("hide").addClass("show");
 
     return false;
-  });  
+  });
 
 
   $("#grid").on("click", function() {
@@ -241,7 +246,7 @@ $(".currency-field").on("blur", function()
       $(".gridview").removeClass("hide").addClass("show");
     }
 
-    else 
+    else
       $(".gridview").removeClass("hide").addClass("show");
 
     return false;
@@ -258,7 +263,7 @@ $(".currency-field").on("blur", function()
       $(".monthview").removeClass("hide").addClass("show");
     }
 
-    else 
+    else
       $(".monthview").removeClass("hide").addClass("show");
 
     return false;

@@ -17,7 +17,7 @@ module Devx
     validate :check_for_duplicates
 
     accepts_nested_attributes_for :schedules, allow_destroy: true,
-        reject_if: proc{ |x| x['start_time'].blank? }
+      reject_if: proc{ |x| x['start_time'].blank? && (x['start_time_date'].blank? || x['start_time_time'].blank?) }
 
     def self.per_page
         10

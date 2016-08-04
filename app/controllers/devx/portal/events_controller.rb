@@ -23,7 +23,7 @@ module Devx
 
   	def create
       @event.calendar_id = Devx::Calendar.find(params[:calendar_id]).id
-      
+
   		if @event.valid? && @event.save
   			redirect_to devx.portal_calendar_path(id: params[:calendar_id]),
   			notice: "Successfully created event"
@@ -35,7 +35,7 @@ module Devx
 
   	def update
       @event.calendar_id = Devx::Calendar.find(params[:calendar_id]).id
-      
+
   		if @event.valid? && @event.update(event_params)
   			redirect_to devx.portal_calendar_path(id: params[:calendar_id]),
   			notice: "Successfully updated event"
@@ -53,11 +53,16 @@ module Devx
 
   	private
 
-  		def event_params
-  			accessible = [ :name, :description, :start_time, :end_time, :location, :private, :contact_name, :contact_email, :venue_id, :tag_list,
-                      schedules_attributes: [ :id, :start_time, :end_time, :all_day, :repeat, :_destroy, days: [] ] ]
-  			params.require(:event).permit(accessible)
-  		end
-
+		def event_params
+			accessible = [
+        :name, :description, :start_time, :end_time, :location, :private,
+        :contact_name, :contact_email, :venue_id, :tag_list,
+        schedules_attributes: [
+          :id, :start_time, :end_time, :start_time_date, :start_time_time,
+          :end_time_date, :end_time_time, :all_day, :repeat, :_destroy, days: []
+        ]
+      ]
+			params.require(:event).permit(accessible)
+		end
   end
 end

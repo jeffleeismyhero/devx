@@ -73,6 +73,21 @@ module Devx
     def us_states
       ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia','Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
     end
-    
+
+    def date_value(value=nil)
+      if value.respond_to?(:strftime)
+        value.strftime("%m/%d/%Y")
+      else
+        value
+      end
+    end
+
+    def time_value(value=nil)
+      if value.respond_to?(:strftime)
+        value.strftime("%l:%M %P")
+      else
+        value
+      end
+    end
   end
 end
