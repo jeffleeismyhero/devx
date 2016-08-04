@@ -1,10 +1,12 @@
-<% @text = nil %>
-<% @attributes[:article].content.try(:split, ' ').try(:take, 30).each do |word| %>
-    <% @text = "#{@text} " + word.html_safe %>
+<% if @attributes[:article].present? %>
+  <% @text = nil %>
+  <% @attributes[:article].content.try(:split, ' ').try(:take, 30).each do |word| %>
+      <% @text = "#{@text} " + word.html_safe %>
+  <% end %>
+
+  <div class="article-single-post-title"><%= @attributes[:article].title.try(:truncate, 40) %></div><br>
+  <div class="article-single-post-datetime"><%= @attributes[:article].created_at.try(:strftime, '%m/%d/%Y') %></div>
+
+  <p class="article-single-post-content"><%= @text %>...</p>
+  <%= link_to 'Read More <i class="hvr-icon-bob" aria-hidden="true" style="top:-12px;"></i>'.html_safe, "/news/#{@attributes[:article].slug}" %>
 <% end %>
-
-<div class="article-single-post-title"><%= @attributes[:article].title %></div><br>
-<div class="article-single-post-datetime"><%= @attributes[:article].created_at.try(:strftime, '%m/%d/%Y') %></div>
-
-<p class="article-single-post-content"><%= @text %></p>
-<%= link_to 'Read More <i class="hvr-icon-bob" aria-hidden="true" style="top:-12px;"></i>'.html_safe, "/news/#{@attributes[:article].slug}" %>
