@@ -11,7 +11,7 @@
       <% @text = strip_tags("#{@text} " + word) %>
   <% end %>
 
-  <div class="article-single-post-title"><%= @title %><% if title_array.count > 10 %>...<% end %></div><br>
+  <div class="article-single-post-title"><%= @title %><% if title_array.count > 10 %>...<% end %></div>
   <div class="article-single-post-datetime"><%= @attributes[:article].published_at.try(:strftime, '%m/%d/%Y') %></div>
 
   <p class="article-single-post-content"><%= @text %><% if text_array.count > 30 %>...<% end %></p>
