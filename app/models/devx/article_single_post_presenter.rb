@@ -14,7 +14,8 @@ module Devx
     end
 
     def attributes
-      { article: article }
+      { article: article,
+        category: @attributes[:category] }
     end
 
 

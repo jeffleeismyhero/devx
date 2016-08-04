@@ -12,6 +12,7 @@ module Devx
     def mychs(user, password)
       @user = user
       @subject = "Introducing the new myCHS!"
+      @password = password
 
       mail to: @user.email,
            subject: @subject

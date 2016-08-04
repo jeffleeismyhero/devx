@@ -8,7 +8,7 @@
   <% @text = nil %>
   <% text_array = @attributes[:article].content.try(:split, ' ') %>
   <% text_array.try(:take, 30).each do |word| %>
-      <% @text = strip_tags("#{@text} " + word) %>
+      <% @text = "#{@text} " + word.html_safe %>
   <% end %>
 
   <div class="article-single-post-title"><%= @title %><% if title_array.count > 10 %>...<% end %></div>
