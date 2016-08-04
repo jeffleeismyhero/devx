@@ -65,6 +65,12 @@ module Devx
     end
 
     def update_from_google
+      if self.events.any?
+        self.events.try(:each) do |e|
+          e.destroy
+        end
+      end
+      
       self.get_all_google_events.try(:each) do |event|
         r = Devx::Event.where(google_event_id: event.id)
         if r.empty?
@@ -76,7 +82,14 @@ module Devx
             location: event.location
           )
 
+          if event.raw['start'].present? && event.raw['start']['date'] =~ /^\d{4}\-\d{2}\-\d{2}$/
+            date_only = true
+          else
+            date_only = false
+          end
+
           e.schedules.new(
+            all_day: date_only,
             start_time: event.start_time.to_datetime,
             end_time: event.end_time.to_datetime
           )
@@ -98,7 +111,14 @@ module Devx
             location: event.location
           )
 
+          if event.raw['start'].present? && event.raw['start']['date'] =~ /^\d{4}\-\d{2}\-\d{2}$/
+            date_only = true
+          else
+            date_only = false
+          end
+
           e.schedules.new(
+            all_day: date_only,
             start_time: event.start_time.to_datetime,
             end_time: event.end_time.to_datetime
           )

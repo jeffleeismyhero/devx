@@ -37,13 +37,13 @@ module Devx
     end
 
     def update
-        if @calendar.valid? && @calendar.update(calendar_params)
-            redirect_to devx.edit_portal_calendar_path(@calendar),
-            notice: "Successfully updated calendar"
-        else
-            render :edit,
-            notice: "Failed to update calendar"
-        end
+      if @calendar.valid? && @calendar.update(calendar_params)
+          redirect_to devx.edit_portal_calendar_path(@calendar),
+          notice: "Successfully updated calendar"
+      else
+          render :edit,
+          notice: "Failed to update calendar"
+      end
     end
 
     def destroy
