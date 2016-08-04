@@ -7,7 +7,7 @@ module Devx
     layout 'devx/portal'
   	#initializes instance variables. ( e.g. index uses @users = User.all, show uses @user = User.find(params[:id]) )
   	load_and_authorize_resource :user, class: 'Devx::User'
-  	
+
   	def index
       @q = @users.search(params[:q])
       @q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
@@ -20,15 +20,15 @@ module Devx
         end
       end
   	end
-  	
+
   	def show
       @user ||= current_user
   	end
-  	
+
   	def new
       @person = Devx::Person.new
   	end
-  	
+
   	def edit
   	end
 
@@ -120,7 +120,7 @@ module Devx
             logfile = File.open("#{Rails.root}/log/import.log", "a")
             logfile.sync = true
             logger = Logger.new(logfile)
-            
+
             records.each_with_index do |record, index|
               uuid = record[0].to_s
               school_id = record[1].to_s
@@ -208,57 +208,70 @@ module Devx
             logger = Logger.new(logfile)
 
             records.each_with_index do |record, index|
-              school_id = record[0].to_s
-              email = record[1].to_s
-              prefix = record[2].to_s
-              first_name = record[3].to_s
-              last_name = record[4].to_s
-              suffix = record[5].to_s
+              begin
+                school_id = record[0].to_s.squish
+                email = record[1].to_s.squish
+                prefix = record[2].to_s.squish
+                first_name = record[3].to_s.squish
+                last_name = record[4].to_s.squish
+                suffix = record[5].to_s.squish
 
-              user = Devx::User.new(
-                email: email,
-                password: Devise.friendly_token(12)
-              )
+                if Devx::User.exists?(email: email)
+                  user = Devx::User.find_by(email: email)
+                else
+                  password = Devise.friendly_token(12)
+                  if user = Devx::User.create(email: email, password: password)
+                    Devx::NotificationMailer.delay.mychs(user, password)
+                  end
+                end
 
-              user.authorizations.new(role: Devx::Role.find_or_create_by(name: 'Parent'))
+                role = Devx::Role.find_or_create_by(name: 'Parent')
+                if role && !user.authorizations.exists?(role: role)
+                  user.authorizations.new(role: role)
+                end
 
-              if Devx::Person.find_by(email: email).nil?
-                person = Devx::Person.new(
-                  prefix: prefix,
-                  first_name: first_name,
-                  last_name: last_name,
-                  email: email,
-                  suffix: suffix,
-                  association_list: 'Parent'
-                )
-              else
-                person = Devx::Person.find_by(email: email)
+                if Devx::Person.exists?(email: email)
+                  person = Devx::Person.find_by(email: email)
+                else
+                  person = Devx::Person.new(
+                    prefix: prefix,
+                    first_name: first_name,
+                    last_name: last_name,
+                    email: email,
+                    suffix: suffix,
+                    association_list: 'Parent'
+                  )
+                end
                 person.association_list.add('Parent')
-              end
+                person.save
 
-              user.person = person
+                user.person = person
 
-              if user.valid?
-                logger.info "Expecting object to be valid: #{user.inspect}"
-                user.save
+                if user.valid? && user.save
+                  logger.info "[VALID USER] #{user.inspect}"
 
-                user.linked_accounts.new(person: Devx::Person.find_by(school_id: school_id))
-                logger.info "Expecting linked object to be valid: #{user.linked_accounts.inspect}"
+                  if student = Devx::Person.find_by(school_id: school_id)
+                    user.linked_accounts.new(person: student)
+                    logger.info "[STUDENT] #{user.linked_accounts.inspect}"
+                    logger.info "[VALID LINK] #{user.linked_accounts.inspect}"
+                  else
+                    logger.info "[STUDENT] No student found with ID: #{school_id}"
+                  end
 
-                if !user.save
-                  logger.warn "#{Failed to save linked object}"
+                  if !user.save
+                    logger.warn "[USER] #{Failed to save linked object}"
+                    logger.warn "[USER] #{user.errors.full_messages.join("\n")}"
+                  end
+                else
+                  logger.warn "Failed to import object: #{user.inspect}"
                   user.errors.full_messages.try(:each) do |error|
                     logger.warn "#{error}"
                   end
-                else
-                  Devx::NotificationMailer.delay.mychs(user, user.password)
+                  @errors += 1
                 end
-              else
-                logger.warn "Failed to import object: #{user.inspect}"
-                user.errors.full_messages.try(:each) do |error|
-                  logger.warn "#{error}"
-                end
-                @errors += 1
+              rescue => e
+                Rails.logger.info "[IMPORT FAILURE] Record: #{record.inspect}"
+                Rails.logger.info "[IMPORT FAILURE] Exception: #{e.message}"
               end
             end
           end
@@ -283,7 +296,7 @@ module Devx
             logfile = File.open("#{Rails.root}/log/import.log", "a")
             logfile.sync = true
             logger = Logger.new(logfile)
-            
+
             records.each_with_index do |record, index|
               created_at = record[0].to_s.squish
               receipt_number = record[1].to_s.squish
