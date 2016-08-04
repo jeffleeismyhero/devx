@@ -91,39 +91,8 @@ module Devx
         end
       end
 
-      # if @calendar.calendar_type == 'Standard'
-      #   @events = Devx::Schedule.for_calendar(@calendar)
-
-
-      #   # render plain: Devx::Schedule.for_calendar(@calendar).inspect
-      #   # return
-
-      #   @events.try(:each) do |event|
-      #     event.schedules.try(:each) do |schedule|
-      #       if !@dates.include?(schedule.start_time_date)
-      #         @dates.push(schedule.start_time_date)
-      #       end
-      #     end
-      #   end     
-      # elsif @calendar.calendar_type == 'Google Calendar'
-      #   @google_events = @calendar.get_google_events
-
-      #   @a = []
-      #   @google_events.try(:each) do |e|
-      #     hash = { name: e.title, date: e.start_time.to_datetime.strftime('%Y-%m-%d'), start_time: e.start_time.to_datetime, end_time: e.end_time.to_datetime, venue: e.location }
-      #     @a.push(hash)
-      #   end
-
-      #   @a.map{ |x| x[:date] }.uniq.try(:each) do |event|
-      #     @dates.push(event)
-      #   end
-      # end
-
-      # render plain: @dates.inspect
-      # return
-
-    # rescue
-    #   redirect_to '/404.html'
+    rescue
+      redirect_to '/404.html'
     end
 
     def export_all
