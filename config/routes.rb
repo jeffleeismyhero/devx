@@ -115,6 +115,7 @@ Devx::Engine.routes.draw do
     end
 
     resources :events, only: [ :show ] do
+      resources :schedules, only: [ :show ]
       member do
         post 'subscribe' => 'events#subscribe'
       end

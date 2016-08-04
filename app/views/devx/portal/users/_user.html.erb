@@ -10,8 +10,8 @@
 	</tr>
 <% elsif current_user.super_administrator? %>
 	<tr>
-	    <td><%= user.first_name %></td>
-	    <td><%= user.last_name %></td>
+	    <td><%= user.person.try(:first_name) %></td>
+	    <td><%= user.person.try(:last_name) %></td>
 	    <td><%= link_to user.email, devx.portal_user_path(user) %></td>
 	    <td>
 	    <%= link_to 'Edit', devx.portal_user_path(user) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

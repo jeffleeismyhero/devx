@@ -5,11 +5,6 @@
     </div>
     
     <div class="col-6 columns cd-edit-form">
-        <%= f.label :time_zone %><br>
-        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { default: "Central Time (US & Canada)" }, { class: 'select2-fixed' } %>
-    </div>
-    
-    <div class="col-6 columns cd-edit-form">
         <%= f.label :calendar_type %><br>
         <%= f.select :calendar_type, options_for_select(['Standard', 'Google Calendar'], @calendar.calendar_type), { }, { class: 'select2-fixed' } %>
     </div>
