@@ -15,5 +15,7 @@
   <div class="article-single-post-datetime"><%= @attributes[:article].published_at.try(:strftime, '%m/%d/%Y') %></div>
 
   <p class="article-single-post-content"><%= @text %><% if text_array.count > 30 %>...<% end %></p>
-  <%= link_to 'Read More <i class="hvr-icon-bob" aria-hidden="true" style="top:-12px;"></i>'.html_safe, "/news/#{@attributes[:article].slug}" %>
+  <% @attributes[:category] != 'Announcments' %>
+    <%= link_to 'Read More <i class="hvr-icon-bob" aria-hidden="true" style="top:-12px;"></i>'.html_safe, "/news/#{@attributes[:article].slug}" %>
+  <% end %>
 <% end %>
