@@ -9,7 +9,8 @@ module Devx
     def index
       @q = @administrations.search(params[:q])
       @q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
-      @administrations = @q.result(distinct: true)
+      @administrations = @q.result(distinct: true).paginate(page: params[:page])
+      
       respond_to do |format|
         format.html
         format.xlsx do

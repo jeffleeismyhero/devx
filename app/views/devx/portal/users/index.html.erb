@@ -13,7 +13,7 @@
                 <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
                 <div class="cd-edit-form">
                 <%= search_form_for @q, url: devx.portal_users_path do |f| %>
-                    <%= f.search_field :first_name_or_last_name_or_email_cont %>
+                    <%= f.search_field :person_first_name_or_person_last_name_or_email_cont %>
                     <%= f.submit %>
                 <% end %>
                 </div>
@@ -23,8 +23,8 @@
             <table>
                 <thead>
                     <tr>
-                        <th><%= sort_link @q, :first_name %></th>
-                        <th><%= sort_link @q, :last_name %></th>
+                        <th><%= sort_link @q, :person_first_name %></th>
+                        <th><%= sort_link @q, :person_last_name %></th>
                         <th><%= sort_link @q, :email %></th>
                         <th>&nbsp;</th>
                     </tr>
@@ -33,6 +33,11 @@
                     <%= render partial: 'user', collection: @users %>
                 </tbody>
             </table>
+        </div>
+        <div class="col-12 columns">
+            <% if @users.any? %>
+                <%= will_paginate @users, class: 'apple_pagination' %>
+            <% end %>
         </div>
     </div>
 </div>

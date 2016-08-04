@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804013744) do
+ActiveRecord::Schema.define(version: 20160804190040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -494,6 +494,7 @@ ActiveRecord::Schema.define(version: 20160804013744) do
     t.string   "mobile_number"
     t.string   "photo"
     t.string   "school_id"
+    t.datetime "deleted_at"
   end
 
   create_table "devx_products", force: :cascade do |t|
@@ -636,8 +637,6 @@ ActiveRecord::Schema.define(version: 20160804013744) do
   end
 
   create_table "devx_users", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

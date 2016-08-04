@@ -28,7 +28,7 @@ module Devx
 
     validates :email, presence: true
 
-    attr_accessor :generate_password
+    attr_accessor :generate_password, :first_name, :last_name
 
     after_create :welcome
     after_create :update_crm_record
@@ -40,6 +40,10 @@ module Devx
     accepts_nested_attributes_for :linked_accounts, allow_destroy: true
 
 
+
+    def self.per_page
+      10
+    end
 
     def self.get_user(email)
       find_by(email: email).try(:id) || nil
@@ -135,7 +139,7 @@ module Devx
     end
 
     def welcome
-      #Devx::NotificationMailer.delay.signup(self, self.password)
+      Devx::NotificationMailer.delay.signup(self, self.password)
     end
 
     def balance
@@ -153,7 +157,7 @@ module Devx
       self.person.email = self.email unless self.person.email.present?
       self.person.active = true unless self.person.active.present?
 
-      if person.valid? && person.save
+      if self.valid? && self.save
         puts "Successfully created CRM record #{person.inspect}"
         return true
       else

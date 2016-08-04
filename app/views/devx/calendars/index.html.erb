@@ -94,7 +94,7 @@ ul.event-list {
                   <% else %>
                     <% start = schedule.start_time.try(:strftime, '%I:%M%p') %>
                   <% end %>
-                  <%= link_to "#{schedule.event.name} - #{start}", devx.calendar_event_path(@calendar, schedule.event) %>
+                  <%= link_to "#{schedule.event.name} - #{start}", devx.calendar_event_schedule_path(@calendar, schedule.event, schedule) %>
                 </li>
             <% end %>
           <% end %>

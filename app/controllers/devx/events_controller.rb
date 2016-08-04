@@ -7,24 +7,15 @@ module Devx
 
     layout :determine_layout
 
-    def show
-      if app_settings['calendar_layout'].present?
-        @layout = Devx::Layout.find(app_settings['calendar_layout'])
-      end
-
-      @page = Devx::Page.new(name: @event.name, layout: @layout)
-
-    end
-
     def subscribe
       subscription = Devx::EventSubscription.new(event: @event, user: current_user)
 
       if subscription.valid? && subscription.save
         Devx::NotificationMailer.delay.subscription_confirmation(current_user, 'Event', @event)
-        redirect_to devx.calendar_event_path(@calendar, @event),
+        redirect_to devx.portal_dashboard_path(@calendar, @event, subdomain: 'portal'),
         notice: "You have subscribed to this event"
       else
-        redirect_to devx.calendar_event_path(@calendar, @event),
+        redirect_to devx.portal_dashboard_path(@calendar, @event, subdomain: 'portal'),
         notice: "You have already subscribed to this event"
       end
     end

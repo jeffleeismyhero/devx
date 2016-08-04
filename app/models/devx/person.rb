@@ -1,5 +1,7 @@
 module Devx
   class Person < ActiveRecord::Base
+    acts_as_paranoid
+    
   	scope :students, -> { tagged_with("Student").active }
   	# scope :parents, -> { tagged_with('Parent').active }
   	scope :faculty, -> { tagged_with('Faculty').active }
@@ -24,6 +26,11 @@ module Devx
     mount_uploader :photo, ImageUploader
 
     accepts_nested_attributes_for :user
+
+
+    def self.per_page
+      10
+    end
 
     def is_faculty?
       if self.tagged_with('Faculty', on: :associations).any?

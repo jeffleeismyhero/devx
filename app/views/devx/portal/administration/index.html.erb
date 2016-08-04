@@ -33,5 +33,10 @@
         </tbody>
       </table>
     </div>
+      <div class="col-12 columns">
+          <% if @administrations.any? %>
+              <%= will_paginate @administrations, class: 'apple_pagination' %>
+          <% end %>
+      </div>
   </div>
 </div>
