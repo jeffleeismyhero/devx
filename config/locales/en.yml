@@ -1,0 +1,21 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  views:
+    pagination:
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      last: "Last &raquo;"
+      first: "&laquo; First"
+      truncate: "..."
+  time:
+    formats:
+      default: "%m/%d/%Y at %l:%M %p"
+      short: "%m/%d @ %l:%M %P"
+      long: "%A, %B %e, %Y at %l:%M %p"
+  date:
+    formats:
+      default: "%m/%d/%Y"
+      short: "%m/%d"
+      long: "%A, %B %e, %Y"

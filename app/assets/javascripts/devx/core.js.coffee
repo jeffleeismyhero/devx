@@ -4,6 +4,11 @@ $ ->
     regexp = new RegExp($(this).data("id"), "g")
     $(this).parent().children(".nested-attributes").append($(this).data("fields").replace(regexp, time))
     event.preventDefault()
+    $(".datetimepicker").datetimepicker()
+    $(".select2").select2({ tags: true });
+    $(".select2-multiple").select2({ tags: true, multiple: true });
+    $(".select2-multiple-fixed").select2({ tags: false, multiple: true });
+    $(".select2-fixed").select2({ tags: false, multiple: false });
 
   $("form").on "click", ".remove_fields", (event) ->
     $(this).prev("input[type=hidden]").val("1")
