@@ -1,12 +1,19 @@
 <% if @attributes[:article].present? %>
+  <% @title = nil %>
+  <% title_array = @attributes[:article].title.try(:split, ' ') %>
+  <% title_array.try(:take, 10).each do |word| %>
+      <% @title = "#{@title} " + word %>
+  <% end %>
+
   <% @text = nil %>
-  <% @attributes[:article].content.try(:split, ' ').try(:take, 30).each do |word| %>
+  <% text_array = @attributes[:article].content.try(:split, ' ') %>
+  <% text_array.try(:take, 30).each do |word| %>
       <% @text = "#{@text} " + word.html_safe %>
   <% end %>
 
-  <div class="article-single-post-title"><%= @attributes[:article].title.try(:truncate, 40) %></div><br>
-  <div class="article-single-post-datetime"><%= @attributes[:article].created_at.try(:strftime, '%m/%d/%Y') %></div>
+  <div class="article-single-post-title"><%= @title %><% if title_array.count > 10 %>...<% end %></div><br>
+  <div class="article-single-post-datetime"><%= @attributes[:article].published_at.try(:strftime, '%m/%d/%Y') %></div>
 
-  <p class="article-single-post-content"><%= @text %>...</p>
+  <p class="article-single-post-content"><%= @text %><% if text_array.count > 30 %>...<% end %></p>
   <%= link_to 'Read More <i class="hvr-icon-bob" aria-hidden="true" style="top:-12px;"></i>'.html_safe, "/news/#{@attributes[:article].slug}" %>
 <% end %>
