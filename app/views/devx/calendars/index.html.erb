@@ -39,7 +39,7 @@
           <p style="margin-bottom:8px; font-family:lato; font-weight:600;">Select month:</p>
           <%= select '', :month_select, options_for_select([['January', '1'], ['February', '2'], ['March', '3'], ['April', '4'], ['May', '5'], ['June', '6'], ['July', '7'], ['August', '8'], ['September', '9'], ['October', '10'], ['November', '11'], ['December', '12']]), { prompt: 'Select Month' }, { style: 'max-width:300px' } %>
           <%= select '', :year_select, options_for_select(@years), { prompt: 'Select Year' }, { style: 'max-width:300px' } %>
-          
+
           <div style="margin-top:30px"><%= f.submit %></div>
         <% end %>
         <% if params[:start_date] %>
@@ -48,6 +48,64 @@
       </div>
     </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <h3 style="text-align:center">Week starting: <%= @start_date.beginning_of_week(start_day = :sunday).strftime('%B %d, %Y') rescue @start_date %></h3>
+      <div class="calendar-navigation">
+        <div class="previous-link">
+          <%= link_to "<i class=\"fa fa-arrow-left\"></i> Previous".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date - 1.week) %>
+        </div>
+        <div class="next-link">
+          <%= link_to "Next <i class=\"fa fa-arrow-right\"></i>".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date + 1.week) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+li.event-listing::before {
+  content:"";
+  margin:0;
+}
+
+li.event-listing {
+  list-style-type:initial;
+}
+
+ul.event-list {
+  padding-left:10px;
+}
+</style>
+
+<div class="container" class="week-view hide-for-medium-down">
+  <div class="row weekview hide">
+    <div class="large-12 columns">
+      <%= week_calendar number_of_weeks: 1, events: @schedules do |date, schedules| %>
+        <%= date.try(:strftime, '%d') %>
+        <ul class="event-list">
+          <% @scheduled_events[date].try(:each) do |schedule| %>
+            <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
+               <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
+                  <li class="event-listing">
+                    <% if schedule.all_day == true %>
+                      <% start = 'All day' %>
+                    <% else %>
+                      <% start = schedule.start_time.try(:strftime, '%I:%M%p') %>
+                    <% end %>
+                    <%= link_to "#{schedule.event.name} - #{start}", devx.calendar_event_schedule_path(@calendar, schedule.event, schedule) %>
+                  </li>
+              <% end %>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<hr />
 
 <div class="container">
   <div class="row">
@@ -147,7 +205,7 @@ ul.event-list {
                            <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
                             <li style="margin-bottom:.1rem; ">
                               <div class="accordion-title">
-                                <%= schedule.event.name %>  
+                                <%= schedule.event.name %>
                               </div>
                               <div class="accordion-content">
                                 <span><% if schedule.all_day == true %>All day event<% else %>Start Time: <%= ldate schedule.start_time %><br />End Time: <%= ldate schedule.end_time %><% end %></span><br />
@@ -183,7 +241,7 @@ ul.event-list {
                            <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
                             <li style="margin-bottom:.1rem; ">
                               <div class="accordion-title">
-                                <%= schedule.event.name %>  
+                                <%= schedule.event.name %>
                               </div>
                               <div class="accordion-content">
                                 <span><% if schedule.all_day == true %>All day event<% else %>Start Time: <%= ldate schedule.start_time %><br />End Time: <%= ldate schedule.end_time %><% end %></span><br />
