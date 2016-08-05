@@ -40,6 +40,13 @@ $(function()
   }
 
 
+  // Mobile Navigation
+  $("#mobile-toggle-btn").on("click", function()
+  {
+    $("#cd-mobile-nav").toggleClass("active");
+  });
+
+
   // Select2
   $(".select2").select2({ tags: true });
   $(".select2-multiple").select2({ tags: true, multiple: true });

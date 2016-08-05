@@ -18,7 +18,7 @@
     <!-- START: LOGO -->
       <%= link_to (app_branding.site_name || 'Site Name'), devx.portal_root_path, class: 'cd-logo' %>
     <!-- END: LOGO -->
-    
+
     <!-- START: TOP NAVIGATION DESKTOP-->
     <nav class="cd-nav hide-for-medium-down">
       <div class="cd-top-nav cd-horizontal-accordion">
@@ -58,7 +58,7 @@
       </div>
     </nav>
     <!-- END: TOP NAVIGATION DESKTOP-->
-      
+
     <div class="container show-for-medium-down header">
         <div class="row full-width">
             <div class="medium-12">
@@ -66,21 +66,22 @@
             </div>
         </div>
     </div>
-      
+
 </header>
 <!-- START: TOP NAVIGATION MOBILE-->
-      
+
 <nav class="container show-for-medium-down" style="margin-top:60px;">
     <div class="row">
         <div class="medium-12 columns">
-            <div id="mobile-nav" class="secondary-link">
+            <div id="cd-mobile-nav" class="secondary-link">
                 <ul class="accordion mobile-nav-accordion">
                     <li class="no-drop">
                         <div class="accordion-title"><%= link_to '<i class="fa fa-tachometer"></i> <span>Dashboard</span>'.html_safe, devx.portal_dashboard_path, data: 'dashboard' %></div>
                     </li>
+                    <% if can? :manage, Devx::User %>
                     <li>
                         <div class="accordion-title"><%= link_to '<i class="fa fa-users"></i> <span>Users</span>'.html_safe, '#', class: 'has-children', data: 'users' %></div>
-                        
+
                         <div class="accordion-content">
                             <ul>
                                 <li><%= link_to 'Manage Users', devx.portal_users_path %></li>
@@ -88,10 +89,12 @@
                             </ul>
                         </div>
                     </li>
+                    <% end %>
 
+                    <% if app_settings['organizations'] %>
                     <li>
                         <div class="accordion-title"><%= link_to '<i class="fa fa-sitemap"></i> <span>Organizations</span>'.html_safe, '#', class: 'has-children', data: 'organizations' %></div>
-                        
+
                         <div class="accordion-content">
                             <ul>
                               <li><%= link_to 'Sports', devx.portal_sports_path %></li>
@@ -105,10 +108,12 @@
                             </ul>
                         </div>
                     </li>
-                    
+                    <% end %>
+
+                    <% if current_user.administrator? %>
                     <li>
                         <div class="accordion-title"><%= link_to '<i class="fa fa-laptop"></i> <span>Site Management</span>'.html_safe, '#', class: 'has-children', data: 'site-management' %></div>
-                        
+
                         <div class="accordion-content">
                             <ul>
                                 <li><%= link_to 'Pages', devx.portal_pages_path %></li>
@@ -121,14 +126,18 @@
                             </ul>
                         </div>
                     </li>
+                    <% end %>
 
+                    <% if can? :manage, Devx::Form && app_settings['form_builder'] %>
                     <li class="no-drop">
                         <div class="accordion-title"><%= link_to '<i class="fa fa-file-text-o"></i> <span>Form Builder</span>'.html_safe, devx.portal_forms_path %></div>
                     </li>
+                    <% end %>
 
+                    <% if can? :manage, Devx::Calendar %>
                     <li>
                         <div class="accordion-title"><%= link_to '<i class="fa fa-calendar"></i> <span>Calendars</span>'.html_safe, devx.portal_calendars_path, class: 'has-children', data: 'calendars' %></div>
-                        
+
                         <div class="accordion-content">
                            <ul>
                                 <li><%= link_to 'Calendars', devx.portal_calendars_path %></li>
@@ -136,14 +145,17 @@
                             </ul>
                         </div>
                     </li>
-                    
+                    <% end %>
+
+                    <% if can? :manage, Devx::Article %>
                      <li class="no-drop">
                         <div class="accordion-title"><%= link_to '<i class="fa fa-newspaper-o"></i> <span>News</span>'.html_safe, devx.portal_articles_path, data: 'news' %></div>
                     </li>
-                    
+                    <% end %>
+
                     <li>
                         <div class="accordion-title"><%= link_to '<i class="fa fa-user"></i> <span>Profile</span>'.html_safe, '#', class: 'has-children', data: 'user' %></div>
-                        
+
                         <div class="accordion-content">
                              <ul>
                                   <li><%= link_to 'Edit Profile', devx.portal_profile_path %></li>
@@ -153,10 +165,11 @@
                             </ul>
                         </div>
                     </li>
-                    
+
+                    <% if app_settings['commerce'] %>
                     <li>
                         <div class="accordion-title"><%= link_to '<i class="fa fa-shopping-cart"></i> <span>Commerce</span>'.html_safe, '#', class: 'has-children', data: 'commerce' %></div>
-                        
+
                         <div class="accordion-content">
                              <ul>
                                   <% if can? :manage, Devx::Product %>
@@ -168,18 +181,24 @@
                             </ul>
                         </div>
                     </li>
-                    
+                    <% end %>
+
+                    <% if app_settings['admissions'] && current_user.administrator? %>
                     <li class="no-drop">
                         <div class="accordion-title"><%= link_to '<i class="fa fa-graduation-cap"></i> <span>Admissions</span>'.html_safe, '#' %></div>
                     </li>
-                    
+                    <% end %>
+
+                    <% if app_settings['crm_module'] && current_user.administrator? %>
                     <li class="no-drop">
                         <div class="accordion-title"><%= link_to '<i class="fa fa-database"></i> CRM'.html_safe, devx.portal_administration_index_path %></div>
                     </li>
-                    
+                    <% end %>
+
+                    <% if app_settings['classroom_profiles'] && (current_user.faculty? || current_user.administrator?) %>
                     <li>
                         <div class="accordion-title"><%= link_to '<i class="fa fa-pencil"></i> <span>Classroom</span>'.html_safe, '#', class: 'has-children', data: 'classroom-profile' %></div>
-                        
+
                         <div class="accordion-content">
                              <ul>
                                 <% if current_user.administrator? %>
@@ -195,29 +214,35 @@
                             </ul>
                         </div>
                     </li>
-                    
+                    <% end %>
+
+                    <% if app_settings['balance_tracking'] && (current_user.balance_manager? || current_user.super_administrator?) %>
                     <li class="no-drop">
                         <div class="accordion-title"><%= link_to '<i class="fa fa-credit-card"></i> School Acct. Reports'.html_safe, devx.portal_account_transactions_path %></div>
                     </li>
-                    
+                    <% end %>
+
+                    <% if can? :manage, Devx::Branding %>
                     <li class="no-drop">
                         <div class="accordion-title"><%= link_to '<i class="fa fa-cogs"></i> <span>Settings</span>'.html_safe, devx.portal_branding_index_path, data: 'settings' %></div>
                     </li>
-                    
-                    
+                    <% end %>
+
+                    <% if can? :manage, Devx::ApplicationSetting && current_user.super_administrator? %>
                     <li>
                         <div class="accordion-title"><%= link_to '<i class="fa fa-terminal"></i> <span>Developer</span>'.html_safe, devx.portal_developer_index_path, class: 'has-children', data: 'developer' %></div>
-                        
+
                         <div class="accordion-content">
                              <ul>
                                 <li><%= link_to 'Global Settings'.html_safe, devx.portal_developer_index_path %></li>
                             </ul>
                         </div>
                     </li>
-                    
+                    <% end %>
+
                     <li>
                         <div class="accordion-title"><%= link_to '<i class="fa fa-question"></i> <span>Support</span>'.html_safe, devx.portal_developer_index_path, class: 'has-children', data: 'support' %></div>
-                        
+
                         <div class="accordion-content">
                              <ul>
                                 <li>
@@ -231,12 +256,12 @@
                             </ul>
                         </div>
                     </li>
-                   
+
                     <li class="no-drop">
                         <div class="accordion-title"><%= link_to '<i class="fa fa-sign-out"></i> <span>Logout</span>'.html_safe, devx.destroy_user_session_path, method: :delete %></div>
                     </li>
-                    
-                </ul> 
+
+                </ul>
             </div>
         </div>
     </div>
@@ -246,7 +271,7 @@
 
   <!-- END: HEADER -->
 
-  
+
   <!-- START: CONTENT -->
   <main class="cd-main-content">
 
@@ -343,7 +368,7 @@
           <% end %>
         </ul>
         <% end %>
-        
+
         <% if app_settings['admissions'] && current_user.administrator? %>
         <li>
           <%= link_to '<i class="fa fa-graduation-cap"></i> <span>Admissions</span>'.html_safe, '#' %>
@@ -402,7 +427,7 @@
         </div>
         <div>DevX <%= Devx::VERSION %> | Powered by <%= link_to 'JCW', '//jcwproductions.com' %></div>
       </footer>
-      <!-- END: FOOTER -->  
+      <!-- END: FOOTER -->
     </nav>
     <!-- END: SIDE NAVIGATION -->
 
@@ -410,7 +435,7 @@
     <div class="content-wrapper">
       <div class="content">
         <%= yield %>
-      </div>    
+      </div>
     </div>
     <!-- END: MAIN CONTENT -->
 
