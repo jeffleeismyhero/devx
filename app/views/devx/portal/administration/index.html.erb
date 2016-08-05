@@ -13,7 +13,7 @@
             <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
               <div class="cd-edit-form">
               <%= search_form_for @q, url: devx.portal_administration_index_path do |f| %>
-                  <%= f.search_field :first_name_cont %>
+                  <%= f.search_field :first_name_or_last_name_or_email_or_departments_name_or_position_cont %>
                   <%= f.submit %>
               <% end %>
               </div>
