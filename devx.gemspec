@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
 
 
   ## Data Management
+  s.add_runtime_dependency "activerecord-import"
   s.add_runtime_dependency "paranoia", "~> 2.0"
   s.add_runtime_dependency "friendly_id"
   s.add_runtime_dependency "ransack"

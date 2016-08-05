@@ -26,6 +26,8 @@ module Devx
         #   refresh_token: self.refresh_token
         # )
 
+        code = self.authorization_code unless self.refresh_token.present?
+
         client = Signet::OAuth2::Client.new({
           client_id: '964786152042-lf6mt3nih4ma5cf55dbg89a6thjcdfe6.apps.googleusercontent.com',
           client_secret: 'PcR-NwdDGwGQXrleQBBMmaaU',
@@ -33,7 +35,9 @@ module Devx
           authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
           redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
           scope: Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY,
-          code: nil
+          grant_type: 'refresh_token',
+          code: code,
+          refresh_token: self.refresh_token
         })
 
         return client
@@ -49,8 +53,9 @@ module Devx
             self.authorization_url = client.authorization_uri.to_s
           end
 
-          if self.authorization_code.present?
-            self.refresh_token = client.login_with_auth_code(self.authorization_code)
+          if self.authorization_code.present? && self.refresh_token.nil?
+            response = client.fetch_access_token!
+            self.refresh_token = response['access_token']
           end
         end
       end
@@ -68,7 +73,9 @@ module Devx
       client = google_cal
 
       if client.present?
-        return client.events
+        service = Google::Apis::CalendarV3::CalendarService.new
+        service.authorization = client
+        return service.list_calendar_lists
       end
     end
 
