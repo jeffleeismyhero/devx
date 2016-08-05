@@ -832,3 +832,7 @@ h1 {
 small {
     font-size:1.6rem;
 }
+
+input[type=submit] {
+    background:#084269!important;
+}
