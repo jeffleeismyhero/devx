@@ -75,7 +75,13 @@ module Devx
       if client.present?
         service = Google::Apis::CalendarV3::CalendarService.new
         service.authorization = client
-        return service.list_calendar_lists
+        response = service.list_events(
+          calendar_id: 'primary',
+          max_results: 50,
+          order_by: 'startTime'
+        )
+
+        return response
       end
     end
 
