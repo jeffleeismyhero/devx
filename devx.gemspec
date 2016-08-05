@@ -28,7 +28,10 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "sass-rails", "~> 5.0"
   s.add_runtime_dependency "flash_render"
   s.add_runtime_dependency "uglifier", ">= 1.3.0"
+
+  ## Compression
   s.add_runtime_dependency "yui-compressor"
+  s.add_runtime_dependency "htmlcompressor"
 
 
   ## Authentication
@@ -94,6 +97,7 @@ Gem::Specification.new do |s|
 
 
   ## Google Calendar Integration
+  s.add_runtime_dependency "google-api-client"
   s.add_runtime_dependency "google_calendar"
   s.add_runtime_dependency "icalendar"
 
