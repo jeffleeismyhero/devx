@@ -29,8 +29,8 @@ module Devx
         code = self.authorization_code unless self.refresh_token.present?
 
         client = Signet::OAuth2::Client.new({
-          client_id: '964786152042-lf6mt3nih4ma5cf55dbg89a6thjcdfe6.apps.googleusercontent.com',
-          client_secret: 'PcR-NwdDGwGQXrleQBBMmaaU',
+          client_id: self.client_id,
+          client_secret: self.client_secret,
           token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
           authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
           redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
@@ -52,11 +52,12 @@ module Devx
           if self.authorization_url.blank?
             self.authorization_url = client.authorization_uri.to_s
           end
+        end
 
-          if self.authorization_code.present? && self.refresh_token.nil?
-            response = client.fetch_access_token!
-            self.refresh_token = response['access_token']
-          end
+        if self.authorization_code.present?
+          self.refresh_token = nil
+          response = client.fetch_access_token!
+          self.refresh_token = response['access_token']
         end
       end
     end
@@ -71,17 +72,22 @@ module Devx
 
     def get_all_google_events
       client = google_cal
+      check_google_calendar
 
       if client.present?
+        calendar_id = self.google_calendar_id
         service = Google::Apis::CalendarV3::CalendarService.new
         service.authorization = client
         response = service.list_events(
-          calendar_id: 'primary',
-          max_results: 50,
-          order_by: 'startTime'
+          calendar_id,
+          max_results: 2500,
+          single_events: true,
+          order_by: 'startTime',
+          time_min: Time.now.iso8601,
+          time_max: (Time.now + 2.year).iso8601
         )
 
-        return response
+        return response.items
       end
     end
 
@@ -98,50 +104,30 @@ module Devx
           e = Devx::Event.new(
             calendar_id: self.id,
             google_event_id: event.id,
-            name: event.raw['summary'],
+            name: event.summary,
             description: event.description,
             location: event.location
           )
 
-          if event.raw['start'].present? && event.raw['start']['date'] =~ /^\d{4}\-\d{2}\-\d{2}$/
+          if event.start.try(:date).present?
             date_only = true
-          else
+            start_time = event.start.date.to_datetime
+            
+            if event.end.date.to_datetime == (event.start.date.to_datetime + 1.day)
+              end_time = event.start.date.to_datetime.end_of_day
+            else
+              end_time = event.end.date.to_datetime.end_of_day - 1.day
+            end
+          elsif event.start.try(:date_time).present?
             date_only = false
+            start_time = event.start.date_time.to_datetime
+            end_time = event.end.date_time.to_datetime
           end
 
           e.schedules.new(
             all_day: date_only,
-            start_time: event.start_time.to_datetime,
-            end_time: event.end_time.to_datetime
-          )
-
-          if e.valid?
-            e.save
-          end
-        end
-      end
-
-      self.get_google_events.try(:each) do |event|
-        r = Devx::Event.where(google_event_id: event.id)
-        if r.empty?
-          e = Devx::Event.new(
-            calendar_id: self.id,
-            google_event_id: event.id,
-            name: event.raw['summary'],
-            description: event.description,
-            location: event.location
-          )
-
-          if event.raw['start'].present? && event.raw['start']['date'] =~ /^\d{4}\-\d{2}\-\d{2}$/
-            date_only = true
-          else
-            date_only = false
-          end
-
-          e.schedules.new(
-            all_day: date_only,
-            start_time: event.start_time.to_datetime,
-            end_time: event.end_time.to_datetime
+            start_time: start_time,
+            end_time: end_time
           )
 
           if e.valid?
