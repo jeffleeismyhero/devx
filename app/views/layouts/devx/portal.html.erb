@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title><%= sys_title(yield(:title)) %></title>
-  <% stylesheet_link_tag "boilerplate.min.css", media: "all" %>
+    <%= stylesheet_link_tag "devx/boilerplate.css", media: "all" %>
   <%= stylesheet_link_tag    "devx/application", media: "all" %>
   <%= stylesheet_link_tag    "devx/devx_portal", media: "all" %>
   <%= stylesheet_link_tag    "devx/branding", media: "all" %>
@@ -19,8 +19,8 @@
       <%= link_to (app_branding.site_name || 'Site Name'), devx.portal_root_path, class: 'cd-logo' %>
     <!-- END: LOGO -->
     
-    <!-- START: TOP NAVIGATION -->
-    <nav class="cd-nav">
+    <!-- START: TOP NAVIGATION DESKTOP-->
+    <nav class="cd-nav hide-for-medium-down">
       <div class="cd-top-nav cd-horizontal-accordion">
         <% if app_settings['balance_tracking'] && !current_user.parent? && current_user.person.present? %>
         <div class="cd-accordion-tab">
@@ -57,9 +57,193 @@
         </div>
       </div>
     </nav>
-    <!-- END: TOP NAVIGATION -->
+    <!-- END: TOP NAVIGATION DESKTOP-->
+      
+    <div class="container show-for-medium-down header">
+        <div class="row full-width">
+            <div class="medium-12">
+                <a style="z-index:1000; float:right; margin:10px 10px 0 0;" id="mobile-toggle-btn"><i class="fa fa-bars" style="font-size:2rem;" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+      
+</header>
+<!-- START: TOP NAVIGATION MOBILE-->
+      
+<nav class="container show-for-medium-down" style="margin-top:60px;">
+    <div class="row">
+        <div class="medium-12 columns">
+            <div id="mobile-nav" class="secondary-link">
+                <ul class="accordion mobile-nav-accordion">
+                    <li class="no-drop">
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-tachometer"></i> <span>Dashboard</span>'.html_safe, devx.portal_dashboard_path, data: 'dashboard' %></div>
+                    </li>
+                    <li>
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-users"></i> <span>Users</span>'.html_safe, '#', class: 'has-children', data: 'users' %></div>
+                        
+                        <div class="accordion-content">
+                            <ul>
+                                <li><%= link_to 'Manage Users', devx.portal_users_path %></li>
+                                <li><%= link_to 'Roles', devx.portal_roles_path %></li>
+                            </ul>
+                        </div>
+                    </li>
 
-  </header>
+                    <li>
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-sitemap"></i> <span>Organizations</span>'.html_safe, '#', class: 'has-children', data: 'organizations' %></div>
+                        
+                        <div class="accordion-content">
+                            <ul>
+                              <li><%= link_to 'Sports', devx.portal_sports_path %></li>
+                              <li><%= link_to 'Extracurriculars', devx.portal_extracurriculars_path %></li>
+                              <% if app_settings['alumni_database'] %>
+                              <li><%= link_to 'Alumni Database', devx.portal_alumni_index_path %></li>
+                              <% end %>
+                              <% if app_settings['registrations'] %>
+                              <li><%= link_to 'Registrations', devx.portal_registrations_path %></li>
+                                <% end %>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-laptop"></i> <span>Site Management</span>'.html_safe, '#', class: 'has-children', data: 'site-management' %></div>
+                        
+                        <div class="accordion-content">
+                            <ul>
+                                <li><%= link_to 'Pages', devx.portal_pages_path %></li>
+                                <li><%= link_to 'Layouts', devx.portal_layouts_path %></li>
+                                <li><%= link_to 'Stylesheets', devx.portal_stylesheets_path %></li>
+                                <li><%= link_to 'JavaScripts', devx.portal_javascripts_path %></li>
+                                <li><%= link_to 'Media', devx.portal_media_path %></li>
+                                <li><%= link_to 'Documents', devx.portal_documents_path %></li>
+                                <li><%= link_to 'Menus', devx.portal_menus_path %></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="no-drop">
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-file-text-o"></i> <span>Form Builder</span>'.html_safe, devx.portal_forms_path %></div>
+                    </li>
+
+                    <li>
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-calendar"></i> <span>Calendars</span>'.html_safe, devx.portal_calendars_path, class: 'has-children', data: 'calendars' %></div>
+                        
+                        <div class="accordion-content">
+                           <ul>
+                                <li><%= link_to 'Calendars', devx.portal_calendars_path %></li>
+                                <li><%= link_to 'Venues', devx.portal_venues_path %></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                     <li class="no-drop">
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-newspaper-o"></i> <span>News</span>'.html_safe, devx.portal_articles_path, data: 'news' %></div>
+                    </li>
+                    
+                    <li>
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-user"></i> <span>Profile</span>'.html_safe, '#', class: 'has-children', data: 'user' %></div>
+                        
+                        <div class="accordion-content">
+                             <ul>
+                                  <li><%= link_to 'Edit Profile', devx.portal_profile_path %></li>
+                                  <% if app_settings['balance_tracking'] %>
+                                    <li><%= link_to 'Account Balance', devx.portal_account_balance_path %></li>
+                                  <% end %>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-shopping-cart"></i> <span>Commerce</span>'.html_safe, '#', class: 'has-children', data: 'commerce' %></div>
+                        
+                        <div class="accordion-content">
+                             <ul>
+                                  <% if can? :manage, Devx::Product %>
+                                  <li><%= link_to 'Products', devx.portal_products_path %></li>
+                                  <% end %>
+                                  <% if can? :read, Devx::Order %>
+                                  <li><%= link_to 'Orders', devx.portal_orders_path %></li>
+                                  <% end %>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="no-drop">
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-graduation-cap"></i> <span>Admissions</span>'.html_safe, '#' %></div>
+                    </li>
+                    
+                    <li class="no-drop">
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-database"></i> CRM'.html_safe, devx.portal_administration_index_path %></div>
+                    </li>
+                    
+                    <li>
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-pencil"></i> <span>Classroom</span>'.html_safe, '#', class: 'has-children', data: 'classroom-profile' %></div>
+                        
+                        <div class="accordion-content">
+                             <ul>
+                                <% if current_user.administrator? %>
+                                  <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
+                                <% end %>
+                                <% if current_user.person.try(:classroom).present? %>
+                                  <li><%= link_to 'My Classroom', devx.portal_classroom_path(current_user.person.classroom) %></li>
+                                  <li><%= link_to 'Classroom Galleries', devx.portal_classroom_class_galleries_path(current_user.person.classroom) %></li>
+                                  <li><%= link_to 'Classroom Documents', devx.portal_classroom_class_documents_path(current_user.person.classroom) %></li>
+                                  <li><%= link_to 'Classroom Highlights', devx.portal_classroom_class_highlights_path(current_user.person.classroom) %></li>
+                                  <li><%= link_to 'Classroom Schedules', devx.portal_classroom_class_schedules_path(current_user.person.classroom) %></li>
+                                <% end %>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="no-drop">
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-credit-card"></i> School Acct. Reports'.html_safe, devx.portal_account_transactions_path %></div>
+                    </li>
+                    
+                    <li class="no-drop">
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-cogs"></i> <span>Settings</span>'.html_safe, devx.portal_branding_index_path, data: 'settings' %></div>
+                    </li>
+                    
+                    
+                    <li>
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-terminal"></i> <span>Developer</span>'.html_safe, devx.portal_developer_index_path, class: 'has-children', data: 'developer' %></div>
+                        
+                        <div class="accordion-content">
+                             <ul>
+                                <li><%= link_to 'Global Settings'.html_safe, devx.portal_developer_index_path %></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-question"></i> <span>Support</span>'.html_safe, devx.portal_developer_index_path, class: 'has-children', data: 'support' %></div>
+                        
+                        <div class="accordion-content">
+                             <ul>
+                                <li>
+                                    <%= link_to 'Submit a Support Ticket', devx.new_portal_ticket_path %><br />
+                                    <% if current_user.super_administrator? %>
+                                      <%= link_to 'Manage Tickets', devx.portal_tickets_path %>
+                                    <% else %>
+                                      <%= link_to 'View my Tickets', devx.portal_tickets_path %>
+                                    <% end %>
+                                 </li>
+                            </ul>
+                        </div>
+                    </li>
+                   
+                    <li class="no-drop">
+                        <div class="accordion-title"><%= link_to '<i class="fa fa-sign-out"></i> <span>Logout</span>'.html_safe, devx.destroy_user_session_path, method: :delete %></div>
+                    </li>
+                    
+                </ul> 
+            </div>
+        </div>
+    </div>
+</nav>
+      <!-- END: TOP NAVIGATION MOBILE-->
+
+
   <!-- END: HEADER -->
 
   
@@ -67,7 +251,7 @@
   <main class="cd-main-content">
 
     <!-- START: SIDE NAVIGATION -->
-    <nav class="cd-side-nav secondary">
+    <nav class="cd-side-nav secondary hide-for-medium-down">
       <ul>
         <li>
           <%= link_to '<i class="fa fa-tachometer"></i> <span>Dashboard</span>'.html_safe, devx.portal_dashboard_path, data: 'dashboard' %>

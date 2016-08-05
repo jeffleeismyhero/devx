@@ -1,4 +1,4 @@
-<div class="col-4 columns" style="margin-top:20px;">
+<div class="small-12 medium-12 large-4 columns" style="margin-top:20px;">
     <div class="col-12 columns">
         <% if @user.person.try(:photo).present? %>
             <% photo = @user.person.try(:photo).profile.url %>
@@ -18,57 +18,57 @@
     <% end %>
 </div>
 
-<div class="col-8 columns no-padding" style="margin-top:20px;">
+<div class="small-12 medium-12 large-8 columns no-padding" style="margin-top:20px;">
     <% if current_user.administrator? %>
-        <div class="col-12 columns cd-edit-form">
+        <div class="large-12 columns cd-edit-form">
             <%= f.label :person_id, 'Linked CRM Record' %><br>
             <%= f.select :person_id, Devx::Person.all.collect{ |x| [x.try(:record_with_school_id), x.id] }, { include_blank: true }, { class: 'select2-fixed' } %>
         </div>
     <% end %>
     <%= f.fields_for :person, @person do |p| %>
-        <div class="col-6 columns cd-edit-form">
+        <div class="small-12 medium-6 large-6 columns cd-edit-form">
             <%= p.label :first_name %><br>
             <%= p.text_field :first_name %>
         </div>
         
-        <div class="col-6 columns cd-edit-form">
+        <div class="small-12 medium-6 large-6 columns cd-edit-form">
             <%= p.label :last_name %><br>
             <%= p.text_field :last_name %>
         </div>
     <% end %>
     
-    <div class="col-12 columns cd-edit-form">
+    <div class="small-12 medium-12 large-12 columns cd-edit-form">
         <%= f.label :email %><br>
         <%= f.text_field :email %>
     </div>
     
-    <div class="col-12 columns">
+    <div class="small-12 medium-12 large-12 columns">
         <% if current_user.administrator? %>
             <%= f.hidden_field :generate_password, value: f.object.new_record? %>
         <% end %>
     </div>
 
     <% if current_user == @user || current_user.super_administrator? %>
-        <div class="col-6 columns cd-edit-form">
+        <div class="small-12 medium-6 large-6 columns cd-edit-form">
             <%= f.label :password %><br>
             <%= f.password_field :password %>
         </div>
     
-        <div class="col-6 columns cd-edit-form">
+        <div class="small-12 medium-6 large-6 columns cd-edit-form">
             <%= f.label :password_confirmation %><br>
             <%= f.password_field :password_confirmation %>
         </div>
     <% end %>
 
     <% if (current_user != @user && current_user.administrator?) || current_user.super_administrator? %>
-        <div class="col-12 columns" style="margin-top:20px;">
+        <div class="large-12 columns" style="margin-top:20px;">
             <h3>User Roles</h3>
-            <div class="col-12 columns no-padding">
+            <div class="large-12 columns no-padding">
                 <%= f.select :role_ids, Devx::Role.all.collect{ |x| [x.name, x.id] }, {  }, { multiple: true, class: 'select2' } %>
             </div>
         </div>
     <% end %>
-    <div class="col-12 columns">
+    <div class="large-12 columns">
         <% if (@user.parent? && @user.linked_accounts.any?) || current_user.administrator? %>
         <h3>Linked Accounts</h3>
           <% if current_user.administrator? %>
@@ -94,7 +94,7 @@
 
 
 
-<div class="col-12 columns" style="margin-top:20px;">
+<div class="large-12 columns" style="margin-top:20px;">
     <div class="cd-update-form">
         <%= f.submit %>
     </div>

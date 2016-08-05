@@ -10,11 +10,11 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-12 columns flex">
+    <div class="large-12 columns flex">
 
 
       <!-- START: Subscribed News -->
-      <div class="col-8 columns cd-dashboard-section">
+      <div class="medium-12 large-6 xlarge-7 columns cd-dashboard-section">
         <h4>Newsfeed Subscriptions</h4>
         <% if current_user.article_subscriptions.any? %>
           <div class="newsfeed-subscriptions devx-owl">
@@ -44,8 +44,8 @@
 
 
       <!-- START: Subscribed Events -->
-      <div class="col-3 col-offset-1 columns cd-dashboard-section">
-        <h4>My Subscribed Events <small style="float:right"><%= link_to 'View All', devx.calendar_path, target: '_blank' %></small></h4>
+      <div class="medium-12 medium-offset-0 large-5 large-offset-1 xlarge-4 xlarge-offset-1 columns cd-dashboard-section">
+        <h4>Event Subscriptions <small style="float:right"><%= link_to 'View All', devx.calendar_path, target: '_blank' %></small></h4>
         <% if current_user.event_subscriptions.any? %>
 
           <% event_list = [] %>
