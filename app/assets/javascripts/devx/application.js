@@ -225,8 +225,8 @@ $(".currency-field").on("blur", function()
 
     /* $(".listview").toggleClass("hide").toggleClass("show").fadeIn(1000, function() { }); */
 
-    if ($(".gridview, .monthview").hasClass("show")) {
-      $(".gridview, .monthview").removeClass("show").addClass("hide");
+    if ($(".gridview, .monthview, .weekview").hasClass("show")) {
+      $(".gridview, .monthview, .weekview").removeClass("show").addClass("hide");
       $(".listview").removeClass("hide").addClass("show");
     }
 
@@ -241,8 +241,8 @@ $(".currency-field").on("blur", function()
 
     /* $(".gridview").toggleClass("show").toggleClass("hide").fadeIn(1000, function() { }); */
 
-    if ($(".listview, .monthview").hasClass("show")) {
-      $(".listview, .monthview").removeClass("show").addClass("hide");
+    if ($(".listview, .monthview, .weekview").hasClass("show")) {
+      $(".listview, .monthview, .weekview").removeClass("show").addClass("hide");
       $(".gridview").removeClass("hide").addClass("show");
     }
 
@@ -258,13 +258,30 @@ $(".currency-field").on("blur", function()
 
     /* $(".gridview").toggleClass("show").toggleClass("hide").fadeIn(1000, function() { }); */
 
-    if ($(".listview, .gridview").hasClass("show")) {
-      $(".listview, .gridview").removeClass("show").addClass("hide");
+    if ($(".listview, .gridview, .weekview").hasClass("show")) {
+      $(".listview, .gridview, .weekview").removeClass("show").addClass("hide");
       $(".monthview").removeClass("hide").addClass("show");
     }
 
     else
       $(".monthview").removeClass("hide").addClass("show");
+
+    return false;
+
+  });
+
+
+  $("#week").on("click", function() {
+
+    /* $(".gridview").toggleClass("show").toggleClass("hide").fadeIn(1000, function() { }); */
+
+    if ($(".listview, .gridview, .monthview").hasClass("show")) {
+      $(".listview, .gridview, .monthview").removeClass("show").addClass("hide");
+      $(".weekview").removeClass("hide").addClass("show");
+    }
+
+    else
+      $(".weekview").removeClass("hide").addClass("show");
 
     return false;
 
