@@ -79,24 +79,38 @@ ul.event-list {
       </div>
     </div>
     <div class="large-12 columns">
-      <%= week_calendar number_of_weeks: 1, events: @schedules do |date, schedules| %>
-        <%= date.try(:strftime, '%d') %>
-        <ul class="event-list">
-          <% @scheduled_events[date].try(:each) do |schedule| %>
-            <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
-               <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
-                  <li class="event-listing">
-                    <% if schedule.all_day == true %>
-                      <% start = 'All day' %>
-                    <% else %>
-                      <% start = schedule.start_time.try(:strftime, '%I:%M%p') %>
-                    <% end %>
-                    <%= link_to "#{schedule.event.name} - #{start}", devx.calendar_event_schedule_path(@calendar, schedule.event, schedule) %>
-                  </li>
-              <% end %>
-            <% end %>
-          <% end %>
-        </ul>
+      <% @start_date.beginning_of_week(start_day = :sunday).upto(@start_date.end_of_week).try(:each) do |date| %>
+        <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
+            <div style="box-shadow: 0px 4px 4px #cccccc;">
+              <div class="calendar-event datebar">
+                  <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
+                  <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
+              </div>
+              <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
+                    <ul class="accordion" style="margin:0">
+                      <% @scheduled_events[date.to_date].try(:each) do |schedule| %>
+                        <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
+                           <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
+                            <li style="margin-bottom:.1rem; ">
+                              <div class="accordion-title">
+                                <%= schedule.event.name %>
+                              </div>
+                              <div class="accordion-content">
+                                <span><% if schedule.all_day == true %>All day event<% else %>Start Time: <%= ldate schedule.start_time %><br />End Time: <%= ldate schedule.end_time %><% end %></span><br />
+                                <% if schedule.event.location.present? %><span>Location: <%= schedule.event.location %></span><br /><% end %>
+                                <span><%= schedule.event.venue.try(:full_address) %></span>
+                                <% if schedule.event.description.present? %>
+                                  <span>Description:<br /><%= schedule.event.try(:description) %></span>
+                                <% end %>
+                              </div>
+                            </li>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
       <% end %>
     </div>
   </div>
