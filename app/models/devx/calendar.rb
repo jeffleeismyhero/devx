@@ -10,7 +10,7 @@ module Devx
 
     validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-    before_save :check_google_calendar
+    after_save :update_from_google
 
     def upcoming_events
       self.events.where("start_time > ?", Time.zone.now).order(start_time: :asc)
