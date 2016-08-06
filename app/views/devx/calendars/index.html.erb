@@ -103,7 +103,7 @@ ul.event-list {
                             <% if schedule.event.description.present? %>
                             <tr>
                             <td>
-                                <span><strong>Description:</strong><br /><%= schedule.event.try(:description) %></span>
+                                <span><strong>Description:</strong><br /><%= schedule.event.try(:description).try(:html_safe) %></span>
                             </td>
                           </tr>
                           <% end %>
@@ -158,32 +158,6 @@ ul.event-list {
     </div>
   </div>
 </div>
-
-<!-- <div class="container" class="week-view hide-for-medium-down">
-  <div class="row weekview hide">
-    <div class="large-12 columns">
-    <%= week_calendar events: @schedules do |date, schedules| %>
-      <%= date.try(:strftime, '%d') %>
-      <ul class="event-list">
-        <% @scheduled_events[date].try(:each) do |schedule| %>
-          <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
-             <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
-                <li class="event-listing">
-                  <% if schedule.all_day == true %>
-                    <% start = 'All day' %>
-                  <% else %>
-                    <% start = schedule.start_time.try(:strftime, '%I:%M%p') %>
-                  <% end %>
-                  <%= link_to "#{schedule.event.name} - #{start}", devx.calendar_event_path(@calendar, schedule.event) %>
-                </li>
-            <% end %>
-          <% end %>
-        <% end %>
-      </ul>
-    <% end %>
-    </div>
-  </div>
-</div> -->
 
 <div class="container" style="margin-bottom:40px;" id="grid-view" class="calendar-view">
     <div class="row gridview hide">

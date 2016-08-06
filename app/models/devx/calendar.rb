@@ -4,13 +4,13 @@ module Devx
     friendly_id :name, use: [ :slugged, :finders ]
 
     scope :active, -> { where(active: true) }
-    
+
     has_many :events
     has_many :calendar_subscriptions
 
     validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-    after_save :update_from_google
+    before_save :update_from_google
 
     def upcoming_events
       self.events.where("start_time > ?", Time.zone.now).order(start_time: :asc)
@@ -46,10 +46,9 @@ module Devx
 
     def check_google_calendar
       client = google_cal
-
       if client.present?
-        if self.refresh_token.blank?
-          if self.authorization_url.blank?
+        if self.refresh_token.nil?
+          if self.authorization_url.nil?
             self.authorization_url = client.authorization_uri.to_s
           end
         end
@@ -59,6 +58,7 @@ module Devx
           response = client.fetch_access_token!
           self.refresh_token = response['access_token']
         end
+
       end
     end
 
@@ -92,12 +92,17 @@ module Devx
     end
 
     def update_from_google
+      if self.refresh_token.nil?
+        check_google_calendar
+        return
+      end
+
       if self.events.any?
         self.events.try(:each) do |e|
           e.destroy
         end
       end
-      
+
       self.get_all_google_events.try(:each) do |event|
         r = Devx::Event.where(google_event_id: event.id)
         if r.empty?
@@ -112,7 +117,7 @@ module Devx
           if event.start.try(:date).present?
             date_only = true
             start_time = event.start.date.to_datetime
-            
+
             if event.end.date.to_datetime == (event.start.date.to_datetime + 1.day)
               end_time = event.start.date.to_datetime.end_of_day
             else
