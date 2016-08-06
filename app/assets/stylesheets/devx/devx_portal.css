@@ -233,6 +233,7 @@ table tbody td:last-child {
 
 .cd-login a {
     color:#084269;
+    font-size:1rem;
 }
 
 .cd-login-bkrd {
@@ -830,4 +831,8 @@ h1 {
 
 small {
     font-size:1.6rem;
+}
+
+input[type=submit] {
+    background:#084269!important;
 }
