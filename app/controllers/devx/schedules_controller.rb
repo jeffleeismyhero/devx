@@ -13,5 +13,16 @@ module Devx
 
       @page = Devx::Page.new(name: @schedule.event.name, layout: @layout)
     end
+    
+
+    private
+
+    def determine_layout
+      if app_settings['calendar_layout'].present?
+        'devx/custom'
+      else
+        'devx/application'
+      end
+    end
   end
 end
