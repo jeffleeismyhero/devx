@@ -25,13 +25,19 @@
           <% end %>
           <% if @event.location.present? %>
             <p>
-            <span><strong>Location:</strong> <%= @event.location %></span>
+              <span><strong>Location:</strong> <%= @event.location %></span>
             </p>
           <% end %>
           <% if @event.contact_name.present? %>
             <p>
             <span><strong>Contact Name:</strong> <%= @event.contact_name %></span>
             </p>
+          <% end %>
+          <% if @event.description.present? %>
+            <p>
+              <span><strong>Description:</strong></span>
+            </p>
+            <%= simple_format @event.description %>
           <% end %>
         </div>
       </div>
