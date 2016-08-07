@@ -47,18 +47,16 @@ module Devx
     def check_google_calendar
       client = google_cal
       if client.present?
-        if self.refresh_token.nil?
-          if self.authorization_url.nil?
+        if !self.refresh_token.present?
+          if !self.authorization_url.present?
             self.authorization_url = client.authorization_uri.to_s
           end
         end
 
         if self.authorization_code.present?
-          self.refresh_token = nil
           response = client.fetch_access_token!
           self.refresh_token = response['access_token']
         end
-
       end
     end
 
@@ -92,7 +90,7 @@ module Devx
     end
 
     def update_from_google
-      if self.refresh_token.nil?
+      if !self.refresh_token.present?
         check_google_calendar
         return
       end
