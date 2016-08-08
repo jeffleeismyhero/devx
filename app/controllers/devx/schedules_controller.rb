@@ -6,6 +6,8 @@ module Devx
     load_resource :event, class: 'Devx::Event'
     load_resource :calendar, class: 'Devx::Calendar'
 
+    layout :determine_layout
+
     def show
       if app_settings['calendar_layout'].present?
         @layout = Devx::Layout.find(app_settings['calendar_layout'])
