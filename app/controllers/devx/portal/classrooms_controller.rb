@@ -45,7 +45,7 @@ module Devx
   			redirect_to devx.portal_classrooms_path,
   			notice: "Classroom has been successfully deleted."
   		else
-  			redirect_to devx.poratl_classrooms_path,
+  			redirect_to devx.portal_classrooms_path,
   			notice: "Classroom failed to delete."
   		end
   	end

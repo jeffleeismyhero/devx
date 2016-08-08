@@ -1,0 +1,15 @@
+<% provide(:title, 'Edit ' + controller_name.classify) %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="col-12 columns">
+      <%= link_to 'Back to Announcements', devx.portal_announcements_path %>
+      <%= form_for @announcement, url: devx.portal_announcement_path(@announcement) do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

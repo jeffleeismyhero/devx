@@ -1,6 +1,6 @@
 Devx::Engine.routes.draw do
-    
-    get '/not-found', to: 'pages#not_found'
+
+  get '/not-found', to: 'pages#not_found'
 
   devise_for :users, class_name: "Devx::User", module: :devise,
     controllers: { omniauth_callbacks: 'devx/omniauth_callbacks' },
@@ -57,6 +57,7 @@ Devx::Engine.routes.draw do
       resources :class_highlights
       resources :class_documents
     end
+    resources :announcements
     resources :donations
     resources :faqs
     resources :products
