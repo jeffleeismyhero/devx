@@ -14,7 +14,7 @@ module Devx
 
     validates :name, presence: true
     validates :schedules, presence: true
-    validates :google_event_id, uniqueness: true
+    validates :google_event_id, uniqueness: true, allow_nil: true
     validate :check_for_duplicates
 
     accepts_nested_attributes_for :schedules, allow_destroy: true,
