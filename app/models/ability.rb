@@ -21,6 +21,7 @@ class Ability
       can :manage, Devx::Menu
       can :manage, Devx::Calendar
       can :manage, Devx::Event
+      can :manage, Devx::Schedule
       can :manage, Devx::Venue
       can :manage, Devx::Article
       can :manage, Devx::Document
