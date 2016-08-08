@@ -95,8 +95,8 @@ ul.event-list {
                             <td>
                               <strong><%= schedule.event.name %></strong>
                             <br />
-                              <span><% if schedule.all_day == true %>All day event<% else %><strong>Start Time:</strong> <%= ldate schedule.start_time %><br /><strong>End Time:</strong> <%= ldate schedule.end_time %><% end %></span><br />
-                              <% if schedule.event.location.present? %><span><strong>Location:</strong> <%= schedule.event.location %></span><br /><% end %>
+                              <span><% if schedule.all_day == true %>All day event<% end %><strong>Start Time:</strong> <%= ldate schedule.start_time %><br /><strong>End Time:</strong> <%= ldate schedule.end_time %><% end %></span><br />
+                              <% if schedule.event.location.present? %><span><strong>Location:</strong> <%= schedule.event.location %></span><br />
                               <span><%= schedule.event.venue.try(:full_address) %></span>
                             </td>
                             </tr>

@@ -14,5 +14,5 @@ test:
 production:
   <<: *default
   database: devx_production
-  username: root
-  password: 
+  username: 
+  password:
