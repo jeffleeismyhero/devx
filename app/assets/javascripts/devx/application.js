@@ -158,8 +158,10 @@ $(".currency-field").on("blur", function()
   $('.datepicker').datetimepicker({timepicker: false, format: 'm/d/Y'});
   $('.timepicker').timepicker({
     'timeFormat': 'g:i a',
-    selectOnBlur: true,
-    scrollDefaultNow: true
+    'step': 15,
+    'selectOnBlur': false,
+    'scrollDefaultNow': true,
+    'forceRoundTime': false
   });
 
   $("#media-dropzone").dropzone({
