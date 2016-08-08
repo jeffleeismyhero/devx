@@ -14,8 +14,8 @@
   <div class="article-single-post-title"><%= @title %><% if title_array.count > 10 %>...<% end %></div>
   <div class="article-single-post-datetime"><%= @attributes[:article].published_at.try(:strftime, '%m/%d/%Y') %></div>
 
-  <p class="article-single-post-content"><%= @text %><% if text_array.count > 30 %>...<% end %></p>
+  <p class="article-single-post-content"><%= @text %><% if text_array.count > 25 %>...<% end %></p>
   <% if @attributes[:category] != 'Announcments' %>
-    <%= link_to 'Read More <i class="hvr-icon-bob" aria-hidden="true" style="top:-12px;"></i>'.html_safe, "/news/#{@attributes[:article].slug}" %>
+<%= link_to 'Read More <i class="hvr-icon-bob" aria-hidden="true" style="position:absolute; bottom:10px;"></i>'.html_safe, "/news/#{@attributes[:article].slug}" %>
   <% end %>
 <% end %>
