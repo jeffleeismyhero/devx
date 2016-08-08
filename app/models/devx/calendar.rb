@@ -114,17 +114,17 @@ module Devx
 
           if event.start.try(:date).present?
             date_only = true
-            start_time = event.start.date.to_datetime.beginning_of_day
+            start_time = event.start.date.to_datetime.try(:in_time_zone).beginning_of_day
 
             if event.end.date.to_datetime == (event.start.date.to_datetime + 1.day)
-              end_time = event.start.date.to_datetime.end_of_day
+              end_time = event.start.date.to_datetime.try(:in_time_zone).end_of_day
             else
-              end_time = event.end.date.to_datetime.end_of_day - 1.day
+              end_time = event.end.date.to_datetime.try(:in_time_zone).end_of_day - 1.day
             end
           elsif event.start.try(:date_time).present?
             date_only = false
-            start_time = event.start.date_time.to_datetime
-            end_time = event.end.date_time.to_datetime
+            start_time = event.start.date_time.try(:in_time_zone).to_datetime
+            end_time = event.end.date_time.try(:in_time_zone).to_datetime
           end
 
           e.schedules.new(
