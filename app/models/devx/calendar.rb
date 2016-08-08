@@ -114,7 +114,7 @@ module Devx
 
           if event.start.try(:date).present?
             date_only = true
-            start_time = event.start.date.to_datetime
+            start_time = event.start.date.to_datetime.beginning_of_day
 
             if event.end.date.to_datetime == (event.start.date.to_datetime + 1.day)
               end_time = event.start.date.to_datetime.end_of_day
