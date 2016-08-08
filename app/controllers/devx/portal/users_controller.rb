@@ -176,7 +176,6 @@ module Devx
               if user.valid?
                 logger.info "Expecting object to be valid: #{user.inspect}"
                 user.save
-                Devx::NotificationMailer.delay.mychs(user, user.password)
               else
                 logger.warn "Failed to import object: #{user.inspect}"
                 user.errors.full_messages.try(:each) do |error|
@@ -221,7 +220,6 @@ module Devx
                 else
                   password = Devise.friendly_token(12)
                   if user = Devx::User.create(email: email, password: password)
-                    Devx::NotificationMailer.delay.mychs(user, password)
                   end
                 end
 
