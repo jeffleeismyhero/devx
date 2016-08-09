@@ -3,9 +3,10 @@ module Devx
   	def signup(user, password = nil)
   		@user = user
       @password = password
-  		@subject = "Thanks for signing up"
+      @site_name = Devx::Branding.find_or_create_by(id: 1).site_name
+  		@subject = "Welcome to #{@site_name}"
 
-  		mail to: @user.email, 
+  		mail to: @user.email,
   		     subject: @subject
   	end
 
