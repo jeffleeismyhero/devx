@@ -117,7 +117,7 @@ module Devx
             date_only = true
             start_time = event.start.date.to_datetime.beginning_of_day
 
-            if event.end.date.to_datetime == (event.start.date.to_datetime + 1.day)
+            if event.end.date.to_date.to_s == (event.start.date.to_date + 1.day).to_s
               end_time = event.start.date.to_datetime.end_of_day
             else
               end_time = event.end.date.to_datetime.end_of_day - 1.day
