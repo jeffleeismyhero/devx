@@ -4,5 +4,7 @@ module Devx
 
   	validates :class_gallery, presence: true
   	validates :filename, presence: true
+
+    mount_uploader :filename, Devx::ImageUploader
   end
 end

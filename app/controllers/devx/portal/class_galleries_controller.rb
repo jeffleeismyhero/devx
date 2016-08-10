@@ -42,6 +42,10 @@ module Devx
   	end
 
   	def show
+      @gallery_photos = Devx::ClassPhoto.where(class_gallery: @class_gallery)
+      @q = @gallery_photos.search(params[:q])
+      @q.sorts = 'name asc' if @q.sorts.empty?
+      @gallery_photos = @q.result(distinct: true)
   	end
 
   	def destroy

@@ -10,7 +10,7 @@ module Devx
       @q = @administrations.search(params[:q])
       @q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
       @administrations = @q.result(distinct: true).paginate(page: params[:page])
-      
+
       respond_to do |format|
         format.html
         format.xlsx do
@@ -123,7 +123,7 @@ module Devx
     private
 
     def administration_params
-      accessible = [ :uuid, :school_id, :prefix, :photo, :first_name, :last_name, :suffix, :gender, :birthdate, :address, :city, :state, :zip, :email, :phone, :mobile_number, :association_list, :position, :active,
+      accessible = [ :uuid, :school_id, :prefix, :photo, :first_name, :last_name, :suffix, :gender, :birthdate, :address, :city, :state, :zip, :email, :phone, :mobile_number, :association_list, :position, :bio, :active,
                     department_list: [] ]
       params.require(:person).permit(accessible)
     end

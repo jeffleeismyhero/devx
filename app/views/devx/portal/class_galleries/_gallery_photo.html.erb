@@ -1,0 +1,8 @@
+<tr>
+    <td><%= gallery_photo.name %></td>
+    <td><%= gallery_photo.caption %></td>
+    <td><%= link_to 'View', gallery_photo.filename.try(:url) %></td>
+    <td>
+    <%= link_to 'Delete', devx.portal_classroom_class_gallery_class_photo_path(@classroom, @class_gallery, gallery_photo), method: :delete, data: { confirm: "Are you sure you want to delete #{gallery_photo.name}?" } %>  <i class="fa fa-trash" aria-hidden="true"></i>
+    </td>
+</tr>

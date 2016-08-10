@@ -5,12 +5,17 @@
     </div>
     <% if current_user.administrator? %>
         <div class="col-12 columns cd-edit-form">
-            <%= f.label :layout %>
-            <%= f.select :layout, Devx::Layout.all.collect{ |x| [x.name, x.id] }, { include_blank: true } %>
+            <%= f.label :layout_id %>
+            <%= f.select :layout_id, Devx::Layout.all.collect{ |x| [x.name, x.id] }, { include_blank: true } %>
         </div>
         <div class="col-12 columns cd-edit-form">
-            <%= f.label :classroom_teachers %>
-            <%= f.select :classroom_teachers, Devx::Person.tagged_with('Faculty', on: :associations).collect{ |x| [x.try(:full_name), x.id] }, { include_blank: true }, { multiple: true } %>
+          <h3>Classroom Teachers</h3>
+          <%= content_tag 'div', class: 'nested-attributes' do %>
+            <%= f.fields_for :classroom_teachers do |l| %>
+              <%= render partial: 'classroom_teacher_fields', locals: { f: l } %>
+            <% end %>
+          <% end %>
+          <%= link_to_add_fields 'Link Teacher', f, :classroom_teachers, nil, 'classroom_teacher_fields', '' %>
         </div>
     <% end %>
     <div class="col-12 columns cd-edit-form">

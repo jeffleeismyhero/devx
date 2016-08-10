@@ -8,9 +8,10 @@ module Devx
   	has_many :class_galleries
   	has_many :class_documents
   	has_many :class_highlights
+    has_many :class_announcements
   	has_many :class_schedules
     belongs_to :layout
 
-    accepts_nested_attributes_for :classroom_teachers, allow_destroy: true
+    accepts_nested_attributes_for :classroom_teachers
   end
 end

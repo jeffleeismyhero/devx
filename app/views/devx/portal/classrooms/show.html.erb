@@ -2,7 +2,7 @@
     <div class="row">
         <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-10 xlarge-offset-1 columns no-padding">
             <div class="large-12">
-                <span><%= image_tag('branding/EDS-horizontal-logo.png', class:'logo', style:'width:300px;') %></span>
+                <span><%= image_tag(app_branding.logo.try(:url), class:'logo', style:'width:300px;') %></span>
             </div>
         </div>
     </div>
@@ -29,37 +29,35 @@
     <div class="row">
         <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-10 xlarge-offset-1 columns no-padding">
             <div class="large-12 columns">
-                <h1 class="page-header" style="margin-bottom:0;">Mrs. Duhon's Class</h1>
+                <h1 class="page-header" style="margin-bottom:0;"><%= @classroom.name %></h1>
             </div>
             <div class="small-12 medium-6 large-6 xlarge-6 columns margin-columns">
-                <p>Bacon ipsum dolor amet pork belly pastrami pancetta beef. Short ribs hamburger shoulder brisket drumstick chuck strip steak pork belly spare ribs. Strip steak ribeye prosciutto ham kielbasa cow turducken drumstick. Tenderloin capicola spare ribs venison t-bone corned beef ham filet mignon, shank shankle frankfurter fatback beef sausage.</p>
-
-                <p>Pastrami pig sausage jerky t-bone pancetta. Leberkas pastrami hamburger, corned beef ham hock salami chicken t-bone landjaeger beef. Filet mignon kielbasa bacon, ham short loin tongue turducken capicola chuck. Spare ribs short loin doner corned beef hamburger t-bone. Filet mignon swine chuck jerky prosciutto bresaola tri-tip.</p>
-
-                <p>Swine fatback alcatra beef, ribeye prosciutto salami. Shoulder short ribs landjaeger chuck bacon, cupim porchetta jerky pancetta short loin venison doner. Cupim spare ribs t-bone kielbasa, cow ribeye ground round hamburger prosciutto tri-tip drumstick pancetta. Drumstick ball tip meatloaf shankle.</p>
-
-                <p>Does your lorem ipsum text long for something a little meatier? Give our generator a try… it’s tasty!</p>
+                <%= simple_format @classroom.welcome_message %>
             </div>
             <div class="small-12 medium-6 large-6 xlarge-6 columns">
                 <div class="dark-gray margin-columns" style="min-height:300px; width:100%; padding:20px;">
                     <h4 class="header-text-red-center" style="padding:20px;">Announcements</h4>
-                    <ul>
-                        <li>Announcement</li>
-                        <li>Announcement</li>
-                        <li>Announcement</li>
-                        <li>Announcement</li>
-                    </ul>
-                    <a>View all Announcements</a>
+                    <% if @classroom.class_announcements.any? %>
+                      <ul>
+                        <% @classroom.class_announcements.order(created_at: :desc).limit(3).try(:each) do |announcement| %>
+                          <li><small><%= ldate announcement.created_at %></small><br />
+                            <span><%= announcement.content %></span>
+                          </li>
+                        <% end %>
+                      </ul>
+                      <!--<a>View all Announcements</a>-->
+                    <% end %>
                 </div>
                 <div class="green margin-columns" style="min-height:300px; width:100%; padding:20px;">
                     <h4 class="header-text-red-center" style="padding:20px;">Helpful Documents</h4>
-                    <ul>
-                        <li>Document.pdf</li>
-                        <li>Document.pdf</li>
-                        <li>Document.pdf</li>
-                        <li>Document.pdf</li>
-                    </ul>
-                    <a>View all Documents</a>
+                    <% if @classroom.class_documents.any? %>
+                      <ul>
+                        <% @classroom.class_documents.try(:each) do |document| %>
+                          <li><%= link_to document.name, document.filename.try(:url), target: '_blank' %></li>
+                        <% end %>
+                      </ul>
+                    <!--<a>View all Documents</a>-->
+                  <% end %>
                 </div>
             </div>
         </div>
@@ -70,15 +68,13 @@
     <div class="row">
         <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-10 xlarge-offset-1 columns no-padding">
             <div class="large-12 columns">
+              <% if @classroom.class_galleries.any? %>
                 <ul>
-                    <li style="display:inline-block; width:150px; text-align:center; height:150px; background-color:#e5e5e5; padding-top:6%; margin-left:0!important;">pic</li>
-                    <li style="display:inline-block; width:150px; text-align:center; height:150px; background-color:#e5e5e5; padding-top:6%;">pic</li>
-                    <li style="display:inline-block; width:150px; text-align:center; height:150px; background-color:#e5e5e5; padding-top:6%;">pic</li>
-                    <li style="display:inline-block; width:150px; text-align:center; height:150px; background-color:#e5e5e5; padding-top:6%;">pic</li>
-                    <li style="display:inline-block; width:150px; text-align:center; height:150px; background-color:#e5e5e5; padding-top:6%;">pic</li>
-                    <li style="display:inline-block; width:150px; text-align:center; height:150px; background-color:#e5e5e5; padding-top:6%;">pic</li>
-                    <li style="display:inline-block; width:150px; text-align:center; height:150px; background-color:#e5e5e5; padding-top:6%;">pic</li>
+                  <% @classroom.class_galleries.try(:each) do |gallery| %>
+                    <li style="display:inline-block; width:150px; text-align:center; height:150px; background-image:url(<%= gallery.class_photos.first.try(:filename).try(:large).try(:url) %>); background-size:cover; padding-top:6%; margin-left:0!important;"><%= gallery.name.try(:truncate, 10) %></li>
+                  <% end %>
                 </ul>
+              <% end %>
             </div>
         </div>
     </div>
@@ -101,7 +97,17 @@
                         About the Teacher
                     </div>
                     <div class="accordion-content">
-                        <p>Accordion Content</p>
+                      <div style="padding:40px 0px">
+                        <% @classroom.classroom_teachers.try(:each) do |teacher| %>
+                          <div class="medium-4 columns">
+                            <%= image_tag(teacher.person.try(:photo).try(:large).try(:url), style: 'max-width:100%') %>
+                          </div>
+                          <div class="medium-8 columns">
+                            <h3><%= "#{teacher.person.first_name[0,1]}. #{teacher.person.last_name}".squish %></h3>
+                            <%= simple_format teacher.person.try(:bio) %>
+                          </div>
+                        <% end %>
+                      </div>
                     </div>
                 </li>
                 <li>
@@ -109,14 +115,12 @@
                         Schedule
                     </div>
                     <div class="accordion-content">
+                      <% @classroom.class_schedules.try(:each) do |schedule| %>
                         <div style="padding:10px 0;">
-                            <p style="margin-bottom:0; font-family:''"><span>8-05-2016 | </span><span>EVENT TITLE</span></p>
-                            <p style="margin-bottom:0;">Does your lorem ipsum text long for something a little meatier? Give our generator a try… it’s tasty!</p>
+                            <p style="margin-bottom:0; font-family:''"><span><%= schedule.start_time.try(:strftime, '%m/%d/%y %I:%M%P') %> to <%= schedule.end_time.try(:strftime, '%m/%d/%y %I:%M%P') %> | </span><span><%= schedule.name.try(:upcase) %></span></p>
+                            <%= simple_format schedule.description %>
                         </div>
-                        <div style="padding:10px 0;">
-                            <p style="margin-bottom:0; font-family:''"><span>8-05-2016 | </span><span>EVENT TITLE</span></p>
-                            <p style="margin-bottom:0;">Does your lorem ipsum text long for something a little meatier? Give our generator a try… it’s tasty!</p>
-                        </div>
+                      <% end %>
                     </div>
                 </li>
                 <li>
@@ -124,31 +128,10 @@
                         Policies &amp; Procedures
                     </div>
                     <div class="accordion-content">
-                        <p>Accordion Content</p>
+                        <%= simple_format @classroom.policies_and_procedures %>
                     </div>
                 </li>
             </ul>
         </div>
-    </div>
-</div>
-
-<!-- FOOTER -->
-
-<div class="container banner accent" style="padding:20px 0">
-    <div class="row">
-        <center>
-        <div class="small-6 small-offset-0 medium-3 medium-offset-0 large-3 large-offset-0 xlarge-2 xlarge-offset-2 columns">
-            <a class="footer-button hvr-bounce-red" href="https://eds-fl.client.renweb.com/oa/index.cfm?memberid=520" target="_blank">Apply</a>
-        </div>
-        <div class="small-6 medium-3 large-3 xlarge-2 columns">
-            <a class="footer-button hvr-bounce-red" href="/take-a-tour">Visit</a>
-        </div>
-        <div class="small-6 medium-3 large-3 xlarge-2 columns">
-            <a class="footer-button hvr-bounce-red" href="/careers">Jobs</a>
-        </div>
-        <div class="small-6 medium-3 large-3 xlarge-2 columns">
-            <a class="footer-button hvr-bounce-red" href="https://eds-fl.client.renweb.com/renweb/donateonline/web/link_giving.cfm?District=eds-fl&SchoolCode=" target="_blank">Donate</a>
-        </div>
-        </center>
     </div>
 </div>

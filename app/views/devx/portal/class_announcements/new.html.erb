@@ -1,0 +1,18 @@
+<% provide(:title, 'Create Announcement') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <div class="col-12 columns">
+      <%= link_to 'Back to Announcements', devx.portal_classroom_class_announcements_path %>
+    </div>
+
+    <div class="col-12 columns">
+      <%= form_for @class_announcement, url: devx.portal_classroom_class_announcements_path, method: :post do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

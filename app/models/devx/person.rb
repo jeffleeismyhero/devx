@@ -1,7 +1,7 @@
 module Devx
   class Person < ActiveRecord::Base
     acts_as_paranoid
-    
+
   	scope :students, -> { tagged_with("Student").active }
   	# scope :parents, -> { tagged_with('Parent').active }
   	scope :faculty, -> { tagged_with('Faculty').active }
@@ -14,7 +14,6 @@ module Devx
     has_one :classroom_teacher
     has_one :classroom, through: :classroom_teacher
 
-    has_many :classroom_teachers
     has_many :linked_accounts
     has_many :users, through: :linked_accounts
     has_many :account_transactions

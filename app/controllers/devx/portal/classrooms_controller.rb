@@ -4,7 +4,7 @@ module Devx
   class Portal::ClassroomsController < ApplicationController
   	before_filter :authenticate_user!
   	load_and_authorize_resource :classroom, class: 'Devx::Classroom'
-    layout 'devx/portal'
+    layout :set_layout
 
 
   	def index
@@ -28,16 +28,16 @@ module Devx
 
   	def update
   		if @classroom.valid? && @classroom.update(classroom_params)
-  			redirect_to devx.portal_classroom_path(@classroom), 
+  			redirect_to devx.portal_classroom_path(@classroom),
   			notice: "Classroom has been successfully updated."
   		else
-  			render :edit, 
+  			render :edit,
   			notice: "Classroom failed to updated."
   		end
   	end
 
   	def show
-      @page = Devx::Page.new(name: @classroom.name, layout: Devx::Layout.new(content: '{{page_content}}'))
+      @page = Devx::Page.new(name: @classroom.name, layout: @classroom.layout)
   	end
 
   	def destroy
@@ -53,9 +53,17 @@ module Devx
   	private
 
   	def classroom_params
-  		accessible = [ :name, :welcome_message, :policies_and_procedures, :layout_id, classroom_teachers: [] ]
+  		accessible = [ :name, :welcome_message, :policies_and_procedures, :layout_id, :active, classroom_teachers_attributes: [ :id, :person_id ] ]
   		params.require(:classroom).permit(accessible)
   	end
+
+    def set_layout
+      if @classroom.try(:layout).present?
+        'devx/custom'
+      else
+        'devx/portal'
+      end
+    end
 
   end
 end

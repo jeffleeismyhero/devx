@@ -23,7 +23,7 @@ Devx::Engine.routes.draw do
     post 'developer/update', to: 'developer#update'
     match 'developer/commerce', to: 'developer#commerce_settings', via: [ :get, :post ]
     match 'developer/sms_alert', to: 'developer#sms_alert_settings', via: [ :get, :post ]
-    
+
     ## Import paths
     match 'users/import', to: 'users#import', via: [ :get, :post ]
     match 'users/import-linked', to: 'users#import_linked_users', via: [ :get, :post ]
@@ -53,8 +53,11 @@ Devx::Engine.routes.draw do
     resources :alumni
     resources :classrooms do
       resources :class_schedules
-      resources :class_galleries
+      resources :class_galleries do
+        resources :class_photos
+      end
       resources :class_highlights
+      resources :class_announcements
       resources :class_documents
     end
     resources :announcements
@@ -97,7 +100,7 @@ Devx::Engine.routes.draw do
     end
     resources :tickets
     resources :developer, only: :index
-    
+
     root 'dashboard#index'
     end
   end
@@ -139,5 +142,5 @@ Devx::Engine.routes.draw do
   match '/:id' => 'pages#show', via: [ :get, :post ], as: :page
 
   root 'pages#show'
-  
+
 end

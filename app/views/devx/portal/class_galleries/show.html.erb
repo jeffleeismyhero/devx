@@ -1,0 +1,62 @@
+<% provide(:title, 'Photos for ' + @class_gallery.name) %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 columns">
+            <h1><%= yield(:title) %></h1>
+        </div>
+
+        <div class="col-12 columns" style="padding-bottom:20px;">
+            <div style="float:right;">
+                <span style="padding:0 10px;"><i class="fa fa-caret-down" aria-hidden="true"></i> Filter by</span>
+                <span style="padding:0 10px;"><i class="fa fa-caret-down" aria-hidden="true"></i>Arrange by</span>
+                <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
+              <div class="cd-edit-form">
+              <%= search_form_for @q, url: devx.portal_documents_path do |f| %>
+                  <%= f.search_field :name_cont %>
+                  <%= f.submit %>
+              <% end %>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-12 columns">
+            <table>
+                <thead>
+                    <tr>
+                        <th><%= sort_link @q, :name %></th>
+                        <th>Caption</th>
+                        <th>Link</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%= render partial: 'gallery_photo', collection: @gallery_photos %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-8 columns no-padding" style="margin-top:20px;">
+          <h3>Add a Photo</h3>
+            <%= form_for Devx::ClassPhoto.new, url: devx.portal_classroom_class_gallery_class_photos_path(@classroom, @class_gallery), method: :post do |f| %>
+              <div class="col-6 columns cd-edit-form">
+                <%= f.label :name %>
+                <%= f.text_field :name %>
+              </div>
+              <div class="col-6 columns cd-edit-form">
+                <%= f.label :caption %>
+                <%= f.text_field :caption %>
+              </div>
+              <div class="col-6 columns cd-edit-form">
+                <%= f.label :filename, 'File' %>
+                <%= f.file_field :filename %>
+              </div>
+              <div class="col-12 columns cd-update-form" style="margin-top:20px;">
+                  <%= f.submit %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+    </div>
+</div>

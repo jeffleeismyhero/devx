@@ -57,7 +57,7 @@ module Devx
   	private
 
   	def class_schedule_params
-  		accessible = [:name, :description, :start_time, :end_time]
+  		accessible = [:name, :description, :start_time, :start_time_date, :start_time_time, :end_time, :end_time_date, :end_time_time]
   		params.require(:class_schedule).permit(accessible)
   	end
 

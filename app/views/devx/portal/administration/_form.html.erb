@@ -10,7 +10,7 @@
     </div>
     <div class="col-12 columns">
         <%= f.label :photo %>
-        <%= f.file_field :photo %> 
+        <%= f.file_field :photo %>
     </div>
 </div>
 
@@ -46,27 +46,27 @@
         <%= f.label :first_name %><br>
         <%= f.text_field :first_name %>
     </div>
-    
+
     <div class="col-6 columns cd-edit-form">
         <%= f.label :last_name %><br>
         <%= f.text_field :last_name %>
     </div>
-    
+
     <div class="col-6 columns cd-edit-form">
         <%= f.label :suffix %><br>
         <%= f.text_field :suffix %>
     </div>
-    
+
     <div class="col-6 columns cd-edit-form">
         <%= f.label :birthdate %><br>
         <%= f.date_field :birthdate %>
     </div>
-    
+
     <div class="col-6 columns cd-edit-form">
         <%= f.label :gender %><br>
         <%= f.select :gender, %w[Male Female], { include_blank: true }, { class: 'select2-fixed' } %>
     </div>
-    
+
 
     <div class="col-12 columns"><h3>Mailing Address</h3></div>
     <div class="col-6 columns cd-edit-form">
@@ -100,7 +100,7 @@
         <%= f.label :mobile_number %>
         <%= f.phone_field :mobile_number %>
     </div>
-    
+
     <div class="col-6 columns cd-edit-form">
         <%= f.label :association_list, 'Association' %><br>
         <%= f.select :association_list, Devx::Person.tag_counts_on(:associations).order(name: :asc), { prompt: 'Select association' }, { class: 'select2' } %>
@@ -116,7 +116,10 @@
         <%= f.label :position %>
         <%= f.text_field :position %>
     </div>
-
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :bio %>
+        <%= f.cktext_area :bio %>
+    </div>
 
 
 <div class="col-12 columns">
