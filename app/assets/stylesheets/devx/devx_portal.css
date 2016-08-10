@@ -166,9 +166,14 @@ table thead > tr {
 }
 
 table thead th {
-  padding:10px!important;
+  padding:10px !important;
   color:#084269;
   text-align:left;
+}
+
+/* Remove the above padding from the datetimepicker header */
+.xdsoft_datetimepicker table thead th {
+  padding:0px !important;
 }
 
 table tbody td {
