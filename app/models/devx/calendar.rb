@@ -130,8 +130,8 @@ module Devx
 
           e.schedules.new(
             all_day: date_only,
-            start_time: start_time,
-            end_time: end_time
+            start_time: start_time.in_time_zone,
+            end_time: end_time.in_time_zone
           )
 
           if e.valid?
