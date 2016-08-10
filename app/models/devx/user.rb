@@ -24,6 +24,7 @@ module Devx
     has_many :article_subscriptions
     has_many :linked_accounts
     has_many :children, through: :linked_accounts, class_name: 'Devx::Person'
+    has_many :orders
     belongs_to :person
 
     validates :email, presence: true
