@@ -58,7 +58,7 @@ module Devx
   	end
 
     def set_layout
-      if @classroom.try(:layout).present?
+      if params[:action] == 'show' && @classroom.try(:layout).present?
         'devx/custom'
       else
         'devx/portal'
