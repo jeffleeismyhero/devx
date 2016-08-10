@@ -124,14 +124,14 @@ module Devx
             end
           elsif event.start.try(:date_time).present?
             date_only = false
-            start_time = event.start.date_time
-            end_time = event.end.date_time
+            start_time = event.start.date_time.in_time_zone
+            end_time = event.end.date_time.in_time_zone
           end
 
           e.schedules.new(
             all_day: date_only,
-            start_time: start_time.in_time_zone,
-            end_time: end_time.in_time_zone
+            start_time: start_time,
+            end_time: end_time
           )
 
           if e.valid?
