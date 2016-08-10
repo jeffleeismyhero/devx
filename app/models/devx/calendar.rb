@@ -64,7 +64,7 @@ module Devx
       client = google_cal
 
       if client.present?
-        return client.find_future_events
+        return nil
       end
     end
 

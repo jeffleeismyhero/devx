@@ -52,7 +52,7 @@ module Devx
     private
 
     def announcement_params
-        accessible = [ :title, :content ]
+        accessible = [ :content ]
         params.require(:announcement).permit(accessible)
     end
 

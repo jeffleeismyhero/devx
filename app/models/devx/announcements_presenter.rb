@@ -21,7 +21,7 @@ module Devx
     private
 
     def announcements
-      Devx::Announcement.all.order(created_at: :desc).first(2)
+      Devx::Announcement.all.order(created_at: :desc).first(1)
     end
   end
 end
