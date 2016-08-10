@@ -82,7 +82,7 @@ module Devx
           max_results: 2500,
           single_events: true,
           order_by: 'startTime',
-          time_min: Time.now.iso8601,
+          time_min: Time.now.beginning_of_month.iso8601,
           time_max: (Time.now + 2.year).iso8601
         )
 
