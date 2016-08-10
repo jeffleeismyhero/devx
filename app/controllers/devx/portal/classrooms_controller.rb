@@ -15,7 +15,7 @@ module Devx
 
   	def create
   		if @classroom.valid? && @classroom.save
-  			redirect_to devx.portal_classroom_path(@classroom),
+  			redirect_to devx.edit_portal_classroom_path(@classroom),
   			notice: "Classroom has been successfully created."
   		else
   			render :new,
@@ -28,7 +28,7 @@ module Devx
 
   	def update
   		if @classroom.valid? && @classroom.update(classroom_params)
-  			redirect_to devx.portal_classroom_path(@classroom),
+  			redirect_to devx.edit_portal_classroom_path(@classroom),
   			notice: "Classroom has been successfully updated."
   		else
   			render :edit,
@@ -37,7 +37,11 @@ module Devx
   	end
 
   	def show
-      @page = Devx::Page.new(name: @classroom.name, layout: @classroom.layout)
+      if @classroom.active == true
+        @page = Devx::Page.new(name: @classroom.name, layout: @classroom.layout)
+      else
+        redirect_to '/404.html'
+      end
   	end
 
   	def destroy

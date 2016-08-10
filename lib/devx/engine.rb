@@ -10,7 +10,7 @@ module Devx
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
     config.active_job.queue_adapter = :delayed_job
 
-    if ENV["RAILS_ENV"] == "production"
+    if Rails.env.production? # ENV["RAILS_ENV"] == "production"
       config.assets.css_compressor = :yui
       config.assets.js_compressor = :yui
     end
