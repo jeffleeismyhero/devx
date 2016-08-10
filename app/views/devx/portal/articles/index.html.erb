@@ -13,8 +13,8 @@
                 <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
               <div class="cd-edit-form">
               <%= search_form_for @q, url: devx.portal_articles_path do |f| %>
-                  <%= f.search_field :title_or_short_description_or_content_or_keywords_name_cont, placeholder: 'Search articles'%>
-                  <%= f.select :tags_name_eq, @tags.collect{ |x| [x.name, x.name] }, { include_blank: true } %>
+                  <%= f.search_field :title_or_short_description_or_content_or_keywords_name_cont, placeholder: 'Search'%>
+                  <%= f.select :tags_name_eq, @tags.collect{ |x| [x.name, x.name] }, { prompt: 'Select category' }, { class: 'select2-fixed' } %>
                   <%= f.submit %>
               <% end %>
               </div>

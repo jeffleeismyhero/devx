@@ -140,6 +140,9 @@ module Devx
         end
       end
 
+    rescue Signet::AuthorizationError
+      self.update_columns(refresh_token: nil, authorization_url: nil, authorization_code: nil)
+      self.check_google_calendar
     end
 
   end

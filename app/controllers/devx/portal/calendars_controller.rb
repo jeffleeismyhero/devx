@@ -18,6 +18,7 @@ module Devx
           @q = @schedules.search(params[:q])
           @q.sorts = 'start_time asc'
           @schedules = @q.result.ordered.paginate(page: params[:page])
+          @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
     end
 
     def new
@@ -81,7 +82,7 @@ module Devx
               if record[2].present? && record[2] != 'NULL'
                 category = record[2].to_s.squish
               end
-              
+
               location = record[3].to_s.squish
               contact_name = record[4].to_s.squish
               contact_email = record[5].to_s.squish
@@ -207,5 +208,3 @@ module Devx
     end
   end
 end
-
-
