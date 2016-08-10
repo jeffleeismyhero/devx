@@ -1,16 +1,6 @@
 module Devx
   class Transaction < ActiveRecord::Base
-    # transaction_type - Charge / Refund (Stripe: object)
-    # payment_id - If refund, the charge ID (Stripe: charge)
-    # transaction_responses: {
-    #   transaction_id: integer,
-    #   message: text,
-    #   code: text,
-    #   token: string,
-    #   state: string,
-    #   status: string
-    # }
-    # has_many :transaction_responses
+    has_many :transaction_responses
     belongs_to :order
 
     validates :order_id, presence: true
