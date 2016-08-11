@@ -50,7 +50,7 @@ class Ability
     end
 
     if Devx::ApplicationSetting.find_or_create_by(id: 1).settings['classroom_profiles'] && user.faculty?
-      can :manage, Devx::Classroom, user_id: user.id
+      can [ :edit, :update ], Devx::Classroom
       can :manage, Devx::ClassAnnouncement
       can :manage, Devx::ClassDocument
       can :manage, Devx::ClassGallery

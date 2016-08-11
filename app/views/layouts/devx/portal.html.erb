@@ -205,6 +205,7 @@
                                   <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
                                 <% end %>
                                 <% if current_user.person.try(:classroom).present? %>
+                                  <li><%= link_to 'Edit My Classroom', devx.edit_portal_classroom_path(current_user.person.classroom) %></li>
                                   <li><%= link_to 'My Classroom', devx.portal_classroom_path(current_user.person.classroom) %></li>
                                   <li><%= link_to 'Classroom Galleries', devx.portal_classroom_class_galleries_path(current_user.person.classroom) %></li>
                                   <li><%= link_to 'Classroom Documents', devx.portal_classroom_class_documents_path(current_user.person.classroom) %></li>
@@ -395,6 +396,7 @@
               <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
             <% end %>
             <% if current_user.person.try(:classroom).present? %>
+              <li><%= link_to 'Edit My Classroom', devx.edit_portal_classroom_path(current_user.person.classroom) %></li>
               <li><%= link_to 'My Classroom', devx.portal_classroom_path(current_user.person.classroom) %></li>
               <li><%= link_to 'Classroom Galleries', devx.portal_classroom_class_galleries_path(current_user.person.classroom) %></li>
               <li><%= link_to 'Classroom Documents', devx.portal_classroom_class_documents_path(current_user.person.classroom) %></li>
