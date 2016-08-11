@@ -49,9 +49,20 @@ class Ability
       end
     end
 
+    if Devx::ApplicationSetting.find_or_create_by(id: 1).settings['classroom_profiles'] && user.faculty?
+      can :manage, Devx::Classroom, user_id: user.id
+      can :manage, Devx::ClassAnnouncement
+      can :manage, Devx::ClassDocument
+      can :manage, Devx::ClassGallery
+      can :manage, Devx::ClassHighlight
+      can :manage, Devx::ClassSchedule
+      can :manage, Devx::ClassPhoto
+    end
+
     can :read, :all
     can :read, Devx::Dashboard
     can :read, Devx::Article
+    can :read, Devx::Classroom
     can [:edit, :update, :account_balance], Devx::User, id: user.id
     can [ :read, :update ], Devx::Order, user_id: user.id
     can :create, Devx::Transaction
