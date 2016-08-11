@@ -1,6 +1,7 @@
 <tr>
   <td><%= link_to administration.try(:full_name), devx.edit_portal_administration_path(administration) %></td>
   <td><%= administration.active %></td>
+  <% if app_settings['balance_tracking'] %><td><%= number_to_currency administration.balance %></td><% end %>
   <td>
     <%= link_to 'Edit', devx.edit_portal_administration_path(administration) %>
     <% if current_user.super_administrator? %>

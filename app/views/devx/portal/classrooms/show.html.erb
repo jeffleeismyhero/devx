@@ -1,8 +1,8 @@
 <div class="container light-gray" style="padding:20px 0;" id="homepage">
     <div class="row">
-        <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-10 xlarge-offset-1 columns no-padding">
+        <div class="medium-4 medium-offset-4 large-10 large-offset-1 xlarge-10 xlarge-offset-1 columns no-padding">
             <div class="large-12">
-                <span><%= image_tag(app_branding.logo.try(:url), class:'logo', style:'width:300px;') %></span>
+                <span><%= image_tag(app_branding.logo.try(:url), class:'logo', style:'max-width:200px;width:100%;') %></span>
             </div>
         </div>
     </div>
@@ -10,7 +10,7 @@
 
 <div class="container red" id="teacher-nav">
     <div class="row">
-        <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-10 xlarge-offset-1 columns no-padding">
+        <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-10 xlarge-offset-1 hide-for-medium-down columns no-padding">
             <div class="large-12 columns align-center">
                 <ul class="primary-nav">
                     <li><a class="anchors" href="#homepage">Homepage</a></li>
@@ -89,7 +89,20 @@
                         Highlights
                     </div>
                     <div class="accordion-content">
-                        <p>Accordion Content</p>
+                      <% if @classroom.class_highlights.any? %>
+                        <% @classroom.class_highlights.limit(1).each do |highlight| %>
+                        <div class="medium-4 columns">
+                          <%= image_tag(highlight.image.try(:url), style: 'width:100%') %>
+                        </div>
+                        <div class="medium-8 columns">
+                          <small style="float:right">Posted <%= highlight.created_at.try(:strftime, '%m-%d-%Y') %></small>
+                          <h4><%= highlight.title %></h4>
+                          <%= simple_format highlight.content %>
+                        </div>
+                        <% end %>
+                      <% else %>
+                        <span>There are no highlights at this time.</span>
+                      <% end %>
                     </div>
                 </li>
                 <li>
@@ -115,11 +128,15 @@
                         Schedule
                     </div>
                     <div class="accordion-content">
-                      <% @classroom.class_schedules.try(:each) do |schedule| %>
-                        <div style="padding:10px 0;">
-                            <p style="margin-bottom:0; font-family:''"><span><%= schedule.start_time.try(:strftime, '%m/%d/%y %I:%M%P') %> to <%= schedule.end_time.try(:strftime, '%m/%d/%y %I:%M%P') %> | </span><span><%= schedule.name.try(:upcase) %></span></p>
-                            <%= simple_format schedule.description %>
-                        </div>
+                      <% if @classroom.class_schedules.any? %>
+                        <% @classroom.class_schedules.try(:each) do |schedule| %>
+                          <div style="padding:10px 0;">
+                              <p style="margin-bottom:0; font-family:''"><span><%= schedule.start_time.try(:strftime, '%m/%d/%y %I:%M%P') %> to <%= schedule.end_time.try(:strftime, '%m/%d/%y %I:%M%P') %> | </span><span><%= schedule.name.try(:upcase) %></span></p>
+                              <%= simple_format schedule.description %>
+                          </div>
+                        <% end %>
+                      <% else %>
+                        <span>There is nothing scheduled at this time.</span>
                       <% end %>
                     </div>
                 </li>

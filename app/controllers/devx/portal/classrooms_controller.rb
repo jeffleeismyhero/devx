@@ -19,7 +19,7 @@ module Devx
   			notice: "Classroom has been successfully created."
   		else
   			render :new,
-  			notice: "Classroom failed to create."
+  			notice: @classroom.errors.full_messages.join(',')#"Classroom failed to create."
   		end
   	end
 
