@@ -71,7 +71,13 @@
               <% if @classroom.class_galleries.any? %>
                 <ul>
                   <% @classroom.class_galleries.try(:each) do |gallery| %>
-                    <li style="display:inline-block; width:150px; text-align:center; height:150px; background-image:url(<%= gallery.class_photos.first.try(:filename).try(:large).try(:url) %>); background-size:cover; padding-top:6%; margin-left:0!important;"><%= gallery.name.try(:truncate, 10) %></li>
+                    <% gallery.class_photos.try(:each_with_index) do |photo, index| %>
+                      <% if index == 0 %>
+                        <%= link_to "<li style=\"display:inline-block; width:150px; text-align:center; height:150px; background-image:url(#{photo.filename.try(:url)}); background-size:cover; padding-top:6%; margin-left:0!important;\"></li>".html_safe, photo.filename.try(:large).try(:url), class: 'fancybox', rel: gallery.name %>
+                      <% else %>
+                        <%= link_to image_tag(photo.filename.try(:thumbnail).try(:url)), photo.filename.try(:large).try(:url), class: 'fancybox', rel: gallery.name, style: 'display:none' %>
+                      <% end %>
+                    <% end %>
                   <% end %>
                 </ul>
               <% end %>
