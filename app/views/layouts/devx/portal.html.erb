@@ -22,7 +22,7 @@
     <!-- START: TOP NAVIGATION DESKTOP-->
     <nav class="cd-nav hide-for-medium-down">
       <div class="cd-top-nav cd-horizontal-accordion">
-        <% if app_settings['balance_tracking'] && !current_user.parent? && current_user.person.present? %>
+        <% if app_settings['balance_tracking'] && !current_user.parent? && current_user.person.present? && current_user.super_administrator? %>
         <div class="cd-accordion-tab">
           <div class="cd-accordion-title">
             <span><i class="fa fa-money"></i></span>
