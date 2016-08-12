@@ -17,7 +17,7 @@
       <div class="medium-12 large-6 xlarge-7 columns cd-dashboard-section">
         <h4>Announcements</h4>
         <% if Devx::Announcement.any? %>
-          <%= Devx::Announcement.last.content %>
+          <%= Devx::Announcement.last.content.try(:html_safe) %>
         <% else %>
           <span>There are no current announcements</span>
         <% end %>
