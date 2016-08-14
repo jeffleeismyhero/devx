@@ -5,6 +5,7 @@ rvm:
 
 #bundler_args: --without development
 
+script: bundle exec rake db:create db:migrate
 script: bundle exec rspec spec/models
 
 #env:
