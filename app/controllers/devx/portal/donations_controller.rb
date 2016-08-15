@@ -12,11 +12,11 @@ module Devx
 
     def create
       @donation.user = current_user
-      
+
       if @donation.valid?
         exp_date = "%02d%02d" % [params['expiry_date(2i)'], params['expiry_date(1i)'].last(2)]
         if app_settings['diamond_mind'].present?
-          if DiamondMind::Processor.process(app_settings['diamond_mind_username'], app_settings['diamond_mind_password'], @donation, params['cc_number'], exp_date, params['cvv']) == 'Approved'
+          if DiamondMind::Processor.process(app_settings['diamond_mind_username'], app_settings['diamond_mind_password'], @donation, params['cc_number'], exp_date, params['cvv'], @donation.designation) == 'Approved'
             @donation.save
             redirect_to devx.portal_donate_path,
             notice: "Your donation has been successfully processed"
@@ -40,7 +40,7 @@ module Devx
 
     def donation_params
       accessible = [ :amount, :cardholder_first_name, :cardholder_last_name, :billing_address, :city, :state, :zip_code, :affiliation,
-                    :phone_number, :class_participation, :company_match, :company_name, :company_email_to_notify ]
+                    :phone_number, :class_participation, :company_match, :company_name, :company_email_to_notify, :designation ]
       params.require(:donation).permit(accessible)
     end
   end

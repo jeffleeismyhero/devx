@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810162956) do
+ActiveRecord::Schema.define(version: 20160815203107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -309,6 +309,7 @@ ActiveRecord::Schema.define(version: 20160810162956) do
     t.string   "company_email_to_notify"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "designation"
   end
 
   create_table "devx_event_subscriptions", force: :cascade do |t|
