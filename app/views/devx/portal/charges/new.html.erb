@@ -1,0 +1,17 @@
+<%= form_tag devx.new_portal_charge_path do %>
+	<% if flash[:error].present? %>
+		<div id="error_explanation">
+			<p><%= flash[:error] %></p>
+		</div>
+	<% end %>
+
+	<label class="amount">
+		<span>Amount: $25.00</span>
+	</label>
+
+	<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="A month's subscription"
+          data-amount="2500"
+          data-locale="auto"></script>
+<% end %>

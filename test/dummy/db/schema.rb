@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815203107) do
+ActiveRecord::Schema.define(version: 20160817202430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -512,6 +512,17 @@ ActiveRecord::Schema.define(version: 20160815203107) do
     t.text     "bio"
   end
 
+  create_table "devx_product_skus", force: :cascade do |t|
+    t.integer  "product_id"
+    t.string   "stripe_id"
+    t.string   "currency"
+    t.float    "price"
+    t.boolean  "stockable"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_products", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -524,6 +535,9 @@ ActiveRecord::Schema.define(version: 20160815203107) do
     t.datetime "updated_at",  null: false
     t.string   "image"
     t.datetime "deleted_at"
+    t.string   "stripe_id"
+    t.boolean  "active"
+    t.string   "slug"
   end
 
   create_table "devx_registrations", force: :cascade do |t|

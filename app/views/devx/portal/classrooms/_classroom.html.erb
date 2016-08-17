@@ -1,5 +1,5 @@
 <tr>
-	<td> <%= classroom.name %> </td>
+	<td> <%= link_to classroom.name, devx.portal_classroom_path(classroom) %> </td>
 	<td> <%= classroom.classroom_teachers.count %> </td>
 	<td> <%= classroom.active %> </td>
 	<td> 

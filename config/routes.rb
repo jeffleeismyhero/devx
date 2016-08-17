@@ -42,6 +42,7 @@ Devx::Engine.routes.draw do
     end
     post 'transactions/process-all', to: 'account_transactions#process_all'
 
+    resources :charges
     resources :pages
     resources :menus do
       collection { post :sort }

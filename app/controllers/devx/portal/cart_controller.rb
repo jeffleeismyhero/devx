@@ -33,11 +33,10 @@ module Devx
 
 	  	def empty
 	  		session[:cart] = nil
-	   	redirect_to :action => :index  	
+	   		redirect_to :action => :index  	
 		end
 
 	   def index
-
 	    	if session[:cart] then
 	    		@cart = session[:cart]
 	    	else
