@@ -33,7 +33,7 @@ module Devx
 
     def donate
       if app_settings['donation_form_layout'].present?
-        @layout = app_settings['donation_form_layout']
+        @layout = Devx::Layout.find(app_settings['donation_form_layout'])
       else
         @layout = Devx::Layout.new(content: '{{page_content}}')
       end
