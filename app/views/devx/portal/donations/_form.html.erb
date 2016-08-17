@@ -54,11 +54,16 @@
 <div class="col-8 columns no-padding" style="margin-top:20px;">
   <h3>Donation Details</h3>
   <div class="col-8 columns cd-edit-form">
+    <%= f.label :designation %>
+    <%= f.select :designation, options_for_select(['The Rosarian Fund', 'Capital Giving', 'Planned Giving', 'Tree of Life']), { prompt: 'Select one' }, { class: 'select2-fixed' } %>
+  </div>
+  <h3>Donation Details</h3>
+  <div class="col-8 columns cd-edit-form">
     <%= f.label :affiliation %>
     <%= f.select :affiliation, options_for_select(['Current Parent', 'Grandparent', 'Friend', 'Alumni', 'Past Parent', 'Faculty/Staff', 'Other']), { prompt: 'Select one' }, { class: 'select2-fixed' } %>
   </div>
   <div class="col-6 columns cd-edit-form">
-    <%= f.check_box :class_participation %> 
+    <%= f.check_box :class_participation %>
     <%= f.label :class_participation, 'Credit for class participation' %>
   </div>
 </div>
@@ -66,16 +71,16 @@
 
   <h3>Company Matching</h3>
   <div class="col-8 columns cd-edit-form">
-    <%= f.check_box :company_match %> 
+    <%= f.check_box :company_match %>
     <%= f.label :company_match, 'This gift will be matched by a company' %>
   </div>
   <div id="company-match" style="display:none">
     <div class="col-6 columns cd-edit-form">
-      <%= f.label :company_name %> 
+      <%= f.label :company_name %>
       <%= f.text_field :company_name %>
     </div>
     <div class="col-6 columns cd-edit-form">
-      <%= f.label :company_email_to_notify, 'E-mail of person to notify' %> 
+      <%= f.label :company_email_to_notify, 'E-mail of person to notify' %>
       <%= f.text_field :company_email_to_notify %>
     </div>
   </div>
