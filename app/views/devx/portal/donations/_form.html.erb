@@ -16,7 +16,7 @@
   </div>
   <div class="medium-12 columns cd-edit-form">
     <%= f.label :billing_address %>
-    <%= f.text_field :billing_address %>
+    <%= f.text_field :billing_address, style: 'width:100%' %>
   </div>
   <div class="medium-4 columns cd-edit-form">
     <%= f.label :city %>
@@ -24,7 +24,7 @@
   </div>
   <div class="medium-4 columns cd-edit-form">
     <%= f.label :state %>
-    <%= f.select :state, options_for_select(us_states, @donation.state), { include_blank: true, selected: @donation.state }, class: 'select2-fixed' %>
+    <%= f.select :state, options_for_select(us_states, @donation.state), { include_blank: true, selected: @donation.state } %>
   </div>
   <div class="medium-4 columns cd-edit-form">
     <%= f.label :zip_code %>
@@ -39,11 +39,11 @@
   <h3>Payment Details</h3>
   <div class="medium-8 columns cd-edit-form">
   <%= label_tag :cc_number, 'Credit Card Number' %>
-  <%= text_field_tag :cc_number, '', placeholder: 'Credit Card Number', autocomplete: :off %>
+  <%= text_field_tag :cc_number, '', placeholder: 'Credit Card Number', autocomplete: :off, style: 'width:100%' %>
   </div>
   <div class="medium-5 columns cd-edit-form">
   <%= label_tag :exp_date, 'Expiration Date' %>
-  <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed', required: true } %>
+  <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { required: true } %>
   </div>
 
   <div class="medium-3 columns cd-edit-form">
@@ -55,11 +55,11 @@
   <h3>Donation Details</h3>
   <div class="medium-8 columns cd-edit-form">
     <%= f.label :designation %>
-    <%= f.select :designation, options_for_select(['The Rosarian Fund', 'Capital Giving', 'Planned Giving', 'Tree of Life']), { prompt: 'Select one' }, { class: 'select2-fixed' } %>
+    <%= f.select :designation, options_for_select(['The Rosarian Fund', 'Capital Giving', 'Planned Giving', 'Tree of Life']), { prompt: 'Select one' } %>
   </div>
   <div class="medium-8 columns cd-edit-form">
     <%= f.label :affiliation %>
-    <%= f.select :affiliation, options_for_select(['Current Parent', 'Grandparent', 'Friend', 'Alumni', 'Past Parent', 'Faculty/Staff', 'Other']), { prompt: 'Select one' }, { class: 'select2-fixed' } %>
+    <%= f.select :affiliation, options_for_select(['Current Parent', 'Grandparent', 'Friend', 'Alumni', 'Past Parent', 'Faculty/Staff', 'Other']), { prompt: 'Select one' } %>
   </div>
   <div class="medium-6 columns cd-edit-form">
     <%= f.check_box :class_participation %>
