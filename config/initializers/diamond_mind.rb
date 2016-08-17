@@ -146,7 +146,7 @@ module DiamondMind
           # NOTE: your username and password should replace the ones below
           gw.setLogin(username, password);
 
-          gw.setOrder(order_desc, order_desc, 0, 0, nil, ip_addr)
+          gw.setOrder(order_desc, order_desc, 0, 0, '', ip_addr)
           gw.setBilling(donation.cardholder_first_name,donation.cardholder_last_name,"",donation.billing_address,"", donation.city,
                   donation.state,donation.zip_code,"US",donation.phone_number,"",donation.user.email,
                   "")
