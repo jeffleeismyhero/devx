@@ -67,6 +67,7 @@ class Ability
     can [ :read, :update ], Devx::Order, user_id: user.id
     can :create, Devx::Transaction
     can [ :read, :create ], Devx::AccountTransaction
+    can [ :donate ], Devx::Donation
 
     can [ :read, :create ], Devx::Ticket, user_id: user.id
     can [ :read, :create ], Devx::TicketUpdate, user_id: user.id

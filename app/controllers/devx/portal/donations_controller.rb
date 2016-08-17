@@ -4,7 +4,7 @@ module Devx
   class Portal::DonationsController < ApplicationController
     before_filter :authenticate_user!, except: :donate
     load_and_authorize_resource :donation, class: 'Devx::Donation'
-    layout 'devx/portal'
+    layout :set_layout
 
     def index
       # TODO
@@ -32,6 +32,14 @@ module Devx
     end
 
     def donate
+      if app_settings['donation_form_layout'].present?
+        @layout = app_settings['donation_form_layout']
+      else
+        @layout = Devx::Layout.new(content: '{{page_content}}')
+      end
+
+      @page = Devx::Page.new(name: 'Donate Today!', layout: @layout)
+
       @donation = Devx::Donation.new
     end
 
@@ -42,6 +50,10 @@ module Devx
       accessible = [ :amount, :cardholder_first_name, :cardholder_last_name, :billing_address, :city, :state, :zip_code, :affiliation,
                     :phone_number, :class_participation, :company_match, :company_name, :company_email_to_notify, :designation ]
       params.require(:donation).permit(accessible)
+    end
+
+    def set_layout
+      'devx/custom'
     end
   end
 end
