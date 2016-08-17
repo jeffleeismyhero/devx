@@ -37,8 +37,8 @@
             </div>
             <div class="small-12 medium-6 large-6 xlarge-6 columns">
                 <div class="blue margin-columns" style="min-height:300px; width:100%; padding:20px;">
-                    <h3>Announcements</h3>
-                    <hr>
+                    <h4 class="header-text-white-center">Announcements</h4>
+                    <hr class="hr">
                     <% if @classroom.class_announcements.any? %>
                       <ul>
                         <% @classroom.class_announcements.order(created_at: :desc).limit(3).try(:each) do |announcement| %>
@@ -51,8 +51,8 @@
                     <% end %>
                 </div>
                 <div class="dark-gray margin-columns" style="min-height:300px; width:100%; padding:20px;">
-                    <h3>Helpful Documents</h3>
-                    <hr>
+                  <h4 class="header-text-white-center">Helpful Documents</h4>
+                  <hr class="hr">
                     <% if @classroom.class_documents.any? %>
                       <ul>
                         <% @classroom.class_documents.try(:each) do |document| %>
