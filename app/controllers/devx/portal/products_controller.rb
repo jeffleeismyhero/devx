@@ -36,7 +36,7 @@ module Devx
             render :edit,
             notice: "Failed to save product"
         end
-    rescue Stripe::InvalidRequestError
+     rescue Stripe::InvalidRequestError
         render :edit,
         notice: "Ensure that this product matches the product details in Stripe."
     end
@@ -51,7 +51,7 @@ module Devx
     private
 
     def product_params
-        accessible = [ :name, :description, :sku, :price, :weight, :taxable, :stockable, :image, product_skus_attributes: [ :product_id, :stripe_id, :currency, :price, :stockable, :active ] ]
+        accessible = [ :name, :description, :sku, :price, :weight, :taxable, :stockable, :image, product_skus_attributes: [ :id, :currency, :price, :stockable, :active, :_destroy ] ]
         params.require(:product).permit(accessible)
     end
   end

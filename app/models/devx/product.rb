@@ -7,9 +7,9 @@ module Devx
 
     has_many :line_items
     has_many :orders, through: :line_items
-    has_many :product_skus
+    has_many :product_skus, dependent: :destroy
 
-    accepts_nested_attributes_for :product_skus
+    accepts_nested_attributes_for :product_skus, allow_destroy: true
 
     after_create :create_stripe_product
     after_update :update_stripe_product
@@ -31,8 +31,17 @@ module Devx
 		product.save
     end
 
-    def destroy_stripe_product 
+    def destroy_stripe_product
     	product = Stripe::Product.retrieve(self.slug)
+
+    	skus = Stripe::SKU.list.data
+
+    	skus.try(:each) do |sku|
+    		if sku.product == product.id
+    			sku.delete
+    		end
+    	end
+
 		product.delete
 
 	rescue Stripe::InvalidRequestError

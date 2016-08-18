@@ -11,12 +11,6 @@
                 <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
                 <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
                 <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
-              <div class="cd-edit-form">
-              <%= search_form_for @q, url: devx.portal_orders_path do |f| %>
-                  <%= f.search_field :id_or_user_first_name_or_user_last_name_eq %>
-                  <%= f.submit %>
-              <% end %>
-              </div>
             </div>
         </div>
         <div class="col-12 columns">
