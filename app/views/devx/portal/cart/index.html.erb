@@ -23,23 +23,22 @@
 
         			<% total = 0 %>
 
-            		<% @cart.each do |id, quantity| %>
-            			<% sku = Devx::ProductSku.find(id) %>
-
+            		<% @cart.each do |sku, quantity| %>
             			<tr>
-            				<td><%= link_to sku.name, devx.portal_product_path(id) %></td>
-            				<td><%= number_to_currency(sku.price, :unit => '$') %></td>
+            				<td><%= link_to sku.product.try(:name), devx.portal_product_path(sku.product) %></td>
+            				<td><%= number_to_currency sku.price %></td>
             				<td style="text-align: left;"><%= quantity %></td>
             			</tr>
 
-            			<% total += quantity * sku.price %>
-            			
+            			<% total += quantity * sku.price.to_f %>
+
             		<% end %>
-      				
+
                 </tbody>
             </table>
 
-            <%= "Total: " + number_to_currency(total, :unit => '$').to_s %>
+            <%= "Total: #{number_to_currency total}" %>
+            <%= link_to 'Checkout', devx.portal_checkout_path %>
 
         </div>
     </div>

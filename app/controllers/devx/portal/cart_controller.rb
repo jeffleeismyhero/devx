@@ -2,6 +2,7 @@ require_dependency "devx/application_controller"
 
 module Devx
 	class Portal::CartController < ApplicationController
+		load_and_authorize_resource :order, class: 'Devx::Order'
 		layout 'devx/portal'
 
 	  	def add
@@ -33,7 +34,7 @@ module Devx
 
 	  	def empty
 	  		session[:cart] = nil
-	   		redirect_to :action => :index  	
+	   		redirect_to :action => :index
 		end
 
 	   def index
@@ -43,6 +44,16 @@ module Devx
 	    		@cart = {}
 	    	end
 	   end
+
+		 def checkout
+			 if session[:cart]
+				 @cart = session[:cart]
+			 else
+				 @cart = {}
+			 end
+
+			 @order = Devx::Order.new
+		 end
 
 	end
 end
