@@ -7,8 +7,8 @@ module Devx
 	  	def add
 	  		id = params[:id]
 
-	  		@product = Devx::Product.find(id)
-	  		if @product.present?
+	  		@sku = Devx::ProductSku.find(id)
+	  		if @sku.present?
 
 		  		#use the existing cart, otherwise if one doesn't exist then create a new cart
 		  		if session[:cart] then

@@ -1,0 +1,11 @@
+<% obj.each do |product| %>
+  <tr>
+    <td> <%= link_to product.name, product_path(product) %> </td>
+    <td style = "padding-left: 40px;"> <%= product.description %> </td>
+
+    <% Devx::ProductSku.where(product: product).try(:each) do |sku| %>
+      <td style = "padding-left: 40px;"> <%= number_to_currency sku.price %></td>
+    <% end %>
+
+  </tr>
+<% end %>

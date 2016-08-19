@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 columns">
+            <h1>Products</h1>
+        	<hr>
+        </div>
+
+        <div class="col-12 columns">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th style="padding-left: 40px;">Description</th>
+                        <th style="padding-left: 40px;">Price</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                	<%= render 'product_display', obj: @products %>
+		
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
