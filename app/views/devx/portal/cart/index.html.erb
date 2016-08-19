@@ -8,7 +8,7 @@
 
         <div class="col-12 columns">
 
-        	<p><%= link_to 'Empty Cart', devx.portal_cart_empty_path %></p>
+            <p><%= link_to 'Empty Cart', devx.portal_cart_empty_path %></p>
 
             <table>
                 <thead>
@@ -21,19 +21,20 @@
 
                 <tbody>
 
-        			<% total = 0 %>
+                    <% total = 0 %>
 
             		<% @cart.each do |sku, quantity| %>
+                        <% product_sku = Devx::ProductSku.find(sku) %>
+
             			<tr>
-            				<td><%= link_to sku.product.try(:name), devx.portal_product_path(sku.product) %></td>
-            				<td><%= number_to_currency sku.price %></td>
+            				<td><%= link_to product_sku.product.try(:name), devx.portal_product_path(product_sku.product) %></td>
+            				<td><%= number_to_currency product_sku.price %></td>
             				<td style="text-align: left;"><%= quantity %></td>
             			</tr>
 
-            			<% total += quantity * sku.price.to_f %>
+            			<% total += quantity * product_sku.price.to_f %>
 
             		<% end %>
-
                 </tbody>
             </table>
 

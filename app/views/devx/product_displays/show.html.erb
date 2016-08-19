@@ -10,6 +10,6 @@
   </div>
 
   <% Devx::ProductSku.where(product: @product).try(:each) do |sku| %>
-    <%= link_to 'Add to Cart', devx.portal_path(@product.id) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  
+    <%= link_to 'Add to Cart', devx.portal_url(sku, subdomain: 'portal') %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  
   <% end %>
 </div>
