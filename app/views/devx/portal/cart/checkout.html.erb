@@ -10,6 +10,27 @@
 <div class="container">
   <div class="row">
     <div class="col-8 columns">
+      <table>
+          <tbody>
+
+              <% total = 0 %>
+
+          <% @cart.each do |sku, quantity| %>
+                  <% product_sku = Devx::ProductSku.find(sku) %>
+
+            <tr>
+              <td><%= link_to product_sku.product.try(:name), devx.portal_product_path(product_sku.product) %></td>
+              <td><%= number_to_currency product_sku.price %></td>
+              <td style="text-align: left;"><%= quantity %></td>
+            </tr>
+
+            <% total += quantity * product_sku.price.to_f %>
+
+          <% end %>
+          </tbody>
+      </table>
+      <strong>Total: </strong><%= number_to_currency total %>
+
       <%= form_for @order, url: devx.portal_orders_path, method: :post do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
