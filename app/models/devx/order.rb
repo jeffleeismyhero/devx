@@ -11,6 +11,8 @@ module Devx
     accepts_nested_attributes_for :transactions, allow_destroy: true,
       reject_if: proc{ |x| x['amount'].blank? }
 
+    attr_accessor :stripe_token
+
     def total
       line_items.to_a.sum(&:line_total)
     end

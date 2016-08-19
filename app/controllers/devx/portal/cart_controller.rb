@@ -55,19 +55,31 @@ module Devx
 			 @order = Devx::Order.new
 
 			 if request.post?
+				 if session[:cart]
+					 @cart = session[:cart]
+				 else
+					 @cart = {}
+				 end
+
 				 line_items = []
+
+				 if current_user.stripe_id.present?
+					 customer = Stripe::Customer.retrieve(stripe_id)
+				 else
+					 customer = Stripe::Customer.create(email: current_user.email, source: params[:order][:stripe_token])
+				 end
 
 				 @cart.each do |line_item, quantity|
 					 sku = Devx::ProductSku.find(line_item)
 					 line_items << { type: 'sku', parent: sku.stripe_id, quantity: quantity, description: sku.product.name, amount: sku.price_in_cents }
 				 end
 
-				 @order = Stripe::Order.create(
-				 	currency: 'usd',
+				 Stripe::Order.create(
+					currency: 'usd',
+					customer: customer.id,
 					items: line_items
 				 )
 			 end
-
 		 end
 
 	end

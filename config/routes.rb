@@ -16,7 +16,7 @@ Devx::Engine.routes.draw do
     get '/cart' => 'cart#index'
     get '/cart/empty' => 'cart#empty'
     get '/cart/:id' => 'cart#add'
-    get '/checkout', to: 'cart#checkout'
+    match '/checkout', to: 'cart#checkout', via: [ :get, :post ]
 
     get '/' => 'dashboard#index', as: :dashboard
     get '/terms-of-service', to: 'dashboard#terms_of_service'

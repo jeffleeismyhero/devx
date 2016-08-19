@@ -9,7 +9,8 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-8 columns">
+    <div class="col-6 columns">
+      <h5>Order summary</h5>
       <table>
           <tbody>
 
@@ -20,8 +21,8 @@
 
             <tr>
               <td><%= link_to product_sku.product.try(:name), devx.portal_product_path(product_sku.product) %></td>
-              <td><%= number_to_currency product_sku.price %></td>
-              <td style="text-align: left;"><%= quantity %></td>
+              <td><%= quantity %></td>
+              <td><%= number_to_currency (product_sku.price * quantity) %></td>
             </tr>
 
             <% total += quantity * product_sku.price.to_f %>
@@ -30,8 +31,9 @@
           </tbody>
       </table>
       <strong>Total: </strong><%= number_to_currency total %>
-
-      <%= form_for @order, url: devx.portal_orders_path, method: :post do |f| %>
+    </div>
+    <div class="col-6 columns">
+      <%= form_for @order, url: devx.portal_checkout_path, method: :post do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
     </div>

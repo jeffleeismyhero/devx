@@ -33,6 +33,39 @@ $(function()
   // Activate WOW
   new WOW().init();
 
+
+  // Stripe
+  $("form#new_order").on("submit", function()
+  {
+    var form = this;
+
+    var card = {
+      number:       $("#cc_number").val(),
+      expMonth:     $("#_expiry_date_2i").val(),
+      expYear:      $("#_expiry_date_1i").val(),
+      cvc:          $("#cvv").val(),
+      address_zip:  $("#zipcode").val(),
+      name:         $("#ch_name").val()
+    };
+
+    Stripe.createToken(card, function(status, response)
+    {
+      if (status === 200)
+      {
+        console.log(response.id);
+        $(".stripe-token").val(response.id);
+        form.submit();
+      }
+      else
+      {
+        console.log(response);
+      }
+    });
+
+    return false;
+  });
+
+
   // Notification
   if($(".cd-notification").is(":visible"))
   {

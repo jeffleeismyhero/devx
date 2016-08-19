@@ -2,10 +2,7 @@
   <div class="col-12 columns cd-edit-form">
     <h5>Payment details</h5>
   </div>
-  <div class="col-8 columns cd-edit-form">
-    <%= label_tag :cc_type, 'Credit Card Type' %>
-    <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), { prompt: 'Select Card Type', class: 'select2-fixed' } %>
-  </div>
+  <%= f.hidden_field :stripe_token, class: 'stripe-token' %>
   <div class="col-8 columns cd-edit-form">
     <%= label_tag :cc_number, 'Credit Card Number' %>
     <%= text_field_tag :cc_number, '', placeholder: 'Credit Card Number', autocomplete: :off %>
