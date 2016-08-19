@@ -5,6 +5,10 @@ module Devx
   	after_create :create_stripe_sku
   	#after_destroy :delete_stripe_sku
 
+    def price_in_cents
+      (self.price * 100).to_i
+    end
+
   	private
 
   	def create_stripe_sku

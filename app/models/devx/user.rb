@@ -167,5 +167,11 @@ module Devx
       end
     end
 
+    def create_stripe_record
+      if Devx::ApplicationSetting.settings['stripe']
+        # TODO
+      end
+    end
+
   end
 end

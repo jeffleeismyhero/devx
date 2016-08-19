@@ -53,6 +53,21 @@ module Devx
 			 end
 
 			 @order = Devx::Order.new
+
+			 if request.post?
+				 line_items = []
+
+				 @cart.each do |line_item, quantity|
+					 sku = Devx::ProductSku.find(line_item)
+					 line_items << { type: 'sku', parent: sku.stripe_id, quantity: quantity, description: sku.product.name, amount: sku.price_in_cents }
+				 end
+
+				 @order = Stripe::Order.create(
+				 	currency: 'usd',
+					items: line_items
+				 )
+			 end
+
 		 end
 
 	end
