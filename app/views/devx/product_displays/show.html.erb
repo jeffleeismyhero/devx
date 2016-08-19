@@ -1,0 +1,15 @@
+<h1 style="text-align: center;"><%= @product.name %></h1>
+<hr>
+
+<div class = "row">
+  <div class = "small-12 medium-12, large-12">
+
+    <h3><%= @product.name %></h3>
+    <p><%= @product.description %></p>
+
+  </div>
+
+  <% Devx::ProductSku.where(product: @product).try(:each) do |sku| %>
+    <%= link_to 'Add to Cart', devx.portal_path(@product.id) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  
+  <% end %>
+</div>

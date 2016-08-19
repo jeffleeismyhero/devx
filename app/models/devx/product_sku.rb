@@ -3,7 +3,7 @@ module Devx
   	belongs_to :product
 
   	after_create :create_stripe_sku
-  	after_destroy :delete_stripe_sku
+  	#after_destroy :delete_stripe_sku
 
   	private
 
@@ -32,10 +32,10 @@ module Devx
 		 self.save
   	end
 
-	def delete_stripe_sku
-		sku = Stripe::SKU.retrieve(self.stripe_id)
-	 	sku.delete
-	end
+	# def delete_stripe_sku
+	# 	sku = Stripe::SKU.retrieve(self.stripe_id)
+	#  	sku.delete
+	# end
 
   end
 end

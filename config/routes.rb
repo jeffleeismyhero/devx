@@ -116,6 +116,9 @@ Devx::Engine.routes.draw do
     end
   end
 
+  get 'products', to: 'product_displays#index'
+  get 'products/:id', to: 'product_displays#show', as: :product
+
   resources :calendars, path: 'calendar', only: [ :index ] do
     member do
       get 'export-all', to: 'calendars#export_all'
