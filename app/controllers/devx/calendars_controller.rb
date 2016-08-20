@@ -26,7 +26,7 @@ module Devx
         @start_date = params[:start_date].to_datetime unless params[:start_date].nil?
         @start_date ||= DateTime.now
       end
-      
+
       @page = Devx::Page.new(name: 'Calendar', layout: @layout)
       @dates = []
 
@@ -35,7 +35,7 @@ module Devx
       end
 
       if @calendar.calendar_type.present?
-        @events = Devx::Schedule.for_calendar(@calendar, @start_date)
+        @events = Devx::Schedule.for_calendar(Devx::Calendar.find(1), Time.now.beginning_of_month).ordered
         @schedules = Devx::Schedule.for_month(@start_date)
 
 
