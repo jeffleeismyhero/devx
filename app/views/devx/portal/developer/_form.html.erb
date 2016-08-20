@@ -51,6 +51,11 @@
 </div>
 
 <div class="col-6 columns cd-edit-form">
+    <%= label_tag 'settings[commerce_layout]', 'Commerce Layout' %><br>
+    <%= select_tag 'settings[commerce_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['commerce_layout']), { prompt: 'Select Commerce Layout' } %>
+</div>
+
+<div class="col-6 columns cd-edit-form">
     <%= label_tag 'settings[contact_form_layout]', 'Contact Form Layout' %><br>
     <%= select_tag 'settings[contact_form_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['contact_form_layout']), { prompt: 'Select Contact Form Layout' } %>
 </div>
