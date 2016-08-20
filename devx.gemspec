@@ -54,6 +54,7 @@ Gem::Specification.new do |s|
 
 
   ## User Interface
+  s.add_runtime_dependency "foundation-rails"
   s.add_runtime_dependency "select2-rails"
   s.add_runtime_dependency "font-awesome-rails"
   s.add_runtime_dependency "wow-rails"

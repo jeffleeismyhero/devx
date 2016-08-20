@@ -38,6 +38,14 @@ Devx::Role.create([
   }
 ])
 
+Devx::Permission.create([
+    {
+      role: Devx::Role.find_by(name: 'Super Administrator'),
+      object_class: 'all',
+      action: 'manage'
+    }
+])
+
 users.each do |u|
   role = Devx::Role.find_by(name: 'Super Administrator')
   u.authorizations.create(role: role)

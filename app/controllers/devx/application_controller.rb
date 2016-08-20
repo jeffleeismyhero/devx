@@ -9,5 +9,19 @@ module Devx
     def app_branding
       Devx::Branding.find_or_create_by(id: 1)
     end
+
+    def gather_models
+      models = []
+      
+      # Gather all controllerss from the Portal directory
+      controllers = Dir.new("#{Devx::Engine.root}/app/controllers/devx/portal").entries
+      controllers.each do |controller|
+        if controller =~ /_controller/
+          models << controller.gsub('_controller.rb','').singularize.camelize
+        end
+      end
+
+      return models
+    end
   end
 end

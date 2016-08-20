@@ -5,6 +5,16 @@
     </div>
 
     <div class="col-12 columns">
+      <%= link_to_add_fields 'Add Permission', f, :permissions, nil, 'permission_fields', '' %>
+
+      <%= content_tag :div, class: 'nested-attributes' do %>
+        <%= f.fields_for :permissions do |p| %>
+          <%= render partial: 'permission_fields', locals: { f: p } %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="col-12 columns">
         <div class="cd-update-form">
             <%= f.submit %>
         </div>

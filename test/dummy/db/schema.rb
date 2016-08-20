@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819214640) do
+ActiveRecord::Schema.define(version: 20160820094728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -510,6 +510,14 @@ ActiveRecord::Schema.define(version: 20160819214640) do
     t.string   "school_id"
     t.datetime "deleted_at"
     t.text     "bio"
+  end
+
+  create_table "devx_permissions", force: :cascade do |t|
+    t.integer  "role_id"
+    t.string   "object_class"
+    t.string   "action"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "devx_product_skus", force: :cascade do |t|

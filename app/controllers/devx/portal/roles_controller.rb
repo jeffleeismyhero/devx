@@ -13,9 +13,11 @@ module Devx
     end
 
     def edit
+      @classes = gather_models
     end
 
     def new
+      @classes = gather_models
     end
 
     def show
