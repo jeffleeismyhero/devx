@@ -35,7 +35,7 @@ module Devx
       end
 
       if @calendar.calendar_type.present?
-        @events = Devx::Schedule.for_calendar(Devx::Calendar.find(1), Time.now.beginning_of_month).ordered
+        @events = Devx::Schedule.for_calendar(@calendar, @start_date)
         @schedules = Devx::Schedule.for_month(@start_date)
 
 
