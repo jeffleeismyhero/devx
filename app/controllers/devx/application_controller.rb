@@ -11,13 +11,13 @@ module Devx
     end
 
     def gather_models
-      models = []
-      
+      models = ['all']
+
       # Gather all controllerss from the Portal directory
       controllers = Dir.new("#{Devx::Engine.root}/app/controllers/devx/portal").entries
       controllers.each do |controller|
         if controller =~ /_controller/
-          models << controller.gsub('_controller.rb','').singularize.camelize
+          models << controller.gsub('_controller.rb','').singularize.humanize.titleize
         end
       end
 
