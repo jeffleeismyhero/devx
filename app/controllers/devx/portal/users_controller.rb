@@ -340,7 +340,7 @@ module Devx
   			accessible = [ :person_id, :email, :first_name, :last_name, :generate_password, :photo, role_ids: [],
                       children_attributes: [ :id, :first_name, :last_name, :_destroy ],
                       linked_accounts_attributes: [ :id, :user_id, :person_id, :_destroy ],
-                      person_attributes: [ :id, :first_name, :last_name, :photo ]
+                      person_attributes: [ :id, :first_name, :last_name, :bio, :photo ]
                     ]
 
   			#adds the below params to the above var except when the user and password fields are blank
