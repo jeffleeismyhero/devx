@@ -1,15 +1,145 @@
-<h1 style="text-align: center;"><%= @product.name %></h1>
-<hr>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	  	<title><%= sys_title(yield(:title)) %></title>
 
-<div class = "row">
-  <div class = "small-12 medium-12, large-12">
+	    <%= stylesheet_link_tag "devx/boilerplate.css", media: "all" %>
+	    <%= stylesheet_link_tag "devx/product_displays.css", media: "all" %>
+	  	<%= stylesheet_link_tag    "devx/application", media: "all" %>
+	  	<%= javascript_include_tag "devx/application" %>
+	  	<%= csrf_meta_tags %>
+	</head>
 
-    <h3><%= @product.name %></h3>
-    <p><%= @product.description %></p>
+	<body style="background-color: #cccccc">
 
-  </div>
+   	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900' rel='stylesheet' type='text/css'>
+    	<link href='https://fonts.googleapis.com/css?family=Bad+Script' rel='stylesheet' type='text/css'>
 
-  <% Devx::ProductSku.where(product: @product).try(:each) do |sku| %>
-    <%= link_to 'Add to Cart', devx.portal_url(sku, subdomain: 'portal') %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  
-  <% end %>
-</div>
+    	<div class="container hide-for-medium-down" style="background-color: #fff;">
+    		<div class="row full-width">
+
+    			<div class="medium-12 columns">
+	            <div style="display:block; float:left; posiiton:relative;">
+	             
+	            </div>
+
+	            <div style="background-color:#A6192E; height:50px;">
+
+	            </div>
+
+	            <div style="height:100px; text-align:center;">
+	            	<h4 class="header-text-red-center" id="facts-viewable">HEADER</h4>
+	            </div>
+        		</div>
+
+    		</div>
+		</div>
+
+		<div class="container banner" style="margin-bottom:2.5rem; background-color: #cccccc">
+			<div class="row">
+
+				<div class="large-12 columns">
+					<h4 class="header-text-red-center" id="facts-viewable"><%= @product.name %></h4>
+					<hr class="hr">
+
+					<div class="small-12 small-offset-0 medium-12 medium-offset-0 large-12 large-offset-0 xlarge-10 xlarge-offset-1 columns">
+						<div class="small-12 medium-12 large-12 columns">
+							<h4 class="header-text-red" id="facts-viewable"><%= @product.name %></h4>
+							<p><%= @product.description %></p>
+
+							<p>
+								<% Devx::ProductSku.where(product: @product).try(:each) do |sku| %>
+		    						<%= link_to 'Add to Cart', devx.portal_url(sku, subdomain: 'portal') %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  
+		  						<% end %>
+		  					</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="container red padding-container" id="footer" style="border-bottom:1px solid #90091d; position: absolute; bottom: 90px; width: 100%">
+   		<div class="row full-width">
+
+        		<center>
+	            <div class="small-12 medium-6 large-5 columns">
+	               <div class="small-6 medium-6 large-6 columns">
+	               	<ul>
+	                  	<li><a href="#">About</a></li>
+	                     <li><a href="#">Admissions</a></li>
+	                     <li><a href="#">Academics</a></li>
+	                 </ul>
+	               </div>
+
+	               <div class="small-6 medium-6 large-6 columns">
+	               	<ul>
+	                     <li><a href="#">Programs</a></li>
+	                     <li><a href="#">Student Life</a></li>
+	                     <li><a href="#">Support</a></li>
+	                 </ul>
+	               </div>
+	            </div>
+
+	            <div class="hide-for-medium-down large-2 columns">
+	                <a href="/"><img class="logo" src="/uploads/devx/medium/file/000/000/054/EDS-logo-white.png" alt="Eds logo white 0b577dff5ab5d29297a6f254841ec78d4c5f14262320d3a6b4e00ccd6c424911"></a>
+	            </div>
+
+	            <div class="small-12 medium-6 large-5 columns">
+               	<div class="small-6 medium-6 large-6 columns">
+                    	<ul>                
+                     	<li><a href="#">Alumni</a></li>
+                        <li><a href="#">Parents</a></li>
+                        <li><a href="#">Contact</a></li>
+                    	</ul>
+                	</div>
+
+	                <div class="small-6 medium-6 large-6 columns">
+	                    <ul>                
+	                        <li><a href="#">Careers</a></li>
+	                        <li><a href="#">Board of Trustees</a></li>
+	                        <li><a href="#">Faculty Directory</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+
+	            <div class="show-for-medium-down small-12 medium-12 columns">
+	                <a href="/"><img class="logo" src="/uploads/devx/medium/file/000/000/054/EDS-logo-white.png" alt="Eds logo white 0b577dff5ab5d29297a6f254841ec78d4c5f14262320d3a6b4e00ccd6c424911"></a>
+	            </div>
+        		</center>
+
+    		</div>
+		</div>
+
+		<div class="container red" style="border-top:1px solid #a72236; position: absolute; bottom: 0; width: 100%;">
+    		<div class="row full-width">  
+
+        		<div class="large-12 columns">
+            	<div class="copyright">
+ 						<span class="hide-for-small">Copyright 2016 Episcopal Day School | Design by <a href="http://jcwproductions.com" target="_blank">JCW Productions</a></span>
+            		<span class="show-for-small">Copyright 2016 Episcopal Day School | <br>Design by <a href="http://jcwproductions.com" target="_blank">JCW Productions</a></span>
+
+						<center>
+							<span><a style="font-size:1.2rem;" href="http://dev.edscc.org/privacy-policy">Privacy Policy</a> | <a style="font-size:1.2rem;" href="http://dev.edscc.org/terms-of-use">Terms of Use</a></span>
+						</center>
+					</div>
+				</div>
+
+				<div class="small-4 medium-4 large-4 columns">
+					<div style="height:4px; width:100%; background-color:#AAC8C5;"></div>
+				</div>
+
+				<div class="small-4 medium-4 large-4 columns">
+					<div style="height:4px; width:100%; background-color:#73a434;"></div>
+				</div>
+
+				<div class="small-4 medium-4 large-4 columns">
+					<div style="height:4px; width:100%; background-color:#e5e5e5;"></div>
+				</div>
+
+        	</div>
+    	</div>
+
+	</body>
+</html>
