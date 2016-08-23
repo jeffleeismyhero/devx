@@ -4,8 +4,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	  	<title><%= sys_title(yield(:title)) %></title>
 
-	    <%= stylesheet_link_tag "devx/boilerplate.css", media: "all" %>
-	    <%= stylesheet_link_tag "devx/product_displays.css", media: "all" %>
+	   <%= stylesheet_link_tag "devx/boilerplate.css", media: "all" %>
+	   <%= stylesheet_link_tag "devx/product_displays.css", media: "all" %>
 	  	<%= stylesheet_link_tag    "devx/application", media: "all" %>
 	  	<%= javascript_include_tag "devx/application" %>
 	  	<%= csrf_meta_tags %>
@@ -52,7 +52,10 @@
 								<% Devx::ProductSku.where(product: @product).try(:each) do |sku| %>
 		    						<%= link_to 'Add to Cart', devx.portal_url(sku, subdomain: 'portal') %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  
 		  						<% end %>
+
+		  						<%= '|' %> <%= link_to 'Back to Products', devx.products_path, style:'padding-left: 5px' %>
 		  					</p>
+
 						</div>
 					</div>
 				</div>
