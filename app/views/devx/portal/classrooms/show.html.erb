@@ -110,12 +110,14 @@
                     <div class="accordion-content">
                       <div style="padding:40px 0px">
                         <% @classroom.classroom_teachers.try(:each) do |teacher| %>
-                          <div class="medium-4 columns">
-                            <%= image_tag(teacher.person.try(:photo).try(:large).try(:url), style: 'max-width:100%') %>
-                          </div>
-                          <div class="medium-8 columns">
-                            <h3><%= "#{teacher.person.first_name[0,1]}. #{teacher.person.last_name}".squish %></h3>
-                            <%= simple_format teacher.person.try(:bio) %>
+                          <div class="medium-12 columns" style="margin:10px 0;">
+                              <div class="medium-4 columns">
+                                <%= image_tag(teacher.person.try(:photo).try(:large).try(:url), style: 'max-width:100%') %>
+                              </div>
+                              <div class="medium-8 columns">
+                                <h3><%= "#{teacher.person.first_name[0,1]}. #{teacher.person.last_name}".squish %></h3>
+                                <%= simple_format teacher.person.try(:bio) %>
+                              </div>
                           </div>
                         <% end %>
                       </div>
