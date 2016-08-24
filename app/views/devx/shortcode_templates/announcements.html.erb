@@ -3,7 +3,7 @@
 	<div style="margin-top: 10px;" class="large-12 medium-12 small-12 columns">
 
 		<div class="large-12 medium-12 small-12 columns no-padding">
-			<p style="font-size:16px; font-family:Lato; font-weight:600; margin-bottom: 30px;"><%= announcement.content %></p>
+			<p style="font-size:16px; font-family:Lato; font-weight:600; margin-bottom: 30px;"><%= announcement.content.try(:html_safe) %></p>
 			<hr/>
 		</div>
 

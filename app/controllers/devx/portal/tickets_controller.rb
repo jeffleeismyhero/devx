@@ -15,7 +15,7 @@ module Devx
 
     def create
       @ticket.user = current_user
-      
+
       if @ticket.valid? && @ticket.save
         redirect_to devx.portal_tickets_path,
         notice: "Successfully created ticket"

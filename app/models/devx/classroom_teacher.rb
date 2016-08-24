@@ -4,6 +4,6 @@ module Devx
   	belongs_to :classroom
 
   	validates :person_id, presence: true
-  	validates :classroom, presence: true, uniqueness: { scope: [:person_id] }
+  	validates :classroom, uniqueness: { scope: [:person_id] }
   end
 end

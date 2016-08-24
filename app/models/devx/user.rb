@@ -24,6 +24,7 @@ module Devx
     has_many :article_subscriptions
     has_many :linked_accounts
     has_many :children, through: :linked_accounts, class_name: 'Devx::Person'
+    has_many :orders
     belongs_to :person
 
     validates :email, presence: true
@@ -163,6 +164,12 @@ module Devx
       else
         puts "Failed to create CRM record #{person.inspect}"
         return false
+      end
+    end
+
+    def create_stripe_record
+      if Devx::ApplicationSetting.settings['stripe']
+        # TODO
       end
     end
 

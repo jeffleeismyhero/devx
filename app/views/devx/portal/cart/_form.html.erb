@@ -1,0 +1,27 @@
+<div class="col-8 columns no-padding" style="margin-top:20px;">
+  <div class="col-12 columns cd-edit-form">
+    <h5>Payment details</h5>
+  </div>
+  <%= f.hidden_field :stripe_token, class: 'stripe-token' %>
+  <div class="col-8 columns cd-edit-form">
+    <%= label_tag :cc_number, 'Credit Card Number' %>
+    <%= text_field_tag :cc_number, '', placeholder: 'Credit Card Number', autocomplete: :off %>
+  </div>
+  <div class="col-8 columns cd-edit-form">
+    <%= label_tag :ch_name, 'Cardholder Name' %>
+    <%= text_field_tag :ch_name, '', placeholder: 'Cardholder Name', autocomplete: :off %>
+  </div>
+  <div class="col-8 columns cd-edit-form">
+    <%= label_tag :exp_date, 'Expiration Date' %>
+    <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed' } %>
+  </div>
+  <div class="col-8 columns cd-edit-form">
+    <%= label_tag :cvv, 'Security Code' %>
+    <%= text_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off %>
+  </div>
+  <div class="col-12 columns">
+    <div class="cd-update-form">
+        <%= f.submit 'Submit order' %>
+    </div>
+  </div>
+</div>

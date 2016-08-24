@@ -141,11 +141,12 @@ module DiamondMind
 
 
 
-        def self.process(username, password, donation, credit_card_number, expiration_date, cvv)
+        def self.process(username, password, donation, credit_card_number, expiration_date, cvv, order_desc, ip_addr)
           gw = DiamondMind::Processor.new()
           # NOTE: your username and password should replace the ones below
           gw.setLogin(username, password);
 
+          gw.setOrder(order_desc, order_desc, 0, 0, '', ip_addr)
           gw.setBilling(donation.cardholder_first_name,donation.cardholder_last_name,"",donation.billing_address,"", donation.city,
                   donation.state,donation.zip_code,"US",donation.phone_number,"",donation.user.email,
                   "")

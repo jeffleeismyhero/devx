@@ -12,7 +12,7 @@
         <%= f.fields_for :person, @person do |p| %>
             <div class="col-12 columns">
                 <%= p.label :photo %>
-                <%= p.file_field :photo %> 
+                <%= p.file_field :photo %>
             </div>
         <% end %>
     <% end %>
@@ -30,18 +30,25 @@
             <%= p.label :first_name %><br>
             <%= p.text_field :first_name %>
         </div>
-        
+
         <div class="small-12 medium-6 large-6 columns cd-edit-form">
             <%= p.label :last_name %><br>
             <%= p.text_field :last_name %>
         </div>
+
+        <% if @user.faculty? %>
+          <div class="small-12 columns">
+            <%= p.label :bio %>
+            <%= p.cktext_area :bio, ckeditor: { toolbar: 'mini' } %>
+          </div>
+        <% end %>
     <% end %>
-    
+
     <div class="small-12 medium-12 large-12 columns cd-edit-form">
         <%= f.label :email %><br>
         <%= f.text_field :email %>
     </div>
-    
+
     <div class="small-12 medium-12 large-12 columns">
         <% if current_user.administrator? %>
             <%= f.hidden_field :generate_password, value: f.object.new_record? %>
@@ -53,7 +60,7 @@
             <%= f.label :password %><br>
             <%= f.password_field :password %>
         </div>
-    
+
         <div class="small-12 medium-6 large-6 columns cd-edit-form">
             <%= f.label :password_confirmation %><br>
             <%= f.password_field :password_confirmation %>

@@ -25,7 +25,7 @@ module Devx
       @event.calendar_id = Devx::Calendar.find(params[:calendar_id]).id
 
   		if @event.valid? && @event.save
-  			redirect_to devx.portal_calendar_path(id: params[:calendar_id]),
+  			redirect_to devx.edit_portal_calendar_event_path(@calendar, @event),
   			notice: "Successfully created event"
   		else
   			render :new,
@@ -37,7 +37,7 @@ module Devx
       @event.calendar_id = Devx::Calendar.find(params[:calendar_id]).id
 
   		if @event.valid? && @event.update(event_params)
-  			redirect_to devx.portal_calendar_path(id: params[:calendar_id]),
+  			redirect_to devx.edit_portal_calendar_event_path(@calendar, @event),
   			notice: "Successfully updated event"
   		else
   			render :edit,

@@ -13,6 +13,10 @@ Devx::Engine.routes.draw do
       match 'jobs', to: DelayedJobWeb, anchor: false, via: [ :get, :post ]
     end
 
+    get '/cart' => 'cart#index'
+    get '/cart/empty' => 'cart#empty'
+    get '/cart/:id' => 'cart#add'
+    match '/checkout', to: 'cart#checkout', via: [ :get, :post ]
 
     get '/' => 'dashboard#index', as: :dashboard
     get '/terms-of-service', to: 'dashboard#terms_of_service'
@@ -39,6 +43,7 @@ Devx::Engine.routes.draw do
     end
     post 'transactions/process-all', to: 'account_transactions#process_all'
 
+    resources :charges
     resources :pages
     resources :menus do
       collection { post :sort }
@@ -112,6 +117,9 @@ Devx::Engine.routes.draw do
     end
   end
 
+  get 'products', to: 'product_displays#index'
+  get 'products/:id', to: 'product_displays#show', as: :product
+
   resources :calendars, path: 'calendar', only: [ :index ] do
     member do
       get 'export-all', to: 'calendars#export_all'
@@ -119,9 +127,13 @@ Devx::Engine.routes.draw do
     end
 
     resources :events, only: [ :show ] do
-      resources :schedules, only: [ :show ]
+      resources :schedules, only: [ :show ] do
+        member do
+          post 'export', to: 'schedules#export'
+        end
+      end
       member do
-        post 'subscribe' => 'events#subscribe'
+        post 'subscribe', to: 'events#subscribe'
       end
     end
   end

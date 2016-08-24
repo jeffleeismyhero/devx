@@ -82,7 +82,7 @@ module Devx
           max_results: 2500,
           single_events: true,
           order_by: 'startTime',
-          time_min: Time.now.iso8601,
+          time_min: Time.now.beginning_of_month.iso8601,
           time_max: (Time.now + 2.year).iso8601
         )
 
@@ -115,17 +115,17 @@ module Devx
 
           if event.start.try(:date).present?
             date_only = true
-            start_time = event.start.date.to_datetime.beginning_of_day
+            start_time = event.start.date.in_time_zone.beginning_of_day
 
-            if event.end.date.to_datetime == (event.start.date.to_datetime + 1.day)
-              end_time = event.start.date.to_datetime.end_of_day
+            if event.end.date.to_date.to_s == (event.start.date.to_date + 1.day).to_s
+              end_time = event.start.date.in_time_zone.end_of_day
             else
-              end_time = event.end.date.to_datetime.end_of_day - 1.day
+              end_time = event.end.date.in_time_zone.end_of_day - 1.day
             end
           elsif event.start.try(:date_time).present?
             date_only = false
-            start_time = event.start.date_time
-            end_time = event.end.date_time
+            start_time = event.start.date_time.in_time_zone
+            end_time = event.end.date_time.in_time_zone
           end
 
           e.schedules.new(
@@ -140,6 +140,9 @@ module Devx
         end
       end
 
+    rescue Signet::AuthorizationError
+      self.update_columns(refresh_token: nil, authorization_url: nil, authorization_code: nil)
+      self.check_google_calendar
     end
 
   end

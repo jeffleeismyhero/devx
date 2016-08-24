@@ -43,6 +43,17 @@
     <%= label_tag 'settings[staff_directory]', 'Staff Directory Layout' %><br>
     <%= select_tag 'settings[staff_directory]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['staff_directory']), { prompt: 'Select Staff Directory Layout' } %>
 </div>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+    <%= label_tag 'settings[donation_form_layout]', 'Donation Form Layout' %><br>
+    <%= select_tag 'settings[donation_form_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['donation_form_layout']), { prompt: 'Select Donation Form Layout' } %>
+</div>
+
+<div class="col-6 columns cd-edit-form">
+    <%= label_tag 'settings[commerce_layout]', 'Commerce Layout' %><br>
+    <%= select_tag 'settings[commerce_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['commerce_layout']), { prompt: 'Select Commerce Layout' } %>
+</div>
 
 <div class="col-6 columns cd-edit-form">
     <%= label_tag 'settings[contact_form_layout]', 'Contact Form Layout' %><br>
@@ -212,7 +223,7 @@
         if(c.is(":checked"))
         {
             $("." + d + "-child").show();
-            
+
         }
         else
         {

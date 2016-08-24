@@ -26,7 +26,7 @@ module Devx
         @start_date = params[:start_date].to_datetime unless params[:start_date].nil?
         @start_date ||= DateTime.now
       end
-      
+
       @page = Devx::Page.new(name: 'Calendar', layout: @layout)
       @dates = []
 

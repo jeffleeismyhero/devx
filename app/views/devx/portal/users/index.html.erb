@@ -5,11 +5,14 @@
         <div class="col-12 columns">
             <h1><%= yield(:title) %></h1>
         </div>
-        <div class="col-12 columns" style="padding-bottom:20px;">
+        <div class="large-12 columns" style="padding-bottom:20px;">
+
+            <div class="large-8 medium-6 small-12 columns">
             <i class="fa fa-user-plus" aria-hidden="true"></i> <%= link_to 'Add User', devx.new_portal_user_path %> <i class="fa fa-upload" aria-hidden="true"></i> <%= link_to 'Import Users', devx.portal_users_import_path %> <%= link_to 'Import Linked Users', devx.portal_users_import_linked_path %> <i class="fa fa-download"></i> <%= link_to 'Export Users', devx.portal_users_path(format: :xlsx) %>
-            <div style="float:right;">
-                <span style="padding:0 10px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                <span style="padding:0 10px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+            </div>
+            <div class="large-4 medium-6 small-12 columns" style="">
+                <span style="padding:0 5px;">Filter by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                <span style="padding:0 5px;">Arrange by <i class="fa fa-caret-down" aria-hidden="true"></i></span>
                 <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
                 <div class="cd-edit-form">
                 <%= search_form_for @q, url: devx.portal_users_path do |f| %>

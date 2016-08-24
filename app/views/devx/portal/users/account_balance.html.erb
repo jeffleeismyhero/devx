@@ -22,19 +22,21 @@
                 <% if current_user.person.present? && !current_user.parent? %>
                     <tr>
                         <td><%= current_user.person.try(:record_with_school_id) %></td>
-                        <td><%= number_to_currency current_user.person.balance %></td>
+                        <td><%= "Not yet available" %></td>
                     </tr>
                 <% end %>
                 <% @user.linked_accounts.each do |account| %>
                     <tr>
                         <td><%= account.person.try(:record_with_school_id) %></td>
-                        <td><%= number_to_currency account.person.balance %></td>
+                        <td><%= "Not yet available" %></td>
                     </tr>
                 <% end %>
             </tbody>
         </table>
 
         <h3>Transaction History</h3>
+        <h6>Under Construction</h6>
+        <% if current_user.super_administrator? %>
         <table class="hide-for-medium-down">
             <thead>
                 <tr>
@@ -62,6 +64,7 @@
                 <%= render partial: 'account_transaction', collection: @account_transactions.limit(30) %>
             </tbody>
         </table>
+        <% end %>
     </div>
 
 
@@ -112,7 +115,7 @@
             </div>
         </div>
 
-        
+
 
         <div class="large-12 columns">
          <small>*Please allow up to 24 hours for funds to be available*</small>
