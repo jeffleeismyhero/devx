@@ -14,6 +14,7 @@ module Devx
       @calendar = @q.result.first if @q.result.first.active == true
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
 
+
       if app_settings['default_calendar'].present?
         @calendar = Devx::Calendar.active.find(app_settings['default_calendar']) unless params[:q].present?
       end
