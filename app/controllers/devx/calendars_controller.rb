@@ -51,7 +51,7 @@ module Devx
         @dates.each do |date|
           @scheduled_events[date] = []
           @events.each do |event|
-            event.schedules.try(:each_with_index) do |schedule, index|
+            event.schedules.ordered.try(:each_with_index) do |schedule, index|
               if schedule.end_time_date.present? && schedule.end_time_date >= date
                 if schedule.start_time_date.present? && schedule.start_time_date <= date
                   if !@scheduled_events[date].include?(schedule)
