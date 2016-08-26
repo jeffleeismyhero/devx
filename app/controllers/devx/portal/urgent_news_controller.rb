@@ -3,9 +3,9 @@ require_dependency "devx/application_controller"
 module Devx
   class Portal::UrgentNewsController < ApplicationController
     before_filter :authenticate_user!
-    load_and_authorize_resource
+    load_and_authorize_resource :urgent_news, class: 'Devx::UrgentNews'
 
-    layout 'portal'
+    layout 'devx/portal'
 
     def index
     end
