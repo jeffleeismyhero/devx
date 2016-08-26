@@ -1,5 +1,5 @@
 <ul id="event-list" style="margin-bottom:20px">
-    <% @attributes[:events].try(:each) do |schedule| %>
+    <% @attributes[:events].sort_by{|s| s.start_time }.try(:each) do |schedule| %>
         <%= "<li class=\"event\">
         <div class=\"event-square\">
             <div class=\"event-date\">
@@ -10,7 +10,7 @@
         </div>
         <div class=\"event-text\">
             <p class=\"event-title\">#{schedule.event.name.try(:upcase)}</p>
-            <p class=\"event-desc\">#{schedule.start_time.try(:strftime, '%I:%M%p')}</p>
+            <p class=\"event-desc\">#{schedule.start_time.try(:strftime, '%l:%M %p')}</p>
             <p class=\"event-desc\">#{schedule.event.venue.try(:upcase)}</p>
         </div>
     </li>".html_safe %>
