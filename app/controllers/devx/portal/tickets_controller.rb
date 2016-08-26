@@ -28,7 +28,6 @@ module Devx
     def update
     end
 
-
     private
 
     def ticket_params
