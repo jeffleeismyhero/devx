@@ -4,10 +4,10 @@
       <h3 style="text-align:center">Week starting: <%= @start_date.beginning_of_week(start_day = :sunday).strftime('%B %d, %Y') rescue @start_date %></h3>
       <div class="calendar-navigation">
         <div class="previous-link">
-          <%= link_to "<i class=\"fa fa-arrow-left\"></i> Previous".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date - 1.week) %>
+          <%= link_to "<i class='fa fa-arrow-left'></i> Previous".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date - 1.week) %>
         </div>
         <div class="next-link">
-          <%= link_to "Next <i class=\"fa fa-arrow-right\"></i>".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date + 1.week) %>
+          <%= link_to "Next <i class='fa fa-arrow-right'></i>".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date + 1.week) %>
         </div>
       </div>
     </div>
