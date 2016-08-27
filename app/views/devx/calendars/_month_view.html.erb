@@ -15,7 +15,7 @@
       <%= month_calendar events: @schedules do |date, schedules| %>
         <%= date.try(:strftime, '%d') %>
         <ul class="event-list">
-          <% @scheduled_events[date].try(:each) do |schedule| %>
+          <% @scheduled_events[date].to_a.sort_by{|s| s.start_time }.try(:each) do |schedule| %>
             <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
               <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
                 <li class="event-listing">
