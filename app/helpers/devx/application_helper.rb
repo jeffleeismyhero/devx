@@ -119,7 +119,7 @@ module Devx
     def year_select_options(schedules)
       years = schedules.pluck("DISTINCT EXTRACT(YEAR FROM start_time)::Integer")
       years = years.reject { |year| year.to_s.length != 4 }
-      options_for_select((years.min..years.max).to_a rescue [])
+      options_for_select((years.min..years.max).to_a) rescue nil
     end
   end
 end
