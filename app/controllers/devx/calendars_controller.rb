@@ -82,7 +82,7 @@ module Devx
       end
 
     rescue => e
-      logger.warn "[EXCEPTION] #{e.inspect}" 
+      logger.warn "[EXCEPTION] #{e.message}" 
       redirect_to '/404.html'
     end
 
