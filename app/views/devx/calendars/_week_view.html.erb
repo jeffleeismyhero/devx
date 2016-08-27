@@ -12,8 +12,8 @@
       </div>
     </div>
 
-    <% @dates = @start_date.beginning_of_week(start_day = :sunday).upto(@start_date.end_of_week) %>
-    <% @dates.in_groups_of(3).each do |group| %>
+    <% dates = @start_date.beginning_of_week(start_day = :sunday).upto(@start_date.end_of_week) %>
+    <% dates.in_groups_of(3).each do |group| %>
       <div class="large-12 columns">
         <% group.each do |date| %>
           <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
