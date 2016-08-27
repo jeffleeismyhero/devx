@@ -18,7 +18,6 @@
 </head>
 <body>
 
-<div style="display:none"><%= Devx::UrgentNews.latest.inspect %></div>
 <%= alert_message(Devx::UrgentNews.latest) if params && params[:debug].present? %>
 
 <%= yield %>
