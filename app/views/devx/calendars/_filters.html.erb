@@ -1,0 +1,22 @@
+<div class="small-12 medium-10 medium-offset-1 large-10 large-offset-1 columns">
+  <%= search_form_for @q do |f| %>
+    <% if @calendars.count > 1 %>
+      <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View calendar:</p>
+      <%= f.select :id_eq, Devx::Calendar.all.collect{ |x| [ x.name, x.id ] }, { include_blank: true }, { class: 'select2-fixed' } %>
+    <% end %>
+
+    <% if @tags.any? %>
+      <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View category:</p>
+      <%= select '', :category, options_from_collection_for_select(@tags, 'name', 'name', params['category']), { include_blank: true }, { class: 'select2' } %>
+    <% end %>
+
+    <p style="margin-bottom:8px; font-family:lato; font-weight:600;">Select month:</p>
+    <%= select '', :month_select, month_select_options, { prompt: 'Select Month' }, { style: 'max-width:300px' } %>
+    <%= select '', :year_select, options_for_select(@years), { prompt: 'Select Year' }, { style: 'max-width:300px' } %>
+
+    <div style="margin-top:30px"><%= f.submit %></div>
+    <% end %>
+    <% if params[:start_date] %>
+    <%= link_to 'Back to Today', devx.calendars_path, class: 'button primary small' %>
+  <% end %>
+</div>

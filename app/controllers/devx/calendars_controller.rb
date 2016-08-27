@@ -14,7 +14,6 @@ module Devx
       @calendar = @q.result.first if @q.result.first.active == true
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
 
-
       if app_settings['default_calendar'].present?
         @calendar = Devx::Calendar.active.find(app_settings['default_calendar']) unless params[:q].present?
       end
@@ -37,15 +36,6 @@ module Devx
       if @calendar.calendar_type.present?
         @events = Devx::Schedule.for_calendar(@calendar, @start_date)
         @schedules = Devx::Schedule.for_month(@start_date).ordered
-
-
-        @years = []
-
-        Devx::Schedule.all.ordered.try(:each) do |s|
-          if !@years.include?(s.start_time.try(:strftime, '%Y'))
-            @years.push(s.start_time.try(:strftime, '%Y'))
-          end
-        end
 
         @scheduled_events = {}
         @dates.each do |date|
@@ -129,7 +119,6 @@ module Devx
     end
 
     private
-
 
     def determine_layout
       if app_settings['newsfeed_layout'].present?

@@ -106,5 +106,20 @@ module Devx
         end
       end
     end
+
+    def month_select_options
+      options_for_select([
+        ['January', '1'], ['February', '2'], ['March', '3'], ['April', '4'],
+        ['May', '5'], ['June', '6'], ['July', '7'], ['August', '8'],
+        ['September', '9'], ['October', '10'], ['November', '11'],
+        ['December', '12']
+      ])
+    end
+
+    def year_select_options(schedules)
+      years = schedules.pluck("DISTINCT EXTRACT(YEAR FROM start_time)::Integer")
+      years = years.reject { |year| year.to_s.length != 4 }
+      options_for_select((years.min..years.max).to_a rescue [])
+    end
   end
 end

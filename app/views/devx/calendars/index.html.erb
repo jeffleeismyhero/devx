@@ -1,53 +1,33 @@
 <% provide(:title, 'Calendar') %>
 
 <div class="container banner" style="margin-bottom:40px; padding-bottom:20px;background-color:#e9e9e9">
-    <div class="row">
-        <div class="medium-10 medium-offset-1 large-10 large-offset-1 columns" style="margin-bottom:20px;">
-          <h1 class="page-title calendar-title">Calendar</h1>
-        </div>
+  <div class="row">
+    <div class="medium-10 medium-offset-1 large-10 large-offset-1 columns" style="margin-bottom:20px;">
+      <h1 class="page-title calendar-title">Calendar</h1>
     </div>
-    <div class="row">
-      <div class="small-12 medium-10 medium-offset-1 large-10 large-offset-1 columns">
-          <ul>
-              <li style="display:inline-block;"><a id="month" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-calendar" style="font-size:1.8rem;" aria-hidden="true"></i> Month View</a></li>
-              <li style="display:inline-block;"><a id="week" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-calendar" style="font-size:1.8rem;" aria-hidden="true"></i> Week View</a></li>
-              <li style="display:inline-block;"><a id="grid" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-th-large" style="font-size:1.8rem;" aria-hidden="true"></i> Grid View</a></li>
-              <li style="display:inline-block;"><a id="list" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-list-alt" style="font-size:1.8rem;" aria-hidden="true"></i></i> List View</a></li>
-              <li style="display:inline-block;"><a href="javascript:window.print()" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-print" style="font-size:1.8rem;" aria-hidden="true"></i> Print</a></li>
-              <% if params[:category].present? %>
-                <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export this category".html_safe, devx.calendar_path(category: params[:category], format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
-              <% end %>
-              <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export full calendar".html_safe, devx.export_all_calendar_path(@calendar, format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
-              <li style="display:inline-block;">
-                <% if user_signed_in? %>
-                  <%= link_to "<i class=\"fa fa-plus\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Subscribe".html_safe, devx.subscribe_calendar_path(@calendar), method: :post, style: 'font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;' %>
-                <% end %>
-              </li>
-          </ul>
-      </div>
-      <div class="small-12 medium-10 medium-offset-1 large-10 large-offset-1 columns">
-        <%= search_form_for @q do |f| %>
-          <% if @calendars.count > 1 %>
-            <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View calendar:</p>
-            <%= f.select :id_eq, Devx::Calendar.all.collect{ |x| [ x.name, x.id ] }, { include_blank: true }, { class: 'select2-fixed' } %>
-          <% end %>
-
-          <% if @tags.any? %>
-            <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View category:</p>
-            <%= select '', :category, options_from_collection_for_select(@tags, 'name', 'name', params['category']), { include_blank: true }, { class: 'select2' } %>
-          <% end %>
-
-          <p style="margin-bottom:8px; font-family:lato; font-weight:600;">Select month:</p>
-          <%= select '', :month_select, options_for_select([['January', '1'], ['February', '2'], ['March', '3'], ['April', '4'], ['May', '5'], ['June', '6'], ['July', '7'], ['August', '8'], ['September', '9'], ['October', '10'], ['November', '11'], ['December', '12']]), { prompt: 'Select Month' }, { style: 'max-width:300px' } %>
-          <%= select '', :year_select, options_for_select(@years), { prompt: 'Select Year' }, { style: 'max-width:300px' } %>
-
-          <div style="margin-top:30px"><%= f.submit %></div>
+  </div>
+  <div class="row">
+    <div class="small-12 medium-10 medium-offset-1 large-10 large-offset-1 columns">
+      <ul>
+        <li style="display:inline-block;"><a id="month" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-calendar" style="font-size:1.8rem;" aria-hidden="true"></i> Month View</a></li>
+        <li style="display:inline-block;"><a id="week" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-calendar" style="font-size:1.8rem;" aria-hidden="true"></i> Week View</a></li>
+        <li style="display:inline-block;"><a id="grid" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-th-large" style="font-size:1.8rem;" aria-hidden="true"></i> Grid View</a></li>
+        <li style="display:inline-block;"><a id="list" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-list-alt" style="font-size:1.8rem;" aria-hidden="true"></i></i> List View</a></li>
+        <li style="display:inline-block;"><a href="javascript:window.print()" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-print" style="font-size:1.8rem;" aria-hidden="true"></i> Print</a></li>
+        <% if params[:category].present? %>
+          <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export this category".html_safe, devx.calendar_path(category: params[:category], format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
         <% end %>
-        <% if params[:start_date] %>
-          <%= link_to 'Back to Today', devx.calendars_path, class: 'button primary small' %>
-        <% end %>
-      </div>
+        <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export full calendar".html_safe, devx.export_all_calendar_path(@calendar, format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
+        <li style="display:inline-block;">
+          <% if user_signed_in? %>
+            <%= link_to "<i class=\"fa fa-plus\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Subscribe".html_safe, devx.subscribe_calendar_path(@calendar), method: :post, style: 'font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;' %>
+          <% end %>
+        </li>
+      </ul>
     </div>
+
+    <%= render partial: 'filters' %>
+  </div>
 </div>
 
 <style>
