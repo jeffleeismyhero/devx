@@ -45,62 +45,7 @@ ul.event-list {
 }
 </style>
 
-<div class="container" class="week-view hide-for-medium-down">
-  <div class="row weekview hide">
-    <div class="large-12 columns">
-      <h3 style="text-align:center">Week starting: <%= @start_date.beginning_of_week(start_day = :sunday).strftime('%B %d, %Y') rescue @start_date %></h3>
-      <div class="calendar-navigation">
-        <div class="previous-link">
-          <%= link_to "<i class=\"fa fa-arrow-left\"></i> Previous".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date - 1.week) %>
-        </div>
-        <div class="next-link">
-          <%= link_to "Next <i class=\"fa fa-arrow-right\"></i>".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date + 1.week) %>
-        </div>
-      </div>
-    </div>
-    <div class="large-12 columns">
-      <% @start_date.beginning_of_week(start_day = :sunday).upto(@start_date.end_of_week).try(:each) do |date| %>
-        <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
-            <div style="box-shadow: 0px 4px 4px #cccccc;">
-              <div class="calendar-event datebar">
-                  <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
-                  <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
-              </div>
-              <div style="border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
-                <table style="margin-bottom:40px">
-                    <% @scheduled_events[date.to_date].try(:each) do |schedule| %>
-                      <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
-                         <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
-                          <tr>
-                            <td>
-                              <strong><%= schedule.event.name %></strong>
-                            <br />
-                              <span><% if schedule.all_day == true %>All day event<% end %><strong>Start Time:</strong> <%= ldate schedule.start_time %><br /><strong>End Time:</strong> <%= ldate schedule.end_time %><% end %></span><br />
-                              <% if schedule.event.location.present? %><span><strong>Location:</strong> <%= schedule.event.location %></span><br />
-                              <span><%= schedule.event.venue.try(:full_address) %></span>
-                            </td>
-                            </tr>
-                            <% if schedule.event.description.present? %>
-                            <tr>
-                            <td>
-                                <span><strong>Description:</strong><br /><%= schedule.event.try(:description).try(:html_safe) %></span>
-                            </td>
-                          </tr>
-                          <% end %>
-                          <tr>
-                          <td>&nbsp;</td>
-                          </tr>
-                        <% end %>
-                      <% end %>
-                    <% end %>
-                </table>
-                </div>
-            </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= render partial: 'week_view' %>
 
 <div class="container" class="month-view hide-for-medium-down">
   <div class="row monthview hide">
