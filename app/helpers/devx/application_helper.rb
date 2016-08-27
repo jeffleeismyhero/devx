@@ -96,11 +96,11 @@ module Devx
           content_tag :div, class: 'row' do
             content_tag :div, class: 'large-12 columns' do
               messages.collect do |message|
-                concat content_tag :div, class: 'message' do
-                  concat content_tag :h2, message.title, class: 'alert-title'
-                  concat content_tag :p, message.message, class: 'alert-message'
+                content_tag :div, class: 'message' do
+                  content_tag :h2, message.title, class: 'alert-title'
+                  content_tag :p, message.message, class: 'alert-message'
                 end
-              end
+              end.reduce(:<<)
             end
           end
         end
