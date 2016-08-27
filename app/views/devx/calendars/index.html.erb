@@ -45,77 +45,9 @@ ul.event-list {
 }
 </style>
 
-<%= render partial: 'week_view' %>
 
 <%= render partial: 'month_view' %>
 
-<div class="container" style="margin-bottom:40px;" id="grid-view" class="calendar-view">
-    <div class="row gridview hide">
-      <% @dates.try(:each) do |date| %>
-        <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
-            <div style="background-color: #fff;border:1px solid #384967;box-shadow: 0px 4px 4px #cccccc;overflow:hidden">
-                <div class="calendar-event datebar">
-                    <h6 class="calendar-event month"><%= date.try(:strftime, '%^a') %></h6>
-                    <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.try(:strftime, '%^b %d') %></h6>
-                </div>
-                <div style="height:180px;overflow-y:scroll">
-                    <ul class="accordion">
-                      <% @scheduled_events[date].try(:each) do |schedule| %>
-                        <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
-                           <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
-                            <li style="margin-bottom:.1rem; ">
-                              <div class="accordion-title">
-                                <%= schedule.event.name %>
-                              </div>
-                              <div class="accordion-content">
-                                <span><% if schedule.all_day == true %>All day event<% else %>Start Time: <%= ldate schedule.start_time %><br />End Time: <%= ldate schedule.end_time %><% end %></span><br />
-                                <% if schedule.event.location.present? %><span>Location: <%= schedule.event.location %></span><br /><% end %>
-                                <span><%= schedule.event.venue.try(:full_address) %></span>
-                              </div>
-                            </li>
-                          <% end %>
-                        <% end %>
-                      <% end %>
-                    </ul>
-                </div>
-            </div>
-        </div>
-      <% end %>
-    </div>
-</div>
+<%= render partial: 'grid_view' %>
 
-
-<div class="container" style="margin-bottom:40px;" id="list-view" class="calendar-view">
-    <div class="row listview hide">
-      <% @dates.try(:each) do |date| %>
-        <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-8 xlarge-offset-2 columns" style="margin-bottom:20px;">
-            <div style="box-shadow: 0px 4px 4px #cccccc;">
-              <div class="calendar-event datebar">
-                  <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
-                  <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
-              </div>
-              <div style="height:180px;border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
-                    <ul class="accordion" style="margin:0">
-                      <% @scheduled_events[date].try(:each) do |schedule| %>
-                        <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
-                           <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
-                            <li style="margin-bottom:.1rem; ">
-                              <div class="accordion-title">
-                                <%= schedule.event.name %>
-                              </div>
-                              <div class="accordion-content">
-                                <span><% if schedule.all_day == true %>All day event<% else %>Start Time: <%= ldate schedule.start_time %><br />End Time: <%= ldate schedule.end_time %><% end %></span><br />
-                                <% if schedule.event.location.present? %><span>Location: <%= schedule.event.location %></span><br /><% end %>
-                                <span><%= schedule.event.venue.try(:full_address) %></span>
-                              </div>
-                            </li>
-                          <% end %>
-                        <% end %>
-                      <% end %>
-                    </ul>
-                </div>
-            </div>
-        </div>
-      <% end %>
-    </div>
-</div>
+<%= render partial: 'list_view' %>
