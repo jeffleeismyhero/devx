@@ -13,7 +13,7 @@
     </div>
 
     <% dates = @start_date.beginning_of_week(start_day = :sunday).upto(@start_date.end_of_week) %>
-    <% dates.in_groups_of(3).each do |group| %>
+    <% dates.to_a.in_groups_of(3).each do |group| %>
       <div class="large-12 columns">
         <% group.each do |date| %>
           <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
@@ -22,7 +22,44 @@
                 <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
                 <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
               </div>
-              
+              <div style="border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
+                <table style="margin-bottom:40px">
+                  <% @scheduled_events[date.to_date].try(:each) do |schedule| %>
+                    <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
+                      <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
+                        <tr>
+                          <td>
+                            <strong><%= schedule.event.name %></strong><br />
+                            <span>
+                              <% if schedule.all_day == true %>
+                                All day event
+                              <% else %>
+                                <strong>Start Time:</strong> <%= ldate schedule.start_time %><br />
+                                <strong>End Time:</strong> <%= ldate schedule.end_time %>
+                              <% end %>
+                            </span><br />
+                            <% if schedule.event.location.present? %>
+                              <span><strong>Location:</strong> <%= schedule.event.location %></span><br />
+                            <% end %>
+                            <span><%= schedule.event.venue.try(:full_address) %></span>
+                          </td>
+                        </tr>
+                        <% if schedule.event.description.present? %>
+                          <tr>
+                            <td>
+                              <span>
+                                <strong>Description:</strong><br />
+                                <%= schedule.event.try(:description).try(:html_safe) %>
+                              </span>
+                            </td>
+                          </tr>
+                        <% end %>
+                        <tr><td>&nbsp;</td></tr>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </table>
+              </div>
             </div>
           </div>
         <% end %>
