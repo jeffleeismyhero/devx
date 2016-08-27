@@ -12,11 +12,13 @@
   <% Devx::Stylesheet.all.try(:each) do |stylesheet| %>
     <link rel="stylesheet" type="text/css" href="<%= stylesheet_path(stylesheet) %>.css">
   <% end %>
-  <link rel="icon" type="image/png" href="<%= app_branding.favicon.try(:url) %>" />  
+  <link rel="icon" type="image/png" href="<%= app_branding.favicon.try(:url) %>" />
   <%= javascript_include_tag "devx/application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<%= alert_message(Devx::UrgentNews.latest) if params && params[:debug].present? %>
 
 <%= yield %>
 
