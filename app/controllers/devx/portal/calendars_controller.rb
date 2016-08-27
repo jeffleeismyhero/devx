@@ -200,11 +200,15 @@ module Devx
 
       end
     end
+    
     private
 
     def calendar_params
-        accessible = [ :name, :calendar_type, :client_id, :client_secret, :google_calendar_id, :authorization_code, :time_zone, :active ]
-        params.require(:calendar).permit(accessible)
+      accessible = [
+        :name, :calendar_type, :client_id, :client_secret, :google_calendar_id,
+        :authorization_code, :time_zone, :active
+      ]
+      params.require(:calendar).permit(accessible)
     end
   end
 end
