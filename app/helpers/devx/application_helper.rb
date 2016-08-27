@@ -92,7 +92,7 @@ module Devx
 
     def alert_message(messages)
       if messages.any?
-        content_tag :div, class: 'container banner secondary hide-for-medium-down' do
+        content_tag :div, class: 'container banner alert secondary' do
           content_tag :div, class: 'row' do
             content_tag :div, class: 'large-12 columns' do
               messages.collect do |message|
