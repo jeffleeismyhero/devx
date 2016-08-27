@@ -13,6 +13,20 @@
     </div>
 
     <% dates = @start_date.beginning_of_week(start_day = :sunday).upto(@start_date.end_of_week) %>
-    
+    <% dates.in_groups_of(3).each do |group| %>
+      <div class="large-12 columns">
+        <% group.each do |date| %>
+          <div class="small-12 medium-6 large-4 xlarge-3 columns" style="margin-bottom:20px;">
+            <div style="box-shadow: 0px 4px 4px #cccccc;">
+              <div class="calendar-event datebar">
+                <h6 class="calendar-event month"><%= date.to_date.try(:strftime, '%^a') %></h6>
+                <h6 style="display:inline-block; padding:10px; float:right; font-family:lato; margin:0; font-weight:600;"><%= date.to_date.try(:strftime, '%^b %d') %></h6>
+              </div>
+              
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
