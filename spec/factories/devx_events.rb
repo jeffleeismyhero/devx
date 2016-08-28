@@ -7,7 +7,7 @@ FactoryGirl.define do
     name { generate(:event_title) }
     description 'This is an event'
 
-    ignore do
+    transient do
       schedule_count 1
     end
 
