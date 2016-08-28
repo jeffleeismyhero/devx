@@ -159,10 +159,10 @@ module Devx
       self.person.active = true unless self.person.active.present?
 
       if self.valid? && self.save
-        puts "Successfully created CRM record #{person.inspect}"
+        logger.debug "Successfully created CRM record #{person.inspect}"
         return true
       else
-        puts "Failed to create CRM record #{person.inspect}"
+        logger.debug "Failed to create CRM record #{person.inspect}"
         return false
       end
     end
