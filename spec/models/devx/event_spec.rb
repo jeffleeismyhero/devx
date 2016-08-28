@@ -17,7 +17,7 @@ module Devx
 
     describe 'start time' do
       it 'should be invalid if blank' do
-        event.start_time = ''
+        event = FactoryGirl.build(:devx_event, schedule_count: 0)
         expect(event).not_to be_valid
       end
 
