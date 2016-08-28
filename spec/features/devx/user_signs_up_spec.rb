@@ -4,23 +4,20 @@ module Devx
   feature 'User signs up', type: 'feature' do
     Capybara.current_driver = Capybara.javascript_driver # :selenium by default
     Capybara.current_session.driver.browser.manage.window.resize_to(1366, 768)
-    
+
     scenario 'with valid e-mail and password' do
-      skip
       sign_up 'demo@devxcms.com', 'password'
-      expect(page).to have_content?('Sign up successful')
+      expect(page).to have_text('You have signed up successfully.')
     end
 
     scenario 'with invalid e-mail address' do
-      skip
       sign_up 'demo', 'password'
-      expect(page).to have_content?('Failed to sign up')
+      expect(page).to have_text('Email is invalid')
     end
 
     scenario 'with blank password' do
-      skip
-      sign_up 'demo', ''
-      expect(page).to have_content?('Failed to sign up')
+      sign_up 'demo@devxcms.com', ''
+      expect(page).to have_text('Password can\'t be blank')
     end
   end
 end
