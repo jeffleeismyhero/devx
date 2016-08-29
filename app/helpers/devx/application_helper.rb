@@ -97,7 +97,7 @@ module Devx
             content_tag :div, class: 'large-12 columns' do
               messages.collect do |message|
                 content_tag :div, class: 'message' do
-                  concat content_tag :span, message.title, class: 'alert-title'
+                    concat content_tag :span, "#{message.title}: ", class: 'alert-title'
                   concat content_tag :span, message.message, class: 'alert-message'
                 end
               end.reduce(:<<)
