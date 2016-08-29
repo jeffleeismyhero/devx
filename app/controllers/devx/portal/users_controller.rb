@@ -66,7 +66,7 @@ module Devx
 
       @linked_accounts = {}
 
-      if @user.person_id.present?
+      if @user.person.present?
         @linked_accounts[@user.person_id] = @user.person.try(:record_with_school_id)
       end
 
