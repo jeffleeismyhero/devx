@@ -446,24 +446,6 @@ ActiveRecord::Schema.define(version: 20160819214640) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "devx_members", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "position"
-    t.string   "department"
-    t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "phone"
-    t.string   "email"
-    t.string   "website"
-    t.string   "photo"
-    t.text     "biography"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "devx_menu_pages", force: :cascade do |t|
     t.integer  "menu_id"
     t.integer  "page_id"
@@ -558,13 +540,6 @@ ActiveRecord::Schema.define(version: 20160819214640) do
     t.string   "slug"
   end
 
-  create_table "devx_registration_submissions", force: :cascade do |t|
-    t.integer  "registration_id"
-    t.text     "submission_content"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
-
   create_table "devx_registrations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",            null: false
@@ -649,13 +624,6 @@ ActiveRecord::Schema.define(version: 20160819214640) do
   end
 
   add_index "devx_stylesheets", ["slug"], name: "index_devx_stylesheets_on_slug", using: :btree
-
-  create_table "devx_teams", force: :cascade do |t|
-    t.integer  "sport_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "devx_ticket_updates", force: :cascade do |t|
     t.integer  "ticket_id"

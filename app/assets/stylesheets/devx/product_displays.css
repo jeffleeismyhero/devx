@@ -625,7 +625,7 @@ text-align: center!important;
 
 /* #TABLES */
 
-.table-header td {
+.table-header td, .table-header th {
     background:#AAC8C5;
     color:#fff!important;
 }
@@ -655,6 +655,10 @@ text-align: center!important;
     background: #fff!important;
     border:none;
 } 
+
+#ecommerce-product-table th:first-child, #ecommerce-product-table td:first-child,  #ecommerce-product-table td, #ecommerce-product-table th {
+    padding:12px 15px!important;
+}
 
 
 /* #JCW ACCORDION */

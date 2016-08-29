@@ -11,55 +11,35 @@
 	  	<%= csrf_meta_tags %>
 	</head>
 
-	<body style="background-color: #cccccc">
+	<body>
 
    	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900' rel='stylesheet' type='text/css'>
-    	<link href='https://fonts.googleapis.com/css?family=Bad+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Bad+Script' rel='stylesheet' type='text/css'>
 
-    	<div class="container hide-for-medium-down" style="background-color: #fff;">
-    		<div class="row full-width">
 
-    			<div class="medium-12 columns">
-	            <div style="display:block; float:left; posiiton:relative;">
-	             
-	            </div>
-
-	            <div style="background-color:#A6192E; height:50px;">
-
-	            </div>
-
-	            <div style="height:100px; text-align:center;">
-	            	<h4 class="header-text-red-center" id="facts-viewable">HEADER</h4>
-	            </div>
-        		</div>
-
-    		</div>
-		</div>
-
-		<div class="container banner" style="margin-bottom:2.5rem; background-color: #cccccc">
+		<div class="container banner" style="margin-bottom:2.5rem;">
 			<div class="row">
 
 				<div class="large-12 columns">
-					<h4 class="header-text-red-center" id="facts-viewable"><%= @product.name %></h4>
+					<h3 class="header-text-red" id="facts-viewable"><%= @product.name %></h3>
 					<hr class="hr">
 
 					<div class="small-12 small-offset-0 medium-12 medium-offset-0 large-12 large-offset-0 xlarge-10 xlarge-offset-1 columns">
 						<div class="small-12 medium-12 large-12 columns">
-							<h4 class="header-text-red" id="facts-viewable"><%= @product.name %></h4>
+							<h5><%= @product.name %></h5>
 							<p><%= @product.description %></p>
 
 							<p>
 								<% Devx::ProductSku.where(product: @product).try(:each) do |sku| %>
-		    						<%= link_to 'Add to Cart', devx.portal_url(sku, subdomain: 'portal') %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  
+		    						<i class="fa fa-cart-plus" aria-hidden="true"></i> <%= link_to 'Add to Cart', devx.portal_url(sku, subdomain: 'portal') %>   
 		  						<% end %>
 
-		  						<%= '|' %> <%= link_to 'Back to Products', devx.products_path, style:'padding-left: 5px' %>
+		  						<%= '|' %> <i class="fa fa-arrow-left" aria-hidden="true"></i> <%= link_to 'Back to Products', devx.products_path, style:'padding-left: 5px' %>
 		  					</p>
 
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 
