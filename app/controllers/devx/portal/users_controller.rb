@@ -74,7 +74,7 @@ module Devx
         @linked_accounts[linked_account.person.id] = linked_account.person.try(:record_with_school_id)
       end
 
-      @account_transactions = Devx::AccountTransaction.where(person: @user.person).where('created_at >= ? AND created_at <= ?', Time.zone.now, Time.zone.now + 30.days).order(created_at: :desc)
+      @account_transactions = Devx::AccountTransaction.imported.where(person: @user.person, imported: true).where('created_at >= ? AND created_at <= ?', Time.zone.now, Time.zone.now + 30.days).order(created_at: :desc)
 
       @transaction = AccountTransaction.new
 

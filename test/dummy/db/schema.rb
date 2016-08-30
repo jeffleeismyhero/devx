@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830165625) do
+ActiveRecord::Schema.define(version: 20160830183214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20160830165625) do
     t.string   "product"
     t.string   "cardholder"
     t.datetime "processed_at"
+    t.boolean  "imported"
   end
 
   create_table "devx_alumnis", force: :cascade do |t|

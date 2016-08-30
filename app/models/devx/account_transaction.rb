@@ -3,6 +3,7 @@ module Devx
     belongs_to :person
 
     scope :pending, -> { where(processed_at: nil) }
+    scope :imported, -> { where(imported: true) }
 
     validates :person, presence: true
     validates :transaction_type, presence: true
