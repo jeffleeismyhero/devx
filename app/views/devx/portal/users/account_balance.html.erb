@@ -50,8 +50,7 @@
             <tbody>
                 <% @linked_accounts.try(:each) do |key, value| %>
                   <% @account_transactions = Devx::AccountTransaction.imported.where(person: Devx::Person.find(key)).where('created_at >= ? AND created_at <= ?', Time.zone.now - 30.days, Time.zone.now).order(created_at: :desc) %>
-                    <%= render partial: 'account_transaction', collection: @account_transactions %>
-                  <% end %>
+                  <%= render partial: 'account_transaction', collection: @account_transactions %>
                 <% end %>
             </tbody>
         </table>
