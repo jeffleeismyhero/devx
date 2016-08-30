@@ -1,3 +1,14 @@
+<% if @user.errors.any? %>
+  <h6>The following errors prevented the user from being created.</h6>
+    
+  <% @user.errors.full_messages.each do |msg| %>
+    <ul>
+      <li><%= msg %></li>
+    </ul>
+  <% end %>
+    
+<% end %>
+
 <div class="small-12 medium-12 large-4 columns" style="margin-top:20px;">
     <div class="col-12 columns">
         <% if @user.person.try(:photo).present? %>
