@@ -66,7 +66,7 @@ module Devx
 
       @linked_accounts = {}
 
-      if @user.person.present?
+      if @user.person.present? && !@user.person.association_list.include?('Parent')
         @linked_accounts[@user.person_id] = @user.person.try(:record_with_school_id)
       end
 

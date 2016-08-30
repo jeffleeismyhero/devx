@@ -31,6 +31,7 @@
             <span><i class="fa fa-money"></i></span>
           </div>
           <div class="cd-accordion-body" style="text-align:center">
+            <% if current_user.person.association_list.include?('Student') || current_user.person.association_list.include?('Faculty') %><span><strong>Balance: <%= number_to_currency current_user.person.try(:current_balance) %></strong></span><br /><% end %>
             <%= link_to 'Add funds', devx.portal_account_balance_path %>
           </div>
         </div>
@@ -41,7 +42,7 @@
           </div>
           <div class="cd-accordion-body">
             <%= link_to 'Submit a Support Ticket', devx.new_portal_ticket_path %><br />
-            <% if current_user.super_administrator? %>
+            <% if current_user.administrator? %>
               <%= link_to 'Manage Tickets', devx.portal_tickets_path %>
             <% else %>
               <%= link_to 'View my Tickets', devx.portal_tickets_path %>

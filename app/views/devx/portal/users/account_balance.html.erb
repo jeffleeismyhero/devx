@@ -19,16 +19,16 @@
                 </tr>
             </thead>
             <tbody>
-                <% if current_user.person.present? && !current_user.parent? %>
+                <% if current_user.person.try(:school_id).present? && !current_user.person.association_list.include?('Parent') %>
                     <tr>
                         <td><%= current_user.person.try(:record_with_school_id) %></td>
-                        <td><%= "Not yet available" %></td>
+                        <td><%= current_user.person.try(:current_balance) %></td>
                     </tr>
                 <% end %>
                 <% @user.linked_accounts.each do |account| %>
                     <tr>
                         <td><%= account.person.try(:record_with_school_id) %></td>
-                        <td><%= "Not yet available" %></td>
+                        <td><%= account.person.try(:current_balance) %></td>
                     </tr>
                 <% end %>
             </tbody>
@@ -74,11 +74,11 @@
         <div class="large-12 columns no-padding">
             <div class="small-12 medium-6 large-4 columns cd-edit-form">
                 <%= f.label :person_id, 'Add funds for' %>
-                <%= f.select :person_id, options_from_collection_for_select(@linked_accounts, :first, :last), { include_blank: true }, { class: 'select2-fixed' } %>
+                <%= f.select :person_id, options_from_collection_for_select(@linked_accounts, :first, :last), { include_blank: true }, { class: 'select2-fixed', required: true } %>
             </div>
             <div class="small-12 medium-6 large-4 columns cd-edit-form">
                 <%= f.label :amount %>
-                <%= f.text_field :amount, { step: '0.01', placeholder: 'Amount', class: 'currency-field' } %>
+                <%= f.text_field :amount, { step: '0.01', placeholder: 'Amount', class: 'currency-field', required: true } %>
             </div>
         </div>
 
@@ -89,29 +89,29 @@
         <div class="large-12 columns no-padding">
             <div class="small-12 medium-12 large-6 xlarge-6 columns cd-edit-form">
             <%= label_tag :cc_type, 'Credit Card Type' %>
-            <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), { prompt: 'Select Card Type', class: 'select2-fixed' } %>
+            <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), { prompt: 'Select Card Type', class: 'select2-fixed', required: true } %>
             </div>
         </div>
         <div class="small-12 medium-12 large-12 xlarge-12 columns no-padding">
             <div class="medium-12 large-6 xlarge-6 columns cd-edit-form">
             <%= label_tag :cc_number, 'Credit Card Number' %>
-            <%= text_field_tag :cc_number, '', placeholder: 'Credit Card Number', autocomplete: :off %>
+            <%= text_field_tag :cc_number, '', placeholder: 'Credit Card Number', autocomplete: :off, required: true %>
             </div>
 
             <div class="small-12 medium-12 large-6 xlarge-6 columns cd-edit-form">
             <%= label_tag :ch_name, 'Cardholder Name' %>
-            <%= text_field_tag :ch_name, '', placeholder: 'Cardholder Name', autocomplete: :off %>
+            <%= text_field_tag :ch_name, '', placeholder: 'Cardholder Name', autocomplete: :off, required: true %>
             </div>
         </div>
         <div class="small-12 medium-12 large-12 xlarge-8 columns no-padding">
             <div class="small-12 medium-6 large-6 xlarge-4 columns cd-edit-form">
             <%= label_tag :exp_date, 'Expiration Date' %>
-            <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed' } %>
+            <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed', required: true } %>
             </div>
 
             <div class="small-12 medium-6 large-6 xlarge-4 columns cd-edit-form">
             <%= label_tag :cvv, 'Security Code' %>
-            <%= text_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off %>
+            <%= text_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off, required: true %>
             </div>
         </div>
 
