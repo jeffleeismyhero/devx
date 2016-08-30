@@ -2,7 +2,7 @@ module Devx
   class AccountTransaction < ActiveRecord::Base
     belongs_to :person
 
-    scope :pending, -> { where(processed_at: nil) }
+    scope :pending, -> { where(processed_at: nil, imported: false) }
     scope :imported, -> { where(imported: true) }
 
     validates :person, presence: true
