@@ -63,7 +63,7 @@ class Ability
     can :read, Devx::Dashboard
     can :read, Devx::Article
     can :read, Devx::Classroom
-    can [:edit, :update, :account_balance], Devx::User, id: user.id
+    can [:read, :edit, :update, :account_balance], Devx::User, id: user.id
     can [ :read, :update ], Devx::Order, user_id: user.id
     can :create, Devx::Transaction
     can [ :read, :create ], Devx::AccountTransaction

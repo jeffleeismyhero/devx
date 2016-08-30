@@ -577,18 +577,18 @@ a.cd-logo {
     display:none;
   }
 
-  .cd-side-nav ul > li a.active, .cd-side-nav ul > li a:hover {
+  .cd-side-nav ul > li a.active, .cd-side-nav ul.navigation > li > a:hover {
     background-color:#ACCC38;
     color:#ffffff;
     border-right:4px solid #084269;
   }
 
 
-  .cd-side-nav ul > li:hover a {
+  .cd-side-nav ul > li:hover > a {
     color:#FFFFFF;
   }
 
-  .cd-side-nav ul > li:hover a {
+  .cd-side-nav ul > li:hover > a {
     background:#ACCC38;
   }
 
