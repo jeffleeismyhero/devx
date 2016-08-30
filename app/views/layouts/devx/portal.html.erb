@@ -392,7 +392,7 @@
         </li>
         <% end %>
 
-        <% if app_settings['crm_module'] && current_user.administrator? %>
+        <% if app_settings['crm_module'] && can? :read, Devx::Person %>
           <li><%= link_to '<i class="fa fa-database"></i> CRM'.html_safe, devx.portal_administration_index_path %></li>
         <% end %>
 

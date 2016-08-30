@@ -46,6 +46,7 @@ class Ability
     if Devx::ApplicationSetting.find_or_create_by(id: 1).settings['balance_tracking']
       if user.balance_manager?
         can :manage, Devx::AccountTransaction
+        can :read, Devx::Person
       end
     end
 
