@@ -59,7 +59,6 @@ class Ability
       can :manage, Devx::ClassPhoto
     end
 
-    can :read, :all
     can :read, Devx::Dashboard
     can :read, Devx::Article
     can :read, Devx::Classroom
