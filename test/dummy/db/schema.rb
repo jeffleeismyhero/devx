@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819214640) do
+ActiveRecord::Schema.define(version: 20160830165625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -500,8 +500,8 @@ ActiveRecord::Schema.define(version: 20160819214640) do
     t.integer  "zip"
     t.string   "email"
     t.string   "phone"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "uuid"
     t.string   "position"
     t.boolean  "active"
@@ -510,6 +510,15 @@ ActiveRecord::Schema.define(version: 20160819214640) do
     t.string   "school_id"
     t.datetime "deleted_at"
     t.text     "bio"
+    t.float    "current_balance"
+  end
+
+  create_table "devx_permissions", force: :cascade do |t|
+    t.integer  "role_id"
+    t.string   "object_class"
+    t.string   "action"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "devx_product_skus", force: :cascade do |t|
