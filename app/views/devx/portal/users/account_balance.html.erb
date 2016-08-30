@@ -35,11 +35,11 @@
         </table>
 
         <h3>Transaction History</h3>
-        <h6>Under Construction</h6>
         <% if current_user.super_administrator? %>
         <table>
             <thead>
                 <tr>
+                    <th>Customer</th>
                     <th>Date</th>
                     <th>Type</th>
                     <th>Payment Method</th>
@@ -48,7 +48,11 @@
                 </tr>
             </thead>
             <tbody>
-                <%= render partial: 'account_transaction', collection: @account_transactions %>
+                <% @linked_accounts.try(:each) do |key, value| %>
+                  <% @account_transactions = Devx::AccountTransaction.imported.where(person: Devx::Person.find(key)).where('created_at >= ? AND created_at <= ?', Time.zone.now - 30.days, Time.zone.now).order(created_at: :desc) %>
+                    <%= render partial: 'account_transaction', collection: @account_transactions %>
+                  <% end %>
+                <% end %>
             </tbody>
         </table>
         <% end %>
