@@ -1,0 +1,16 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  header = style.add_style b: true
+
+  wb.add_worksheet(name: "Form Submissions") do |sheet|
+    # Add Header
+    sheet.add_row @fields, style: header
+
+    @form.form_submissions.each do |submission|
+      content = submission.submission_content
+      sheet.add_row [
+        @fields.each_with_index { |field, index| content[field] }
+      ]
+    end
+  end
+end

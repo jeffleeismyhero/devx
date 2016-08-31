@@ -21,6 +21,13 @@ module Devx
       @form.fields.order(position: :asc).try(:each) do |field|
         @fields << field.name
       end
+
+      respond_to do |format|
+        format.html
+        format.xlsx do
+          render xlsx: 'show', filename: "#{@form.name} - Submissions.xlsx"
+        end
+      end
     end
 
     def create

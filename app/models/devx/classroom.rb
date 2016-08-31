@@ -13,5 +13,9 @@ module Devx
     belongs_to :layout
 
     accepts_nested_attributes_for :classroom_teachers
+
+    def should_generate_new_friendly_id?
+      name_changed?
+    end
   end
 end
