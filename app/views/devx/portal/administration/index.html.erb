@@ -24,7 +24,7 @@
           <thead>
               <tr>
                   <th><%= sort_link @q, :full_name %></th>
-                  <th><%= sort_link @q, :school_id %></th>
+                  <th><%= sort_link @q, :school_id, 'School ID' %></th>
                   <% if app_settings['balance_tracking'] %><th>Balance</th><% end %>
                   <th><%= sort_link @q, :active %></th>
                   <th>&nbsp;</th>

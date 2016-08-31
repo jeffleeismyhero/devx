@@ -83,6 +83,7 @@ Devx::Engine.routes.draw do
     resources :roles
     resources :venues
     resources :forms do
+      collection { post :sort }
       member do
         get 'submissions'
       end

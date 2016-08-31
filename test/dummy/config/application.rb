@@ -16,7 +16,7 @@ module Dummy
     # config.time_zone = 'Central Time (US & Canada)'
     config.time_zone = 'Central Time (US & Canada)'
     config.active_record.default_timezone = :local
-    config.active_record.time_zone_aware_attributes = false
+    config.active_record.time_zone_aware_attributes = true
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

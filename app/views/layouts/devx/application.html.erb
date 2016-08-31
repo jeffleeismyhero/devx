@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<%= alert_message(Devx::UrgentNews.latest) if params && params[:debug].present? %>
+<%= alert_message(Devx::UrgentNews.latest) %>
 
 <%= yield %>
 

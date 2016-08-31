@@ -92,13 +92,13 @@ module Devx
 
     def alert_message(messages)
       if messages.any?
-        content_tag :div, class: 'container banner alert secondary' do
+        content_tag :div, class: 'container banner alert' do
           content_tag :div, class: 'row' do
             content_tag :div, class: 'large-12 columns' do
               messages.collect do |message|
                 content_tag :div, class: 'message' do
-                  concat content_tag :h2, message.title, class: 'alert-title'
-                  concat content_tag :p, message.message, class: 'alert-message'
+                  concat content_tag :span, "<i class='fa fa-exclamation-circle' aria-hidden='true'></i> #{message.title}: ".html_safe, class: 'alert-title'
+                  concat content_tag :span, message.message, class: 'alert-message'
                 end
               end.reduce(:<<)
             end

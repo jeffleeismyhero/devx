@@ -66,7 +66,7 @@ module Devx
 
       @linked_accounts = {}
 
-      if @user.person_id.present?
+      if @user.person.present? && !@user.person.association_list.include?('Parent')
         @linked_accounts[@user.person_id] = @user.person.try(:record_with_school_id)
       end
 
@@ -74,11 +74,10 @@ module Devx
         @linked_accounts[linked_account.person.id] = linked_account.person.try(:record_with_school_id)
       end
 
-      @account_transactions = Devx::AccountTransaction.where(person: @user.person)
-
       @transaction = AccountTransaction.new
 
       if request.post?
+        @transaction.imported = false
         @transaction.amount = params[:account_transaction][:amount]
         @transaction.transaction_type = 'Credit'
         @transaction.payment_method = 'Credit Card'

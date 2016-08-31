@@ -15,50 +15,51 @@
 
       <link href='https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900' rel='stylesheet' type='text/css'>
       <link href='https://fonts.googleapis.com/css?family=Bad+Script' rel='stylesheet' type='text/css'>
+       
+<!--
+<tr>
+  <td>Product 1</td>  
+  <td>Desc</td>
+  <td>$100.00</td>
+</tr>
+<tr>
+  <td>Product 2</td>  
+  <td>Desc</td>
+  <td>$25.00</td>
+</tr>
+<tr>
+  <td>Product 3</td>  
+  <td>Desc</td>
+  <td>$50.00</td>
+</tr>
+<tr>
+  <td>Product 4</td>  
+  <td>Desc</td>
+  <td>$350.00</td>
+</tr>
+-->
 
-      <div class="container hide-for-medium-down" style="background-color: #fff;">
-         <div class="row full-width">
-
-            <div class="medium-12 columns">
-               <div style="display:block; float:left; posiiton:relative;">
-                
-               </div>
-
-               <div style="background-color:#A6192E; height:50px;">
-
-               </div>
-
-               <div style="height:100px; text-align:center;">
-                  <h4 class="header-text-red-center" id="facts-viewable">HEADER</h4>
-               </div>
-            </div>
-
-         </div>
-      </div>
-
-      <div class="container banner blue">
+      <div class="container padding-header">
          <div class="row">
             <div class="col-12 columns">
-               <h1>Products</h1>
-              	<hr>
-            </div>
-
-            <table class="large-12 columns">
-               <thead>
-                  <tr>
-                     <th class="large-4 header-text-white">Item</th>
-                     <th class="large-4 header-text-white">Description</th>
-                     <th class="large-4 header-text-white">Price</th>
-                  </tr>
-               </thead>
-
-               <tbody>
-
-                  <%= render 'product_display', obj: @products %>
-
-               </tbody>
-            </table>
+               <h3 class="header-text-red">Products</h3>
             
+                <table width="100%" id="ecommerce-product-table">
+                   <thead class="table-header">
+                      <tr>
+                         <th class="large-4">Item</th>
+                         <th class="large-4">Description</th>
+                         <th class="large-4">Price</th>
+                      </tr>
+                   </thead>
+
+                   <tbody class="table-color">
+
+                      <%= render 'product_display', obj: @products %>
+
+                   </tbody>
+                </table>
+            </div>
          </div>
       </div>
 

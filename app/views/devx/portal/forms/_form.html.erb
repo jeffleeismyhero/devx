@@ -19,7 +19,6 @@
 
 <div class="col-12 columns no-padding">
   <h3>Form Fields</h3>
-
   <%= content_tag 'div', class: 'nested-attributes' do %>
     <%= f.fields_for :fields do |l| %>
       <%= render partial: 'form_fields', locals: { f: l } %>
@@ -33,4 +32,3 @@
         <%= f.submit %>
     </div>
 </div>
-
