@@ -17,6 +17,10 @@ module Devx
     end
 
     def show
+      @fields = []
+      @form.fields.order(position: :asc).try(:each) do |field|
+        @fields << field.name
+      end
     end
 
     def create

@@ -19,5 +19,35 @@
             <% end %>
           </ul>
         </div>
+        <div class="col-12 columns">
+          <h3>Submissions</h3>
+          <%= @fields %>
+          <table width="100%">
+            <thead>
+              <th>#</th>
+              <% @fields.try(:each) do |field| %>
+                <th><%= field %></th>
+              <% end %>
+            </thead>
+            <tbody>
+              <% @form.form_submissions.try(:each_with_index) do |submission, submission_index| %>
+                <tr>
+                  <td><%= submission_index + 1 %></td>
+                  <% @fields.try(:each_with_index) do |field, field_index| %>
+                    <% submission.submission_content.try(:each) do |key, value| %>
+                      <% if @fields.include?(key) %>
+                        <% if @fields.at(field_index) == key %>
+                          <td><%= key %></td>
+                        <% end %>
+                      <% else %>
+                        <td><%= @fields.at(field_index) %> <%= field_index %> empty <%= key %></td>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
     </div>
 </div>

@@ -11,7 +11,7 @@ module Devx
       end
 
       @q = @calendars.search(params[:q])
-      @calendar = @q.result.first if @q.result.first.active == true
+      @calendar = @q.result.first if @q.result.first == true
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
 
       if app_settings['default_calendar'].present?
@@ -82,7 +82,7 @@ module Devx
       end
 
     rescue => e
-      logger.warn "[EXCEPTION] #{e.message}" 
+      logger.warn "[EXCEPTION] #{e.message}"
       redirect_to '/404.html'
     end
 
