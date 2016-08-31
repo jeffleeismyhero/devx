@@ -12,7 +12,7 @@ module Devx
     end
 
     def charge?
-      transaction_type ~= /Charge/i
+      transaction_type =~ /Charge/i
     end
 
     def refund?
