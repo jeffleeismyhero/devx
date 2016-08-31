@@ -1,5 +1,5 @@
 <ul id="event-list" style="margin-bottom:20px">
-    <% @attributes[:events].sort_by{|s| s.start_time.strftime("%H%M") }.try(:each) do |schedule| %>
+    <% @attributes[:events].try(:each) do |schedule| %>
         <%= "<li class=\"event\">
         <div class=\"event-square\">
             <div class=\"event-date\">
