@@ -89,5 +89,37 @@ module Devx
         value
       end
     end
+
+    def alert_message(messages)
+      if messages.any?
+        content_tag :div, class: 'container banner alert' do
+          content_tag :div, class: 'row' do
+            content_tag :div, class: 'large-12 columns' do
+              messages.collect do |message|
+                content_tag :div, class: 'message' do
+                  concat content_tag :span, "<i class='fa fa-exclamation-circle' aria-hidden='true'></i> #{message.title}: ".html_safe, class: 'alert-title'
+                  concat content_tag :span, message.message, class: 'alert-message'
+                end
+              end.reduce(:<<)
+            end
+          end
+        end
+      end
+    end
+
+    def month_select_options
+      options_for_select([
+        ['January', '1'], ['February', '2'], ['March', '3'], ['April', '4'],
+        ['May', '5'], ['June', '6'], ['July', '7'], ['August', '8'],
+        ['September', '9'], ['October', '10'], ['November', '11'],
+        ['December', '12']
+      ])
+    end
+
+    def year_select_options(schedules)
+      years = schedules.pluck("DISTINCT EXTRACT(YEAR FROM start_time)::Integer")
+      years = years.reject { |year| year.to_s.length != 4 }
+      options_for_select((years.min..years.max).to_a) rescue nil
+    end
   end
 end

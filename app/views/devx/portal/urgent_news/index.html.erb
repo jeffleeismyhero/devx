@@ -1,13 +1,13 @@
-<% provide(:title, 'Manage Urgent News') %>
+<% provide(:title, 'Urgent News') %>
 <div class="container">
   <div class="row">
     
-    <div class="medium-8 columns">
+    <div class="medium-12 columns">
       <h1><%= yield(:title) %></h1>
     </div>
 
-    <div class="medium-4 columns">
-      <%= link_to '<i class="fa fa-plus"></i> New Event'.html_safe, new_portal_urgent_news_path %>
+    <div class="medium-12 columns" style="padding-bottom:20px;">
+        <%= link_to '<i class="fa fa-plus"></i> New Message'.html_safe, new_portal_urgent_news_path %>
     </div>
 
     <div class="medium-12 columns">
@@ -20,7 +20,7 @@
           <th>&nbsp;</th>
         </thead>
         <tbody>
-          <%= render @urgent_news %>
+          <%= render partial: 'urgent_news', collection: @urgent_news %>
         </tbody>
       </table>
     </div>

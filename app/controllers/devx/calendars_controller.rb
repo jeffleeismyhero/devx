@@ -11,9 +11,8 @@ module Devx
       end
 
       @q = @calendars.search(params[:q])
-      @calendar = @q.result.first if @q.result.first.active == true
+      @calendar = @q.result.first if @q.result.first == true
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
-
 
       if app_settings['default_calendar'].present?
         @calendar = Devx::Calendar.active.find(app_settings['default_calendar']) unless params[:q].present?
@@ -36,22 +35,13 @@ module Devx
 
       if @calendar.calendar_type.present?
         @events = Devx::Schedule.for_calendar(@calendar, @start_date)
-        @schedules = Devx::Schedule.for_month(@start_date)
-
-
-        @years = []
-
-        Devx::Schedule.all.ordered.try(:each) do |s|
-          if !@years.include?(s.start_time.try(:strftime, '%Y'))
-            @years.push(s.start_time.try(:strftime, '%Y'))
-          end
-        end
+        @schedules = Devx::Schedule.for_month(@start_date).ordered
 
         @scheduled_events = {}
         @dates.each do |date|
           @scheduled_events[date] = []
           @events.each do |event|
-            event.schedules.try(:each_with_index) do |schedule, index|
+            event.schedules.ordered.try(:each_with_index) do |schedule, index|
               if schedule.end_time_date.present? && schedule.end_time_date >= date
                 if schedule.start_time_date.present? && schedule.start_time_date <= date
                   if !@scheduled_events[date].include?(schedule)
@@ -91,7 +81,8 @@ module Devx
         end
       end
 
-    rescue
+    rescue => e
+      logger.warn "[EXCEPTION] #{e.message}"
       redirect_to '/404.html'
     end
 
@@ -129,7 +120,6 @@ module Devx
     end
 
     private
-
 
     def determine_layout
       if app_settings['newsfeed_layout'].present?

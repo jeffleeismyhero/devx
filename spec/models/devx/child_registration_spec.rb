@@ -9,7 +9,6 @@ module Devx
       it 'should be invalid if blank' do
         child_registration.registration = nil
         expect(child_registration).not_to be_valid
-        puts child_registration.registration.inspect
       end
 
       it 'should be valid if user is present' do
@@ -21,7 +20,6 @@ module Devx
       it 'should be invalid if blank' do
         child_registration.child = nil
         expect(child_registration).not_to be_valid
-        puts child_registration.child.inspect
       end
 
       it 'should be valid if present' do

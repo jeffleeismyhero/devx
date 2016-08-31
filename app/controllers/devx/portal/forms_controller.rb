@@ -16,6 +16,13 @@ module Devx
     def edit
     end
 
+    def show
+      @fields = []
+      @form.fields.order(position: :asc).try(:each) do |field|
+        @fields << field.name
+      end
+    end
+
     def create
       if @form.valid? && @form.save
         redirect_to devx.edit_portal_form_path(@form),
@@ -26,7 +33,7 @@ module Devx
       end
     end
 
-    def update      
+    def update
       if @form.valid? && @form.update(form_params)
         redirect_to devx.edit_portal_form_path(@form),
         notice: "Successfully updated form"
@@ -39,17 +46,25 @@ module Devx
     def destroy
     end
 
-
-    def submissions
-      @form = Devx::Form.find(param[:id])
+    def sort
+      list = params[:field]
+      list.try(:each_with_index) do |id, index|
+        Devx::Field.find(id).update_columns(position: index + 1)
+      end
+      render json: nil, status: :ok
+    rescue
     end
 
-    
+    def submissions
+      @form = Devx::Form.find(params[:id])
+    end
+
+
     private
 
     def form_params
       accessible = [ :name, :image, :layout_id, :submission_recipients, fields_attributes: [ :id, :name, :field_type, :options, :field_size, :required, :_destroy ] ]
       params.require(:form).permit(accessible)
-    end 
+    end
   end
 end

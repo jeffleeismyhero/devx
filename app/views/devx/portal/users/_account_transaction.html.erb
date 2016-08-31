@@ -1,5 +1,6 @@
 <tr>
-	<td><%= ldate account_transaction.created_at %></td>
+	<td><%= account_transaction.person.try(:record_with_school_id) %></td>
+	<td><%= account_transaction.created_at.try(:strftime, '%m/%d/%Y') %></td>
 	<td><%= account_transaction.transaction_type %></td>
 	<td><%= account_transaction.payment_method %></td>
 	<td><%= account_transaction.product %></td>

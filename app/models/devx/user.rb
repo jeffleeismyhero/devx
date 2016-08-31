@@ -15,7 +15,6 @@ module Devx
 
     has_many :authorizations
     has_many :roles, through: :authorizations
-    has_many :children
     has_many :child_registrations
     has_many :registrations, through: :child_registrations
     has_many :attendances
@@ -23,7 +22,8 @@ module Devx
     has_many :event_subscriptions
     has_many :article_subscriptions
     has_many :linked_accounts
-    has_many :children, through: :linked_accounts, class_name: 'Devx::Person'
+    has_many :children, through: :linked_accounts, class_name: 'Devx::Person', source: :person
+    has_many :children_linked_accounts, through: :children, source: :linked_accounts
     has_many :orders
     belongs_to :person
 
@@ -159,10 +159,10 @@ module Devx
       self.person.active = true unless self.person.active.present?
 
       if self.valid? && self.save
-        puts "Successfully created CRM record #{person.inspect}"
+        logger.debug "Successfully created CRM record #{person.inspect}"
         return true
       else
-        puts "Failed to create CRM record #{person.inspect}"
+        logger.debug "Failed to create CRM record #{person.inspect}"
         return false
       end
     end

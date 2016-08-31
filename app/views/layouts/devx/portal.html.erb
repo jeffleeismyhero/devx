@@ -10,7 +10,6 @@
   <%= javascript_include_tag "devx/application" %>
   <% if app_settings['stripe'] %>
     <%= javascript_include_tag "https://js.stripe.com/v2/" %>
-    <%= javascript_tag "Stripe.publishableKey = '#{Rails.configuration.stripe[:publishable_key]}';" %>
   <% end %>
   <%= csrf_meta_tags %>
 </head>
@@ -26,13 +25,13 @@
     <!-- START: TOP NAVIGATION DESKTOP-->
     <nav class="cd-nav hide-for-medium-down">
       <div class="cd-top-nav cd-horizontal-accordion">
-        <% if app_settings['balance_tracking'] && !current_user.parent? && current_user.person.present? && current_user.super_administrator? %>
+        <% if app_settings['balance_tracking'] && !current_user.parent? && current_user.person.present? %>
         <div class="cd-accordion-tab">
           <div class="cd-accordion-title">
             <span><i class="fa fa-money"></i></span>
           </div>
           <div class="cd-accordion-body" style="text-align:center">
-            <span><strong>Balance: <%= number_to_currency current_user.balance %></strong></span><br />
+            <% if current_user.person.association_list.include?('Student') || current_user.person.association_list.include?('Faculty') %><span><strong>Balance: <%= number_to_currency current_user.person.try(:current_balance) %></strong></span><br /><% end %>
             <%= link_to 'Add funds', devx.portal_account_balance_path %>
           </div>
         </div>
@@ -43,7 +42,7 @@
           </div>
           <div class="cd-accordion-body">
             <%= link_to 'Submit a Support Ticket', devx.new_portal_ticket_path %><br />
-            <% if current_user.super_administrator? %>
+            <% if current_user.administrator? %>
               <%= link_to 'Manage Tickets', devx.portal_tickets_path %>
             <% else %>
               <%= link_to 'View my Tickets', devx.portal_tickets_path %>
@@ -208,14 +207,20 @@
                                 <% if current_user.administrator? %>
                                   <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
                                 <% end %>
-                                <% if current_user.person.try(:classroom).present? %>
-                                  <li><%= link_to 'Edit My Classroom', devx.edit_portal_classroom_path(current_user.person.classroom) %></li>
-                                  <li><%= link_to 'My Classroom', devx.portal_classroom_path(current_user.person.classroom) %></li>
-                                  <li><%= link_to 'Classroom Galleries', devx.portal_classroom_class_galleries_path(current_user.person.classroom) %></li>
-                                  <li><%= link_to 'Classroom Documents', devx.portal_classroom_class_documents_path(current_user.person.classroom) %></li>
-                                  <li><%= link_to 'Classroom Highlights', devx.portal_classroom_class_highlights_path(current_user.person.classroom) %></li>
-                                  <li><%= link_to 'Classroom Announcements', devx.portal_classroom_class_announcements_path(current_user.person.classroom) %></li>
-                                  <li><%= link_to 'Classroom Schedules', devx.portal_classroom_class_schedules_path(current_user.person.classroom) %></li>
+                                <% if current_user.person.try(:classrooms).any? %>
+                                  <% current_user.person.try(:classrooms).try(:each) do |classroom| %>
+                                    <li><%= classroom.name %>
+                                      <ul>
+                                        <li><%= link_to 'Edit My Classroom', devx.edit_portal_classroom_path(classroom) %></li>
+                                        <li><%= link_to 'My Classroom', devx.portal_classroom_path(classroom) %></li>
+                                        <li><%= link_to 'Classroom Galleries', devx.portal_classroom_class_galleries_path(classroom) %></li>
+                                        <li><%= link_to 'Classroom Documents', devx.portal_classroom_class_documents_path(classroom) %></li>
+                                        <li><%= link_to 'Classroom Highlights', devx.portal_classroom_class_highlights_path(classroom) %></li>
+                                        <li><%= link_to 'Classroom Announcements', devx.portal_classroom_class_announcements_path(classroom) %></li>
+                                        <li><%= link_to 'Classroom Schedules', devx.portal_classroom_class_schedules_path(classroom) %></li>
+                                      </ul>
+                                    </li>
+                                  <% end %>
                                 <% end %>
                             </ul>
                         </div>
@@ -292,7 +297,7 @@
         <li>
           <%= link_to '<i class="fa fa-users"></i> <span>Users</span>'.html_safe, '#', class: 'has-children', data: 'users' %>
         </li>
-        <ul class="child-nav" data-parent="users">
+        <ul class="navigation child-nav" data-parent="users">
           <li><%= link_to 'Manage Users', devx.portal_users_path %></li>
           <% if current_user.super_administrator? %>
           <li><%= link_to 'Roles', devx.portal_roles_path %></li>
@@ -304,7 +309,7 @@
         <li>
           <%= link_to '<i class="fa fa-sitemap"></i> <span>Organizations</span>'.html_safe, '#', class: 'has-children', data: 'organizations' %>
         </li>
-        <ul class="child-nav" data-parent="organizations">
+        <ul class="navigation child-nav" data-parent="organizations">
           <li><%= link_to 'Sports', devx.portal_sports_path %></li>
           <li><%= link_to 'Extracurriculars', devx.portal_extracurriculars_path %></li>
           <% if app_settings['alumni_database'] %>
@@ -320,7 +325,7 @@
         <li>
           <%= link_to '<i class="fa fa-laptop"></i> <span>Site Management</span>'.html_safe, '#', class: 'has-children', data: 'site-management' %>
         </li>
-        <ul class="child-nav" data-parent="site-management">
+        <ul class="navigation child-nav" data-parent="site-management">
           <li><%= link_to 'Pages', devx.portal_pages_path %></li>
           <li><%= link_to 'Layouts', devx.portal_layouts_path %></li>
           <li><%= link_to 'Stylesheets', devx.portal_stylesheets_path %></li>
@@ -337,6 +342,12 @@
         </li>
         <% end %>
 
+        <% if current_user.administrator? %>
+        <li>
+          <%= link_to '<i class="fa fa-exclamation" aria-hidden="true"></i> <span>Urgent News</span>'.html_safe, devx.portal_urgent_news_index_path, data: 'urgent-news' %>
+        </li>
+        <% end %>
+
         <% if can? :manage, Devx::Form && app_settings['form_builder'] %>
           <li><%= link_to '<i class="fa fa-file-text-o"></i> <span>Form Builder</span>'.html_safe, devx.portal_forms_path %></li>
         <% end %>
@@ -345,7 +356,7 @@
         <li>
           <%= link_to '<i class="fa fa-calendar"></i> <span>Calendars</span>'.html_safe, devx.portal_calendars_path, class: 'has-children', data: 'calendars' %>
         </li>
-        <ul class="child-nav" data-parent="calendars">
+        <ul class="navigation child-nav" data-parent="calendars">
           <li><%= link_to 'Calendars', devx.portal_calendars_path %></li>
           <li><%= link_to 'Venues', devx.portal_venues_path %></li>
         </ul>
@@ -360,7 +371,7 @@
         <li>
           <%= link_to '<i class="fa fa-user"></i> <span>Profile</span>'.html_safe, '#', class: 'has-children', data: 'user' %>
         </li>
-        <ul class="child-nav" data-parent="user">
+        <ul class="navigation child-nav" data-parent="user">
           <li><%= link_to 'Edit Profile', devx.portal_profile_path %></li>
           <% if app_settings['balance_tracking'] %>
             <li><%= link_to 'Account Balance', devx.portal_account_balance_path %></li>
@@ -371,7 +382,7 @@
         <li>
           <%= link_to '<i class="fa fa-shopping-cart"></i> <span>Commerce</span>'.html_safe, '#', class: 'has-children', data: 'commerce' %>
         </li>
-        <ul class="child-nav" data-parent="commerce">
+        <ul class="navigation child-nav" data-parent="commerce">
           <% if can? :manage, Devx::Product %>
           <li><%= link_to 'Products', devx.portal_products_path %></li>
           <% end %>
@@ -387,7 +398,7 @@
         </li>
         <% end %>
 
-        <% if app_settings['crm_module'] && current_user.administrator? %>
+        <% if app_settings['crm_module'] && (current_user.administrator? || current_user.balance_manager?) %>
           <li><%= link_to '<i class="fa fa-database"></i> CRM'.html_safe, devx.portal_administration_index_path %></li>
         <% end %>
 
@@ -395,18 +406,24 @@
          <li>
             <%= link_to '<i class="fa fa-pencil"></i> <span>Classroom</span>'.html_safe, '#', class: 'has-children', data: 'classroom-profile' %>
           </li>
-          <ul class="child-nav" data-parent="classroom-profile">
+          <ul class="navigation child-nav" data-parent="classroom-profile">
             <% if current_user.administrator? %>
               <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
             <% end %>
-            <% if current_user.person.try(:classroom).present? %>
-              <li><%= link_to 'Edit My Classroom', devx.edit_portal_classroom_path(current_user.person.classroom) %></li>
-              <li><%= link_to 'My Classroom', devx.portal_classroom_path(current_user.person.classroom) %></li>
-              <li><%= link_to 'Classroom Galleries', devx.portal_classroom_class_galleries_path(current_user.person.classroom) %></li>
-              <li><%= link_to 'Classroom Documents', devx.portal_classroom_class_documents_path(current_user.person.classroom) %></li>
-              <li><%= link_to 'Classroom Highlights', devx.portal_classroom_class_highlights_path(current_user.person.classroom) %></li>
-              <li><%= link_to 'Classroom Announcements', devx.portal_classroom_class_announcements_path(current_user.person.classroom) %></li>
-              <li><%= link_to 'Classroom Schedules', devx.portal_classroom_class_schedules_path(current_user.person.classroom) %></li>
+            <% if current_user.person.try(:classrooms).any? %>
+              <% current_user.person.try(:classrooms).try(:each) do |classroom| %>
+                <li><strong><%= classroom.name %></strong>
+                  <ul class="navigation">
+                    <li><%= link_to 'Edit My Classroom', devx.edit_portal_classroom_path(classroom) %></li>
+                    <li><%= link_to 'My Classroom', devx.portal_classroom_path(classroom) %></li>
+                    <li><%= link_to 'Classroom Galleries', devx.portal_classroom_class_galleries_path(classroom) %></li>
+                    <li><%= link_to 'Classroom Documents', devx.portal_classroom_class_documents_path(classroom) %></li>
+                    <li><%= link_to 'Classroom Highlights', devx.portal_classroom_class_highlights_path(classroom) %></li>
+                    <li><%= link_to 'Classroom Announcements', devx.portal_classroom_class_announcements_path(classroom) %></li>
+                    <li><%= link_to 'Classroom Schedules', devx.portal_classroom_class_schedules_path(classroom) %></li>
+                  </ul>
+                </li>
+              <% end %>
             <% end %>
           </ul>
         <% end %>
@@ -425,7 +442,7 @@
           <li>
             <%= link_to '<i class="fa fa-terminal"></i> <span>Developer</span>'.html_safe, devx.portal_developer_index_path, class: 'has-children', data: 'developer' %>
           </li>
-          <ul class="child-nav" data-parent="developer">
+          <ul class="navigation child-nav" data-parent="developer">
             <li>
               <%= link_to 'Global Settings'.html_safe, devx.portal_developer_index_path %>
             </li>

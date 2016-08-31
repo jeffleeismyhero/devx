@@ -7,18 +7,17 @@ module Devx
     layout 'devx/portal'
 
     def index
-        @q = @calendars.search(params[:q])
-        @q.sorts = 'name asc' if @q.sorts.empty?
-        @calendars = @q.result(distinct: true)
+      @q = @calendars.search(params[:q])
+      @q.sorts = 'name asc' if @q.sorts.empty?
+      @calendars = @q.result(distinct: true)
     end
 
     def show
-          #@events = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
-          @schedules = Devx::Schedule.coming_up
-          @q = @schedules.search(params[:q])
-          @q.sorts = 'start_time asc'
-          @schedules = @q.result.ordered.paginate(page: params[:page])
-          @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
+      @schedules = Devx::Schedule.coming_up
+      @q = @schedules.search(params[:q])
+      @q.sorts = 'start_time asc'
+      @schedules = @q.result.ordered.paginate(page: params[:page])
+      @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
     end
 
     def new
@@ -28,33 +27,33 @@ module Devx
     end
 
     def create
-        if @calendar.valid? && @calendar.save
-            redirect_to devx.edit_portal_calendar_path(@calendar),
-            notice: "Successfully saved calendar"
-        else
-            render :new,
-            notice: "Failed to save calendar"
-        end
+      if @calendar.valid? && @calendar.save
+        redirect_to devx.edit_portal_calendar_path(@calendar),
+        notice: "Successfully saved calendar"
+      else
+        render :new,
+        notice: "Failed to save calendar"
+      end
     end
 
     def update
       if @calendar.valid? && @calendar.update(calendar_params)
-          redirect_to devx.edit_portal_calendar_path(@calendar),
-          notice: "Successfully updated calendar"
+        redirect_to devx.edit_portal_calendar_path(@calendar),
+        notice: "Successfully updated calendar"
       else
-          render :edit,
-          notice: "Failed to update calendar"
+        render :edit,
+        notice: "Failed to update calendar"
       end
     end
 
     def destroy
-        if @calendar.destroy
-            redirect_to devx.portal_calendars_path,
-            notice: "Successfully deleted calendar"
-        else
-            redirect_to devx.portal_calendars_path,
-            notice: "Failed to delete calendar"
-        end
+      if @calendar.destroy
+        redirect_to devx.portal_calendars_path,
+        notice: "Successfully deleted calendar"
+      else
+        redirect_to devx.portal_calendars_path,
+        notice: "Failed to delete calendar"
+      end
     end
 
 
@@ -65,9 +64,7 @@ module Devx
       @errors = 0;
 
       if request.post?
-
         if @import.valid?
-
           if records = CSV.read(@import.file.path, headers: true)
             logfile = File.open("#{Rails.root}/log/import.log", "a")
             logfile.sync = true
@@ -200,11 +197,15 @@ module Devx
 
       end
     end
+
     private
 
     def calendar_params
-        accessible = [ :name, :calendar_type, :client_id, :client_secret, :google_calendar_id, :authorization_code, :time_zone, :active ]
-        params.require(:calendar).permit(accessible)
+      accessible = [
+        :name, :calendar_type, :client_id, :client_secret, :google_calendar_id,
+        :authorization_code, :time_zone, :active
+      ]
+      params.require(:calendar).permit(accessible)
     end
   end
 end

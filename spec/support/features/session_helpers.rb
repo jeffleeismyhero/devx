@@ -19,7 +19,7 @@ module Features
       find(:css, '#user_email').set email
       find(:css, '#user_password').set password
       find(:css, '#user_password_confirmation').set password
-      click_link_or_button 'LOGIN'
+      click_link_or_button 'REGISTER'
     end
 
     def authorize_as_super_administrator(user = create(:devx_user))

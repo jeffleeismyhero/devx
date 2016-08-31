@@ -1,0 +1,36 @@
+<div class="container" class="month-view hide-for-medium-down">
+  <div class="row monthview hide">
+    <div class="large-12 columns">
+      <h3 style="text-align:center"><%= @start_date.strftime('%B %Y') %></h3>
+      <div class="calendar-navigation">
+        <div class="previous-link">
+          <%= link_to "<i class='fa fa-arrow-left'></i> Previous".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date - 1.month) %>
+        </div>
+        <div class="next-link">
+          <%= link_to "Next <i class='fa fa-arrow-right'></i>".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date + 1.month) %>
+        </div>
+      </div>
+    </div>
+    <div class="large-12 columns">
+      <%= month_calendar events: @schedules do |date, schedules| %>
+        <%= date.try(:strftime, '%d') %>
+        <ul class="event-list">
+          <% @scheduled_events[date].to_a.sort_by{|s| s.start_time.strftime("%H%M") }.try(:each) do |schedule| %>
+            <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
+              <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
+                <li class="event-listing">
+                  <% if schedule.all_day == true %>
+                    <% start = 'All day' %>
+                  <% else %>
+                    <% start = schedule.start_time.try(:strftime, '%l:%M %p') %>
+                  <% end %>
+                  <%= link_to "#{start} - #{schedule.event.name}", devx.calendar_event_schedule_path(@calendar, schedule.event, schedule) %>
+                </li>
+              <% end %>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

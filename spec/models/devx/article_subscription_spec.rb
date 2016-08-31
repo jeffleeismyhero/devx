@@ -12,7 +12,12 @@ module Devx
       end
 
       it 'should be invalid if user is already subscribed' do
-        skip
+        subscription = FactoryGirl.build(
+          :devx_article_subscription,
+          user: article_subscription.user,
+          category: 'basketball'
+        )
+        expect(subscription).not_to be_valid
       end
 
       it 'should be valid if user is present' do
