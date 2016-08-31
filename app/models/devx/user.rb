@@ -25,6 +25,18 @@ module Devx
     has_many :children, through: :linked_accounts, class_name: 'Devx::Person', source: :person
     has_many :children_linked_accounts, through: :children, source: :linked_accounts
     has_many :orders
+
+    # Student-based relationships
+    has_many :links_to_parents, class_name: 'Devx::LinkedAccount', primary_key: 'person_id', foreign_key: 'person_id'
+    has_many :parents, through: :links_to_parents, source: :user
+    has_many :account_transactions, through: :person
+    
+    # Parent-based relationships
+    has_many :links_to_students, class_name: 'Devx::LinkedAccount', primary_key: 'id', foreign_key: 'user_id'
+    has_many :students, through: :links_to_students, source: :person
+    has_many :student_account_transactions, through: :students, source: :account_transactions
+
+
     belongs_to :person
 
     validates :email, presence: true

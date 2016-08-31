@@ -32,11 +32,11 @@ module Devx
     end
 
     def is_faculty?
-      if self.tagged_with('Faculty', on: :associations).any?
-        return true
-      else
-        return false
-      end
+      association_list.include?("Faculty")
+    end
+
+    def student?
+      association_list.include?("Student")
     end
 
     def full_name
