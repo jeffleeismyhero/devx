@@ -6,11 +6,8 @@ wb.styles do |style|
     # Add Header
     sheet.add_row @fields, style: header
 
-    @form.form_submissions.each do |submission|
-      content = submission.submission_content
-      sheet.add_row [
-        @fields.each_with_index { |field, index| content[field] }
-      ]
+    @display.each do |row|
+      sheet.add_row row
     end
   end
 end

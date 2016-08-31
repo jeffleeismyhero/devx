@@ -19,12 +19,27 @@ module Devx
     def show
       @fields = []
       @form.fields.order(position: :asc).try(:each) do |field|
-        @fields << field.name
+        @fields << field.name.try(:titleize)
       end
 
       respond_to do |format|
         format.html
         format.xlsx do
+          @display = []
+          @form.form_submissions.try(:each_with_index) do |submission, submission_index|
+            @display[submission_index] = []
+            @content = submission.submission_content
+            @array = []
+            @fields.try(:each_with_index) do |field, field_index|
+              if @content.key?(field)
+                @array << @content[field]
+              else
+                @array << ''
+              end
+            end
+            @display[submission_index] = @array
+          end
+
           render xlsx: 'show', filename: "#{@form.name} - Submissions.xlsx"
         end
       end
