@@ -30,6 +30,7 @@ module Devx
 
     def get_events
       events = Devx::Schedule.coming_up.ordered
+      events = events.try(:limit, @attributes[:limit])
       events = events.sort_by{|s| s.start_time.strftime("%H%M") }
       events = events.try(:first, @attributes[:limit])
       return events
