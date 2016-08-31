@@ -19,32 +19,28 @@ module Devx
 
     def create_stripe_product
     	Stripe::Product.create(
-  			:name => self.name,
-  			:description => self.description,
-  			:id => self.slug
-		)
+  			name: name,
+  			description: description,
+  			id: slug
+  		)
     end
 
     def update_stripe_product
-    	product = Stripe::Product.retrieve(self.slug)
-		product.description = self.description
-		product.save
+    	product = Stripe::Product.retrieve(slug)
+  		product.description = description
+  		product.save
     end
 
     def destroy_stripe_product
-    	product = Stripe::Product.retrieve(self.slug)
-
+    	product = Stripe::Product.retrieve(slug)
     	skus = Stripe::SKU.list.data
 
     	skus.try(:each) do |sku|
-    		if sku.product == product.id
-    			sku.delete
-    		end
+    		sku.delete if sku.product == product.id
     	end
 
-		product.delete
-
-	rescue Stripe::InvalidRequestError
+  		product.delete
+  	rescue Stripe::InvalidRequestError
     end
   end
 end
