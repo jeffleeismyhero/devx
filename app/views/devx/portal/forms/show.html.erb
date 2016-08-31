@@ -1,0 +1,23 @@
+<% provide(:title, @form.name) %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 columns">
+            <h1><%= yield(:title) %></h1>
+        </div>
+        <div class="col-12 columns" style="padding-bottom:20px;">
+          <%= link_to 'Edit', devx.edit_portal_form_path(@form) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          <%= link_to 'Delete', devx.portal_form_path(@form), method: :delete, data: { confirm: "Are you sure you want to delete #{@form.name}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
+        </div>
+        <div class="col-12 columns">
+          <h3>Form Fields</h3>
+          <ul class="sortable-list" data-update-url="<%= devx.sort_portal_forms_path %>">
+            <% @form.fields.order(position: :asc).try(:each) do |field| %>
+              <%= content_tag_for :li, field do %>
+                <%= field.name %>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+    </div>
+</div>

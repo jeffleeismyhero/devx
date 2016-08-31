@@ -28,6 +28,12 @@ $ ->
     $(this).parent().parent().hide()
     event.preventDefault()
 
+  $(".sortable-list").sortable
+    axis: "y"
+    update: ->
+      console.log($(this).sortable("serialize"))
+      $.post($(this).data("update-url"), $(this).sortable("serialize"))
+
   $(".sortable-menu").sortable
     axis: "y"
     update: ->

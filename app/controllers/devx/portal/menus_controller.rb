@@ -64,7 +64,6 @@ module Devx
       end
       render nothing: true
     rescue
-      Devx
     end
 
 
