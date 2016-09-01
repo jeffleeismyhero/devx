@@ -82,6 +82,8 @@ module Devx
 
     rescue => e
       logger.warn "[EXCEPTION] #{e.message}"
+      logger.warn "[CALENDAR OBJECT] #{@calendar.inspect}"
+      logger.warn "[CALENDAR INDEX OBJECT] #{@calendars.inspect}"
       logger.warn "[PARAMETERS] #{params.inspect}"
       redirect_to '/404.html'
     end
