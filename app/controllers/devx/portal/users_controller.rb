@@ -251,14 +251,21 @@ module Devx
                     logger.info "[VALID USER] #{user.inspect}"
 
                     if student = Devx::Person.find_by(school_id: school_id)
-                      user.linked_accounts.each do |link|
-                        if !link.person == student
+                      logger.info "[STUDENT] Validating connection for #{student.inspect}"
+
+                      if user.linked_accounts.any?
+                        if !user.linked_accounts.exists?(person: student)
                           user.linked_accounts.new(person: student)
                           logger.info "[STUDENT] #{user.linked_accounts.inspect}"
                           logger.info "[VALID LINK] #{user.linked_accounts.inspect}"
+                          logger.info "[PARENT] User now has #{user.linked_accounts.count} students linked"
                         else
                           logger.info "[STUDENT] Link already exists"
                         end
+                      else
+                        user.linked_accounts.new(person: student)
+                        logger.info "[STUDENT] #{user.linked_accounts.inspect}"
+                        logger.info "[VALID LINK] #{user.linked_accounts.inspect}"
                       end
                     else
                       logger.info "[STUDENT] No student found with ID: #{school_id}"
