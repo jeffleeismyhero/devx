@@ -141,7 +141,7 @@ module DiamondMind
 
 
 
-        def self.process(username, password, obj, obj_data, amount, ch_first_name, ch_last_name, cc_number, cc_exp, cc_cvv, ipaddr)
+        def self.process(username, password, obj, obj_data, amount, ch_first_name, ch_last_name, cc_number, cc_exp, cc_cvv, zip_code, ipaddr)
           gw = DiamondMind::Processor.new()
           # NOTE: your username and password should replace the ones below
           gw.setLogin(username, password);
@@ -160,7 +160,7 @@ module DiamondMind
           submission_data = obj_data.submission_content
 
           gw.setBilling(ch_first_name.to_s, ch_last_name.to_s, '', '', '', '',
-                  '', '', 'US', '', '', '', '')
+                  '', zip_code, 'US', '', '', '', '')
 
           gw.setOrder(obj.name, obj.name, 0, 0, '', ipaddr.to_s)
 

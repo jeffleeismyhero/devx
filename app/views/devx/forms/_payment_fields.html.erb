@@ -50,6 +50,11 @@
   </div>
 
   <div id="cc_fields" class="large-<%= field.field_size %> columns cd-edit-form">
+    <div class="medium-4 columns cd-edit-form">
+    <%= label_tag :cc_type, 'Credit Card Type' %>
+    <%= select_tag :cc_type, options_for_select(%w[Visa MasterCard AMEX Discover]), { prompt: 'Select Card Type', required: true } %>
+    </div>
+
     <div class="medium-9 columns cd-edit-form">
     <%= label_tag :cc_number, 'Credit Card Number' %>
     <%= text_field_tag :cc_number, '', placeholder: 'Credit Card Number', autocomplete: :off, style: 'width:100%', required: true %>
@@ -70,7 +75,12 @@
     <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { required: true } %>
     </div>
 
-    <div class="medium-3 columns cd-edit-form">
+    <div class="medium-4 columns cd-edit-form">
+    <%= label_tag :zip_code, 'Zip Code' %>
+    <%= text_field_tag :zip_code, '', placeholder: 'Zip Code', autocomplete: :off, required: true %>
+    </div>
+
+    <div class="medium-4 columns cd-edit-form">
     <%= label_tag :cvv, 'Security Code' %>
     <%= text_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off, required: true %>
     </div>
@@ -78,9 +88,17 @@
 <% end %>
 
 <script type="text/javascript">
+  var subtotal = 0;
+
+  $(".purchase-field").each(function()
+  {
+    subtotal += parseFloat($(this).attr("data-price")) * $(this).val();
+  });
+
+  $("#purchase-amount").text("Total: $" + subtotal.toFixed(2));
+
   $(".purchase-field").on("change", function()
   {
-    var subtotal = 0;
     var o = $(this);
 
     $(".purchase-field").each(function()

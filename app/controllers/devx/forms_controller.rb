@@ -27,7 +27,7 @@ module Devx
         end
 
         exp_date = "%02d%02d" % [params['expiry_date(2i)'], params['expiry_date(1i)'].last(2)]
-        if response = Devx::PaymentProcessor.process(@form, @submission, price, params['ch_first_name'], params['ch_last_name'], params['cc_number'], exp_date, params['cvv'], request.env["HTTP_X_FORWARDED_FOR"])
+        if response = Devx::PaymentProcessor.process(@form, @submission, price, params['ch_first_name'], params['ch_last_name'], params['cc_number'], exp_date, params['cvv'], params['zip_code'], request.env["HTTP_X_FORWARDED_FOR"])
           purchase_successful = true
         else
           purchase_successful = false
