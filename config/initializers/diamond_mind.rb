@@ -141,22 +141,31 @@ module DiamondMind
 
 
 
-        def self.process(username, password, donation, credit_card_number, expiration_date, cvv, order_desc, ip_addr)
+        def self.process(username, password, obj, obj_data, amount, ch_first_name, ch_last_name, cc_number, cc_exp, cc_cvv, ipaddr)
           gw = DiamondMind::Processor.new()
           # NOTE: your username and password should replace the ones below
           gw.setLogin(username, password);
 
-          gw.setOrder(order_desc, order_desc, 0, 0, '', ip_addr)
-          gw.setBilling(donation.cardholder_first_name,donation.cardholder_last_name,"",donation.billing_address,"", donation.city,
-                  donation.state,donation.zip_code,"US",donation.phone_number,"",donation.user.email,
-                  "")
+          # gw.setBilling("John","Smith","Acme, Inc.","123 Main St","Suite 200", "Beverly Hills",
+          #         "CA","90210","US","555-555-5555","555-555-5556","support@example.com",
+          #         "www.example.com")
 
           # gw.setShipping("Mary","Smith","na","124 Shipping Main St","Suite Ship", "Beverly Hills",
-                  # "CA","90210","US","support@example.com")
+          #         "CA","90210","US","support@example.com")
 
           # gw.setOrder("1234","Big Order",1, 2, "PO1234","65.192.14.10")
 
-          r = gw.doSale(donation.amount,credit_card_number,expiration_date,cvv)
+          # r = gw.doSale("5.00","4111111111111111","1212",'999')
+
+          submission_data = obj_data.submission_content
+
+          gw.setBilling(ch_first_name.to_s, ch_last_name.to_s, '', '', '', '',
+                  '', '', 'US', '', '', '', '')
+
+          gw.setOrder(obj.name, obj.name, 0, 0, '', ipaddr.to_s)
+
+          r = gw.doSale(amount, cc_number, cc_exp, cc_cvv)
+
           myResponses = gw.getResponses
 
           # print myResponses['response'] + "  "
@@ -168,6 +177,8 @@ module DiamondMind
           elsif (myResponses['response'] == '3')
               return "Error"
           end
+        rescue => e
+          puts "#{e}"
         end
     end
 end
