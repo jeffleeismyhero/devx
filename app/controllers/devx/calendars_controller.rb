@@ -80,9 +80,10 @@ module Devx
         end
       end
 
-    # rescue => e
-    #   logger.warn "[EXCEPTION] #{e.message}"
-    #   redirect_to '/404.html'
+    rescue => e
+      logger.warn "[EXCEPTION] #{e.message}"
+      logger.warn "[PARAMETERS] #{params.inspect}"
+      redirect_to '/404.html'
     end
 
     def export_all
