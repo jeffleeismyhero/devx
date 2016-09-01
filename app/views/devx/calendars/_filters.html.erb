@@ -1,8 +1,8 @@
 <div class="small-12 medium-10 medium-offset-1 large-10 large-offset-1 columns">
   <%= search_form_for @q do |f| %>
-    <% if @calendars.count > 1 %>
+    <% if Devx::Calendar.active.count > 1 %>
       <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View calendar:</p>
-      <%= f.select :id_eq, Devx::Calendar.all.collect{ |x| [ x.name, x.id ] }, { include_blank: true }, { class: 'select2-fixed' } %>
+      <%= f.select :id_eq, Devx::Calendar.active.collect{ |x| [ x.name, x.id ] }, { include_blank: true }, { class: 'select2-fixed' } %>
     <% end %>
 
     <% if @tags.any? %>

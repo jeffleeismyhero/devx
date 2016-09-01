@@ -208,66 +208,73 @@ module Devx
             records.each_with_index do |record, index|
               begin
                 school_id = record[0].to_s.squish
-                email = record[1].to_s.squish
+                email = record[1].to_s.downcase.squish
                 prefix = record[2].to_s.squish
                 first_name = record[3].to_s.squish
                 last_name = record[4].to_s.squish
                 suffix = record[5].to_s.squish
 
-                if Devx::User.exists?(email: email)
-                  user = Devx::User.find_by(email: email)
-                else
-                  password = Devise.friendly_token(12)
-                  if user = Devx::User.create(email: email, password: password)
+                if email.present?
+
+                  if Devx::User.exists?(email: email)
+                    user = Devx::User.find_by(email: email)
+                  else
+                    password = Devise.friendly_token(12)
+                    if user = Devx::User.create(email: email, password: password)
+                    end
                   end
-                end
 
-                role = Devx::Role.find_or_create_by(name: 'Parent')
-                if role && !user.authorizations.exists?(role: role)
-                  user.authorizations.new(role: role)
-                end
+                  role = Devx::Role.find_or_create_by(name: 'Parent')
+                  if role && !user.authorizations.exists?(role: role)
+                    user.authorizations.new(role: role)
+                  end
 
-                if Devx::Person.exists?(email: email)
-                  person = Devx::Person.find_by(email: email)
-                else
-                  person = Devx::Person.new(
-                    prefix: prefix,
-                    first_name: first_name,
-                    last_name: last_name,
-                    email: email,
-                    suffix: suffix
-                  )
-                end
-                person.association_list = 'Parent'
-                person.save
+                  if Devx::Person.exists?(email: email)
+                    person = Devx::Person.find_by(email: email)
+                  else
+                    person = Devx::Person.new(
+                      prefix: prefix,
+                      first_name: first_name,
+                      last_name: last_name,
+                      email: email,
+                      suffix: suffix
+                    )
+                  end
+                  person.association_list = 'Parent'
+                  person.save
 
-                user.person = person
+                  if !user.person.present?
+                    user.person = person
+                  end
 
-                if user.valid? && user.save
-                  logger.info "[VALID USER] #{user.inspect}"
+                  if user.valid? && user.save
+                    logger.info "[VALID USER] #{user.inspect}"
 
-                  if student = Devx::Person.find_by(school_id: school_id)
-                    if !user.linked_accounts.exists?(student)
-                      user.linked_accounts.new(person: student)
-                      logger.info "[STUDENT] #{user.linked_accounts.inspect}"
-                      logger.info "[VALID LINK] #{user.linked_accounts.inspect}"
+                    if student = Devx::Person.find_by(school_id: school_id)
+                      user.linked_accounts.each do |link|
+                        if !link.person == student
+                          user.linked_accounts.new(person: student)
+                          logger.info "[STUDENT] #{user.linked_accounts.inspect}"
+                          logger.info "[VALID LINK] #{user.linked_accounts.inspect}"
+                        else
+                          logger.info "[STUDENT] Link already exists"
+                        end
+                      end
                     else
-                      logger.info "[STUDENT] Link already exists"
+                      logger.info "[STUDENT] No student found with ID: #{school_id}"
+                    end
+
+                    if !user.save
+                      logger.warn "[USER] #{Failed to save linked object}"
+                      logger.warn "[USER] #{user.errors.full_messages.join("\n")}"
                     end
                   else
-                    logger.info "[STUDENT] No student found with ID: #{school_id}"
+                    logger.warn "Failed to import object: #{user.inspect}"
+                    user.errors.full_messages.try(:each) do |error|
+                      logger.warn "#{error}"
+                    end
+                    @errors += 1
                   end
-
-                  if !user.save
-                    logger.warn "[USER] #{Failed to save linked object}"
-                    logger.warn "[USER] #{user.errors.full_messages.join("\n")}"
-                  end
-                else
-                  logger.warn "Failed to import object: #{user.inspect}"
-                  user.errors.full_messages.try(:each) do |error|
-                    logger.warn "#{error}"
-                  end
-                  @errors += 1
                 end
               rescue => e
                 Rails.logger.info "[IMPORT FAILURE] Record: #{record.inspect}"
