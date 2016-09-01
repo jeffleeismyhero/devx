@@ -4,10 +4,10 @@
       <h3 style="text-align:center"><%= @start_date.strftime('%B %Y') %></h3>
       <div class="calendar-navigation">
         <div class="previous-link">
-          <%= link_to "<i class='fa fa-arrow-left'></i> Previous".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date - 1.month) %>
+          <%= link_to "<i class='fa fa-arrow-left'></i> Previous".html_safe, devx.calendar_path(q: { id_eq: params[:q][:id_eq] }, category: params[:category], start_date: @start_date - 1.month) %>
         </div>
         <div class="next-link">
-          <%= link_to "Next <i class='fa fa-arrow-right'></i>".html_safe, devx.calendar_path(category: params[:category], start_date: @start_date + 1.month) %>
+          <%= link_to "Next <i class='fa fa-arrow-right'></i>".html_safe, devx.calendar_path(q: { id_eq: params[:q][:id_eq] }, category: params[:category], start_date: @start_date + 1.month) %>
         </div>
       </div>
     </div>

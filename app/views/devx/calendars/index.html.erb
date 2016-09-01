@@ -17,7 +17,9 @@
         <% if params[:category].present? %>
           <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export this category".html_safe, devx.calendar_path(category: params[:category], format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
         <% end %>
-        <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export full calendar".html_safe, devx.export_all_calendar_path(@calendar, format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
+        <% if @calendar.events.any? %>
+          <li style="display:inline-block;"><%= link_to "<i class=\"fa fa-download\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Export full calendar".html_safe, devx.export_all_calendar_path(@calendar, format: :ics), class: 'calendar hide-for-small-only', style: "font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;" %></li>
+        <% end %>
         <li style="display:inline-block;">
           <% if user_signed_in? %>
             <%= link_to "<i class=\"fa fa-plus\" style=\"font-size:1.8rem;\" aria-hidden=\"true\"></i> Subscribe".html_safe, devx.subscribe_calendar_path(@calendar), method: :post, style: 'font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;' %>
