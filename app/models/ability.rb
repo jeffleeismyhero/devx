@@ -27,6 +27,9 @@ class Ability
       can :manage, Devx::Document
       can :manage, Devx::Person
       can :manage, Devx::Announcement
+      can :manage, Devx::Form
+      can :manage, Devx::Field
+      can :manage, Devx::FormSubmission
 
       if Devx::ApplicationSetting.find_or_create_by(id: 1).settings['alumni_database']
         can :manage, Devx::Alumni

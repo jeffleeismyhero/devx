@@ -235,11 +235,10 @@ module Devx
                     first_name: first_name,
                     last_name: last_name,
                     email: email,
-                    suffix: suffix,
-                    association_list: 'Parent'
+                    suffix: suffix
                   )
                 end
-                person.association_list.add('Parent')
+                person.association_list = 'Parent'
                 person.save
 
                 user.person = person
@@ -248,9 +247,13 @@ module Devx
                   logger.info "[VALID USER] #{user.inspect}"
 
                   if student = Devx::Person.find_by(school_id: school_id)
-                    user.linked_accounts.new(person: student)
-                    logger.info "[STUDENT] #{user.linked_accounts.inspect}"
-                    logger.info "[VALID LINK] #{user.linked_accounts.inspect}"
+                    if !user.linked_accounts.exists?(student)
+                      user.linked_accounts.new(person: student)
+                      logger.info "[STUDENT] #{user.linked_accounts.inspect}"
+                      logger.info "[VALID LINK] #{user.linked_accounts.inspect}"
+                    else
+                      logger.info "[STUDENT] Link already exists"
+                    end
                   else
                     logger.info "[STUDENT] No student found with ID: #{school_id}"
                   end
