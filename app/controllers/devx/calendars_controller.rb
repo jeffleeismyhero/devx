@@ -10,6 +10,8 @@ module Devx
         @layout = Devx::Layout.find(app_settings['calendar_layout'])
       end
 
+      @calendars = Devx::Calendar.active
+
       @q = @calendars.search(params[:q])
       puts @q.result.inspect
       @calendar = @q.result.first if @q.result.first.present?
