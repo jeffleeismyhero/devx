@@ -11,6 +11,7 @@ module Devx
       end
 
       @q = @calendars.search(params[:q])
+      puts @q.result.inspect
       @calendar = @q.result.first if @q.result.first.present?
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
 
