@@ -1,5 +1,6 @@
 module Devx
   class ProductSku < ActiveRecord::Base
+    after_update :update_stripe_sku
     before_destroy :delete_stripe_sku
 
   	belongs_to :product
@@ -13,6 +14,7 @@ module Devx
       {
         price: (price * 100).to_i,
 		   	currency: currency,
+        active: active,
 		   	inventory: {
 		     	'type': inventory || 'infinte',
      			'quantity': quantity
@@ -29,6 +31,15 @@ module Devx
   		sku = product.skus.create(values)
       update_attributes(stripe_id: sku.id)
   	end
+
+    def update_stripe_sku
+      sku = Stripe::SKU.retrieve(stripe_id)
+      values = self.values.delete_if { |k, v| [:id].include?(k) }
+      values = values.delete_if { |k, v| v.blank? }
+      values.each_pair { |key, value| sku.send("#{key}=", value) }
+      sku.active = self.values[:active] || false
+  		sku.save
+    end
 
   	def delete_stripe_sku
   		Stripe::SKU.retrieve(self.stripe_id).try(:delete)
