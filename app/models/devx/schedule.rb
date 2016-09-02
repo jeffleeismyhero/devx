@@ -27,8 +27,40 @@ module Devx
           events.push(s.event)
         end
       end
+      events
+    end
 
-      return events
+    def self.resequence(calendar, schedules, date)
+      schedules = schedules.joins(:event).where('devx_events.calendar_id': calendar.id)
+      schedules.collect do |schedule|
+        current_date = date
+        next_occurrence = nil
+        days = schedule.days.reject(&:blank?)
+        if days.any?
+          day_indexes = days.collect{ |d| Date::DAYNAMES.index(d) }
+          current_day = current_date.strftime("%A")
+          current_day_index = Date::DAYNAMES.index(current_day)
+          until next_occurrence
+            if day_indexes.index(current_day_index)
+              next_occurrence = current_date
+            else
+              current_day_index = (current_day_index + 1 > 6) ? 0 : current_day_index + 1
+              current_date = current_date + 1.day
+            end
+          end
+        else
+          next_occurrence = current_date
+        end
+
+        if schedule.start_time.to_date < next_occurrence
+          advance = (next_occurrence - schedule.start_time.to_date).to_i
+          schedule.start_time = schedule.start_time.advance(days: advance)
+        end
+
+        # Do not return any schedules where the next time would be past the
+        # `end_time` value.
+        (schedule.end_time && schedule.start_time < schedule.end_time) ? schedule : nil
+      end.compact
     end
   end
 end
