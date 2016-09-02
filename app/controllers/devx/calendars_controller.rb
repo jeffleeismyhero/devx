@@ -27,7 +27,7 @@ module Devx
         params[:start_date] = @start_date
       else
         @start_date = params[:start_date].to_datetime unless params[:start_date].nil?
-        @start_date ||= DateTime.now
+        @start_date ||= Time.zone.now
       end
 
       @page = Devx::Page.new(name: 'Calendar', layout: @layout)
