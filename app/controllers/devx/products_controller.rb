@@ -2,7 +2,6 @@ require_dependency "devx/application_controller"
 
 module Devx
   class ProductsController < ApplicationController
-  	before_action :set_product, only: [:show]
     load_resource :product, class: 'Devx::Product'
     layout :set_layout
 
