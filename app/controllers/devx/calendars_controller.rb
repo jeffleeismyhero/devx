@@ -35,7 +35,6 @@ module Devx
 
       @scheduled_events = {}
       @dates.each do |date|
-        byebug if date == Date.today
         schedules = Devx::Schedule.where("start_time <= ? AND end_time >= ?", date.to_time.in_time_zone.end_of_day, date.to_time.in_time_zone.beginning_of_day)
         if schedules.any?
           @scheduled_events[date] = Devx::Schedule.resequence(@calendar, schedules, date)
