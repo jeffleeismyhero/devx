@@ -118,9 +118,6 @@ Devx::Engine.routes.draw do
     end
   end
 
-  get 'products', to: 'product_displays#index'
-  get 'products/:id', to: 'product_displays#show', as: :product
-
   resources :calendars, path: 'calendar', only: [ :index ] do
     member do
       get 'export-all', to: 'calendars#export_all'
@@ -139,10 +136,16 @@ Devx::Engine.routes.draw do
     end
   end
 
+  resources :products
+  resources :cart, only: :index
+  get '/cart/add', to: 'cart#add'
+  get '/cart/empty', to: 'cart#empty'
+
   get '/branding.css', to: 'stylesheets#branding'
   get '/directory', to: 'administration#index'
   match '/calendar', to: 'calendars#show', via: [ :get, :post ]
   match '/contact', to: 'contact#show', via: [ :get, :post ]
+  match '/checkout', to: 'cart#checkout', via: [ :get, :post ]
 
   resources :registrations, only: [ :show, :create ]
   resources :forms, only: [ :show, :create ]

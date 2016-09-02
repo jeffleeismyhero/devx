@@ -1,0 +1,49 @@
+<% provide :title, @page.name %>
+
+<div class="container ecommerce-padded-container">
+  <div class="row">
+    <div class="medium-12 columns">
+      <h1><%= yield(:title) %></h1>
+    </div>
+
+    <% if @cart.any? %>
+    <div class="medium-6 columns">
+      <%= link_to 'Continue shopping', devx.products_path %>
+    </div>
+    <div class="medium-6 columns">
+      <%= link_to 'Empty cart', devx.cart_empty_path %>
+    </div>
+    <div class="medium-12 columns">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart.try(:each) do |sku, quantity | %>
+          <% product_sku = Devx::ProductSku.find(sku) %>
+          <tr>
+            <td><%= product_sku.product.try(:name) %></td>
+            <td><%= product_sku.try(:price) %></td>
+            <td><%= quantity %></td>
+          </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Subtotal: <%= number_to_currency @subtotal %></td>
+          </tr>
+        </tfoot>
+      </table>
+      <%= link_to 'Checkout', devx.checkout_path %>
+    </div>
+    <% else %>
+    <div class="medium-12 columns">
+      <h5>Your cart is empty. Return to <%= link_to 'shop', devx.products_path %></h5>
+    </div>
+    <% end %>
+  </div>
+</div>

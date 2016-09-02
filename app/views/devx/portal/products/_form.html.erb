@@ -15,55 +15,18 @@
     <%= f.cktext_area :description %>
   </div>
 
-<div class="col-12 columns cd-edit-form">
-  <%= link_to_add_fields 'Add SKUs', f, :product_skus, nil, 'product_skus_fields', '' %> 
+  <% if !@product.new_record? %>
+    <div class="col-12 columns cd-edit-form">
+      <%= link_to_add_fields 'Add SKUs', f, :product_skus, nil, 'product_skus_fields', '' %>
 
-  <%= content_tag 'div', class: 'nested-attributes' do %>
-    <%= f.fields_for :product_skus do |p| %>
-      <%= render partial: 'product_skus_fields', locals: { f: p } %>
-    <% end %>
+      <%= content_tag 'div', class: 'nested-attributes' do %>
+        <%= f.fields_for :product_skus do |p| %>
+          <%= render partial: 'product_skus_fields', locals: { f: p } %>
+        <% end %>
+      <% end %>
+
+    </div>
   <% end %>
-
-</div>
-
-
-
-  
-  <!--
-
-  <div class="col-6 columns cd-edit-form">
-    <%= f.label :price %>
-    <%= f.number_field :price, step: '0.01' %>
-  </div>
-
-  <div class="col-6 columns cd-edit-form">
-    <%= f.label :weight, 'Weight (lb)' %>
-    <%= f.number_field :weight, step: '0.01' %>
-  </div>
-
-  <div class="col-8 columns cd-edit-form">
-      <%= f.label :taxable %><br>
-  </div>
-
-  <div class="col-1 columns cd-edit-form">
-      <label class="switch">
-          <%= f.check_box :taxable %>
-          <div class="slider round"></div>
-      </label>
-  </div>
-
-  <div class="col-8 columns cd-edit-form">
-      <%= f.label :stockable %><br>
-  </div>
-
-  <div class="col-1 columns cd-edit-form">
-      <label class="switch">
-          <%= f.check_box :stockable %>
-          <div class="slider round"></div>
-      </label>
-  </div>
-
-  -->
 
   <div class="col-12 columns">
     <div class="cd-update-form">
