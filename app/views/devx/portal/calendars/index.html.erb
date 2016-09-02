@@ -1,35 +1,35 @@
 <% provide(:title, '' + controller_name.classify.pluralize) %>
 
 <div class="container">
-    <div class="row">
-        <div class="col-12 columns">
-            <h1><%= yield(:title) %></h1>
-        </div>
-        <div class="col-12 columns" style="padding-bottom:20px;">
-            <i class="fa fa-calendar" aria-hidden="true"></i> <%= link_to 'Create Calendar', devx.new_portal_calendar_path %>
-            <div style="float:right;">
-                <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
-              <div class="cd-edit-form">
-              <%= search_form_for @q, url: devx.portal_calendars_path do |f| %>
-                  <%= f.search_field :name_cont %>
-                  <%= f.submit %>
-              <% end %>
-              </div>
-            </div>
-        </div>
-        <div class="col-12 columns">
-            <table>
-                <thead>
-                    <tr>
-                        <th><%= sort_link @q, :name %></th>
-                        <th>Active</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%= render partial: 'calendar', collection: @calendars %>
-                </tbody>
-            </table>
-        </div>
+  <div class="row">
+    <div class="col-12 columns">
+      <h1><%= yield(:title) %></h1>
     </div>
+    <div class="col-12 columns" style="padding-bottom:20px;">
+      <i class="fa fa-calendar" aria-hidden="true"></i> <%= link_to 'Create Calendar', devx.new_portal_calendar_path %>
+      <div style="float:right;">
+        <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
+        <div class="cd-edit-form">
+        <%= search_form_for @q, url: devx.portal_calendars_path do |f| %>
+          <%= f.search_field :name_cont %>
+          <%= f.submit %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 columns">
+      <table>
+        <thead>
+          <tr>
+            <th><%= sort_link @q, :name %></th>
+            <th>Active</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'calendar', collection: @calendars %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

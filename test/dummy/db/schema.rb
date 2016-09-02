@@ -657,13 +657,28 @@ ActiveRecord::Schema.define(version: 20160831081348) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "devx_transaction_responses", force: :cascade do |t|
+    t.integer  "transaction_id"
+    t.text     "message"
+    t.text     "code"
+    t.string   "token"
+    t.string   "state"
+    t.string   "status"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "devx_transactions", force: :cascade do |t|
     t.integer  "order_id"
     t.string   "payment_method"
     t.float    "amount"
     t.text     "comments"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "transaction_type"
+    t.string   "status"
+    t.string   "state"
+    t.string   "payment_token"
   end
 
   create_table "devx_urgent_news", force: :cascade do |t|
@@ -699,6 +714,7 @@ ActiveRecord::Schema.define(version: 20160831081348) do
     t.datetime "updated_at",                          null: false
     t.string   "photo"
     t.integer  "person_id"
+    t.string   "customer_token"
     t.string   "stripe_id"
   end
 

@@ -1,242 +1,215 @@
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[boilerplate]', 'JCW Boilerplate' %><br>
+  <%= label_tag 'settings[boilerplate]', 'JCW Boilerplate' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[boilerplate]', @settings.settings['boilerplate'], @settings.settings['boilerplate'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[boilerplate]', @settings.settings['boilerplate'], @settings.settings['boilerplate'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[default_timezone]', 'Default Timezone' %><br>
-    <%= select_tag 'settings[default_timezone]', options_for_select(@timezones, @settings.settings['default_timezone']), { prompt: 'Select timezone', class: 'select2-fixed' } %>
+  <%= label_tag 'settings[default_timezone]', 'Default Timezone' %><br />
+  <%= select_tag 'settings[default_timezone]', options_for_select(@timezones, @settings.settings['default_timezone']), { prompt: 'Select timezone', class: 'select2-fixed' } %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[article_list_template]', 'Article List Template' %><br>
-    <%= select_tag 'settings[article_list_template]', options_for_select(['List Style 1', 'Blog Style 1'], @settings.settings['article_list_template']), { prompt: 'Select Article List Style' } %>
+  <%= label_tag 'settings[article_list_template]', 'Article List Template' %><br />
+  <%= select_tag 'settings[article_list_template]', options_for_select(['List Style 1', 'Blog Style 1'], @settings.settings['article_list_template']), { prompt: 'Select Article List Style' } %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[article_view_template]', 'Article View Template' %><br>
-    <%= select_tag 'settings[article_view_template]', options_for_select(['Style 1'], @settings.settings['article_view_template']), { prompt: 'Select Article Style' } %>
+  <%= label_tag 'settings[article_view_template]', 'Article View Template' %><br />
+  <%= select_tag 'settings[article_view_template]', options_for_select(['Style 1'], @settings.settings['article_view_template']), { prompt: 'Select Article Style' } %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[article_layout]', 'Article Layout' %><br>
-    <%= select_tag 'settings[article_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['article_layout']), { prompt: 'Select Article Layout' } %>
+  <%= label_tag 'settings[article_layout]', 'Article Layout' %><br />
+  <%= select_tag 'settings[article_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['article_layout']), { prompt: 'Select Article Layout' } %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[newsfeed_layout]', 'Newsfeed Layout' %><br>
-    <%= select_tag 'settings[newsfeed_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['newsfeed_layout']), { prompt: 'Select Newsfeed Layout' } %>
+  <%= label_tag 'settings[newsfeed_layout]', 'Newsfeed Layout' %><br />
+  <%= select_tag 'settings[newsfeed_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['newsfeed_layout']), { prompt: 'Select Newsfeed Layout' } %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[calendar_layout]', 'Calendar Layout' %><br>
-    <%= select_tag 'settings[calendar_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['calendar_layout']), { prompt: 'Select Calendar Layout' } %>
+  <%= label_tag 'settings[calendar_layout]', 'Calendar Layout' %><br />
+  <%= select_tag 'settings[calendar_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['calendar_layout']), { prompt: 'Select Calendar Layout' } %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[staff_directory]', 'Staff Directory Layout' %><br>
-    <%= select_tag 'settings[staff_directory]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['staff_directory']), { prompt: 'Select Staff Directory Layout' } %>
-</div>
+  <%= label_tag 'settings[staff_directory]', 'Staff Directory Layout' %><br />
+  <%= select_tag 'settings[staff_directory]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['staff_directory']), { prompt: 'Select Staff Directory Layout' } %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[donation_form_layout]', 'Donation Form Layout' %><br>
+    <%= label_tag 'settings[donation_form_layout]', 'Donation Form Layout' %><br />
     <%= select_tag 'settings[donation_form_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['donation_form_layout']), { prompt: 'Select Donation Form Layout' } %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[commerce_layout]', 'Commerce Layout' %><br>
-    <%= select_tag 'settings[commerce_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['commerce_layout']), { prompt: 'Select Commerce Layout' } %>
+  <%= label_tag 'settings[commerce_layout]', 'Commerce Layout' %><br />
+  <%= select_tag 'settings[commerce_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['commerce_layout']), { prompt: 'Select Commerce Layout' } %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[contact_form_layout]', 'Contact Form Layout' %><br>
-    <%= select_tag 'settings[contact_form_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['contact_form_layout']), { prompt: 'Select Contact Form Layout' } %>
+  <%= label_tag 'settings[contact_form_layout]', 'Contact Form Layout' %><br />
+  <%= select_tag 'settings[contact_form_layout]', options_for_select(Devx::Layout.all.collect{ |x| [x.name, x.id] }, @settings.settings['contact_form_layout']), { prompt: 'Select Contact Form Layout' } %>
 </div>
 
 <div class="col-6 columns cd-edit-form">
-    <%= label_tag 'settings[contact_form_recipient]', 'Contact Form Recipient' %><br>
-    <%= text_field_tag 'settings[contact_form_recipient]', @settings.settings['contact_form_recipient'] %>
+  <%= label_tag 'settings[contact_form_recipient]', 'Contact Form Recipient' %><br />
+  <%= text_field_tag 'settings[contact_form_recipient]', @settings.settings['contact_form_recipient'] %>
 </div>
 
-
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[admissions]', 'Admissions' %><br>
+  <%= label_tag 'settings[admissions]', 'Admissions' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[admissions]', @settings.settings['admissions'], @settings.settings['admissions'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[admissions]', @settings.settings['admissions'], @settings.settings['admissions'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
-
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[crm_module]', 'CRM' %><br>
+  <%= label_tag 'settings[crm_module]', 'CRM' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[crm_module]', @settings.settings['crm_module'], @settings.settings['crm_module'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[crm_module]', @settings.settings['crm_module'], @settings.settings['crm_module'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
-
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[classroom_profiles]', 'Classroom Profiles' %><br>
+  <%= label_tag 'settings[classroom_profiles]', 'Classroom Profiles' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[classroom_profiles]', @settings.settings['classroom_profiles'], @settings.settings['classroom_profiles'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[classroom_profiles]', @settings.settings['classroom_profiles'], @settings.settings['classroom_profiles'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
 <%= render partial: 'calendar_settings_form' %>
 
-<div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[commerce]', 'Commerce' %><br>
+<div class="col-8 columns">
+	<h3>Commerce</h3>
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[commerce]', @settings.settings['commerce'], @settings.settings['commerce'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[commerce]', @settings.settings['commerce'], @settings.settings['commerce'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
 <%= render partial: 'commerce_settings_form' %>
 
-
-
-
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[balance_tracking]', 'Balance Tracking' %><br>
+  <%= label_tag 'settings[balance_tracking]', 'Balance Tracking' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[balance_tracking]', @settings.settings['balance_tracking'], @settings.settings['balance_tracking'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[balance_tracking]', @settings.settings['balance_tracking'], @settings.settings['balance_tracking'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
-
-
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[organizations]', 'Organizations' %><br>
+  <%= label_tag 'settings[organizations]', 'Organizations' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[organizations]', @settings.settings['organizations'], @settings.settings['organizations'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[organizations]', @settings.settings['organizations'], @settings.settings['organizations'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
-
-
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[alumni_database]', 'Alumni Database' %><br>
+  <%= label_tag 'settings[alumni_database]', 'Alumni Database' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[alumni_database]', @settings.settings['alumni_database'], @settings.settings['alumni_database'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[alumni_database]', @settings.settings['alumni_database'], @settings.settings['alumni_database'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
-
-
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[form_builder]', 'Form Builder' %><br>
+  <%= label_tag 'settings[form_builder]', 'Form Builder' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[form_builder]', @settings.settings['form_builder'], @settings.settings['form_builder'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[form_builder]', @settings.settings['form_builder'], @settings.settings['form_builder'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
-
-
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[registrations]', 'Registrations' %><br>
+  <%= label_tag 'settings[registrations]', 'Registrations' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[registrations]', @settings.settings['registrations'], @settings.settings['registrations'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[registrations]', @settings.settings['registrations'], @settings.settings['registrations'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
-
-
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[student_management]', 'Student Management' %><br>
+  <%= label_tag 'settings[student_management]', 'Student Management' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[student_management]', @settings.settings['student_management'], @settings.settings['student_management'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[student_management]', @settings.settings['student_management'], @settings.settings['student_management'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
 
 <%= render partial: 'social_media_settings_form' %>
 
-
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[student_management]', 'SMS Alerts' %><br>
+  <%= label_tag 'settings[student_management]', 'SMS Alerts' %><br />
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
-        <%= check_box_tag 'settings[sms_alerts]', @settings.settings['sms_alerts'], @settings.settings['sms_alerts'] %>
-        <div class="slider round"></div>
-    </label>
+  <label class="switch">
+    <%= check_box_tag 'settings[sms_alerts]', @settings.settings['sms_alerts'], @settings.settings['sms_alerts'] %>
+    <div class="slider round"></div>
+  </label>
 </div>
-
 
 <%= render partial: 'sms_alert_settings_form' %>
 
-
 <script type="text/javascript">
-    $(".switch").on("change", function()
-    {
-        var o = $(this);
-        var d = $(this).attr("data");
-        var c = $(this).children("input");
+  $(".switch").on("change", function() {
+    var o = $(this);
+    var d = $(this).attr("data");
+    var c = $(this).children("input");
 
-        if(c.is(":checked"))
-        {
-            $("." + d + "-child").show();
+    if (c.is(":checked")) {
+      $("." + d + "-child").show();
+    } else {
+      $("." + d + "-child").hide();
+    }
+  });
 
-        }
-        else
-        {
-            $("." + d + "-child").hide();
-        }
-    });
-
-    $(".switch").each(function()
-    {
-        var o = $(this);
-        if(o.children("input").is(":checked"))
-        {
-            $("." + o.attr("data") + "-child").show();
-        }
-    });
+  $(".switch").each(function() {
+    var o = $(this);
+    if (o.children("input").is(":checked")) {
+      $("." + o.attr("data") + "-child").show();
+    }
+  });
 </script>
