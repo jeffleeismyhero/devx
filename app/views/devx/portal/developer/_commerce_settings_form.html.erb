@@ -1,9 +1,9 @@
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[stripe]', 'Stripe' %><br>
+	<h4>Stripe</h4>
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
+    <label class="switch" data="stripe">
         <%= check_box_tag 'settings[stripe]', @settings.settings['stripe'], @settings.settings['stripe'] %>
         <div class="slider round"></div>
     </label>
@@ -14,20 +14,21 @@
   <%= password_field_tag 'settings[stripe_publishable_key]', @settings.settings['stripe_publishable_key'] %>
 </div>
 
-
 <div class="col-6 columns cd-edit-form">
   <%= label_tag 'settings[stripe_secret_key]', 'Secret Key' %>
   <%= password_field_tag 'settings[stripe_secret_key]', @settings.settings['stripe_secret_key'] %>
 </div>
 
-
+<div class="col-12 columns cd-edit-form">
+  <br /><hr />
+</div>
 
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[diamond_mind]', 'DiamondMind' %><br>
+	<h4>DiamonMind</h4>
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
+    <label class="switch" data="diamond_mind">
         <%= check_box_tag 'settings[diamond_mind]', @settings.settings['diamond_mind'], @settings.settings['diamond_mind'] %>
         <div class="slider round"></div>
     </label>
@@ -43,14 +44,16 @@
   <%= password_field_tag 'settings[diamond_mind_password]', @settings.settings['diamond_mind_password'] %>
 </div>
 
-
+<div class="col-12 columns cd-edit-form">
+  <br /><hr />
+</div>
 
 <div class="col-8 columns cd-edit-form">
-    <%= label_tag 'settings[payeezy]', 'Payeezy' %><br>
+	<h4>Payeezy</h4>
 </div>
 
 <div class="col-1 columns cd-edit-form">
-    <label class="switch">
+    <label class="switch" data="payeezy">
         <%= check_box_tag 'settings[payeezy]', @settings.settings['payeezy'], @settings.settings['payeezy'] %>
         <div class="slider round"></div>
     </label>

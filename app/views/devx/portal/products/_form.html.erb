@@ -10,28 +10,35 @@
     <%= f.file_field :image %>
   </div>
 
+  <div class="col-8 columns cd-edit-form">
+    <%= f.label :active %><br>
+  </div>
+
+  <div class="col-2 columns cd-edit-form">
+    <label class="switch">
+      <%= f.check_box :active %>
+      <div class="slider round"></div>
+    </label>
+  </div>
+
   <div class="col-12 columns cd-edit-form">
     <%= f.label :description %>
     <%= f.cktext_area :description %>
   </div>
 
-  <% if !@product.new_record? %>
-    <div class="col-12 columns cd-edit-form">
-      <%= link_to_add_fields 'Add SKUs', f, :product_skus, nil, 'product_skus_fields', '' %>
+  <div class="col-12 columns cd-edit-form">
+    <%= link_to_add_fields 'Add SKUs', f, :product_skus, nil, 'product_skus_fields', '' %>
 
-      <%= content_tag 'div', class: 'nested-attributes' do %>
-        <%= f.fields_for :product_skus do |p| %>
-          <%= render partial: 'product_skus_fields', locals: { f: p } %>
-        <% end %>
+    <%= content_tag 'div', class: 'nested-attributes' do %>
+      <%= f.fields_for :product_skus do |p| %>
+        <%= render partial: 'product_skus_fields', locals: { f: p } %>
       <% end %>
-
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
   <div class="col-12 columns">
     <div class="cd-update-form">
       <%= f.submit %>
     </div>
   </div>
-
 </div>
