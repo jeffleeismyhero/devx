@@ -31,10 +31,10 @@ module Devx
       end
 
       @page = Devx::Page.new(name: 'Calendar', layout: @layout)
-      @dates = (@start_date.beginning_of_month.to_date..@start_date.end_of_month.to_date).to_a
+      @dates = ((@start_date.beginning_of_month-1.week).to_date..(@start_date.end_of_month+1.week).to_date).to_a
 
       @scheduled_events = {}
-      @scheduled_events = @dates.each do |date|
+      @dates.each do |date|
         schedules = Devx::Schedule.where("start_time <= ? AND end_time >= ?", date, date)
         if schedules.any?
           @scheduled_events[date] = Devx::Schedule.resequence(@calendar, schedules, date)
