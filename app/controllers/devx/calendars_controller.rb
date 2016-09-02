@@ -31,29 +31,12 @@ module Devx
       end
 
       @page = Devx::Page.new(name: 'Calendar', layout: @layout)
-      @dates = []
-
-      (@start_date.beginning_of_month.to_date..@start_date.end_of_month.to_date).each do |date|
-        @dates.push(date)
-      end
-
-      @events = Devx::Schedule.for_calendar(@calendar, @start_date)
-      @schedules = Devx::Schedule.for_month(@start_date).ordered
+      @dates = (@start_date.beginning_of_month.to_date..@start_date.end_of_month.to_date).to_a
 
       @scheduled_events = {}
-      @dates.each do |date|
-        @scheduled_events[date] = []
-        @events.each do |event|
-          event.schedules.ordered.try(:each_with_index) do |schedule, index|
-            if schedule.end_time_date.present? && schedule.end_time_date >= date
-              if schedule.start_time_date.present? && schedule.start_time_date <= date
-                if !@scheduled_events[date].include?(schedule)
-                  @scheduled_events[date].push(schedule)
-                end
-              end
-            end
-          end
-        end
+      @scheduled_events = @dates.each do |date|
+        schedules = Devx::Schedule.where("start_time <= ? AND end_time >= ?", date, date)
+        @scheduled_events[date] = Devx::Schedule.resequence(@calendar, schedules, date)
       end
 
       respond_to do |format|
