@@ -16,7 +16,7 @@ module Devx
 		   	currency: currency,
         active: active,
 		   	inventory: {
-		     	'type': inventory || 'infinte',
+		     	'type': inventory || 'infinite',
      			'quantity': quantity
 		   	}
       }
