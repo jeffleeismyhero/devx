@@ -67,6 +67,7 @@ module Devx
 
     rescue => e
       logger.warn "[EXCEPTION] #{e.message}"
+      logger.warn "[EXCEPTION] #{e.backtace}"
       logger.warn "[CALENDAR OBJECT] #{@calendar.inspect}"
       logger.warn "[CALENDAR INDEX OBJECT] #{@calendars.inspect}"
       logger.warn "[PARAMETERS] #{params.inspect}"
