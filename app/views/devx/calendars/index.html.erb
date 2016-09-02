@@ -47,10 +47,10 @@ ul.event-list {
 }
 </style>
 
-<%= render partial: 'week_view' %>
+<%= render partial: 'week_view' rescue nil %>
 
-<%= render partial: 'month_view' %>
+<%= render partial: 'month_view' rescue nil %>
 
-<%= render partial: 'grid_view' %>
+<%= render partial: 'grid_view' rescue nil %>
 
-<%= render partial: 'list_view' %>
+<%= render partial: 'list_view' rescue nil %>
