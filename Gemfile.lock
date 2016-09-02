@@ -127,6 +127,7 @@ GEM
     breadcrumbs_on_rails (3.0.0)
     buftok (0.2.0)
     builder (3.2.2)
+    byebug (9.0.5)
     cancancan (1.15.0)
     capybara (2.7.1)
       addressable
@@ -474,6 +475,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   capybara
   capybara-webkit
   database_cleaner
