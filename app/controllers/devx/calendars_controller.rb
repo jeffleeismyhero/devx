@@ -36,7 +36,11 @@ module Devx
       @scheduled_events = {}
       @scheduled_events = @dates.each do |date|
         schedules = Devx::Schedule.where("start_time <= ? AND end_time >= ?", date, date)
-        @scheduled_events[date] = Devx::Schedule.resequence(@calendar, schedules, date)
+        if schedules.any?
+          @scheduled_events[date] = Devx::Schedule.resequence(@calendar, schedules, date)
+        else
+          @scheduled_events[date] = []
+        end
       end
 
       respond_to do |format|
