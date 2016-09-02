@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="large-12 columns">
-      <%= month_calendar events: @scheduled_events do |date, schedules| %>
+      <%= month_calendar do |date| %>
         <%= date.try(:strftime, '%d') %>
         <ul class="event-list">
           <% @scheduled_events[date].to_a.sort_by{|s| s.start_time.strftime("%H%M") }.try(:each) do |schedule| %>
