@@ -59,7 +59,7 @@ module Devx
 
         # Do not return any schedules where the next time would be past the
         # `end_time` value.
-        (schedule.end_time && schedule.start_time < schedule.end_time) ? schedule : nil
+        (schedule.end_time && (schedule.start_time < schedule.end_time)) ? schedule : nil
       end.compact
     end
   end
