@@ -39,12 +39,12 @@ module Devx
     end
 
     describe 'amount' do
-      it 'should be invalid if amount < 0.01' do
-        account_transaction.amount = 0.00
+      it 'should be invalid if amount >= 0.00' do
+        account_transaction.amount = -10.00
         expect(account_transaction).not_to be_valid
       end
 
-      it 'should be valid if amount > 0.00' do
+      it 'should be valid if amount >= 0.00' do
         expect(account_transaction).to be_valid
       end
     end
