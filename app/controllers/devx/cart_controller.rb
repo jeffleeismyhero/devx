@@ -2,6 +2,7 @@ require_dependency "devx/application_controller"
 
 module Devx
   class CartController < ApplicationController
+    before_filter :authenticate_user!, only: :checkout
     load_resource :order, class: 'Devx::Order'
     layout :determine_layout
 
@@ -40,7 +41,8 @@ module Devx
         else
           cart[id] = 1
         end
-        redirect_to :action => :index
+        redirect_to devx.cart_index_path,
+        notice: "Added #{@sku.product.try(:name)} to cart"
 
       end
 
@@ -50,7 +52,8 @@ module Devx
 
     def empty
       session[:cart] = nil
-      redirect_to :action => :index
+      redirect_to devx.cart_index_path,
+      notice: "Your cart is now empty"
     end
 
     def checkout
@@ -77,7 +80,7 @@ module Devx
         line_items = []
 
         if current_user.stripe_id.present?
-          customer = Stripe::Customer.retrieve(stripe_id)
+          customer = Stripe::Customer.retrieve(current_user.stripe_id)
         else
           customer = Stripe::Customer.create(email: current_user.email, source: stripe_source)
           current_user.update_columns(stripe_id: customer.id)
@@ -94,7 +97,11 @@ module Devx
         items: line_items
         )
 
-        order.pay(customer: customer)
+        if order.pay(customer: customer)
+          session.delete(:cart)
+          redirect_to devx.cart_index_path,
+          notice: "Your order has been received."
+        end
       end
     end
 

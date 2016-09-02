@@ -1,6 +1,6 @@
 <div class="col-8 columns no-padding" style="margin-top:20px;">
   <div class="col-12 columns cd-edit-form">
-    <h5>Payment details</h5>
+    <h4>Payment details</h4>
   </div>
   <%= f.hidden_field :stripe_token, class: 'stripe-token' %>
   <div class="col-8 columns cd-edit-form">
@@ -13,7 +13,7 @@
   </div>
   <div class="col-8 columns cd-edit-form">
     <%= label_tag :exp_date, 'Expiration Date' %>
-    <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed' } %>
+    <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_two_digit_numbers: true, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } } %>
   </div>
   <div class="col-8 columns cd-edit-form">
     <%= label_tag :cvv, 'Security Code' %>

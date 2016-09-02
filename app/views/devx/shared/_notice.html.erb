@@ -1,0 +1,11 @@
+<% if flash.any? %>
+  <div class="container">
+    <div class="row">
+      <div class="medium-12 columns notification primary">
+        <% flash.each do |key, value| %>
+          <%= value %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

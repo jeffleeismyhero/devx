@@ -1,17 +1,16 @@
 <% provide :title, @page.name %>
 
+<%= render partial: 'devx/shared/notice' %>
+
 <div class="container ecommerce-padded-container">
   <div class="row">
     <div class="medium-12 columns">
-      <h1><%= yield(:title) %></h1>
+      <h3 class="ecommerce-page-title"><%= yield(:title) %></h3>
     </div>
 
     <% if @cart.any? %>
-    <div class="medium-6 columns">
-      <%= link_to 'Continue shopping', devx.products_path %>
-    </div>
-    <div class="medium-6 columns">
-      <%= link_to 'Empty cart', devx.cart_empty_path %>
+    <div class="medium-12 columns">
+      <%= link_to 'Empty cart', devx.cart_empty_path, class: 'button primary' %>
     </div>
     <div class="medium-12 columns">
       <table width="100%">
@@ -34,11 +33,14 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="3">Subtotal: <%= number_to_currency @subtotal %></td>
+            <td colspan="3"><strong>Subtotal:</strong> <%= number_to_currency @subtotal %></td>
           </tr>
         </tfoot>
       </table>
-      <%= link_to 'Checkout', devx.checkout_path %>
+    </div>
+    <div class="medium-12 columns">
+      <%= link_to 'Checkout', devx.checkout_path, class: 'button primary' %>
+      <%= link_to 'Continue shopping', devx.products_path, class: 'button primary' %>
     </div>
     <% else %>
     <div class="medium-12 columns">
