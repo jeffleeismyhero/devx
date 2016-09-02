@@ -33,8 +33,8 @@ module Devx
       @page = Devx::Page.new(name: 'Calendar', layout: @layout)
       @dates = []
 
-      (@start_date.beginning_of_month..@start_date.end_of_month).each do |date|
-        @dates.push(date.to_date)
+      (@start_date.beginning_of_month.to_date..@start_date.end_of_month.to_date).each do |date|
+        @dates.push(date)
       end
 
       @events = Devx::Schedule.for_calendar(@calendar, @start_date)
