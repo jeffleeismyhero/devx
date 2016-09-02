@@ -1,5 +1,4 @@
 <ul id="event-list" style="margin-bottom:20px">
-  <div style="display:none;"><%= @start_date %></div>
   <% @attributes[:events].try(:each) do |schedule| %>
     <li class="event">
       <div class="event-square">
