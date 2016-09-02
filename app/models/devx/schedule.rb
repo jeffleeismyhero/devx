@@ -8,7 +8,7 @@ module Devx
 
     scope :upcoming, -> { where('(start_time < ? OR start_time >= ?) AND end_time >= ?', Time.zone.now, Time.zone.now, Time.zone.now).ordered }
     scope :coming_up, -> { where('start_time >= ?', Time.zone.now).ordered }
-    scope :for_month, -> (start_time) { where('start_time >= ? AND start_time <= ?', start_time.zone.beginning_of_month, start_time.zone.end_of_month).ordered }
+    scope :for_month, -> (start_time) { where('start_time >= ? AND start_time <= ?', start_time.beginning_of_month, start_time.end_of_month).ordered }
     scope :ordered, -> { order("start_time ASC, end_time ASC") }
 
     belongs_to :event
