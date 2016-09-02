@@ -97,14 +97,10 @@ module Devx
         return
       end
 
-      if self.events.any?
-        self.events.try(:each) do |e|
-          e.destroy
-        end
-      end
+      self.events.destroy_all if self.events.any?
 
       self.get_all_google_events.try(:each) do |event|
-        r = Devx::Event.where(google_event_id: event.id)
+        r = self.events.where(google_event_id: event.id)
         if r.empty?
           e = Devx::Event.new(
             calendar_id: self.id,
@@ -135,12 +131,9 @@ module Devx
             end_time: end_time
           )
 
-          if e.valid?
-            e.save
-          end
+          e.save if e.valid?
         end
       end
-
     rescue Signet::AuthorizationError
       self.update_columns(refresh_token: nil, authorization_url: nil, authorization_code: nil)
       self.check_google_calendar
