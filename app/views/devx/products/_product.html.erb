@@ -1,0 +1,8 @@
+<% group.each do |product| %>
+  <div class="medium-4 columns">
+    <%= product.name %><br />
+    <% if product.product_skus.one? %>
+      <%= link_to 'Add to cart', devx.cart_add_path(id: product.product_skus.first) %>
+    <% end %>
+  </div>
+<% end %>

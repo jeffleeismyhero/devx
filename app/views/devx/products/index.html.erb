@@ -1,0 +1,17 @@
+<div class="container padding-header">
+   <div class="row">
+    <div class="col-12 columns">
+       <h3 class="ecommerce-page-title">Products</h3>
+     </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+     <% @products.in_groups_of(3, false).try(:each) do |group| %>
+      <div class="large-12 columns no-padding">
+        <%= render partial: 'product', locals: { group: group } %>
+      </div>
+     <% end %>
+   </div>
+</div>

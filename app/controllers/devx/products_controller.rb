@@ -1,9 +1,9 @@
 require_dependency "devx/application_controller"
 
 module Devx
-  class ProductDisplaysController < ApplicationController
+  class ProductsController < ApplicationController
   	before_action :set_product, only: [:show]
-    load_and_authorize_resource :product, class: 'Devx::Product'
+    load_resource :product, class: 'Devx::Product'
     layout :set_layout
 
   	def index
@@ -15,7 +15,7 @@ module Devx
 
       @page = Devx::Page.new(name: 'Shop', layout: @layout)
 
-      @products = Devx::Product.all
+      @products = Devx::Product.active
   	end
 
   	def show
@@ -28,10 +28,8 @@ module Devx
       @page = Devx::Page.new(name: @product.name, layout: @layout)
   	end
 
-  	private
-    def set_product
-    	@product = Product.find(params[:id])
-  	end
+
+    private
 
     def set_layout
       if app_settings['commerce_layout'].present?

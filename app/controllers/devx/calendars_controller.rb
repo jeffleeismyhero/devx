@@ -10,9 +10,13 @@ module Devx
         @layout = Devx::Layout.find(app_settings['calendar_layout'])
       end
 
+      @calendars = Devx::Calendar.active
+
       @q = @calendars.search(params[:q])
-      @calendar = @q.result.first if @q.result.first == true
+      puts @q.result.inspect
+      @calendar = @q.result.first if @q.result.first.present?
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
+
 
       if app_settings['default_calendar'].present?
         @calendar = Devx::Calendar.active.find(app_settings['default_calendar']) unless params[:q].present?
@@ -33,26 +37,23 @@ module Devx
         @dates.push(date.to_date)
       end
 
-      if @calendar.calendar_type.present?
-        @events = Devx::Schedule.for_calendar(@calendar, @start_date)
-        @schedules = Devx::Schedule.for_month(@start_date).ordered
+      @events = Devx::Schedule.for_calendar(@calendar, @start_date)
+      @schedules = Devx::Schedule.for_month(@start_date).ordered
 
-        @scheduled_events = {}
-        @dates.each do |date|
-          @scheduled_events[date] = []
-          @events.each do |event|
-            event.schedules.ordered.try(:each_with_index) do |schedule, index|
-              if schedule.end_time_date.present? && schedule.end_time_date >= date
-                if schedule.start_time_date.present? && schedule.start_time_date <= date
-                  if !@scheduled_events[date].include?(schedule)
-                    @scheduled_events[date].push(schedule)
-                  end
+      @scheduled_events = {}
+      @dates.each do |date|
+        @scheduled_events[date] = []
+        @events.each do |event|
+          event.schedules.ordered.try(:each_with_index) do |schedule, index|
+            if schedule.end_time_date.present? && schedule.end_time_date >= date
+              if schedule.start_time_date.present? && schedule.start_time_date <= date
+                if !@scheduled_events[date].include?(schedule)
+                  @scheduled_events[date].push(schedule)
                 end
               end
             end
           end
         end
-
       end
 
       respond_to do |format|
@@ -83,6 +84,9 @@ module Devx
 
     rescue => e
       logger.warn "[EXCEPTION] #{e.message}"
+      logger.warn "[CALENDAR OBJECT] #{@calendar.inspect}"
+      logger.warn "[CALENDAR INDEX OBJECT] #{@calendars.inspect}"
+      logger.warn "[PARAMETERS] #{params.inspect}"
       redirect_to '/404.html'
     end
 
