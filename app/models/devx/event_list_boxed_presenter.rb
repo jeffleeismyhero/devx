@@ -52,7 +52,7 @@ module Devx
               next_occurrence = current_date
             else
               current_day_index = (current_day_index + 1 > 6) ? 0 : current_day_index + 1
-              current_date = Time.zone.now.to_date + 1.day
+              current_date = current_date + 1.day
             end
           end
         else
@@ -60,7 +60,7 @@ module Devx
         end
 
         if schedule.start_time.to_date < next_occurrence
-          advance = (Time.zone.now.to_date - schedule.start_time.to_date).to_i
+          advance = (next_occurrence - schedule.start_time.to_date).to_i
           schedule.start_time = schedule.start_time.advance(days: advance)
         end
 
