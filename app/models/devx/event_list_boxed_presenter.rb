@@ -40,7 +40,7 @@ module Devx
     # occurrence of `days` unless the end date has passed
     def resequence_schedules(schedules)
       schedules.collect do |schedule|
-        current_date = Time.zone.now.to_date
+        current_date = Time.now.to_date
         next_occurrence = nil
         days = schedule.days.reject(&:blank?)
         if days.any?
