@@ -6,6 +6,10 @@ module Devx
     scope :imported, -> { where(imported: true) }
 
     validates :person, presence: true
+    validates :transaction_type, presence: true
+    validates :payment_method, presence: true
+    validates :amount, numericality: { greater_than_or_equal_to: 0 },
+      presence: true
 
     def self.per_page
       return 20
