@@ -6,8 +6,8 @@ module Devx
     layout :determine_layout
 
     def index
-      @layout = app_settings['commerce_layout'] if app_settings['commerce_layout'].present?
-      @page = Devx::Page.new(name: 'Cart', layout: Devx::Layout.find(@layout))
+      @layout = Devx::Layout.find(app_settings['commerce_layout']) if app_settings['commerce_layout'].present?
+      @page = Devx::Page.new(name: 'Cart', layout: @layout)
 
       if session[:cart] then
         @cart = session[:cart]
@@ -54,8 +54,8 @@ module Devx
     end
 
     def checkout
-      @layout = app_settings['commerce_layout'] if app_settings['commerce_layout'].present?
-      @page = Devx::Page.new(name: 'Checkout', layout: Devx::Layout.find(@layout))
+      @layout = Devx::Layout.find(app_settings['commerce_layout']) if app_settings['commerce_layout'].present?
+      @page = Devx::Page.new(name: 'Cart', layout: @layout)
 
       if session[:cart]
         @cart = session[:cart]
@@ -66,6 +66,8 @@ module Devx
       @order = Devx::Order.new
 
       if request.post?
+        stripe_source = params[:order][:stripe_token]
+
         if session[:cart]
           @cart = session[:cart]
         else
@@ -77,7 +79,8 @@ module Devx
         if current_user.stripe_id.present?
           customer = Stripe::Customer.retrieve(stripe_id)
         else
-          customer = Stripe::Customer.create(email: current_user.email, source: params[:order][:stripe_token])
+          customer = Stripe::Customer.create(email: current_user.email, source: stripe_source)
+          current_user.update_columns(stripe_id: customer.id)
         end
 
         @cart.each do |line_item, quantity|
@@ -85,11 +88,13 @@ module Devx
           line_items << { type: 'sku', parent: sku.stripe_id, quantity: quantity, description: sku.product.name, amount: sku.price_in_cents }
         end
 
-        Stripe::Order.create(
+        order = Stripe::Order.create(
         currency: 'usd',
         customer: customer.id,
         items: line_items
         )
+
+        order.pay(customer: customer)
       end
     end
 

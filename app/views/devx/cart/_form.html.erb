@@ -19,6 +19,11 @@
     <%= label_tag :cvv, 'Security Code' %>
     <%= text_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off %>
   </div>
+  </div>
+  <div class="col-8 columns cd-edit-form">
+    <%= label_tag :zip_code, 'Zip Code' %>
+    <%= text_field_tag :zip_code, '', placeholder: 'Zip Code', autocomplete: :off %>
+  </div>
   <div class="col-12 columns">
     <div class="cd-update-form">
       <%= f.submit 'Submit order' %>

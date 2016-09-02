@@ -6,14 +6,15 @@ module Devx
     scope :active, -> { where(active: true) }
 
     has_many :events
+    has_many :schedules, through: :events
     has_many :calendar_subscriptions
 
     validates :name, presence: true, uniqueness: { case_sensitive: false }
 
     before_save :update_from_google
 
-    def upcoming_events
-      self.events.where("start_time > ?", Time.zone.now).order(start_time: :asc)
+    def test(start_date)
+      self.events.joins(:schedules).where('devx_schedules.start_time >= ? AND devx_schedules.start_time <= ?', start_date.beginning_of_month, start_date.end_of_month).order('devx_schedules.start_time ASC')
     end
 
     def google_cal

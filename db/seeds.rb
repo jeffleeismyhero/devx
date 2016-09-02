@@ -44,3 +44,34 @@ users.each do |u|
 end
 
 Devx::Branding.create(id: 1)
+
+products = Devx::Product.create([
+    {
+      name: 'Product 1',
+      description: 'Lorem ipsum'
+    },
+    {
+      name: 'Product 2',
+      description: 'Lorem ipsum'
+    },
+    {
+      name: 'Product 3',
+      description: 'Lorem ipsum'
+    },
+    {
+      name: 'Product 4',
+      description: 'Lorem ipsum'
+    },
+    {
+      name: 'Product 5',
+      description: 'Lorem ipsum'
+    },
+    {
+      name: 'Product 6',
+      description: 'Lorem ipsum'
+    },
+])
+
+products.each do |p|
+  p.product_skus.create(currency: 'USD', price: 9.99, stockable: false, active: true)
+end
