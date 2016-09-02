@@ -25,7 +25,7 @@
                 </div>
                 <div style="border-left:1px solid #384967; border-right:1px solid #384967; border-bottom:1px solid #384967;overflow-y:scroll">
                   <table style="margin-bottom:40px">
-                    <% @scheduled_events[date.to_date].try(:each) do |schedule| %>
+                    <% @scheduled_events && @scheduled_events[date].try(:each) do |schedule| %>
                       <% if (schedule.repeat == false || schedule.repeat.nil?) || (schedule.repeat == true && schedule.days.include?(date.try(:strftime, '%A'))) %>
                         <% if (params['category'].present? && schedule.event.tag_list.include?(params['category'])) || params['category'].blank? || params['category'].nil? %>
                           <tr>
