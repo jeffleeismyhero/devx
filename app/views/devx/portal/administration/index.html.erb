@@ -28,6 +28,9 @@
                   <% if app_settings['balance_tracking'] %><th>Balance</th><% end %>
                   <th><%= sort_link @q, :active %></th>
                   <th>&nbsp;</th>
+                  <% if current_user && (current_user.super_administrator?) %>
+                    <th>&nbsp;</th>
+                  <% end %>
               </tr>
           </thead>
           <tbody>
