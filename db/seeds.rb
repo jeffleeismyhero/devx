@@ -38,12 +38,12 @@ Devx::Role.create([
   }
 ])
 
-users.each do |u|
+Devx::User.all.each do |u|
   role = Devx::Role.find_by(name: 'Super Administrator')
   u.authorizations.create(role: role)
 end
 
-Devx::Branding.create(id: 1)
+Devx::Branding.find_or_create_by(id: 1)
 
 products = Devx::Product.create([
     {

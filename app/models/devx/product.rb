@@ -32,21 +32,27 @@ module Devx
     private
 
     def create_stripe_product
-    	Stripe::Product.create(values.delete_if { |k, v| v.blank? unless k == :active })
-      product_skus.collect(&:create_stripe_sku)
+      if Stripe.api_key
+      	Stripe::Product.create(values.delete_if { |k, v| v.blank? unless k == :active })
+        product_skus.collect(&:create_stripe_sku)
+      end
     end
 
     def update_stripe_product
-      product = Stripe::Product.retrieve(slug)
-      values = self.values.delete_if { |k, v| [:id].include?(k) }
-      values = values.delete_if { |k, v| v.blank? }
-      values.each_pair { |key, value| product.send("#{key}=", value) }
-      product.active = self.values[:active] || false
-  		product.save
+      if Stripe.api_key
+        product = Stripe::Product.retrieve(slug)
+        values = self.values.delete_if { |k, v| [:id].include?(k) }
+        values = values.delete_if { |k, v| v.blank? }
+        values.each_pair { |key, value| product.send("#{key}=", value) }
+        product.active = self.values[:active] || false
+    		product.save
+      end
     end
 
     def destroy_stripe_product
-      Stripe::Product.retrieve(slug).try(:delete)
+      if Stripe.api_key
+        Stripe::Product.retrieve(slug).try(:delete)
+      end
     end
   end
 end
