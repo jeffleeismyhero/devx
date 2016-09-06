@@ -4,7 +4,7 @@
 
   <div class="event-square small-3 medium-4 columns"><span class="event-month"><%= schedule.start_time.try(:strftime, '%b') %></span> <span class="event-date"><%= schedule.start_time.try(:strftime, '%d') %></span></div>
 
-  <div class="small-9 medium-8 columns"><span><%= schedule.start_time.try(:strftime, '%I:%M%P') %></span><br>
+  <div class="small-9 medium-8 columns"><span><%= link_to schedule.start_time.try(:strftime, '%I:%M%P'), "/calendar/#{schedule.event.calendar.slug}/events/#{schedule.event.id}/schedules/#{schedule.id}" %></span><br>
     <span><%= schedule.event.location %></span><br>
     &nbsp;</div>
   </div>

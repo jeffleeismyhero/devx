@@ -11,7 +11,7 @@
     <% if counter < @attributes[:limit].to_i %>
       <% if schedule.event.try(:tag_list).to_s == @attributes[:category].to_s %>
         <tr>
-          <td><%= schedule.start_time.to_datetime.try(:strftime, '%m/%d %I:%M%P') %></td>
+          <td><%= link_to schedule.start_time.to_datetime.try(:strftime, '%m/%d %I:%M%P'), "/calendar/#{schedule.event.calendar.slug}/events/#{schedule.event.id}/schedules/#{schedule.id}" %></td>
           <td><%= schedule.event.name %></td>
         </tr>
         <% counter += 1 %>

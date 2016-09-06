@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="event-text">
-        <p class="event-title"><%= schedule.event.name.try(:upcase) %></p>
+        <p class="event-title"><%= link_to schedule.event.name.try(:upcase), "/calendar/#{schedule.event.calendar.slug}/events/#{schedule.event.id}/schedules/#{schedule.id}" %></p>
         <p class="event-desc"><%= schedule.start_time.try(:strftime, '%l:%M %p') %></p>
         <p class="event-desc"><%= schedule.event.venue.try(:upcase) %></p>
       </div>
