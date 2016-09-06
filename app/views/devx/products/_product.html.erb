@@ -1,8 +1,16 @@
 <% group.each do |product| %>
-  <div class="medium-4 columns">
-    <%= product.name %><br />
+  <div class="medium-4 columns ecommerce-product">
+    <div class="ecommerce-product-image">
+      <% if product.image.present? %>
+
+      <% else %>
+        <%= image_tag('https://placehold.it/250x200') %>
+      <% end %>
+    </div>
+    <div class="ecommerce-product-name"><%= product.name %></div>
     <% if product.product_skus.one? %>
-      <%= link_to 'Add to cart', devx.cart_add_path(id: product.product_skus.first) %>
+      <div class="ecommerce-price-text"><%= number_to_currency product.product_skus.first.try(:price) %></div>
+      <%= link_to '<i class="fa fa-shopping-cart"></i>Add to cart'.html_safe, devx.cart_add_path(id: product.product_skus.first), class: 'button primary' %>
     <% end %>
   </div>
 <% end %>

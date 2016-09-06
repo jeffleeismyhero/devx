@@ -15,6 +15,8 @@ module Devx
       @page = Devx::Page.new(name: 'Shop', layout: @layout)
 
       @products = Devx::Product.active
+      @q = @products.search(params[:q])
+      @products = @q.result(distinct: true)
   	end
 
   	def show

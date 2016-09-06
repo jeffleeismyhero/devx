@@ -348,7 +348,7 @@
         </li>
         <% end %>
 
-        <% if can? :manage, Devx::Form && app_settings['form_builder'] %>
+        <% if current_user.administrator? && app_settings['form_builder'] %>
           <li><%= link_to '<i class="fa fa-file-text-o"></i> <span>Form Builder</span>'.html_safe, devx.portal_forms_path %></li>
         <% end %>
 

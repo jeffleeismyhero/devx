@@ -3,6 +3,8 @@ module Devx
   	extend FriendlyId
     friendly_id :name, use: [ :slugged, :finders ]
 
+    scope :active, -> { joins(:product_skus).where('devx_product_skus.active = true') }
+
     acts_as_paranoid
 
     has_many :line_items
@@ -21,6 +23,7 @@ module Devx
       {
         name: name,
         description: description,
+        shippable: false,
         active: active,
         id: slug
       }

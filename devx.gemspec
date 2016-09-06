@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "pg"
   s.add_runtime_dependency "jquery-rails"
   s.add_runtime_dependency "jquery-ui-rails"
+  s.add_runtime_dependency "therubyracer"
   s.add_runtime_dependency "coffee-rails", "~> 4.1.0"
   s.add_runtime_dependency "sass-rails", "~> 5.0"
   s.add_runtime_dependency "flash_render"

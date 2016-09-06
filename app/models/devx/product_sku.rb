@@ -12,11 +12,11 @@ module Devx
   		end
 
       {
-        price: (price * 100).to_i,
+        price: (self.price * 100).to_i,
 		   	currency: currency,
         active: active,
 		   	inventory: {
-		     	'type': inventory || 'infinte',
+		     	'type': inventory || 'infinite',
      			'quantity': quantity
 		   	}
       }
