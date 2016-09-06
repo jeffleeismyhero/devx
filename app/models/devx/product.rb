@@ -21,6 +21,7 @@ module Devx
       {
         name: name,
         description: description,
+        shippable: false,
         active: active,
         id: slug
       }
