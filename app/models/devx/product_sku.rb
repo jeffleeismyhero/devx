@@ -28,7 +28,7 @@ module Devx
 
   	def create_stripe_sku
   		product = Stripe::Product.retrieve(self.product.slug)
-  		sku = product.skus.create(values)
+  		sku = product.skus.create(values.delete_if { |k, v| v.blank? unless k == :active })
       update_attributes(stripe_id: sku.id)
   	end
 

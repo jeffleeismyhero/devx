@@ -11,6 +11,8 @@ module Devx
 
     accepts_nested_attributes_for :product_skus, allow_destroy: true
 
+    validates :name, presence: true
+
     after_create :create_stripe_product
     after_update :update_stripe_product
     before_destroy :destroy_stripe_product
