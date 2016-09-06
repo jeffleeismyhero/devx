@@ -100,39 +100,37 @@ module Devx
       self.events.destroy_all if self.events.any?
 
       self.get_all_google_events.try(:each) do |event|
-        r = self.events.where(google_event_id: event.id)
-        if r.empty?
-          e = Devx::Event.new(
-            calendar_id: self.id,
-            google_event_id: event.id,
-            name: event.summary,
-            description: event.description,
-            location: event.location
-          )
+        self.events.where(google_event_id: event.id).destroy_all
+        e = Devx::Event.new(
+          calendar_id: self.id,
+          google_event_id: event.id,
+          name: event.summary,
+          description: event.description,
+          location: event.location
+        )
 
-          if event.start.try(:date).present?
-            date_only = true
-            start_time = event.start.date.in_time_zone.beginning_of_day
+        if event.start.try(:date).present?
+          date_only = true
+          start_time = event.start.date.in_time_zone.beginning_of_day
 
-            if event.end.date.to_date.to_s == (event.start.date.to_date + 1.day).to_s
-              end_time = event.start.date.in_time_zone.end_of_day
-            else
-              end_time = event.end.date.in_time_zone.end_of_day - 1.day
-            end
-          elsif event.start.try(:date_time).present?
-            date_only = false
-            start_time = event.start.date_time.in_time_zone
-            end_time = event.end.date_time.in_time_zone
+          if event.end.date.to_date.to_s == (event.start.date.to_date + 1.day).to_s
+            end_time = event.start.date.in_time_zone.end_of_day
+          else
+            end_time = event.end.date.in_time_zone.end_of_day - 1.day
           end
-
-          e.schedules.new(
-            all_day: date_only,
-            start_time: start_time,
-            end_time: end_time
-          )
-
-          e.save if e.valid?
+        elsif event.start.try(:date_time).present?
+          date_only = false
+          start_time = event.start.date_time.in_time_zone
+          end_time = event.end.date_time.in_time_zone
         end
+
+        e.schedules.new(
+          all_day: date_only,
+          start_time: start_time,
+          end_time: end_time
+        )
+
+        e.save if e.valid?
       end
     rescue Signet::AuthorizationError
       self.update_columns(refresh_token: nil, authorization_url: nil, authorization_code: nil)
