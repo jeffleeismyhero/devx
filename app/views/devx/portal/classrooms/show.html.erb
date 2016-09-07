@@ -37,6 +37,8 @@
                         <% end %>
                       </ul>
                       <!--<a>View all Announcements</a>-->
+                    <% else %>
+                      <span>There are currently no announcements.</span>
                     <% end %>
                 </div>
                 <div class="dark-gray margin-columns" style="min-height:300px; width:100%; padding:20px;">
@@ -49,18 +51,19 @@
                         <% end %>
                       </ul>
                     <!--<a>View all Documents</a>-->
+                  <% else %>
+                    <span>There are currently no documents.</span>
                   <% end %>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<div class="container" id="photos">
-    <div class="row">
-        <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-10 xlarge-offset-1 columns no-padding">
-            <div class="large-12 columns">
-              <% if @classroom.class_galleries.any? %>
+<% if @classroom.class_galleries.any? %>
+  <div class="container" id="photos">
+      <div class="row">
+          <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-10 xlarge-offset-1 columns no-padding">
+              <div class="large-12 columns">
                 <ul>
                   <% @classroom.class_galleries.try(:each) do |gallery| %>
                     <% gallery.class_photos.try(:each_with_index) do |photo, index| %>
@@ -72,40 +75,38 @@
                     <% end %>
                   <% end %>
                 </ul>
-              <% end %>
-            </div>
-        </div>
-    </div>
-</div>
+              </div>
+          </div>
+      </div>
+  </div>
+<% end %>
 
 <div class="container">
     <div class="row">
         <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-10 xlarge-offset-1 columns">
             <ul class="accordion fw-accordion">
+              <% if @classroom.class_highlights.any? %>
                 <li>
                     <div class="accordion-title" id="highlights">
-                        Highlights
+                        <%= @classroom.highlight_tab_name %>
                     </div>
                     <div class="accordion-content">
-                      <% if @classroom.class_highlights.any? %>
-                        <% @classroom.class_highlights.limit(1).each do |highlight| %>
-                        <div class="medium-4 columns">
-                          <%= image_tag(highlight.image.try(:url), style: 'width:100%') %>
-                        </div>
-                        <div class="medium-8 columns">
-                          <small style="float:right">Posted <%= highlight.created_at.try(:strftime, '%m-%d-%Y') %></small>
-                          <h4><%= highlight.title %></h4>
-                          <%= simple_format highlight.content %>
-                        </div>
-                        <% end %>
-                      <% else %>
-                        <span>There are no highlights at this time.</span>
+                      <% @classroom.class_highlights.limit(1).each do |highlight| %>
+                      <div class="medium-4 columns">
+                        <%= image_tag(highlight.image.try(:url), style: 'width:100%') %>
+                      </div>
+                      <div class="medium-8 columns">
+                        <small style="float:right">Posted <%= highlight.created_at.try(:strftime, '%m-%d-%Y') %></small>
+                        <h4><%= highlight.title %></h4>
+                        <%= simple_format highlight.content %>
+                      </div>
                       <% end %>
                     </div>
                 </li>
+              <% end %>
                 <li>
                     <div class="accordion-title" id="about-teacher">
-                        About the Teacher
+                        About the Teacher(s)
                     </div>
                     <div class="accordion-content">
                       <div style="padding:40px 0px">
@@ -114,7 +115,7 @@
                               <div class="medium-4 columns">
                                 <%= image_tag(teacher.person.try(:photo).try(:large).try(:url), style: 'max-width:100%') %>
                               </div>
-                              <div class="medium-8 columns">  
+                              <div class="medium-8 columns">
                                 <h3><%= "#{teacher.person.first_name} #{teacher.person.last_name}".squish %></h3>
                                 <%= simple_format teacher.person.try(:bio) %>
                               </div>
@@ -123,31 +124,41 @@
                       </div>
                     </div>
                 </li>
-                <li>
-                    <div class="accordion-title" id="schedule">
-                        Schedule
-                    </div>
-                    <div class="accordion-content">
-                      <% if @classroom.class_schedules.any? %>
+                <% if @classroom.class_schedules.any? %>
+                  <li>
+                      <div class="accordion-title" id="schedule">
+                          <%= @classroom.schedule_tab_name %>
+                      </div>
+                      <div class="accordion-content">
                         <% @classroom.class_schedules.try(:each) do |schedule| %>
                           <div style="padding:10px 0;">
-                              <p style="margin-bottom:0; font-family:''"><span><%= schedule.start_time.try(:strftime, '%m/%d/%y %I:%M%P') %> to <%= schedule.end_time.try(:strftime, '%m/%d/%y %I:%M%P') %> | </span><span><%= schedule.name.try(:upcase) %></span></p>
+                              <p style="margin-bottom:0; font-family:''"><span><%= schedule.start_time.try(:strftime, '%I:%M %P') %> to <%= schedule.end_time.try(:strftime, '%I:%M %P') %> | </span><span><%= schedule.name.try(:upcase) %></span></p>
                               <%= simple_format schedule.description %>
                           </div>
                         <% end %>
-                      <% else %>
-                        <span>There is nothing scheduled at this time.</span>
-                      <% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="accordion-title" id="policies">
-                        Policies &amp; Procedures
-                    </div>
-                    <div class="accordion-content">
-                        <%= simple_format @classroom.policies_and_procedures %>
-                    </div>
-                </li>
+                      </div>
+                  </li>
+                <% end %>
+                <% if @classroom.policies_and_procedures.present? %>
+                  <li>
+                      <div class="accordion-title" id="policies">
+                          <%= @classroom.policies_and_procedures_tab_name %>
+                      </div>
+                      <div class="accordion-content">
+                          <%= simple_format @classroom.policies_and_procedures %>
+                      </div>
+                  </li>
+                <% end %>
+                <% @classroom.classroom_custom_tabs.try(:each) do |tab| %>
+                  <li>
+                      <div class="accordion-title" id="policies">
+                          <%= tab.tab_name %>
+                      </div>
+                      <div class="accordion-content">
+                          <%= tab.content.try(:html_safe) %>
+                      </div>
+                  </li>
+                <% end %>
             </ul>
         </div>
     </div>

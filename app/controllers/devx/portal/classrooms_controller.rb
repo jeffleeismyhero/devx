@@ -57,7 +57,9 @@ module Devx
   	private
 
   	def classroom_params
-  		accessible = [ :name, :welcome_message, :policies_and_procedures, :layout_id, :active, classroom_teachers_attributes: [ :id, :person_id ] ]
+  		accessible = [ :name, :welcome_message, :policies_and_procedures, :layout_id, :active,
+                    :highlight_tab_name, :schedule_tab_name, :policies_and_procedures_tab_name, classroom_teachers_attributes: [ :id, :person_id ],
+                    classroom_custom_tabs_attributes: [ :id, :tab_name, :content, :_destroy ] ]
   		params.require(:classroom).permit(accessible)
   	end
 

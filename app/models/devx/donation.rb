@@ -12,5 +12,9 @@ module Devx
     validates :zip_code, presence: true
     validates :affiliation, presence: true
     validates :phone_number, presence: true
+
+    def should_generate_new_friendly_id?
+      name_changed?
+    end
   end
 end

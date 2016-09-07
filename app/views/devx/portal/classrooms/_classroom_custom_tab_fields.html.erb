@@ -1,5 +1,13 @@
 <div class="nested-object">
-  <%= f.select :person_id, Devx::Person.faculty.collect{ |x| [x.try(:record_with_school_id), x.id] }, { include_blank: true }, class: 'select2-fixed' %>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :tab_name %>
+    <%= f.text_field :tab_name %>
+  </div>
+
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :content %>
+    <%= f.cktext_area :content %>
+  </div>
 
   <div class="nested-actions pull-right buttons">
     <%= f.hidden_field :_destroy, class: 'remove-field' %>

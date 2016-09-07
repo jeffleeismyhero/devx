@@ -45,9 +45,42 @@
   <%= javascript_include_tag "https://js.stripe.com/v2/" %>
   <%= javascript_tag "Stripe.publishableKey = '#{app_settings['stripe_publishable_key']}';" %>
 <% elsif app_settings['diamond_mind'] %>
-  <div class="medium-12 columns">
-    <h5 id="purchase-amount">Total: $0.00</h5>
-  </div>
+  <% if @form.fields.where(field_type: 'purchase_field').any? %>
+    <div class="medium-12 columns">
+      <h5 id="purchase-amount">Total: $0.00</h5>
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function()
+      {
+        var subtotal = 0;
+
+        $(".purchase-field").each(function()
+        {
+          subtotal += parseFloat($(this).attr("data-price")) * $(this).val();
+        });
+
+        $("#purchase-amount").text("Total: $" + subtotal.toFixed(2));
+
+        $(".purchase-field").on("change", function()
+        {
+          subtotal = 0;
+          var o = $(this);
+
+          $(".purchase-field").each(function()
+          {
+            subtotal += parseFloat($(this).attr("data-price")) * $(this).val();
+          });
+
+          $("#purchase-amount").text("Total: $" + subtotal.toFixed(2));
+        });
+      });
+    </script>
+  <% else %>
+    <div class="medium-12 columns">
+      <%= label_tag :amount %>
+      <%= text_field_tag :amount, '', placeholder: 'Amount' %>
+    </div>
+  <% end %>
 
   <div id="cc_fields" class="large-<%= field.field_size %> columns cd-edit-form">
     <div class="medium-4 columns cd-edit-form">
@@ -86,26 +119,3 @@
     </div>
   </div>
 <% end %>
-
-<script type="text/javascript">
-  var subtotal = 0;
-
-  $(".purchase-field").each(function()
-  {
-    subtotal += parseFloat($(this).attr("data-price")) * $(this).val();
-  });
-
-  $("#purchase-amount").text("Total: $" + subtotal.toFixed(2));
-
-  $(".purchase-field").on("change", function()
-  {
-    var o = $(this);
-
-    $(".purchase-field").each(function()
-    {
-      subtotal += parseFloat($(this).attr("data-price")) * $(this).val();
-    });
-
-    $("#purchase-amount").text("Total: $" + subtotal.toFixed(2));
-  });
-</script>

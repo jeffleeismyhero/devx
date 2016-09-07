@@ -19,7 +19,12 @@ module Devx
     def show
       @fields = []
       @form.fields.order(position: :asc).try(:each) do |field|
-        @fields << field.name.try(:titleize)
+        @fields << field.name.try(:titleize) unless field.field_type == 'section_title' || field.field_type == 'payment_fields'
+      end
+
+      if @form.fields.where(field_type: 'payment_fields').any?
+        @fields << 'Amount'
+        @fields << 'Credit Card Type'
       end
 
       respond_to do |format|

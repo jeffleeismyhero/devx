@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831081348) do
+ActiveRecord::Schema.define(version: 20160907090632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -241,10 +241,18 @@ ActiveRecord::Schema.define(version: 20160831081348) do
 
   create_table "devx_class_schedules", force: :cascade do |t|
     t.integer  "classroom_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.time     "start_time"
+    t.time     "end_time"
     t.string   "name"
     t.string   "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "devx_classroom_custom_tabs", force: :cascade do |t|
+    t.integer  "classroom_id"
+    t.string   "tab_name"
+    t.text     "content"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
@@ -258,14 +266,17 @@ ActiveRecord::Schema.define(version: 20160831081348) do
   end
 
   create_table "devx_classrooms", force: :cascade do |t|
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
     t.text     "welcome_message"
     t.text     "policies_and_procedures"
     t.string   "slug"
     t.string   "name"
     t.integer  "layout_id"
     t.boolean  "active"
+    t.string   "highlight_tab_name",               default: "Highlights"
+    t.string   "schedule_tab_name",                default: "Schedule"
+    t.string   "policies_and_procedures_tab_name", default: "Policies and Procedures"
   end
 
   create_table "devx_contact_submissions", force: :cascade do |t|
@@ -714,8 +725,8 @@ ActiveRecord::Schema.define(version: 20160831081348) do
     t.datetime "updated_at",                          null: false
     t.string   "photo"
     t.integer  "person_id"
-    t.string   "customer_token"
     t.string   "stripe_id"
+    t.string   "customer_token"
   end
 
   add_index "devx_users", ["deleted_at"], name: "index_devx_users_on_deleted_at", using: :btree

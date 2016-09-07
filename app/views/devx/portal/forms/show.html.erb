@@ -38,7 +38,7 @@
                   <td><%= submission_index + 1 %></td>
                   <% @fields.try(:each_with_index) do |field, field_index| %>
                     <% if content.key?(field) %>
-                      <td><%= content[field] %></td>
+                      <td><%= if field == 'Amount' then number_to_currency content[field] else content[field] end %></td>
                     <% else %>
                       <td>&nbsp;</td>
                     <% end %>

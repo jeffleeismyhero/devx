@@ -23,9 +23,32 @@
         <%= f.cktext_area :welcome_message %>
     </div>
     <div class="col-12 columns cd-edit-form">
+      <%= f.label :highlight_tab_name %>
+      <%= f.text_field :highlight_tab_name %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
+      <%= f.label :schedule_tab_name %>
+      <%= f.text_field :schedule_tab_name %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
+      <%= f.label :policies_and_procedures_tab_name %>
+      <%= f.text_field :policies_and_procedures_tab_name %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
         <%= f.label :policies_and_procedures %>
         <%= f.cktext_area :policies_and_procedures %>
     </div>
+
+    <div class="col-12 columns cd-edit-form">
+      <h3>Custom Tabs</h3>
+      <%= link_to_add_fields 'Add Tab', f, :classroom_custom_tabs, nil, 'classroom_custom_tab_fields', '' %>
+      <%= content_tag 'div', class: 'nested-attributes' do %>
+        <%= f.fields_for :classroom_custom_tabs do |l| %>
+          <%= render partial: 'classroom_custom_tab_fields', locals: { f: l } %>
+        <% end %>
+      <% end %>
+    </div>
+
     <div class="col-2 columns cd-edit-form">
         <%= f.label :active %><br>
     </div>
