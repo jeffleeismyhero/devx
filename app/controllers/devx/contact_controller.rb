@@ -12,9 +12,11 @@ module Devx
 
   		if request.post?
   			@contact = params[:contact]
-  			
+
 			if @contact.present?
-  				Devx::ContactMailer.delay.submit_inquiry(@contact, app_settings['contact_form_recipient'])
+          recipients = app_settings['contact_form_recipient'].split(',').try(:each) do |recipient|
+  				  Devx::ContactMailer.delay.submit_inquiry(@contact, recipient)
+          end
   			end
   		end
   	end
