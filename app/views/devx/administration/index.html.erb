@@ -23,7 +23,7 @@
 <div class="container">
   <div class="row">
       <% @departments.each do |tag| %>
-        <% s = @administrations.tagged_with(tag, on: :departments) %>
+        <% s = @administrations.tagged_with(tag) %>
         <% if s.count > 0 %>
           <div class="small-12 medium-12 large-12 columns flexbox">
             <h4 style="padding:40px 0px 20px"><%= tag.name %></h4>

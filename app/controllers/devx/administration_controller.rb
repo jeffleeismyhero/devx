@@ -17,7 +17,7 @@ module Devx
   		@q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
   		@administrations = @q.result(distinct: true)
 
-  		@departments = @administrations.tag_counts_on(:departments).order(name: :asc)
+  		@departments = Devx::Person.active.tag_counts_on(:departments).order(name: :asc)
   	end
 
     def determine_layout
