@@ -65,7 +65,7 @@
             <% event_list.push(subscription.event) %>
           <% end %>
           <ul class="cd-section-list">
-            <% event_list.sort_by{ |x| x.schedules.try(:upcoming).try(:first).try(:start_time) }.try(:each) do |event| %>
+            <% event_list.sort_by{ |x| x.try(:schedules).try(:upcoming).try(:first).try(:start_time) }.try(:each) do |event| %>
               <li class="cd-section-item">
                 <strong><%= link_to event.name, devx.calendar_event_path(event.calendar, event) %></strong><br />
                 <span><%= event.schedules.try(:upcoming).try(:first).try(:start_time).try(:strftime, '%B %d at %l:%M %P') %></span><br />
