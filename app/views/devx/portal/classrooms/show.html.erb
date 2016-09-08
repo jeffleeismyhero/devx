@@ -4,11 +4,16 @@
             <div class="large-12 columns align-center">
                 <ul class="primary-nav">
                     <li><a class="anchors" href="#homepage">Homepage</a></li>
-                    <li><a class="anchors" href="#photos">Class Photos</a></li>
-                    <li><a class="anchors" href="#highlights">Highlights</a></li>
+                    <% if @classroom.class_galleries.any? %><li><a class="anchors" href="#photos">Class Photos</a></li><% end %>
+                    <% if @classroom.class_highlights.any? %><li><a class="anchors" href="#highlights">Highlights</a></li><% end %>
                     <li><a class="anchors" href="#about-teacher">About the Teacher</a></li>
-                    <li><a class="anchors" href="#schedule">Schedule</a></li>
-                    <li><a class="anchors" href="#policies">Policies &amp; Procedures</a></li>
+                    <% if @classroom.class_schedules.any? %><li><a class="anchors" href="#schedule">Schedule</a></li><% end %>
+                    <% if @classroom.policies_and_procedures.present? %><li><a class="anchors" href="#policies">Policies &amp; Procedures</a></li><% end %>
+                    <% if @classroom.classroom_custom_tabs.any? %>
+                      <% @classroom.classroom_custom_tabs.try(:each) do |tab| %>
+                        <li><a class="anchors" href="#<%= tab.tab_name.downcase.tr(' ', '_') %>"><%= tab.tab_name %></a></li>
+                      <% end %>
+                    <% end %>
                 </ul>
             </div>
         </div>
@@ -151,7 +156,7 @@
                 <% end %>
                 <% @classroom.classroom_custom_tabs.try(:each) do |tab| %>
                   <li>
-                      <div class="accordion-title" id="policies">
+                      <div class="accordion-title" id="<%= tab.tab_name.downcase.tr(' ', '_') %>">
                           <%= tab.tab_name %>
                       </div>
                       <div class="accordion-content">
