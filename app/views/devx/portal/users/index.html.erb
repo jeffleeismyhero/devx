@@ -21,7 +21,7 @@
                   <%= f.label :sign_in_count_eq, 'Sign in count' %>
                   <%= f.search_field :sign_in_count_eq %>
                   <%= f.label :roles_name_eq, 'Role' %>
-                  <%= f.select :roles_name_eq, Devx::Role.all.collect{ |x| [x.name, x.name] } %>
+                  <%= f.select :roles_name_eq, Devx::Role.all.collect{ |x| [x.name, x.name] }, { include_blank: true } %>
                   <%= f.submit %>
                 <% end %>
                 </div>
