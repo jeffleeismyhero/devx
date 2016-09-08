@@ -1,4 +1,5 @@
 Devx::Engine.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
 
   get '/not-found', to: 'pages#not_found'
 
