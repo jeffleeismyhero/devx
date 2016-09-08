@@ -3,6 +3,10 @@
         <%= f.label :name %>
         <%= f.text_field :name %>
     </div>
+    <div class="col-12 columns cd-edit-form">
+        <%= f.label :day_of_week %>
+        <%= f.select :day_of_week, %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday], { }, { multiple: true, class: 'select2-multiple-fixed' } %>
+    </div>
       <div class="col-12 columns cd-edit-form">
         <%= f.label :description %>
         <%= f.cktext_area :description %>

@@ -135,12 +135,33 @@
                           <%= @classroom.schedule_tab_name %>
                       </div>
                       <div class="accordion-content">
-                        <% @classroom.class_schedules.try(:each) do |schedule| %>
-                          <div style="padding:10px 0;">
-                              <p style="margin-bottom:0; font-family:''"><span><%= schedule.start_time.try(:strftime, '%I:%M %P') %> to <%= schedule.end_time.try(:strftime, '%I:%M %P') %> | </span><span><%= schedule.name.try(:upcase) %></span></p>
-                              <%= simple_format schedule.description %>
-                          </div>
-                        <% end %>
+                        <% @days = %w[Monday Tuesday Wednesday Thursday Friday] %>
+                        <table width="100%">
+                          <thead>
+                            <tr>
+                              <% @days.try(:each_with_index) do |day, index| %>
+                                <% if day != 'Sunday' && day != 'Saturday' %>
+                                  <td style="width:20%;font-size:1.4rem;text-align:center"><%= day %></td>
+                                <% end %>
+                              <% end %>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <% @days.try(:each) do |day| %>
+                                <td>
+                                  <ul>
+                                    <% @classroom.class_schedules.order(start_time: :asc).try(:each) do |schedule| %>
+                                      <% if schedule.day_of_week.include?(day) %>
+                                        <li><%= "<span style=\"font-size:1.2rem\">#{schedule.start_time.strftime('%I:%M%P')} - #{schedule.end_time.strftime('%I:%M:%P')}</span><br />#{schedule.name}".html_safe %></li>
+                                      <% end %>
+                                    <% end %>
+                                  </ul>
+                                </td>
+                              <% end %>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                   </li>
                 <% end %>
