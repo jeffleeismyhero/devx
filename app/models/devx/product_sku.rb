@@ -27,13 +27,9 @@ module Devx
     end
 
   	def create_stripe_sku
-      puts self.inspect
-      puts values['quantity']
   		product = Stripe::Product.retrieve(self.product.slug)
   		sku = product.skus.create(values.delete_if { |k, v| !v.present? unless k == :active })
-      puts sku.inspect
-      update_attributes(stripe_id: sku.id)
-    rescue Stripe::InvalidRequestError
+      update_columns(stripe_id: sku.id)
   	end
 
     def update_stripe_sku
