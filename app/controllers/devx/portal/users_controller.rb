@@ -11,10 +11,10 @@ module Devx
   	def index
       @q = @users.search(params[:q])
       @q.sorts = 'last_name asc, first_name asc' if @q.sorts.empty?
-      @users = @q.result(distinct: true).paginate(page: params[:page])
+      @users = @q.result(distinct: true)
 
       respond_to do |format|
-        format.html
+        format.html { @users = @users.paginate(page: params[:page]) }
         format.xlsx do
           render xlsx: 'index', filename: 'users_export.xlsx'
         end

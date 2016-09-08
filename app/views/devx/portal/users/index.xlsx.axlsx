@@ -11,7 +11,7 @@ wb.styles do |style|
 
     @users.each do |user|
       sheet.add_row [
-        user.first_name, user.last_name,
+        user.person.try(:first_name), user.person.try(:last_name),
         user.email, user.sign_in_count, user.last_sign_in_at, user.created_at
       ]
     end
