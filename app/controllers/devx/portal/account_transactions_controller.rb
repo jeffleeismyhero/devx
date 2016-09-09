@@ -7,7 +7,7 @@ module Devx
     layout 'devx/portal'
 
     def index
-      @q = @account_transactions.search(params[:q])
+      @q = @account_transactions.not_imported.search(params[:q])
       @q.sorts = 'created_at desc' if @q.sorts.empty?
 
       if params[:q].present?
@@ -15,7 +15,7 @@ module Devx
       elsif params['approved'].present?
         @account_transactions = @account_transactions.approved
       else
-        @account_transactions = @account_transactions.pending
+        @account_transactions = @account_transactions.pending.not_imported
       end
     end
 

@@ -4,6 +4,7 @@ module Devx
 
     scope :pending, -> { where(processed_at: nil, imported: false) }
     scope :imported, -> { where(imported: true) }
+    scope :not_imported, -> { where(imported: false) }
 
     validates :person, presence: true
     validates :transaction_type, presence: true
