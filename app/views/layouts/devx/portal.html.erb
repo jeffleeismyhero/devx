@@ -205,7 +205,7 @@
                         <div class="accordion-content">
                              <ul>
                                 <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
-                                <% if current_user.person.try(:classrooms).any? %>
+                                <% if current_user.faculty? && current_user.person.try(:classrooms).try(:any?) %>
                                   <% current_user.person.try(:classrooms).try(:each) do |classroom| %>
                                     <li><%= classroom.name %>
                                       <ul>
@@ -400,15 +400,13 @@
           <li><%= link_to '<i class="fa fa-database"></i> CRM'.html_safe, devx.portal_administration_index_path %></li>
         <% end %>
 
-        <% if app_settings['classroom_profiles'] && (current_user.faculty? || current_user.administrator?) %>
+        <% if app_settings['classroom_profiles'] %>
          <li>
             <%= link_to '<i class="fa fa-pencil"></i> <span>Classroom</span>'.html_safe, '#', class: 'has-children', data: 'classroom-profile' %>
           </li>
           <ul class="navigation child-nav" data-parent="classroom-profile">
-            <% if current_user.administrator? %>
-              <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
-            <% end %>
-            <% if current_user.person.try(:classrooms).any? %>
+            <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
+            <% if current_user.faculty? && current_user.person.try(:classrooms).try(:any?) %>
               <% current_user.person.try(:classrooms).try(:each) do |classroom| %>
                 <li><strong><%= classroom.name %></strong>
                   <ul class="navigation">

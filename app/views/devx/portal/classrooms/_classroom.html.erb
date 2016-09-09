@@ -3,9 +3,8 @@
 	<td> <%= classroom.classroom_teachers.count %> </td>
 	<td> <%= classroom.active %> </td>
 	<td>
-		<% if can? :read, Devx::Classroom %><%= link_to 'View', devx.portal_classroom_path(classroom) %><i class="fa fa-eye"></i><% end %>
-		<% if can? :edit, Devx::Classroom %><%= link_to 'Edit', devx.edit_portal_classroom_path(classroom) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i><% end %>
-		<% if can? :destroy, Devx::Classroom %><%= link_to 'Delete', devx.portal_classroom_path(classroom), method: :delete, data: { confirm: "Are you sure you want to delete this?" } %><% end %>
-		<i class="fa fa-trash" aria-hidden="true"></i>
+		<% if can? :read, Devx::Classroom %><%= link_to '<i class="fa fa-eye"></i> View'.html_safe, devx.portal_classroom_path(classroom) %><% end %>
+		<% if can? :edit, Devx::Classroom %><%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, devx.edit_portal_classroom_path(classroom) %><% end %>
+		<% if can? :destroy, Devx::Classroom %><%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, devx.portal_classroom_path(classroom), method: :delete, data: { confirm: "Are you sure you want to delete this?" } %><% end %>
 	</td>
 </tr>
