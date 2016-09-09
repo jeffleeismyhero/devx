@@ -3,31 +3,35 @@
         <%= f.label :name %><br>
         <%= f.text_field :name %>
     </div>
-    
+
     <div class="col-6 columns cd-edit-form">
         <%= f.label :calendar_type %><br>
         <%= f.select :calendar_type, options_for_select(['Standard', 'Google Calendar'], @calendar.calendar_type), { }, { class: 'select2-fixed' } %>
     </div>
-    
+
     <div id="google_calendar_fields">
         <div class="col-6 columns cd-edit-form">
             <%= f.label :client_id %><br>
             <%= f.password_field :client_id, value: @calendar.client_id %>
         </div>
-        
+
         <div class="col-6 columns cd-edit-form">
             <%= f.label :client_secret %><br>
             <%= f.password_field :client_secret, value: @calendar.client_secret %>
         </div>
-        
+
         <div class="col-6 columns cd-edit-form">
             <%= f.label :google_calendar_id %><br>
             <%= f.text_field :google_calendar_id %>
         </div>
-        
+
         <div class="col-6 columns cd-edit-form">
             <%= f.label :authorization_code %><br>
             <%= f.text_field :authorization_code %>
+        </div>
+        <div class="col-12 columns cd-edit-form">
+          <%= f.label :embed_code %>
+          <%= f.text_area :embed_code %>
         </div>
     </div>
 
@@ -38,11 +42,11 @@
           </p>
         <% end %>
     </div>
-    
+
     <div class="col-8 columns cd-edit-form">
         <%= f.label :active %><br>
     </div>
-    
+
     <div class="col-1 columns cd-edit-form">
         <label class="switch">
             <%= f.check_box :active %>

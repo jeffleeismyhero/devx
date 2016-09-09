@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909155023) do
+ActiveRecord::Schema.define(version: 20160909213333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(version: 20160909155023) do
     t.string   "refresh_token"
     t.string   "time_zone"
     t.string   "slug"
+    t.text     "embed_code"
   end
 
   create_table "devx_child_registrations", force: :cascade do |t|
@@ -571,6 +572,13 @@ ActiveRecord::Schema.define(version: 20160909155023) do
     t.string   "stripe_id"
     t.boolean  "active"
     t.string   "slug"
+  end
+
+  create_table "devx_registration_submissions", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.text     "submission_content"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "devx_registrations", force: :cascade do |t|

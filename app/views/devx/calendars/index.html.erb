@@ -6,6 +6,7 @@
       <h1 class="page-title calendar-title">Calendar</h1>
     </div>
   </div>
+  <% if !@calendar.embed_code.present? %>
   <div class="row">
     <div class="small-12 medium-10 medium-offset-1 large-10 large-offset-1 columns">
       <ul>
@@ -30,6 +31,7 @@
 
     <%= render partial: 'filters' %>
   </div>
+  <% end %>
 </div>
 
 <style>
@@ -47,10 +49,14 @@ ul.event-list {
 }
 </style>
 
-<%= render partial: 'week_view' %>
+<% if !@calendar.embed_code.present? %>
+  <%= render partial: 'week_view' %>
 
-<%= render partial: 'month_view' %>
+  <%= render partial: 'month_view' %>
 
-<%= render partial: 'grid_view' %>
+  <%= render partial: 'grid_view' %>
 
-<%= render partial: 'list_view' %>
+  <%= render partial: 'list_view' %>
+<% else %>
+  <%= @calendar.embed_code.html_safe %>
+<% end %>
