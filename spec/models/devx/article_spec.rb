@@ -39,7 +39,7 @@ module Devx
 
         featured_articles = Devx::Article.featured
         expect(featured_articles).not_to include(article3)
-        expect(featured_articles).to eq([article2, article1, article4, article5, article6])
+        expect(featured_articles).to eq([article2, article4, article1, article6, article5])
       end
     end
   end
