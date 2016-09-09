@@ -9,3 +9,4 @@ test/dummy/.sass-cache
 test/cont
 sku
 /.byebug_history
+test/dummy/*
