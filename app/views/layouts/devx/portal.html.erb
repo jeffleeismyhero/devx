@@ -198,15 +198,13 @@
                     </li>
                     <% end %>
 
-                    <% if app_settings['classroom_profiles'] && (current_user.faculty? || current_user.administrator?) %>
+                    <% if app_settings['classroom_profiles'] %>
                     <li>
                         <div class="accordion-title"><%= link_to '<i class="fa fa-pencil"></i> <span>Classroom</span>'.html_safe, '#', class: 'has-children', data: 'classroom-profile' %></div>
 
                         <div class="accordion-content">
                              <ul>
-                                <% if current_user.administrator? %>
-                                  <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
-                                <% end %>
+                                <li><%= link_to 'Classroom Pages', devx.portal_classrooms_path %></li>
                                 <% if current_user.person.try(:classrooms).any? %>
                                   <% current_user.person.try(:classrooms).try(:each) do |classroom| %>
                                     <li><%= classroom.name %>

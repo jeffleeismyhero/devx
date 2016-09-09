@@ -19,13 +19,6 @@ module Devx
 
     def google_cal
       if self.calendar_type == 'Google Calendar'
-        # client = Google::Calendar.new(
-        #   client_id: self.client_id,
-        #   client_secret: self.client_secret,
-        #   calendar: self.google_calendar_id,
-        #   redirect_url: 'urn:ietf:wg:oauth:2.0:oob',
-        #   refresh_token: self.refresh_token
-        # )
 
         code = self.authorization_code unless self.refresh_token.present?
 
@@ -57,6 +50,8 @@ module Devx
         if self.authorization_code.present?
           response = client.fetch_access_token!
           self.refresh_token = response['access_token']
+          puts "Google refresh token"
+          puts self.refresh_token
         end
       end
     end
