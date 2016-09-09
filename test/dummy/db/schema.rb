@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908152728) do
+ActiveRecord::Schema.define(version: 20160909155023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,10 +136,12 @@ ActiveRecord::Schema.define(version: 20160908152728) do
     t.datetime "published_at"
     t.datetime "approved_at"
     t.integer  "approved_by"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "user_id"
     t.string   "document"
+    t.boolean  "featured",          default: false
+    t.datetime "featured_until"
   end
 
   add_index "devx_articles", ["published_at"], name: "index_devx_articles_on_published_at", using: :btree
@@ -543,14 +545,6 @@ ActiveRecord::Schema.define(version: 20160908152728) do
     t.float    "current_balance"
   end
 
-  create_table "devx_permissions", force: :cascade do |t|
-    t.integer  "role_id"
-    t.string   "object_class"
-    t.string   "action"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
   create_table "devx_product_skus", force: :cascade do |t|
     t.integer  "product_id"
     t.string   "stripe_id"
@@ -577,13 +571,6 @@ ActiveRecord::Schema.define(version: 20160908152728) do
     t.string   "stripe_id"
     t.boolean  "active"
     t.string   "slug"
-  end
-
-  create_table "devx_registration_submissions", force: :cascade do |t|
-    t.integer  "registration_id"
-    t.text     "submission_content"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
   end
 
   create_table "devx_registrations", force: :cascade do |t|
@@ -749,8 +736,8 @@ ActiveRecord::Schema.define(version: 20160908152728) do
     t.datetime "updated_at",                          null: false
     t.string   "photo"
     t.integer  "person_id"
-    t.string   "stripe_id"
     t.string   "customer_token"
+    t.string   "stripe_id"
   end
 
   add_index "devx_users", ["deleted_at"], name: "index_devx_users_on_deleted_at", using: :btree

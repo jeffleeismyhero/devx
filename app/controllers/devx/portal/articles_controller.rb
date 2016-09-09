@@ -147,8 +147,9 @@ module Devx
     def article_params
       accessible = [
         :title, :slug, :short_description, :content, :image, :document,
-        :published_at, :published_at_date, :published_at_time, tag_list: [],
-        keyword_list: [], article_media_attributes: []
+        :published_at, :published_at_date, :published_at_time, :featured,
+        :featured_until, :featured_until_time, :featured_until_date,
+        tag_list: [], keyword_list: [], article_media_attributes: []
       ]
       params.require(:article).permit(accessible)
     end
