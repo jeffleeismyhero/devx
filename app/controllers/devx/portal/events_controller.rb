@@ -10,6 +10,7 @@ module Devx
   	load_and_authorize_resource :calendar, class: 'Devx::Calendar'
 
   	def index
+      @events = @events.paginate(page: params[:page])
   	end
 
   	def show
