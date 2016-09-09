@@ -6,7 +6,7 @@ module Devx
 
     acts_as_paranoid
 
-    scope :upcoming, -> { where('(start_time < ? OR start_time >= ?) AND end_time >= ?', Time.zone.now, Time.zone.now, Time.zone.now).ordered }
+    scope :upcoming, -> { where('(devx_schedules.start_time < ? OR devx_schedules.start_time >= ?) AND devx_schedules.end_time >= ?', Time.zone.now, Time.zone.now, Time.zone.now).ordered }
     scope :coming_up, -> { where('start_time >= ?', Time.zone.now).ordered }
     scope :for_month, -> (start_time) { where('start_time >= ? AND start_time <= ?', start_time.beginning_of_month, start_time.end_of_month).ordered }
     scope :ordered, -> { order("start_time ASC, end_time ASC") }

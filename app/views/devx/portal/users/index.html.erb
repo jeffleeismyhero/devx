@@ -16,7 +16,7 @@
                 <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
                 <div class="cd-edit-form">
                 <%= search_form_for @q, url: devx.portal_users_path do |f| %>
-                  <%= f.label :person_first_name_or_person_last_name_or_email_cont, 'Name' %>
+                  <%= f.label :person_first_name_or_person_last_name_or_email_cont, 'Name or e-mail' %>
                   <%= f.search_field :person_first_name_or_person_last_name_or_email_cont %>
                   <%= f.label :sign_in_count_eq, 'Sign in count' %>
                   <%= f.search_field :sign_in_count_eq %>
