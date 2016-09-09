@@ -14,7 +14,11 @@
               <!--<span style="padding:0 10px;">Grid View <i class="fa fa-th" aria-hidden="true"></i></span>-->
             <div class="cd-edit-form">
             <%= search_form_for @q, url: devx.portal_calendar_path(@calendar) do |f| %>
+                <%= f.label :event_name_cont, 'Event Name' %>
                 <%= f.search_field :event_name_cont, placeholder: 'Search' %>
+                <%= f.label :event_schedules_start_time_gteq, 'Date range' %>
+                <%= f.date_field :event_schedules_start_time_gteq %>
+                <%= f.date_field :event_schedules_start_time_lteq %>
                 <%= f.select :event_tags_name_eq, @tags.collect{ |x| [x.name, x.name] }, { prompt: 'Select category' }, { class: 'select2-fixed' } %>
                 <%= f.submit %>
             <% end %>
