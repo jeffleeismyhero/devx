@@ -9,7 +9,7 @@ module Devx
 
     scope :published, -> { where.not(published_at: nil) }
     scope :latest, -> { order(published_at: :desc) }
-    scope :featured, -> { where("(featured_until IS NULL OR featured_until >= ?) AND published_at >= ?", Time.now, Time.now).order(featured: :desc, featured_until: :asc, published_at: :asc) }
+    scope :featured, -> { where("(featured_until IS NULL OR featured_until >= ?)", Time.now).order(featured: :desc, featured_until: :asc, published_at: :desc) }
 
     has_many :article_media
     has_many :media, through: :article_media
