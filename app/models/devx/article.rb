@@ -1,13 +1,15 @@
 module Devx
   class Article < ActiveRecord::Base
     extend TimeSplitter::Accessors
-    split_accessor :published_at
+    split_accessor :featured_until, date_format: "%m/%d/%Y", time_format: "%I:%M %P"
+    split_accessor :published_at, date_format: "%m/%d/%Y", time_format: "%I:%M %P"
 
     extend FriendlyId
     friendly_id :title, use: [ :slugged, :finders ]
 
     scope :published, -> { where.not(published_at: nil) }
     scope :latest, -> { order(published_at: :desc) }
+    scope :featured, -> { where("featured_until IS NULL OR featured_until >= ?", Time.now).order(featured: :desc, featured_until: :asc, published_at: :asc) }
 
     has_many :article_media
     has_many :media, through: :article_media

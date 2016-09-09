@@ -1,55 +1,73 @@
 <div class="col-8 columns no-padding" style="margin-top:20px;">
-    <div class="col-12 columns cd-edit-form">
-        <%= f.label :title %><br>
-        <%= f.text_field :title %>
-    </div>
-    <div class="col-12 columns cd-edit-form">
-        <%= f.label :tag_list, 'Category' %><br>
-        <%= f.select :tag_list, @tags, { }, { multiple:true, class: 'select2-multiple' } %>
-    </div>
-    <div class="col-12 columns cd-edit-form">
-        <%= f.label :keyword_list, 'Keywords' %><br>
-        <%= f.select :keyword_list, Devx::Article.tag_counts_on(:keywords), { }, { multiple:true, class: 'select2-multiple' } %>
-    </div>
-    <div class="col-12 columns cd-edit-form">
-        <%= f.label :short_description %><br>
-        <%= f.text_field :short_description %>
-    </div>
-    <div class="col-3 columns cd-edit-form">
-      <%= f.label :published_at_date, "Publish Date" %>
-      <%= f.text_field :published_at_date, value: date_value(f.object.published_at_date), placeholder: date_value(Date.today), class: 'datepicker' %>
-    </div>
-    <div class="col-3 columns cd-edit-form">
-      <%= f.label :published_at_time, "Publish Time" %>
-      <%= f.text_field :published_at_time, value: time_value(f.object.published_at_time), placeholder: time_value(Time.now), class: 'timepicker' %>
-    </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :tag_list, 'Category' %><br />
+    <%= f.select :tag_list, @tags, { }, { multiple:true, class: 'select2-multiple' } %>
+  </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :keyword_list, 'Keywords' %><br />
+    <%= f.select :keyword_list, Devx::Article.tag_counts_on(:keywords), { }, { multiple:true, class: 'select2-multiple' } %>
+  </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :short_description %><br />
+    <%= f.text_field :short_description %>
+  </div>
+
+  <div class="col-3 columns cd-edit-form">
+  	<label>Featured</label>
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <label class="switch" data="stripe">
+      <%= f.check_box :featured %>
+      <div class="slider round"></div>
+    </label>
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <%= f.label :featured_until_date, "Featured Until Date" %>
+    <%= f.text_field :featured_until_date, placeholder: 'Until removed', class: 'datepicker' %>
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <%= f.label :featured_until_time, "Featured Until Time" %>
+    <%= f.text_field :featured_until_time, class: 'timepicker' %>
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <%= f.label :published_at_date, "Publish Date" %>
+    <%= f.text_field :published_at_date, value: date_value(f.object.published_at_date), placeholder: date_value(Date.today), class: 'datepicker' %>
+  </div>
+  <div class="col-3 columns cd-edit-form">
+    <%= f.label :published_at_time, "Publish Time" %>
+    <%= f.text_field :published_at_time, value: time_value(f.object.published_at_time), placeholder: time_value(Time.now), class: 'timepicker' %>
+  </div>
 </div>
 
 <div class="col-4 columns no-padding">
-    <% if @article.image.present? %>
-        <div class="col-12 columns">
-            <%= image_tag(@article.image.try(:url), style: 'width:50%') %>
-        </div>
-    <% end %>
-
-    <div class="col-12 columns cd-edit-form">
-        <%= f.label :image, 'Image' %>
-        <%= f.file_field :image %>
+  <% if @article.image.present? %>
+    <div class="col-12 columns">
+      <%= image_tag(@article.image.try(:url), style: 'width:50%') %>
     </div>
+  <% end %>
 
-    <div class="col-12 columns cd-edit-form">
-        <%= f.label :document, 'Attachment' %>
-        <%= f.file_field :document %>
-    </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :image, 'Image' %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :document, 'Attachment' %>
+    <%= f.file_field :document %>
+  </div>
 </div>
 
 <div class="col-8 columns cd-edit-form no-padding" style="margin-top:20px;">
-    <div class="col-12 columns">
-        <%= f.label :content %><br>
-        <div style="margin:4px 0;"><%= f.cktext_area :content %></div>
-    </div>
+  <div class="col-12 columns">
+    <%= f.label :content %><br />
+    <div style="margin:4px 0;"><%= f.cktext_area :content %></div>
+  </div>
 </div>
 
 <div class="col-12 columns cd-update-form" style="margin-top:20px;">
-    <%= f.submit %>
+  <%= f.submit %>
 </div>

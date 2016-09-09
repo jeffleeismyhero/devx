@@ -22,7 +22,7 @@ module Devx
     private
 
     def articles
-      Devx::Article.published.latest.try(:limit, @attributes[:limit])
+      Devx::Article.published.featured.try(:limit, @attributes[:limit])
     end
   end
 end

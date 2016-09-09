@@ -19,5 +19,28 @@ module Devx
       end
     end
 
+    describe 'featured content' do
+      it 'should be ordered' do
+        Devx::Article.destroy_all
+        article1 = FactoryGirl.build(:devx_article_featured)
+        article2 = FactoryGirl.build(:devx_article_featured_until)
+        article3 = FactoryGirl.build(:devx_article_featured_until, featured_until: Time.now - 1.day)
+        article4 = FactoryGirl.build(:devx_article_featured)
+        article5 = FactoryGirl.build(:devx_article)
+        article6 = FactoryGirl.build(:devx_article)
+        expect {
+          article1.save
+          article2.save
+          article3.save
+          article4.save
+          article5.save
+          article6.save
+        }.to change(Devx::Article.featured, :count).by(5)
+
+        featured_articles = Devx::Article.featured
+        expect(featured_articles).not_to include(article3)
+        expect(featured_articles).to eq([article2, article1, article4, article5, article6])
+      end
+    end
   end
 end
