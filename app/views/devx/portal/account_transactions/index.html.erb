@@ -52,10 +52,5 @@
                 <%= link_to 'Process all transactions', devx.portal_transactions_process_all_path, method: :post %>
             <% end %>
         </div>
-        <div class="col-12 columns">
-            <% if @account_transactions.any? %>
-                <%= will_paginate @account_transactions, class: 'apple_pagination' %>
-            <% end %>
-        </div>
     </div>
 </div>

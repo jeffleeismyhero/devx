@@ -11,11 +11,11 @@ module Devx
       @q.sorts = 'created_at desc' if @q.sorts.empty?
 
       if params[:q].present?
-        @account_transactions = @q.result(distinct: true).page(params[:page])
+        @account_transactions = @q.result(distinct: true)
       elsif params['approved'].present?
-        @account_transactions = @account_transactions.approved.page(params[:page])
+        @account_transactions = @account_transactions.approved
       else
-        @account_transactions = @account_transactions.pending.page(params[:page])
+        @account_transactions = @account_transactions.pending
       end
     end
 
