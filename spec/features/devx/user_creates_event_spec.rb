@@ -36,6 +36,10 @@ module Devx
 
       expect(page).to have_content('Successfully created event')
       expect(page).to have_selector("input#event_name[value='#{@event.name}']")
+      expect(page).to have_selector("input.start-time-date[value='11/16/2016']"), find(:css, '.start-time-date').value
+      expect(page).to have_selector("input.start-time-date[value='9:30 PM']"), find(:css, '.start-time-time').value
+      expect(page).to have_selector("input.end-time-date[value='11/16/2016']"), find(:css, '.end-time-date').value
+      expect(page).to have_selector("input.start-time-date[value='10:30 PM']"), find(:css, '.end-time-time').value
     end
   end
 end
