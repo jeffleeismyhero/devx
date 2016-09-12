@@ -58,5 +58,13 @@ ul.event-list {
 
   <%= render partial: 'list_view' %>
 <% else %>
-  <%= @calendar.embed_code.html_safe %>
+  <div class="container">
+    <div class="row">
+      <div class="medium-12 columns">
+        <center>
+          <%= @calendar.embed_code.html_safe %>
+        </center>
+      </div>
+    </div>
+  </div>
 <% end %>
