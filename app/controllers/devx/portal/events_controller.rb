@@ -5,8 +5,7 @@ module Devx
   class Portal::EventsController < ApplicationController
     before_filter :authenticate_user!
     layout 'devx/portal'
-  	#initializes instance variables. ( e.g. index uses @users = User.all, show uses @user = User.find(params[:id]) )
-    load_and_authorize_resource :event, class: 'Devx::Event'
+  	load_and_authorize_resource :event, class: 'Devx::Event'
   	load_and_authorize_resource :calendar, class: 'Devx::Calendar'
 
   	def index
@@ -23,26 +22,24 @@ module Devx
   	end
 
   	def create
-      @event.calendar_id = Devx::Calendar.find(params[:calendar_id]).id
+      @event.calendar_id = @calendar.try(:id)
 
   		if @event.valid? && @event.save
   			redirect_to devx.edit_portal_calendar_event_path(@calendar, @event),
-  			notice: "Successfully created event"
+    			notice: "Successfully created event"
   		else
-  			render :new,
-  			notice: "Failed to save event"
+  			render :new, notice: "Failed to save event"
   		end
   	end
 
   	def update
-      @event.calendar_id = Devx::Calendar.find(params[:calendar_id]).id
+      @event.calendar_id = @calendar.id
 
   		if @event.valid? && @event.update(event_params)
   			redirect_to devx.edit_portal_calendar_event_path(@calendar, @event),
-  			notice: "Successfully updated event"
+  			   notice: "Successfully updated event"
   		else
-  			render :edit,
-  			notice: "Failed to update event"
+  			render :edit, notice: "Failed to update event"
   		end
   	end
 
