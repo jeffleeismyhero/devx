@@ -5,6 +5,7 @@
       <%= f.select :id_eq, Devx::Calendar.active.collect{ |x| [ x.name, x.id ] }, { include_blank: true }, { class: 'select2-fixed' } %>
     <% end %>
 
+  <% if !@calendar.embed_code.present? %>
     <% if @tags.any? %>
       <p style="margin-bottom:8px; font-family:lato; font-weight:600;">View category:</p>
       <%= select '', :category, options_from_collection_for_select(@tags, 'name', 'name', params['category']), { include_blank: true }, { class: 'select2' } %>
@@ -17,8 +18,9 @@
     <% end %>
 
     <div style="margin-top:30px"><%= f.submit %></div>
-    <% end %>
-    <% if params[:start_date] %>
+  <% end %>
+  
+  <% if params[:start_date] && !@calendar.embed_code.present? %>
     <%= link_to 'Back to Today', devx.calendars_path, class: 'button primary small' %>
   <% end %>
 </div>
