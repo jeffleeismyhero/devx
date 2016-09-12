@@ -6,8 +6,8 @@
       <h1 class="page-title calendar-title">Calendar</h1>
     </div>
   </div>
-  <% if !@calendar.embed_code.present? %>
   <div class="row">
+    <% if !@calendar.embed_code.present? %>
     <div class="small-12 medium-10 medium-offset-1 large-10 large-offset-1 columns">
       <ul>
         <li style="display:inline-block;"><a id="month" href="#" class="calendar hide-for-small-only" style="font-family:lato; text-decoration:none; font-size:1.8rem; margin:5px 10px;"><i class="fa fa-calendar" style="font-size:1.8rem;" aria-hidden="true"></i> Month View</a></li>
@@ -28,10 +28,10 @@
         </li>
       </ul>
     </div>
+    <% end %>
 
     <%= render partial: 'filters' %>
   </div>
-  <% end %>
 </div>
 
 <style>
@@ -58,5 +58,13 @@ ul.event-list {
 
   <%= render partial: 'list_view' %>
 <% else %>
-  <%= @calendar.embed_code.html_safe %>
+  <div class="container">
+    <div class="row">
+      <div class="medium-12 columns">
+        <center>
+          <%= @calendar.embed_code.html_safe %>
+        </center>
+      </div>
+    </div>
+  </div>
 <% end %>
