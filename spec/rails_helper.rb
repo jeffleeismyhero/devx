@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'factory_girl_rails'
 require 'database_cleaner'
 require 'capybara/rspec'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -59,17 +60,6 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
-  end
-
-  DEFAULT_HOST = "portal.devxcms.dev"
-  DEFAULT_PORT = 3000
-
-  config.before(:each) do
-    Capybara.default_host = "http://#{DEFAULT_HOST}"
-    Capybara.server_port = DEFAULT_PORT
-    # default_url_options[:host] = "#{Capybara.default_host}:#{Capybara.server_port}"
-    Capybara.app_host = "http://#{DEFAULT_HOST}:#{Capybara.server_port}"
-    Capybara.javascript_driver = :selenium
   end
 
   config.after(:each) do

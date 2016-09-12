@@ -17,8 +17,12 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'capybara'
+Capybara.configure do |config|
+  config.app_host = "http://portal.lvh.me"
+  config.always_include_port = true
+end
 Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
 end
 
 RSpec.configure do |config|
