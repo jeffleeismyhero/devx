@@ -16,9 +16,9 @@
         <%= select '', :month_select, month_select_options, { prompt: 'Select Month' }, { style: 'max-width:300px' } %>
         <%= select '', :year_select, year_select_options(Devx::Schedule.all), { prompt: 'Select Year' }, { style: 'max-width:300px' } %>
       <% end %>
-
-      <div style="margin-top:30px"><%= f.submit %></div>
     <% end %>
+    
+    <div style="margin-top:30px"><%= f.submit %></div>
 
     <% if params[:start_date] && !@calendar.embed_code.present? %>
       <%= link_to 'Back to Today', devx.calendars_path, class: 'button primary small' %>
