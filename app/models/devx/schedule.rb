@@ -4,6 +4,38 @@ module Devx
     split_accessor :start_time, date_format: "%m/%d/%Y", time_format: "%I:%M %P"
     split_accessor :end_time, date_format: "%m/%d/%Y", time_format: "%I:%M %P"
 
+    def start_time_date
+      start_time.try(:strftime, "%m/%d/%Y")
+    end
+
+    def start_time_time
+      start_time.try(:strftime, "%I:%M %P")
+    end
+
+    def end_time_date
+      end_time.try(:strftime, "%m/%d/%Y")
+    end
+
+    def end_time_time
+      end_time.try(:strftime, "%I:%M %P")
+    end
+
+    def start_time_date=(value)
+      self[:start_time] = Date.parse("#{value}")
+    end
+
+    def start_time_time=(value)
+      self[:start_time] = DateTime.parse("#{self[:start_time].try(:strftime, "%m/%d/%Y")} #{value} Central Time (US & Canada)")
+    end
+
+    def end_time_date=(value)
+      self[:end_time] = Date.parse("#{value}")
+    end
+
+    def end_time_time=(value)
+      self[:end_time] = DateTime.parse("#{self[:end_time].try(:strftime, "%m/%d/%Y")} #{value} Central Time (US & Canada)")
+    end
+
     acts_as_paranoid
 
     scope :upcoming, -> { where('(devx_schedules.start_time < ? OR devx_schedules.start_time >= ?) AND devx_schedules.end_time >= ?', Time.zone.now, Time.zone.now, Time.zone.now).ordered }

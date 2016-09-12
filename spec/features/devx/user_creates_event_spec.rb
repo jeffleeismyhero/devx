@@ -24,11 +24,11 @@ module Devx
 
         find(:css, '.start-time-date').set '11/16/2016'
         page.execute_script("$('.datepicker').datetimepicker('hide')")
-        find(:css, '.start-time-time').set '9:30 PM'
+        find(:css, '.start-time-time').set '9:30 pm'
         page.execute_script("$('.timepicker').timepicker('hide')")
         find(:css, '.end-time-date').set '11/16/2016'
         page.execute_script("$('.datepicker').datetimepicker('hide')")
-        find(:css, '.end-time-time').set '10:30 PM'
+        find(:css, '.end-time-time').set '10:30 pm'
         page.execute_script("$('.timepicker').timepicker('hide')")
 
         click_link_or_button('Create Event')
@@ -36,10 +36,10 @@ module Devx
 
       expect(page).to have_content('Successfully created event')
       expect(page).to have_selector("input#event_name[value='#{@event.name}']")
-      expect(page).to have_selector("input.start-time-date[value='11/16/2016']"), find(:css, '.start-time-date').value
-      expect(page).to have_selector("input.start-time-date[value='9:30 PM']"), find(:css, '.start-time-time').value
-      expect(page).to have_selector("input.end-time-date[value='11/16/2016']"), find(:css, '.end-time-date').value
-      expect(page).to have_selector("input.start-time-date[value='10:30 PM']"), find(:css, '.end-time-time').value
+      expect(find(:css, '.start-time-date').value).to eq('11/16/2016')
+      expect(find(:css, '.start-time-time').value).to eq('9:30 pm')
+      expect(find(:css, '.end-time-date').value).to eq('11/16/2016')
+      expect(find(:css, '.end-time-time').value).to eq('10:30 pm')
     end
   end
 end
