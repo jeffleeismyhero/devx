@@ -153,7 +153,7 @@
                                   <ul>
                                     <% @classroom.class_schedules.order(start_time: :asc).try(:each) do |schedule| %>
                                       <% if schedule.day_of_week.include?(day) %>
-                                        <li><%= "<span style=\"font-size:1.2rem\">#{schedule.start_time.strftime('%I:%M%P')} - #{schedule.end_time.strftime('%I:%M:%P')}</span><br />#{schedule.name}".html_safe %></li>
+                                        <li><%= "<span style=\"font-size:1.2rem\">#{schedule.start_time.strftime('%I:%M%P')} - #{schedule.end_time.strftime('%I:%M%P')}</span><br />#{schedule.name}".html_safe %></li>
                                       <% end %>
                                     <% end %>
                                   </ul>
