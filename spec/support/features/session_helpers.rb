@@ -23,7 +23,7 @@ module Features
     end
 
     def authorize_as_super_administrator(user = create(:devx_user))
-      @role = create(:super_administrator_role)
+      @role = Devx::Role.find_by(name: 'Super Administrator') || create(:super_administrator_role)
       unless user.roles.include?(@role)
         user.authorizations.create(role: @role)
       end
