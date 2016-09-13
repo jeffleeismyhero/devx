@@ -72,7 +72,7 @@ class Ability
     can :read, Devx::ClassHighlight
     can :read, Devx::ClassSchedule
     can :read, Devx::ClassPhoto
-    can [:read, :edit, :update, :account_balance], Devx::User, id: user.id
+    can [:read, :edit, :update, :account_balance, :end_impersonation], Devx::User, id: user.id
     can [ :read, :update ], Devx::Order, user_id: user.id
     can :create, Devx::Transaction
     can [ :read, :create ], Devx::AccountTransaction
