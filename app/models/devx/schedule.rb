@@ -1,9 +1,5 @@
 module Devx
   class Schedule < ActiveRecord::Base
-    extend TimeSplitter::Accessors
-    split_accessor :start_time, date_format: "%m/%d/%Y", time_format: "%I:%M %P"
-    split_accessor :end_time, date_format: "%m/%d/%Y", time_format: "%I:%M %P"
-
     def start_time_date
       start_time.try(:strftime, "%m/%d/%Y")
     end
@@ -26,6 +22,7 @@ module Devx
 
     def start_time_time=(value)
       self[:start_time] = DateTime.parse("#{self[:start_time].try(:strftime, "%m/%d/%Y")} #{value} Central Time (US & Canada)")
+      self[:start_time] -= 1.hour if self[:start_time].dst?
     end
 
     def end_time_date=(value)
@@ -34,6 +31,7 @@ module Devx
 
     def end_time_time=(value)
       self[:end_time] = DateTime.parse("#{self[:end_time].try(:strftime, "%m/%d/%Y")} #{value} Central Time (US & Canada)")
+      self[:end_time] -= 1.hour if self[:end_time].dst?
     end
 
     acts_as_paranoid
