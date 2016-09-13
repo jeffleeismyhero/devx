@@ -9,53 +9,6 @@
         <span style="float:right"><i class="fa fa-credit-card"></i> <%= link_to 'Add funds'.html_safe, '#', id: 'add-funds-btn' %>
     </div>
 
-    <div class="large-12 columns">
-        <h3>Current Balance</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Linked Account</th>
-                    <th>Balance</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if current_user.person.try(:school_id).present? && !current_user.person.association_list.include?('Parent') %>
-                    <tr>
-                        <td><%= current_user.person.try(:record_with_school_id) %></td>
-                        <td><%= current_user.person.try(:current_balance) %></td>
-                    </tr>
-                <% end %>
-                <% @user.linked_accounts.each do |account| %>
-                    <tr>
-                        <td><%= account.person.try(:record_with_school_id) %></td>
-                        <td><%= account.person.try(:current_balance) %></td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-
-        <h3>Transaction History</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Customer</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Payment Method</th>
-                    <th>Product</th>
-                    <th>Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @linked_accounts.try(:each) do |key, value| %>
-                  <% @account_transactions = Devx::AccountTransaction.imported.where(person: Devx::Person.find(key)).where('created_at >= ? AND created_at <= ?', Time.zone.now - 30.days, Time.zone.now).order(created_at: :desc) %>
-                  <%= render partial: 'account_transaction', collection: @account_transactions %>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
-
-
     <div id="add-funds" class="large-12 columns">
         <h2>Add Money to Account</h2>
         <%= form_for @transaction, url: devx.portal_account_balance_path(@person), method: :post do |f| %>
@@ -112,6 +65,52 @@
           </div>
         </div>
         <% end %>
+    </div>
+
+    <div class="large-12 columns">
+        <h3>Current Balance</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Linked Account</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if current_user.person.try(:school_id).present? && !current_user.person.association_list.include?('Parent') %>
+                    <tr>
+                        <td><%= current_user.person.try(:record_with_school_id) %></td>
+                        <td><%= current_user.person.try(:current_balance) %></td>
+                    </tr>
+                <% end %>
+                <% @user.linked_accounts.each do |account| %>
+                    <tr>
+                        <td><%= account.person.try(:record_with_school_id) %></td>
+                        <td><%= account.person.try(:current_balance) %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+
+        <h3>Transaction History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Payment Method</th>
+                    <th>Product</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @linked_accounts.try(:each) do |key, value| %>
+                  <% @account_transactions = Devx::AccountTransaction.imported.where(person: Devx::Person.find(key)).where('created_at >= ? AND created_at <= ?', Time.zone.now - 30.days, Time.zone.now).order(created_at: :desc) %>
+                  <%= render partial: 'account_transaction', collection: @account_transactions %>
+                <% end %>
+            </tbody>
+        </table>
     </div>
   </div>
 </div>
