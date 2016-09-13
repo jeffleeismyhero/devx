@@ -7,6 +7,15 @@
     </div>
     <div class="col-12 columns">
       <%= link_to 'Back to Users', devx.portal_users_path %>
+
+      <% if true_user.super_administrator? %>
+        <% if current_user == true_user && @user != current_user %>
+          <%= link_to 'Impersonate', devx.impersonate_portal_user_path %>
+        <% elsif current_user != true_user %>
+          <%= link_to 'End Impersonation', devx.end_impersonation_portal_user_path(@user) %>
+        <% end %>
+      <% end %>
+
       <%= form_for @user, url: devx.portal_user_path(@user) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>

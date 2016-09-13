@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
   ## Authentication
   s.add_runtime_dependency "devise"
   s.add_runtime_dependency "cancancan"
+  s.add_runtime_dependency "pretender"
   s.add_runtime_dependency "omniauth"
   s.add_runtime_dependency "omniauth-google-oauth2"
 

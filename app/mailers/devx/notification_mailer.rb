@@ -59,6 +59,17 @@ module Devx
         subject: @subject
     end
 
+    def account_transaction_notification(user, amount, recipients = Devx::User.joins(:roles).where("devx_roles.name = 'Balance Manager'"))
+      @recipients = recipients
+      @site_name = Devx::Branding.find_or_create_by(id: 1).site_name
+      @subject = "#{@site_name}: Deposit Confirmation"
+      @user = user
+      @amount = amount
+
+      mail to: @user.email,
+        subject: @subject
+    end
+
     def registration_completed(registration, submission, recipient)
       @recipient = recipient
       @registration = registration

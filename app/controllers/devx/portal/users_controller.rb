@@ -61,6 +61,17 @@ module Devx
   		end
   	end
 
+    def impersonate
+      user = Devx::User.find(params[:id])
+      impersonate_user(user)
+      redirect_to devx.portal_dashboard_path
+    end
+
+    def end_impersonation
+      stop_impersonating_user
+      redirect_to devx.portal_dashboard_path
+    end
+
     def account_balance
       @user ||= current_user
 
@@ -89,6 +100,7 @@ module Devx
         if @transaction.valid?
           if @transaction.process(@transaction.amount.to_i, params[:cc_type], params[:ch_name], params[:cc_number], exp_date, params[:cvv])
             if @transaction.save
+              Devx::NotificationMailer.delay.account_transaction_notification(current_user, @transaction.amount)
               redirect_to devx.portal_account_balance_path,
               notice: "Your transaction has been processed successfully"
             else

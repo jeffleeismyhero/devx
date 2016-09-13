@@ -27,14 +27,6 @@ module Devx
       end
     end
 
-    def commerce_settings
-      @settings = app_settings
-    end
-
-    def sms_alert_settings
-      @settings = app_settings
-    end
-
     private
 
     def app_settings

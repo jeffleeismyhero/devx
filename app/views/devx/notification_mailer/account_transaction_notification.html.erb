@@ -1,0 +1,11 @@
+<html>
+<body>
+  <p>
+    Hi<%= if @user.person.try(:first_name).try(:present?) then " #{@user.person.first_name}" end %>!
+  </p>
+
+  <p>
+    Your deposit of <%= number_to_currency @amount %> has been received and will be available for use within 24 hours.
+  </p>
+</body>
+</html>

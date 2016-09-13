@@ -77,6 +77,8 @@ Devx::Engine.routes.draw do
     resources :branding
     resources :users do
       member do
+        get 'impersonate', to: 'users#impersonate'
+        get 'end_impersonation', to: 'users#end_impersonation'
         patch 'reset-password', to: 'users#reset_password'
         match 'account-deposit', to: 'users#account_deposit', via: [ :get, :post ]
       end
