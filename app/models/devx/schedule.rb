@@ -21,7 +21,7 @@ module Devx
     end
 
     def start_time_time=(value)
-      self[:start_time] = DateTime.parse("#{self[:start_time].try(:strftime, "%m/%d/%Y")} #{value} Central Time (US & Canada)")
+      self[:start_time] = DateTime.parse("#{self[:start_time].try(:strftime, "%m/%d/%Y")} #{value} #{Time.zone.name}")
       self[:start_time] -= 1.hour if self[:start_time].dst?
     end
 
@@ -30,7 +30,7 @@ module Devx
     end
 
     def end_time_time=(value)
-      self[:end_time] = DateTime.parse("#{self[:end_time].try(:strftime, "%m/%d/%Y")} #{value} Central Time (US & Canada)")
+      self[:end_time] = DateTime.parse("#{self[:end_time].try(:strftime, "%m/%d/%Y")} #{value} #{Time.zone.name}")
       self[:end_time] -= 1.hour if self[:end_time].dst?
     end
 
