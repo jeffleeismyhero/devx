@@ -22,7 +22,7 @@
     <%= f.text_field :short_description %>
   </div>
 
-  <div class="col-3 columns cd-edit-form">
+  <div class="col-9 columns cd-edit-form">
   	<label>Featured</label>
   </div>
   <div class="col-3 columns cd-edit-form">
@@ -71,6 +71,17 @@
   <div class="col-12 columns">
     <%= f.label :content %><br />
     <div style="margin:4px 0;"><%= f.cktext_area :content %></div>
+  </div>
+</div>
+
+<div class="col-8 columns cd-edit-form no-padding" style="margin-top:20px;">
+  <div class="col-12 columns">
+    <%= link_to_add_fields 'Add Image to Gallery', f, :article_galleries, nil, 'article_gallery_fields', '' %>
+    <%= content_tag 'div', class: 'nested-attributes' do %>
+      <%= f.fields_for :article_galleries do |l| %>
+        <%= render partial: 'article_gallery_fields', locals: { f: l } %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 

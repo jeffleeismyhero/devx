@@ -11,8 +11,7 @@ module Devx
     scope :latest, -> { order(published_at: :desc) }
     scope :featured, -> { where("(featured_until IS NULL OR featured_until >= ?)", Time.now).order(featured: :desc, featured_until: :asc, published_at: :desc) }
 
-    has_many :article_media
-    has_many :media, through: :article_media
+    has_many :article_galleries
     belongs_to :user
 
     validates :title, presence: true, uniqueness: { scope: :published_at }
@@ -23,6 +22,9 @@ module Devx
 
     mount_uploader :image, Devx::ImageUploader
     mount_uploader :document, Devx::DocumentUploader
+
+    accepts_nested_attributes_for :article_galleries, allow_destroy: true,
+      reject_if: proc{ |x| x['file'].blank? || x['file'].nil? }
 
     acts_as_taggable
     acts_as_taggable_on :keywords

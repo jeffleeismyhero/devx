@@ -149,7 +149,7 @@ module Devx
         :title, :slug, :short_description, :content, :image, :document,
         :published_at, :published_at_date, :published_at_time, :featured,
         :featured_until, :featured_until_time, :featured_until_date,
-        tag_list: [], keyword_list: [], article_media_attributes: []
+        tag_list: [], keyword_list: [], article_galleries_attributes: [ :id, :file, :_destroy ]
       ]
       params.require(:article).permit(accessible)
     end

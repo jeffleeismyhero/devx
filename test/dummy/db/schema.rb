@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909213333) do
+ActiveRecord::Schema.define(version: 20160914203712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,22 @@ ActiveRecord::Schema.define(version: 20160909213333) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_article_galleries", force: :cascade do |t|
+    t.integer  "article_id"
+    t.string   "file"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "devx_article_images", force: :cascade do |t|
+    t.integer  "article_id"
+    t.string   "file"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_article_media", force: :cascade do |t|
     t.integer  "article_id"
     t.integer  "medium_id"
@@ -132,7 +148,7 @@ ActiveRecord::Schema.define(version: 20160909213333) do
     t.string   "slug"
     t.string   "short_description"
     t.text     "content"
-    t.string   "image"
+    t.jsonb    "image"
     t.datetime "published_at"
     t.datetime "approved_at"
     t.integer  "approved_by"
@@ -142,6 +158,7 @@ ActiveRecord::Schema.define(version: 20160909213333) do
     t.string   "document"
     t.boolean  "featured",          default: false
     t.datetime "featured_until"
+    t.string   "gallery",           default: [],                 array: true
   end
 
   add_index "devx_articles", ["published_at"], name: "index_devx_articles_on_published_at", using: :btree
