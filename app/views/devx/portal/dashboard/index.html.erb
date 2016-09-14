@@ -61,7 +61,7 @@
         <% if current_user.event_subscriptions.any? %>
           <ul class="cd-section-list">
             <% current_user.event_subscriptions.try(:each) do |subscription| %>
-              <% subscription.event.schedules.try(:each) do |schedule| %>
+              <% subscription.event.try(:schedules).try(:each) do |schedule| %>
                 <% if schedule.is_future_occurrence? %>
                   <li class="cd-section-item">
                     <strong><%= link_to subscription.event.name, devx.calendar_event_path(subscription.event.calendar, subscription.event) %></strong><br />
