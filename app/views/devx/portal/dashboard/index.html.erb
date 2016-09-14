@@ -59,18 +59,16 @@
       <div class="medium-12 medium-offset-0 large-5 large-offset-1 xlarge-4 xlarge-offset-1 columns cd-dashboard-section">
         <h4>Event Subscriptions <small style="float:right"><%= link_to 'View All', devx.calendar_path, target: '_blank' %></small></h4>
         <% if current_user.event_subscriptions.any? %>
-
-          <% event_list = [] %>
-          <% current_user.event_subscriptions.try(:each) do |subscription| %>
-            <% event_list.push(subscription.event) %>
-          <% end %>
           <ul class="cd-section-list">
-            <% event_list.sort_by{ |x| x.try(:schedules).try(:upcoming).try(:first).try(:start_time) }.try(:each) do |event| %>
-              <li class="cd-section-item">
-                <strong><%= link_to event.name, devx.calendar_event_path(event.calendar, event) %></strong><br />
-                <span><%= event.schedules.try(:upcoming).try(:first).try(:start_time).try(:strftime, '%B %d at %l:%M %P') %></span><br />
-
-              </li>
+            <% current_user.event_subscriptions.try(:each) do |subscription| %>
+              <% subscription.event.schedules.try(:each) do |schedule| %>
+                <% if schedule.is_future_occurrence? %>
+                  <li class="cd-section-item">
+                    <strong><%= link_to subscription.event.name, devx.calendar_event_path(subscription.event.calendar, subscription.event) %></strong><br />
+                    <span><%= subscription.event.schedules.try(:upcoming).try(:first).try(:start_time).try(:strftime, '%B %d at %l:%M %P') %></span><br />
+                  </li>
+                <% end %>
+              <% end %>
             <% end %>
           </ul>
         <% else %>
