@@ -32,9 +32,7 @@ module Devx
     def create
       @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
 
-      if @article.new_record?
-        @article.user_id = current_user.id
-      end
+      @article.user_id = current_user.id
 
       if @article.save
         redirect_to devx.portal_articles_path,
@@ -47,6 +45,7 @@ module Devx
 
     def update
       @tags = Devx::Article.tag_counts_on(:tags).order(name: :asc)
+      @article.featured_until = nil if params[:article][:featured_until].blank?
 
       if @article.update(article_params)
         redirect_to devx.portal_articles_path,
