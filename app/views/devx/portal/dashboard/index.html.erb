@@ -61,8 +61,8 @@
         <% if current_user.event_subscriptions.any? %>
           <ul class="cd-section-list">
             <% current_user.event_subscriptions.try(:each) do |subscription| %>
-              <% subscription.event.try(:schedules).try(:each) do |schedule| %>
-                <% if schedule.is_future_occurrence? %>
+              <% subscription.event.try(:schedules).try(:where, 'start_time > ?', Time.zone.now).try(:each) do |schedule| %>
+                <% if schedule.is_future_occurrence? && schedule == subscription.event.try(:schedules).try(:first) %>
                   <li class="cd-section-item">
                     <strong><%= link_to subscription.event.name, devx.calendar_event_path(subscription.event.calendar, subscription.event) %></strong><br />
                     <span><%= subscription.event.schedules.try(:upcoming).try(:first).try(:start_time).try(:strftime, '%B %d at %l:%M %P') %></span><br />

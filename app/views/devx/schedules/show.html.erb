@@ -12,7 +12,7 @@
             <%= link_to 'Back to calendar', devx.calendar_path %>
             </p>
             <p>
-              <%= link_to 'Subscribe', devx.subscribe_calendar_event_path(calendar: @calendar, event: @event), method: :post, class: 'button primary small' %>
+              <%= link_to 'Subscribe', devx.subscribe_calendar_event_path(calendar: @calendar, id: @event), method: :post, class: 'button primary small' %>
               <%= link_to 'Export', devx.export_calendar_event_schedule_path(calendar: @calendar, event: @event, schedule: @schedule, format: :ics), method: :post, class: 'button primary small' %>
             </p>
           <% if @schedule.all_day == true %>
