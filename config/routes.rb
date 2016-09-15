@@ -117,7 +117,7 @@ Devx::Engine.routes.draw do
   ## Public-facing
   resources :articles, path: 'news', only: [ :index, :show ] do
     member do
-      post 'subscribe' => 'articles#subscribe'
+      post 'subscribe', to: 'articles#subscribe'
     end
   end
 
@@ -135,6 +135,7 @@ Devx::Engine.routes.draw do
       end
       member do
         post 'subscribe', to: 'events#subscribe'
+        post 'unsubscribe', to: 'events#unsubscribe'
       end
     end
   end

@@ -20,6 +20,16 @@ module Devx
       end
     end
 
+    def unsubscribe
+      subscribe = Devx::EventSubscription.find_by(event: @event, user: current_user)
+
+      if subscribe.present?
+        subscribe.destroy
+      end
+
+      redirect_to devx.portal_dashboard_path(subdomain: 'portal')
+    end
+
 
     private
 
