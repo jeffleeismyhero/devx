@@ -41,13 +41,6 @@ module Devx
         expect(featured_articles).not_to include(article3)
         expect(featured_articles).to eq([article2, article4, article1, article6, article5])
       end
-
-      it 'should set featured until to nil if left blank on update' do
-        article = FactoryGirl.build(:devx_article_featured_until, featured_until: '')
-        article.save
-
-        expect(article.featured_until).to be_nil
-      end
     end
   end
 end
