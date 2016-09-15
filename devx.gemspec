@@ -66,8 +66,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "simple_calendar", "~> 2.0"
   s.add_runtime_dependency "velocityjs-rails"
   s.add_runtime_dependency "typedjs-rails", "~> 1.0.3"
-
-
+  s.add_runtime_dependency "foundation-rails"
+ 
+ 
   ## WYSIWYG Editor
   s.add_runtime_dependency "ckeditor", "~> 4.1"
 

@@ -25,6 +25,7 @@ PATH
       fancybox2-rails
       flash_render
       font-awesome-rails
+      foundation-rails
       friendly_id
       google-api-client
       google_calendar
@@ -126,6 +127,10 @@ GEM
     axlsx_rails (0.5.0)
       actionpack (>= 3.1)
       axlsx (>= 2.0.1)
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.11)
     blankslate (3.1.3)
     breadcrumbs_on_rails (3.0.1)
@@ -211,6 +216,10 @@ GEM
       rails (>= 2.3.8)
     font-awesome-rails (4.6.3.1)
       railties (>= 3.2, < 5.1)
+    foundation-rails (6.2.3.0)
+      railties (>= 3.1.0)
+      sass (>= 3.3.0, < 3.5)
+      sprockets-es6 (>= 0.9.0)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
     globalid (0.3.7)
@@ -437,6 +446,10 @@ GEM
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
+    sprockets-es6 (0.9.1)
+      babel-source (>= 5.8.11)
+      babel-transpiler
+      sprockets (>= 3.0.0)
     sprockets-rails (3.2.0)
       actionpack (>= 4.0)
       activesupport (>= 4.0)

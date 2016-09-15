@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title><%= sys_title(yield(:title)) %></title>
-    <%= stylesheet_link_tag "devx/boilerplate.css", media: "all" %>
+  <%= stylesheet_link_tag "devx/boilerplate.css", media: "all" %>
   <%= stylesheet_link_tag    "devx/application", media: "all" %>
   <%= stylesheet_link_tag    "devx/devx_portal", media: "all" %>
   <%= stylesheet_link_tag    "devx/branding", media: "all" %>
@@ -15,15 +15,67 @@
 </head>
 <body>
 
-  <!-- START: HEADER -->
-  <header class="cd-main-header primary no-print">
+<nav class="container">
+    <div class="row full-width">
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-tachometer"></i> <br> <span>Dashboard</span>'.html_safe, devx.portal_dashboard_path, data: 'dashboard' %>
+        </div>
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-users"></i> <br> <span>Users</span>'.html_safe, '#', class: 'has-children', data: 'users' %>
+        </div>
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-sitemap"></i> <br> <span>Organizations</span>'.html_safe, '#', class: 'has-children', data: 'organizations' %>
+        </div>
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-laptop"></i> <br> <span>Site Management</span>'.html_safe, '#', class: 'has-children', data: 'site-management' %>
+        </div>
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-file-text-o"></i> <br> <span>Form Builder</span>'.html_safe, devx.portal_forms_path %>
+        </div>
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-calendar"></i> <br> <span>Calendars</span>'.html_safe, devx.portal_calendars_path, class: 'has-children', data: 'calendars' %>
+        </div>
+        <!--<div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-newspaper-o"></i> <br> <span>News</span>'.html_safe, devx.portal_articles_path, data: 'news' %>
+        </div>
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-user"></i> <br> <span>Profile</span>'.html_safe, '#', class: 'has-children', data: 'user' %>
+        </div>
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-shopping-cart"></i> <br> <span>Commerce</span>'.html_safe, '#', class: 'has-children', data: 'commerce' %>
+        </div>
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-graduation-cap"></i> <br> <span>Admissions</span>'.html_safe, '#' %>
+        </div>
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-pencil"></i> <br> <span>Classroom</span>'.html_safe, '#', class: 'has-children', data: 'classroom-profile' %>
+        </div>
+        <div class="large-2 columns icon">
+            <%= link_to '<i style="font-size:3.4rem!important;" class="fa fa-cogs"></i> <br> <span>Settings</span>'.html_safe, devx.portal_branding_index_path, data: 'settings' %>
+        </div>-->
+    </div>
+    <div class="row full-width subnav" style="max-width:100%;text-align:center;">
+        <ul>
+            <li><a href="">Pages</a></li>
+            <li><a href="">Layouts</a></li>
+            <li><a href="">Stylesheets</a></li>
+            <li><a href="">JavaScripts</a></li>
+            <li><a href="">Media</a></li>
+            <li><a href="">Documents</a></li>
+            <li><a href="">Menus</a></li>
+        </ul>
+    </div>
+</nav>
+ 
 
+  <!-- START: HEADER -->
+ <header class="cd-main-header primary no-print" style="position:relative;">
     <!-- START: LOGO -->
       <%= link_to (app_branding.site_name || 'Site Name'), devx.portal_root_path, class: 'cd-logo' %>
     <!-- END: LOGO -->
 
     <!-- START: TOP NAVIGATION DESKTOP-->
-    <nav class="cd-nav hide-for-medium-down">
+    <div class="cd-nav hide-for-medium-down">
       <div class="cd-top-nav cd-horizontal-accordion">
         <% if app_settings['balance_tracking'] && !current_user.parent? && current_user.person.present? %>
         <div class="cd-accordion-tab">
@@ -59,7 +111,7 @@
           </div>
         </div>
       </div>
-    </nav>
+    </div>
     <!-- END: TOP NAVIGATION DESKTOP-->
 
     <div class="container show-for-medium-down header">

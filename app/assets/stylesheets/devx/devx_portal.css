@@ -842,3 +842,38 @@ input[type=submit] {
     background:#accc38!important;
     background-color:#accc38!important;
 }
+
+
+/* NEW STLYING - V2.0 */
+
+     
+/*********************************************************************
+NAV
+*********************************************************************/
+nav {
+  background-color:#AAC8C5;
+}
+
+nav .icon {
+    text-align:center;
+    padding:10px;
+}
+
+nav .subnav {
+    background-color:rgba(255,255,255,.25);
+}
+
+nav ul {
+    list-style: none;
+    margin:0 auto;
+}
+
+nav li {
+    display:inline-block;
+    padding:10px 20px;
+    margin-bottom:0;
+}
+
+nav a {
+    font-size:14px;
+}

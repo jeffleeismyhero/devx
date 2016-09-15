@@ -120,14 +120,6 @@ ActiveRecord::Schema.define(version: 20160914203712) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "devx_article_images", force: :cascade do |t|
-    t.integer  "article_id"
-    t.string   "file"
-    t.integer  "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "devx_article_media", force: :cascade do |t|
     t.integer  "article_id"
     t.integer  "medium_id"
@@ -148,7 +140,7 @@ ActiveRecord::Schema.define(version: 20160914203712) do
     t.string   "slug"
     t.string   "short_description"
     t.text     "content"
-    t.jsonb    "image"
+    t.string   "image"
     t.datetime "published_at"
     t.datetime "approved_at"
     t.integer  "approved_by"
@@ -158,7 +150,6 @@ ActiveRecord::Schema.define(version: 20160914203712) do
     t.string   "document"
     t.boolean  "featured",          default: false
     t.datetime "featured_until"
-    t.string   "gallery",           default: [],                 array: true
   end
 
   add_index "devx_articles", ["published_at"], name: "index_devx_articles_on_published_at", using: :btree
@@ -591,13 +582,6 @@ ActiveRecord::Schema.define(version: 20160914203712) do
     t.string   "slug"
   end
 
-  create_table "devx_registration_submissions", force: :cascade do |t|
-    t.integer  "registration_id"
-    t.text     "submission_content"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
-
   create_table "devx_registrations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",            null: false
@@ -761,8 +745,8 @@ ActiveRecord::Schema.define(version: 20160914203712) do
     t.datetime "updated_at",                          null: false
     t.string   "photo"
     t.integer  "person_id"
-    t.string   "customer_token"
     t.string   "stripe_id"
+    t.string   "customer_token"
   end
 
   add_index "devx_users", ["deleted_at"], name: "index_devx_users_on_deleted_at", using: :btree
