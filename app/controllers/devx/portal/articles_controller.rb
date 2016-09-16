@@ -35,7 +35,7 @@ module Devx
       @article.user_id = current_user.id
 
       if @article.save
-        redirect_to devx.portal_articles_path,
+        redirect_to devx.edit_portal_article_path(@article),
         notice: "Successfully created #{@article.title}"
       else
         render :new,
@@ -48,7 +48,7 @@ module Devx
       @article.featured_until = nil if params[:article][:featured_until].blank?
 
       if @article.update(article_params)
-        redirect_to devx.portal_articles_path,
+        redirect_to devx.edit_portal_article_path(@article),
         notice: "Successfully updated #{@article.title}"
       else
         render :edit,
@@ -75,6 +75,17 @@ module Devx
       else
         redirect_to devx.articles_path,
         notice: "Failed to approve"
+      end
+    end
+
+    def add_to_gallery
+      @article = Devx::Article.find(params[:id])
+
+      file = params['article_gallery']['file']
+      @article.article_galleries.create(file: file)
+
+      respond_to do |format|
+        format.json { render json: @article }
       end
     end
 
@@ -147,7 +158,7 @@ module Devx
       accessible = [
         :title, :slug, :short_description, :content, :image, :document,
         :published_at, :published_at_date, :published_at_time, :featured,
-        :featured_until, :featured_until_time, :featured_until_date,
+        :featured_until, :featured_until_time, :featured_until_date, :article_gallery_image,
         tag_list: [], keyword_list: [], article_galleries_attributes: [ :id, :file, :_destroy ]
       ]
       params.require(:article).permit(accessible)

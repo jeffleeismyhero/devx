@@ -76,7 +76,6 @@
 
 <div class="col-8 columns cd-edit-form no-padding" style="margin-top:20px;">
   <div class="col-12 columns">
-    <%= link_to_add_fields 'Add Image to Gallery', f, :article_galleries, nil, 'article_gallery_fields', '' %>
     <%= content_tag 'div', class: 'nested-attributes' do %>
       <%= f.fields_for :article_galleries do |l| %>
         <%= render partial: 'article_gallery_fields', locals: { f: l } %>

@@ -213,8 +213,8 @@ $(".currency-field").on("blur", function()
     }
   });
 
-  $("#article-media-dropzone").dropzone({
-    paramName: "article[image]",
+  $("#article-gallery-dropzone").dropzone({
+    paramName: "article_gallery[file]",
     queuecomplete: function()
     {
       //location.reload();

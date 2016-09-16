@@ -52,7 +52,11 @@ Devx::Engine.routes.draw do
     resources :layouts
     resources :javascripts, except: :show
     resources :stylesheets, except: :show
-    resources :articles
+    resources :articles do
+      member do
+        patch 'add_to_gallery', to: 'articles#add_to_gallery'
+      end
+    end
     resources :calendars do
       resources :events
     end
