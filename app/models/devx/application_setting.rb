@@ -10,6 +10,7 @@ module Devx
 
     def self.initialize_settings
       Devx::StripeConfigurator.new
+      Devx::SmsAlert.new
     end
   end
 end
