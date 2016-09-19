@@ -101,6 +101,15 @@ $(function()
     singleItem: true
   });
 
+  // Owl Carousel
+  $(".owlcarousel").owlCarousel({
+    items: 1,
+    autoPlay:true,
+    paginationNumbers: true,
+    singleItem:true,
+    loop:true
+  });
+
 
   // Navigation
   var active_path = window.location.pathname;

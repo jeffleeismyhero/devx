@@ -45,12 +45,21 @@ module Devx
       end
     end
 
+    def sort
+      list = params[:slide]
+      list.try(:each_with_index) do |id, index|
+        Devx::Slide.find(id).update_columns(position: index + 1)
+      end
+      render json: nil, status: :ok
+    rescue
+    end
+
 
     private
 
     def slideshow_params
       accessible = [ :name,
-                    slides_attributes: [ :id, :slideshow_id, :title, :content, :image, :position, :_destroy ]
+                    slides_attributes: [ :id, :slideshow_id, :title, :content, :image, :_destroy ]
                   ]
       params.require(:slideshow).permit(accessible)
     end

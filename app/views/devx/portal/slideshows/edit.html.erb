@@ -7,6 +7,18 @@
     </div>
     <div class="col-12">
       <%= link_to 'Back to Slideshows', devx.portal_slideshows_path %>
+
+      <h3>Current Slides</h3>
+      <ul class="sortable-list" data-update-url="<%= sort_portal_slideshows_path %>">
+        <% @slideshow.slides.order(position: :asc).try(:each) do |slide| %>
+          <%= content_tag_for :li, slide, style: 'list-style-type:none' do %>
+            <div class="medium-1">
+              <%= image_tag(slide.image.try(:small).try(:url), style: 'width:100%') %>
+            </div>
+          <% end %>
+        <% end %>
+      </ul>
+
       <%= form_for @slideshow, url: devx.portal_slideshow_path(@slideshow) do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>

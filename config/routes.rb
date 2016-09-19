@@ -95,7 +95,9 @@ Devx::Engine.routes.draw do
         get 'submissions'
       end
     end
-    resources :slideshows
+    resources :slideshows do
+      collection { post :sort }
+    end
     resources :media
     resources :administration
     resources :registrations do
