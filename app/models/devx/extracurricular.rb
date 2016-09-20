@@ -10,8 +10,7 @@ module Devx
   	mount_uploader :image, ImageUploader
 
     def self.per_page
-      return 1
+      return 10
     end
   end
 end
-

@@ -14,14 +14,18 @@ module Devx
     end
 
     def attributes
-      { extracurriculars: extracurriculars }
+      { extracurriculars: extracurriculars,
+        group: @attributes[:group],
+        style: @attributes[:style],
+        limit: @attributes[:limit]
+      }
     end
 
 
     private
 
     def extracurriculars
-      Devx::Extracurricular.all.order(name: :asc)
+      Devx::Extracurricular.ordered.try(:limit, @attributes[:limit])
     end
   end
 end
