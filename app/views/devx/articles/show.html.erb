@@ -24,21 +24,25 @@
                 <span><%= link_to 'Download Document', @article.document.try(:url), method: :post, class: 'button primary small' %></span>
             <% end %>
 
-            <% if @article.article_galleries.any? %>
-              <h6 style="margin-top:40px">View Gallery</h6>
-              <% @article.article_galleries.try(:each_with_index) do |image, index| %>
-                <%= link_to image_tag(image.file.try(:thumbnail).try(:url)), image.file.try(:url), class: 'fancybox', rel: 'gallery' %>
-              <% end %>
-            <% end %>
-
             <div style="margin-top:20px;border-top:1px solid #e9e9e9;">
                 <%= link_to "<i class=\"fa fa-arrow-left\" style=\"margin:2.4rem 1rem;\"></i> Back to Previous Page".html_safe, :back %>
             </div>
         </div>
-        <% if @article.image.present? %>
-            <div class="medium-6 columns">
-                <%= image_tag(@article.image.url, style: 'margin:0 auto;max-width:100%;max-height:400px;float:right') %>
+        <div class="medium-6 columns">
+          <% if @article.image.present? %>
+            <div style="display:block;width:100%">
+              <%= image_tag(@article.image.url, style: 'margin:0 auto;max-width:100%;max-height:400px;') %>
             </div>
-        <% end %>
+            <% end %>
+
+            <% if @article.article_galleries.any? %>
+              <div style="display:block;margin:40px 0px;width:100%">
+              <h6>View Gallery</h6>
+              <% @article.article_galleries.try(:each_with_index) do |image, index| %>
+                <%= link_to image_tag(image.file.try(:thumbnail).try(:url)), image.file.try(:url), class: 'fancybox-gallery', rel: 'gallery' %>
+              <% end %>
+              </div>
+            <% end %>
+        </div>
     </div>
 </div>

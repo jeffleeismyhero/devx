@@ -87,8 +87,9 @@ $(function()
   $(".select2-fixed").select2({ tags: false, multiple: false });
 
 
-  // Fancybox
-  $("a.fancybox").fancybox();
+  //Fancybox
+  $("a.fancybox").fancybox({ type: 'iframe' });
+  $("a.fancybox-gallery").fancybox();
 
 
   // JCW Accordion
