@@ -11,69 +11,43 @@ module Devx
 
     validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-    before_save :update_from_google
+    #before_save :update_from_google
+    before_save :connect_to_google
 
-    def test(start_date)
-      self.events.joins(:schedules).where('devx_schedules.start_time >= ? AND devx_schedules.start_time <= ?', start_date.beginning_of_month, start_date.end_of_month).order('devx_schedules.start_time ASC')
-    end
-
-    def google_cal
+    def google_calendar
       if self.calendar_type == 'Google Calendar'
-
-        code = self.authorization_code unless self.refresh_token.present?
-
-        client = Signet::OAuth2::Client.new({
-          client_id: self.client_id,
-          client_secret: self.client_secret,
-          token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
-          authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
-          redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
-          scope: Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY,
-          grant_type: 'refresh_token',
-          code: code,
-          refresh_token: self.refresh_token
-        })
-
-        puts client.inspect
-
-        return client
-      end
-    end
-
-    def check_google_calendar
-      client = google_cal
-      if client.present?
-        # if self.refresh_token && client.fetch_access_token!
-        #   return
-        # end
-
-        if !self.refresh_token.present?
-          if !self.authorization_url.present?
-            self.authorization_url = client.authorization_uri.to_s
-          end
-        end
-
-        if self.authorization_code.present?
-          response = client.fetch_access_token!
-          self.refresh_token = response['access_token']
-          puts "Google refresh token"
-          puts self.refresh_token
-        end
-      end
-    end
-
-    def get_google_events
-      client = google_cal
-
-      if client.present?
+        return @client = Devx::GoogleCalendar.new({
+            client_id: self.client_id,
+            client_secret: self.client_secret
+          })
+      else
         return nil
       end
     end
 
-    def get_all_google_events
-      client = google_cal
-      check_google_calendar
+    def connect_to_google
+      connection = google_calendar
 
+      if connection.present?
+        if !self.refresh_token.present?
+          if !self.authorization_code.present?
+            self.authorization_url = connection.authorization_url
+          else
+            connection.client.code = self.authorization_code
+            Devx::GoogleCalendar.get_access_token(connection.client)
+            self.refresh_token = connection.refresh_token
+          end
+        else
+          connection.login(self.refresh_token)
+          update_from_google(connection.client)
+        end
+      end
+    rescue Signet::AuthorizationError
+      self.update_columns(authorization_code: nil, refresh_token: nil)
+    end
+
+
+    def get_all_google_events(client)
       if client.present?
         calendar_id = self.google_calendar_id
         service = Google::Apis::CalendarV3::CalendarService.new
@@ -92,15 +66,10 @@ module Devx
       end
     end
 
-    def update_from_google
-      if !self.refresh_token.present?
-        check_google_calendar
-        return
-      end
-
+    def update_from_google(client)
       self.events.destroy_all if self.events.any?
 
-      self.get_all_google_events.try(:each) do |event|
+      self.get_all_google_events(client).try(:each) do |event|
         self.events.where(google_event_id: event.id).destroy_all
         e = Devx::Event.new(
           calendar_id: self.id,
@@ -133,9 +102,6 @@ module Devx
 
         e.save if e.valid?
       end
-    rescue Signet::AuthorizationError
-      self.update_columns(refresh_token: nil, authorization_url: nil, authorization_code: nil)
-      self.check_google_calendar
     end
 
   end
