@@ -39,7 +39,9 @@ module Devx
           end
         else
           connection.login(self.refresh_token)
-          update_from_google(connection.client)
+          Devx::Calendar.where(calendar_type: 'Google Calendar').try(:each) do |calendar|
+            calendar.delay.synchronize(connection.client)
+          end
         end
       end
     rescue Signet::AuthorizationError
@@ -58,49 +60,75 @@ module Devx
           max_results: 2500,
           single_events: true,
           order_by: 'startTime',
-          time_min: Time.now.beginning_of_month.iso8601,
-          time_max: (Time.now + 2.year).iso8601
+          time_min: Time.now.beginning_of_year.iso8601,
+          time_max: (Time.now + 1.year).iso8601
         )
 
         return response.items
       end
     end
 
-    def update_from_google(client)
+    def synchronize(client)
       self.events.destroy_all if self.events.any?
 
       self.get_all_google_events(client).try(:each) do |event|
-        self.events.where(google_event_id: event.id).destroy_all
-        e = Devx::Event.new(
-          calendar_id: self.id,
-          google_event_id: event.id,
-          name: event.summary,
-          description: event.description,
-          location: event.location
-        )
+        existing = Devx::Event.where("calendar_id = ? AND google_event_id LIKE '#{event.id.try(:split, '_').try(:first)}%'", self.id).try(:first)
 
-        if event.start.try(:date).present?
-          date_only = true
-          start_time = event.start.date.in_time_zone.beginning_of_day
+        if existing.nil?
+          e = Devx::Event.new(
+            calendar_id: self.id,
+            google_event_id: event.id,
+            name: event.summary,
+            description: event.description,
+            location: event.location
+          )
 
-          if event.end.date.to_date.to_s == (event.start.date.to_date + 1.day).to_s
-            end_time = event.start.date.in_time_zone.end_of_day
-          else
-            end_time = event.end.date.in_time_zone.end_of_day - 1.day
+          if event.start.try(:date).present?
+            date_only = true
+            start_time = event.start.date.in_time_zone.beginning_of_day
+
+            if event.end.date.to_date.to_s == (event.start.date.to_date + 1.day).to_s
+              end_time = event.start.date.in_time_zone.end_of_day
+            else
+              end_time = event.end.date.in_time_zone.end_of_day - 1.day
+            end
+          elsif event.start.try(:date_time).present?
+            date_only = false
+            start_time = event.start.date_time.in_time_zone
+            end_time = event.end.date_time.in_time_zone
           end
-        elsif event.start.try(:date_time).present?
-          date_only = false
-          start_time = event.start.date_time.in_time_zone
-          end_time = event.end.date_time.in_time_zone
+
+          e.schedules.new(
+            all_day: date_only,
+            start_time: start_time,
+            end_time: end_time
+          )
+
+          e.save if e.valid?
+        else
+          if event.start.try(:date).present?
+            date_only = true
+            start_time = event.start.date.in_time_zone.beginning_of_day
+
+            if event.end.date.to_date.to_s == (event.start.date.to_date + 1.day).to_s
+              end_time = event.start.date.in_time_zone.end_of_day
+            else
+              end_time = event.end.date.in_time_zone.end_of_day - 1.day
+            end
+          elsif event.start.try(:date_time).present?
+            date_only = false
+            start_time = event.start.date_time.in_time_zone
+            end_time = event.end.date_time.in_time_zone
+          end
+
+          existing.schedules.new(
+            all_day: date_only,
+            start_time: start_time,
+            end_time: end_time
+          )
+
+          existing.save if existing.valid?
         end
-
-        e.schedules.new(
-          all_day: date_only,
-          start_time: start_time,
-          end_time: end_time
-        )
-
-        e.save if e.valid?
       end
     end
 

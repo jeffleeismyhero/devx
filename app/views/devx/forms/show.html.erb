@@ -3,16 +3,15 @@
 <!--   <div style="padding:140px 0px;margin:0 auto;text-align:center">
     <h1 style="padding:0;margin:0;border:none;color:#000;"><%= @form.name %></h1>
   </div> -->
-
-<div class="container notify">
-  <div class="row">
-    <div class="large-12 columns">
-      <% if flash.any? %>
-        <%= notice %>
-      <% end %>
+<% if flash.any? %>
+  <div class="container notify">
+    <div class="row">
+      <div class="large-12 columns">
+          <%= notice %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
 
 <div class="container">
   <div class="row">
