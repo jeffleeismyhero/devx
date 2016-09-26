@@ -11,6 +11,7 @@
 
     <div id="add-funds" class="large-12 columns">
         <h2>Add Money to Account</h2>
+        <p style="max-width:100%">You will receive an email to confirm your payment has been received. If you do not receive an email please contact your bank (banking institution?) to see if the funds were withdrawn then contact <%= link_to 'pjohnson@catholichigh.org', 'mailto:pjohnson@catholichigh.org' %> if you need additional assistance.</p>
         <%= form_for @transaction, url: devx.portal_account_balance_path(@person), method: :post do |f| %>
         <div class="large-12 columns no-padding">
             <div class="small-12 medium-6 large-4 columns cd-edit-form">
