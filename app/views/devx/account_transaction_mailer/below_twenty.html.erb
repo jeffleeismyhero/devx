@@ -1,0 +1,16 @@
+<html>
+  <body>
+    <p>Dear Parent/Guardian,</p>
+
+    <p>The balance on your son's CHS Student Debit Account is currently $20 or less (<%= number_to_currency @balance.to_f %>). Please make a payment to his account as soon as possible to prevent his account from depleting further. Please understand that if his account goes below zero ($0), he will receive disciplinary consequences.</p>
+
+    <p>Payments may be made any of the following ways:</p>
+
+    <ol>
+      <li>Use the MyCHS link at the top of the CHS homepage (www.catholichigh.org). When prompted, enter your family email address and your password. Please allow 24 hours or the next regular school day for online payments to appear on your son's account.</li>
+      <li>Students can deposit money at the CHS Bookstore. Payments can be made by using a check payable to Catholic High, cash or credit card. Payments received at the bookstore by 7:30 a.m. will be available for lunch the same day. You may also view account activity on the MyCHS link.</li>
+    </ol>
+ 
+    <p>Please email Mrs. Pinney Johnson (<%= link_to 'pjohnson@catholichigh.org', 'mailto:pjohnson@catholichigh.org' %>) if you have any questions.</p>
+  </body>
+</html>
