@@ -22,7 +22,7 @@ module Devx
     has_many :calendar_subscriptions
     has_many :event_subscriptions
     has_many :article_subscriptions
-    has_many :linked_accounts
+    has_many :linked_accounts, dependent: :destroy
     has_many :children, through: :linked_accounts, class_name: 'Devx::Person', source: :person
     has_many :children_linked_accounts, through: :children, source: :linked_accounts
     has_many :orders
