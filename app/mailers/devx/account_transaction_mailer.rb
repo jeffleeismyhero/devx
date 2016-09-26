@@ -11,6 +11,7 @@ module Devx
 
     def below_ten(recipient, balance)
       @balance = balance
+      @recipient = recipient
 
       mail to: @recipient,
       from: 'noreply@catholichigh.org',
@@ -19,6 +20,7 @@ module Devx
 
     def below_five(recipient, balance)
       @balance = balance
+      @recipient = recipient
 
       mail to: @recipient,
       from: 'noreply@catholichigh.org',
@@ -27,6 +29,7 @@ module Devx
 
     def below_zero(recipient, balance)
       @balance = balance
+      @recipient = recipient
 
       mail to: @recipient,
       from: 'noreply@catholichigh.org',
