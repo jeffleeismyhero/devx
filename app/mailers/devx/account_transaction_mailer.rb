@@ -2,8 +2,9 @@ module Devx
   class AccountTransactionMailer < ApplicationMailer
     def below_twenty(recipient, balance)
       @balance = balance
+      @recipient = recipient
 
-      mail to: recipient,
+      mail to: @recipient,
       from: 'noreply@catholichigh.org',
       subject: 'Low Balance Notification'
     end
@@ -11,7 +12,7 @@ module Devx
     def below_ten(recipient, balance)
       @balance = balance
 
-      mail to: recipient,
+      mail to: @recipient,
       from: 'noreply@catholichigh.org',
       subject: 'Low Balance Notification'
     end
@@ -19,7 +20,7 @@ module Devx
     def below_five(recipient, balance)
       @balance = balance
 
-      mail to: recipient,
+      mail to: @recipient,
       from: 'noreply@catholichigh.org',
       subject: 'Low Balance Notification'
     end
@@ -27,7 +28,7 @@ module Devx
     def below_zero(recipient, balance)
       @balance = balance
 
-      mail to: recipient,
+      mail to: @recipient,
       from: 'noreply@catholichigh.org',
       subject: 'Low Balance Notification'
     end
