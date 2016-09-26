@@ -851,7 +851,7 @@ input[type=submit] {
 NAV
 *********************************************************************/
 nav {
-  background-color:#AAC8C5;
+  background-color:lightseagreen;
 }
 
 nav .icon {
@@ -874,6 +874,40 @@ nav li {
     margin-bottom:0;
 }
 
+nav li:first-child {
+    padding-left:0;
+}
+
 nav a {
-    font-size:14px;
+    font-size:0.9em;
+    color:rgba(255,255,255,0.9);
+}
+
+nav a:hover {
+    color:rgba(255,255,255,0.6);
+    cursor: pointer;
+    background-color:rgba(255,255,255,0.6);
+    line-height:25px;
+}
+
+#breadcrumbs {
+    background-color:#fff; 
+    padding:10px;
+}
+
+#breadcrumbs a, #breadcrumbs span {
+    font-size:0.75em;
+}
+
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: inline-block;
+}
+
+section h1 {
+    font-size:3.2rem;
 }
