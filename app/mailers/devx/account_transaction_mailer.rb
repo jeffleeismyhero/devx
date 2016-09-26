@@ -5,7 +5,7 @@ module Devx
 
       mail to: recipient,
       from: 'noreply@catholichigh.org',
-      subject: 'myCHS - Low Balance Notification'
+      subject: 'Low Balance Notification'
     end
 
     def below_ten(recipient, balance)
@@ -13,7 +13,7 @@ module Devx
 
       mail to: recipient,
       from: 'noreply@catholichigh.org',
-      subject: 'myCHS - Low Balance Notification'
+      subject: 'Low Balance Notification'
     end
 
     def below_five(recipient, balance)
@@ -21,7 +21,7 @@ module Devx
 
       mail to: recipient,
       from: 'noreply@catholichigh.org',
-      subject: 'myCHS - Low Balance Notification'
+      subject: 'Low Balance Notification'
     end
 
     def below_zero(recipient, balance)
@@ -29,7 +29,7 @@ module Devx
 
       mail to: recipient,
       from: 'noreply@catholichigh.org',
-      subject: 'myCHS - Low Balance Notification'
+      subject: 'Low Balance Notification'
     end
   end
 end
