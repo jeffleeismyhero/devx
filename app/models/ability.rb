@@ -31,6 +31,8 @@ class Ability
       can :manage, Devx::Field
       can :manage, Devx::FormSubmission
       can :manage, Devx::UrgentNews
+      can :manage, Devx::Slideshow
+      can :manage, Devx::Slide
 
       if Devx::ApplicationSetting.find_or_create_by(id: 1).settings['alumni_database']
         can :manage, Devx::Alumni
