@@ -203,5 +203,6 @@
   {
     var id = $(this).attr("href");
     $(id).parent("li").addClass("active");
+    $("html, body").animate({ scrollTop: $(id).offset().top }, "slow");
   });
 </script>
