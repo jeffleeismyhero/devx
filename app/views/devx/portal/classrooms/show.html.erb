@@ -36,8 +36,8 @@
                     <% if @classroom.class_announcements.any? %>
                       <ul>
                         <% @classroom.class_announcements.order(created_at: :desc).limit(3).try(:each) do |announcement| %>
-                          <li><small><%= ldate announcement.created_at %></small><br />
-                            <span><%= announcement.content %></span>
+                          <li><span><%= announcement.content %></span><br />
+                            <span style="font-size:0.8em">Posted <%= announcement.created_at.try(:strftime, '%m/%d/%Y') %></span>
                           </li>
                         <% end %>
                       </ul>
@@ -73,9 +73,9 @@
                   <% @classroom.class_galleries.try(:each) do |gallery| %>
                     <% gallery.class_photos.try(:each_with_index) do |photo, index| %>
                       <% if index == 0 %>
-                        <%= link_to "<li style=\"display:inline-block; width:150px; text-align:center; height:150px; background-image:url(#{photo.filename.try(:url)}); background-size:cover; padding-top:6%; margin-left:0!important;\"></li>".html_safe, photo.filename.try(:large).try(:url), class: 'fancybox', rel: gallery.name %>
+                        <%= link_to "<li style=\"display:inline-block; width:150px; text-align:center; height:150px; background-image:url(#{photo.filename.try(:url)}); background-size:cover; padding-top:6%; margin-left:0!important;\"></li>".html_safe, photo.filename.try(:large).try(:url), class: 'fancybox-gallery', rel: gallery.name %>
                       <% else %>
-                        <%= link_to image_tag(photo.filename.try(:thumbnail).try(:url)), photo.filename.try(:large).try(:url), class: 'fancybox', rel: gallery.name, style: 'display:none' %>
+                        <%= link_to image_tag(photo.filename.try(:thumbnail).try(:url)), photo.filename.try(:large).try(:url), class: 'fancybox-gallery', rel: gallery.name, style: 'display:none' %>
                       <% end %>
                     <% end %>
                   <% end %>
@@ -136,32 +136,35 @@
                       </div>
                       <div class="accordion-content">
                         <% @days = %w[Monday Tuesday Wednesday Thursday Friday] %>
-                        <table width="100%">
-                          <thead>
-                            <tr>
-                              <% @days.try(:each_with_index) do |day, index| %>
-                                <% if day != 'Sunday' && day != 'Saturday' %>
-                                  <td style="width:20%;font-size:1.4rem;text-align:center"><%= day %></td>
+                        <% @classroom.classroom_teachers.try(:each) do |teacher| %>
+                          <h3><%= "#{teacher.person.try(:full_name)}'s Schedule" %></h3>
+                          <table width="100%">
+                            <thead>
+                              <tr>
+                                <% @days.try(:each_with_index) do |day, index| %>
+                                  <% if day != 'Sunday' && day != 'Saturday' %>
+                                    <td style="width:20%;font-size:1.4rem;text-align:center"><%= day %></td>
+                                  <% end %>
                                 <% end %>
-                              <% end %>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <% @days.try(:each) do |day| %>
-                                <td>
-                                  <ul>
-                                    <% @classroom.class_schedules.order(start_time: :asc).try(:each) do |schedule| %>
-                                      <% if schedule.day_of_week.include?(day) %>
-                                        <li><%= "<span style=\"font-size:1.2rem\">#{schedule.start_time.strftime('%I:%M%P')} - #{schedule.end_time.strftime('%I:%M%P')}</span><br />#{schedule.name}".html_safe %></li>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <% @days.try(:each) do |day| %>
+                                  <td>
+                                    <ul>
+                                      <% @classroom.class_schedules.order(start_time: :asc).try(:each) do |schedule| %>
+                                        <% if schedule.classroom_teachers.include?(teacher.person.try(:id).to_s) && schedule.day_of_week.include?(day) %>
+                                          <li><%= "<span style=\"font-size:1.2rem\">#{schedule.start_time.strftime('%I:%M%P')} - #{schedule.end_time.strftime('%I:%M%P')}</span><br />#{schedule.name}".html_safe %></li>
+                                        <% end %>
                                       <% end %>
-                                    <% end %>
-                                  </ul>
-                                </td>
-                              <% end %>
-                            </tr>
-                          </tbody>
-                        </table>
+                                    </ul>
+                                  </td>
+                                <% end %>
+                              </tr>
+                            </tbody>
+                          </table>
+                        <% end %>
                       </div>
                   </li>
                 <% end %>
@@ -189,3 +192,9 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+  $("a").each(function()
+  {
+    $(this).attr("target", "_blank");
+  });
+</script>

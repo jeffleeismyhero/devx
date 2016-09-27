@@ -231,6 +231,14 @@ $(".currency-field").on("blur", function()
     }
   });
 
+  $("#class-gallery-dropzone").dropzone({
+    paramName: "class_photo[filename]",
+    queuecomplete: function()
+    {
+      //location.reload();
+    }
+  });
+
   $("form:has(#cc_fields)").submit(function() {
     var form = this;
     // $(".submit").attr("disabled", true);
