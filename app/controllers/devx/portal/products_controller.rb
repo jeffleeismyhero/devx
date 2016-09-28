@@ -51,7 +51,7 @@ module Devx
     private
 
     def product_params
-        accessible = [ :name, :description, :active, :sku, :price, :weight, :taxable, :stockable, :image, product_skus_attributes: [ :id, :currency, :price, :stockable, :active, :_destroy ] ]
+        accessible = [ :name, :description, :active, :sku, :price, :weight, :taxable, :stockable, :image, :shippable, product_skus_attributes: [ :id, :currency, :price, :stockable, :active, :_destroy ] ]
         params.require(:product).permit(accessible)
     end
   end

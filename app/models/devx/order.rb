@@ -13,6 +13,8 @@ module Devx
 
     attr_accessor :stripe_token
 
+    after_create :create_stripe_order
+
     def total
       line_items.to_a.sum(&:line_total)
     end
@@ -23,6 +25,28 @@ module Devx
 
     def balance
       total - payments
+    end
+
+
+    private
+
+    def create_stripe_order
+      customer = Stripe::Customer.retrieve(self.user.stripe_id)
+
+      items = []
+      self.line_items.try(:each) do |line_item|
+        items << { type: 'sku', parent: line_item.product_sku.try(:stripe_id), quantity: line_item.quantity, description: line_item.product_sku.try(:product).try(:name), amount: (line_item.line_total * 100).to_i }
+      end
+
+      puts items.inspect
+
+      order = Stripe::Order.create(
+      currency: 'usd',
+      customer: customer.id,
+      items: items
+      )
+
+      order.pay(customer: customer)
     end
   end
 end

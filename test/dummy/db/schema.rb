@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927173008) do
+ActiveRecord::Schema.define(version: 20160928181435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -275,7 +275,7 @@ ActiveRecord::Schema.define(version: 20160927173008) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.text     "day_of_week",        default: [],              array: true
-    t.text     "classroom_teachers", default: [],              array: true
+    t.integer  "classroom_teachers"
   end
 
   create_table "devx_classroom_custom_tabs", force: :cascade do |t|
@@ -468,10 +468,10 @@ ActiveRecord::Schema.define(version: 20160927173008) do
 
   create_table "devx_line_items", force: :cascade do |t|
     t.integer  "order_id"
-    t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "product_sku_id"
   end
 
   create_table "devx_linked_accounts", force: :cascade do |t|
@@ -505,8 +505,21 @@ ActiveRecord::Schema.define(version: 20160927173008) do
 
   create_table "devx_orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "billing_address_1"
+    t.string   "billing_address_2"
+    t.string   "billing_address_city"
+    t.string   "billing_address_state"
+    t.string   "billing_address_zip_code"
+    t.string   "shipping_address_1"
+    t.string   "shipping_address_2"
+    t.string   "shipping_address_city"
+    t.string   "shipping_address_state"
+    t.string   "shipping_address_zip_code"
+    t.string   "stripe_id"
+    t.float    "amount"
+    t.string   "status"
   end
 
   create_table "devx_pages", force: :cascade do |t|
@@ -581,6 +594,7 @@ ActiveRecord::Schema.define(version: 20160927173008) do
     t.string   "stripe_id"
     t.boolean  "active"
     t.string   "slug"
+    t.boolean  "shippable"
   end
 
   create_table "devx_registration_submissions", force: :cascade do |t|

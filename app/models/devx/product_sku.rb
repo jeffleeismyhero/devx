@@ -3,6 +3,8 @@ module Devx
     after_update :update_stripe_sku
     before_destroy :delete_stripe_sku
 
+    has_many :line_items
+    has_many :orders, through: :line_items
   	belongs_to :product
 
     def values

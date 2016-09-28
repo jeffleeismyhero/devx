@@ -62,7 +62,7 @@ class Ability
       can :manage, Devx::ClassDocument
       can :manage, Devx::ClassGallery
       can :manage, Devx::ClassHighlight
-      can :manage, Devx::ClassSchedule
+      can :manage, Devx::ClassSchedule, classroom_teachers: user.person.id
       can :manage, Devx::ClassPhoto
     end
 

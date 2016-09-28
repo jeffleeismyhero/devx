@@ -9,7 +9,9 @@
                     <li><a class="anchors" href="#about-teacher">About the Teacher</a></li>
                     <% if @classroom.class_schedules.any? %>
                       <% @classroom.classroom_teachers.try(:each) do |teacher| %>
-                        <li><a class="anchors" href="#schedule-<%= teacher.id %>"><%= teacher.person.try(:full_name) %>'s Schedule</a></li>
+                        <% if @classroom.class_schedules.for_teacher(teacher.id).any? %>
+                          <li><a class="anchors" href="#schedule-<%= teacher.id %>"><%= teacher.person.try(:full_name) %>'s Schedule</a></li>
+                        <% end %>
                       <% end %>
                     <% end %>
                     <% if @classroom.policies_and_procedures.present? %><li><a class="anchors" href="#policies">Policies &amp; Procedures</a></li><% end %>
@@ -135,41 +137,43 @@
                 </li>
                 <% if @classroom.class_schedules.any? %>
                   <% @classroom.classroom_teachers.try(:each) do |teacher| %>
-                    <li>
-                      <div class="accordion-title" id="schedule-<%= teacher.id %>">
-                        <span><%= teacher.person.try(:full_name) %>'s Schedule</span>
-                      </div>
-                      <div class="accordion-content">
-                        <% @days = %w[Monday Tuesday Wednesday Thursday Friday] %>
-                        <h3><%= "#{teacher.person.try(:full_name)}'s Schedule" %></h3>
-                        <table width="100%">
-                          <thead>
-                            <tr>
-                              <% @days.try(:each_with_index) do |day, index| %>
-                                <% if day != 'Sunday' && day != 'Saturday' %>
-                                  <td style="width:20%;font-size:1.4rem;text-align:center"><%= day %></td>
+                    <% if @classroom.class_schedules.for_teacher(teacher.id).any? %>
+                      <li>
+                        <div class="accordion-title" id="schedule-<%= teacher.id %>">
+                          <span><%= teacher.person.try(:full_name) %>'s Schedule</span>
+                        </div>
+                        <div class="accordion-content">
+                          <% @days = %w[Monday Tuesday Wednesday Thursday Friday] %>
+                          <h3><%= "#{teacher.person.try(:full_name)}'s Schedule" %></h3>
+                          <table width="100%">
+                            <thead>
+                              <tr>
+                                <% @days.try(:each_with_index) do |day, index| %>
+                                  <% if day != 'Sunday' && day != 'Saturday' %>
+                                    <td style="width:20%;font-size:1.4rem;text-align:center"><%= day %></td>
+                                  <% end %>
                                 <% end %>
-                              <% end %>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <% @days.try(:each) do |day| %>
-                                <td>
-                                  <ul>
-                                    <% @classroom.class_schedules.order(start_time: :asc).try(:each) do |schedule| %>
-                                      <% if schedule.classroom_teachers.include?(teacher.person.try(:id).to_s) && schedule.day_of_week.include?(day) %>
-                                        <li><%= "<span style=\"font-size:1.2rem\">#{schedule.start_time.strftime('%I:%M%P')} - #{schedule.end_time.strftime('%I:%M%P')}</span><br />#{schedule.name}".html_safe %></li>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <% @days.try(:each) do |day| %>
+                                  <td>
+                                    <ul>
+                                      <% @classroom.class_schedules.for_teacher(teacher.id).order(start_time: :asc).try(:each) do |schedule| %>
+                                        <% if schedule.day_of_week.include?(day) %>
+                                          <li><%= "<span style=\"font-size:1.2rem\">#{schedule.start_time.strftime('%I:%M%P')} - #{schedule.end_time.strftime('%I:%M%P')}</span><br />#{schedule.name}".html_safe %></li>
+                                        <% end %>
                                       <% end %>
-                                    <% end %>
-                                  </ul>
-                                </td>
-                              <% end %>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </li>
+                                    </ul>
+                                  </td>
+                                <% end %>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </li>
+                    <% end %>
                   <% end %>
                 <% end %>
                 <% if @classroom.policies_and_procedures.present? %>

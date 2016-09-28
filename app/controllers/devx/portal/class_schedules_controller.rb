@@ -9,7 +9,7 @@ module Devx
   	layout 'devx/portal'
 
   	def index
-      @class_schedules = Devx::ClassSchedule.where(classroom: @classroom)
+      @class_schedules = Devx::ClassSchedule.where(classroom: @classroom, classroom_teachers: current_user.person.try(:id))
   	end
 
   	def new
@@ -18,6 +18,7 @@ module Devx
   	def create
 
       @class_schedule.classroom = @classroom
+      @class_schedule.classroom_teachers = current_user.person.id unless current_user.super_administrator?
 
   		if @class_schedule.valid? && @class_schedule.save
   			redirect_to devx.portal_classroom_class_schedules_path,
@@ -57,7 +58,7 @@ module Devx
   	private
 
   	def class_schedule_params
-  		accessible = [:name, :description, :start_time, :start_time_date, :start_time_time, :end_time, :end_time_date, :end_time_time, day_of_week: [], classroom_teachers: []]
+  		accessible = [:name, :description, :start_time, :start_time_date, :start_time_time, :end_time, :end_time_date, :end_time_time, :classroom_teachers, day_of_week: []]
   		params.require(:class_schedule).permit(accessible)
   	end
 

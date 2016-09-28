@@ -11,6 +11,17 @@
   </div>
 
   <div class="col-8 columns cd-edit-form">
+    <%= f.label :shippable %><br>
+  </div>
+
+  <div class="col-2 columns cd-edit-form">
+    <label class="switch">
+      <%= f.check_box :shippable %>
+      <div class="slider round"></div>
+    </label>
+  </div>
+
+  <div class="col-8 columns cd-edit-form">
     <%= f.label :active %><br>
   </div>
 
