@@ -76,7 +76,7 @@
           <div class="small-12 small-offset-0 medium-12 medium-offset-0 large-10 large-offset-1 xlarge-10 xlarge-offset-1 columns no-padding">
               <div class="large-12 columns">
                 <ul>
-                  <% @classroom.class_galleries.try(:each) do |gallery| %>
+                  <% @classroom.class_galleries.active.try(:each) do |gallery| %>
                     <% gallery.class_photos.try(:each_with_index) do |photo, index| %>
                       <% if index == 0 %>
                         <%= link_to "<li style=\"display:inline-block; width:150px; text-align:center; height:150px; background-image:url(#{photo.filename.try(:url)}); background-size:cover; padding-top:6%; margin-left:0!important;\"></li>".html_safe, photo.filename.try(:large).try(:url), class: 'fancybox-gallery', rel: gallery.name %>

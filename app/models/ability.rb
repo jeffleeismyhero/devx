@@ -57,24 +57,18 @@ class Ability
     end
 
     if Devx::ApplicationSetting.find_or_create_by(id: 1).settings['classroom_profiles'] && user.faculty?
-      can [ :edit, :update ], Devx::Classroom
-      can :manage, Devx::ClassAnnouncement
-      can :manage, Devx::ClassDocument
-      can :manage, Devx::ClassGallery
-      can :manage, Devx::ClassHighlight
-      can :manage, Devx::ClassSchedule, classroom_teachers: user.person.id
-      can :manage, Devx::ClassPhoto
+      can [ :read, :edit, :update ], Devx::Classroom, :classroom_teachers => { person_id: user.person.id }
+      can :manage, Devx::ClassAnnouncement, classroom_id: user.person.try(:classroom_id)
+      can :manage, Devx::ClassDocument, classroom_id: user.person.try(:classroom_id)
+      can :manage, Devx::ClassGallery, classroom_id: user.person.try(:classroom_id)
+      can :manage, Devx::ClassHighlight, classroom_id: user.person.try(:classroom_id)
+      can :manage, Devx::ClassSchedule, classroom_id: user.person.try(:classroom_id), :classroom => { :classroom_teachers => { person_id: user.person.id } }
+      can :manage, Devx::ClassPhoto, classroom_id: user.person.try(:classroom_id)
     end
 
     can :read, Devx::Dashboard
     can :read, Devx::Article
     can :read, Devx::Classroom
-    can :read, Devx::ClassAnnouncement
-    can :read, Devx::ClassDocument
-    can :read, Devx::ClassGallery
-    can :read, Devx::ClassHighlight
-    can :read, Devx::ClassSchedule
-    can :read, Devx::ClassPhoto
     can [:read, :edit, :update, :account_balance, :end_impersonation], Devx::User, id: user.id
     can [ :read, :update ], Devx::Order, user_id: user.id
     can :create, Devx::Transaction
