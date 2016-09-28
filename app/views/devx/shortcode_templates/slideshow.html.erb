@@ -2,7 +2,7 @@
   <% @attributes[:slides].try(:each) do |slide| %>
     <li class="slide">
 
-      <% if slide.link.present? %> <a href="<%= '#{slide.link}' %>"> <% end %>
+      <% if slide.link.present? %> <a href='<%= "#{slide.link}" %>'> <% end %>
 
         <div class="medium-12 columns slide-image" style="background-image:url(<%= slide.image %>);">
           <div class="hide-for-small-only slide-text">
@@ -19,7 +19,7 @@
         </div>
 
       <% if slide.link.present? %> </a> <% end %>
-
+      
     </li>
   <% end %>
 </ul>
