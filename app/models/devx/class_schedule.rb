@@ -10,5 +10,6 @@ module Devx
 
   	validates :name, presence: true
   	validates :start_time, presence: true
+    validates :day_of_week, presence: true
   end
 end
