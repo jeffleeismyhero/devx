@@ -1,19 +1,25 @@
 <ul class="owlcarousel">
   <% @attributes[:slides].try(:each) do |slide| %>
     <li class="slide">
-      <div class="medium-12 columns slide-image" style="background-image:url(<%= slide.image %>);">
-        <div class="hide-for-small-only slide-text">
+
+      <% if slide.link.present? %> <a href='<%= "#{slide.link}" %>'> <% end %>
+
+        <div class="medium-12 columns slide-image" style="background-image:url(<%= slide.image %>);">
+          <div class="hide-for-small-only slide-text">
+            <div class="slide-title"><%= slide.title %></div>
+
+            <div class="slide-content"><%= slide.content %></div>
+          </div>
+        </div>
+
+        <div class="show-for-small-only slide-text mobile-slide-text">
           <div class="slide-title"><%= slide.title %></div>
 
           <div class="slide-content"><%= slide.content %></div>
         </div>
-      </div>
 
-      <div class="show-for-small-only slide-text mobile-slide-text">
-        <div class="slide-title"><%= slide.title %></div>
-
-        <div class="slide-content"><%= slide.content %></div>
-      </div>
+      <% if slide.link.present? %> </a> <% end %>
+      
     </li>
   <% end %>
 </ul>
