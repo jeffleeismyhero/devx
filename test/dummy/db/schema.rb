@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928152941) do
-
+ActiveRecord::Schema.define(version: 20160928181435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -489,24 +488,6 @@ ActiveRecord::Schema.define(version: 20160928152941) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "devx_members", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "position"
-    t.string   "department"
-    t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "phone"
-    t.string   "email"
-    t.string   "website"
-    t.string   "photo"
-    t.text     "biography"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "devx_menu_pages", force: :cascade do |t|
     t.integer  "menu_id"
     t.integer  "page_id"
@@ -616,13 +597,6 @@ ActiveRecord::Schema.define(version: 20160928152941) do
     t.boolean  "shippable"
   end
 
-  create_table "devx_registration_submissions", force: :cascade do |t|
-    t.integer  "registration_id"
-    t.text     "submission_content"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
-
   create_table "devx_registrations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",            null: false
@@ -709,13 +683,6 @@ ActiveRecord::Schema.define(version: 20160928152941) do
 
   add_index "devx_stylesheets", ["slug"], name: "index_devx_stylesheets_on_slug", using: :btree
 
-  create_table "devx_teams", force: :cascade do |t|
-    t.integer  "sport_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "devx_ticket_updates", force: :cascade do |t|
     t.integer  "ticket_id"
     t.integer  "user_id"
@@ -794,8 +761,8 @@ ActiveRecord::Schema.define(version: 20160928152941) do
     t.datetime "updated_at",                              null: false
     t.string   "photo"
     t.integer  "person_id"
-    t.string   "stripe_id"
     t.string   "customer_token"
+    t.string   "stripe_id"
     t.boolean  "receive_text_notifications"
   end
 

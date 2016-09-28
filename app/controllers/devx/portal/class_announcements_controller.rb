@@ -8,6 +8,7 @@ module Devx
     layout 'devx/portal'
 
     def index
+      @announcements = Devx::ClassAnnouncement.where(classroom: @classroom)
     end
 
     def new
