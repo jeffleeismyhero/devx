@@ -25,6 +25,7 @@
               <% group.try(:each) do |photo| %>
                 <div class="col-2 columns">
                   <%= image_tag(photo.filename.try(:small).try(:url), style: 'width:100%') %>
+                  <%= link_to '<i class="fa fa-trash"></i> Delete photo'.html_safe, devx.portal_classroom_class_gallery_class_photo_path(@classroom, @class_gallery, photo), method: :delete, data: { confirm: 'Delete this photo?' } %>
                 </div>
               <% end %>
           </div>

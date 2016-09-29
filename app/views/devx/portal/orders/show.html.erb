@@ -34,6 +34,7 @@
             </tr>
           </tbody>
         </table>
+        <% if can? :refund, Devx::Order %><%= link_to 'Refund', devx.refund_portal_order_path(@order), method: :post, data: { confirm: 'Refund this order?' }, class: 'button primary small' %><% end %>
       </div>
     </div>
   </div>

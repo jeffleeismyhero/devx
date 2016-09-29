@@ -27,6 +27,17 @@ module Devx
       total - payments
     end
 
+    def refund_through_stripe
+      order = Stripe::Order.retrieve(self.stripe_id)
+
+      if order.present? && refund = Stripe::Refund.create(charge: order.charge)
+          return true
+      else
+        return false
+      end
+    rescue Stripe::InvalidRequestError
+    end
+
 
     private
 
@@ -46,7 +57,11 @@ module Devx
       items: items
       )
 
-      order.pay(customer: customer)
+      if order.pay(customer: customer)
+        # self.transactions.
+      end
+
+      self.update_columns(stripe_id: order.id)
     end
   end
 end

@@ -111,6 +111,9 @@ Devx::Engine.routes.draw do
       end
     end
     resources :orders, except: [ :edit ] do
+      member do
+        post 'refund', to: 'orders#refund'
+      end
       resources :transactions
     end
     resources :tickets
