@@ -64,6 +64,7 @@ class Ability
       can :manage, Devx::ClassHighlight, classroom_id: user.person.try(:classroom_id)
       can :manage, Devx::ClassSchedule, classroom_id: user.person.try(:classroom_id), :classroom => { :classroom_teachers => { person_id: user.person.id } }
       can :manage, Devx::ClassPhoto, classroom_id: user.person.try(:classroom_id)
+      can :manage, Devx::ClassroomCustomTab, classroom_id: user.person.try(:classroom_id)
     end
 
     can :read, Devx::Dashboard
