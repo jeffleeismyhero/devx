@@ -117,7 +117,7 @@
               <% end %>
                 <li>
                     <div class="accordion-title" id="about-teacher">
-                        About the Teacher(s)
+                        About the Teacher<% if @classroom.classroom_teachers.count > 1 %>s<% end %>
                     </div>
                     <div class="accordion-content">
                       <div style="padding:40px 0px">
