@@ -93,6 +93,7 @@ Devx::Engine.routes.draw do
       collection { post :sort }
       member do
         get 'submissions'
+        post 'refund', to: 'forms#refund'
       end
     end
     resources :slideshows do

@@ -26,6 +26,8 @@ module Devx
         purchase_fields.try(:each) do |field|
           price += (field.options.to_f * @submission.submission_content[field.name].to_f)
         end
+      elsif @submission.submission_content['fee'].present?
+        price += @submission.submission_content['fee'].to_f
       elsif params['amount'].present?
         price = params['amount'].to_f
       end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928181435) do
+ActiveRecord::Schema.define(version: 20160930171304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,6 +184,8 @@ ActiveRecord::Schema.define(version: 20160928181435) do
     t.string   "accent_color_3"
     t.string   "site_name"
     t.string   "address"
+    t.string   "facebook"
+    t.string   "twitter"
   end
 
   create_table "devx_calendar_subscriptions", force: :cascade do |t|
@@ -413,8 +415,10 @@ ActiveRecord::Schema.define(version: 20160928181435) do
   create_table "devx_form_submissions", force: :cascade do |t|
     t.integer  "form_id"
     t.text     "submission_content"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "stripe_id"
+    t.boolean  "refunded",           default: false
   end
 
   create_table "devx_forms", force: :cascade do |t|
@@ -597,6 +601,13 @@ ActiveRecord::Schema.define(version: 20160928181435) do
     t.boolean  "shippable"
   end
 
+  create_table "devx_registration_submissions", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.text     "submission_content"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "devx_registrations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",            null: false
@@ -761,8 +772,8 @@ ActiveRecord::Schema.define(version: 20160928181435) do
     t.datetime "updated_at",                              null: false
     t.string   "photo"
     t.integer  "person_id"
-    t.string   "customer_token"
     t.string   "stripe_id"
+    t.string   "customer_token"
     t.boolean  "receive_text_notifications"
   end
 

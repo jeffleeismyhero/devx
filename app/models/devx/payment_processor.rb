@@ -12,6 +12,14 @@ module Devx
     end
 
     def self.process_stripe(obj, obj_data, payment_details, ipaddr)
+      charge = Stripe::Charge.create(
+        amount: (payment_details[:amount] * 100).to_i,
+        currency: 'usd',
+        source: obj_data.submission_content[:stripe_token],
+        description: "Payment for #{obj.name}"
+      )
+      puts obj_data.inspect
+      obj_data.stripe_id = charge.id
     end
 
     def self.process_diamond_mind(obj, obj_data, payment_details, ipaddr)
