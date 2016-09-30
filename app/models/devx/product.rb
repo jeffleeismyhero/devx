@@ -8,8 +8,10 @@ module Devx
     acts_as_paranoid
 
     has_many :product_skus, dependent: :destroy
+    has_many :product_attributes, dependent: :destroy
 
     accepts_nested_attributes_for :product_skus, allow_destroy: true
+    accepts_nested_attributes_for :product_attributes, allow_destroy: true
 
     validates :name, presence: true
 
@@ -35,12 +37,19 @@ module Devx
     end
 
     def values
+      (a ||= [])
+
+      self.product_attributes.try(:each) do |att|
+        a.push(att.product_attribute) 
+      end 
+
       {
         name: name,
         description: description,
         shippable: shippable,
         active: active,
-        id: slug
+        id: slug,
+        attributes: a 
       }
     end
 
@@ -69,6 +78,7 @@ module Devx
       if Stripe.api_key
         Stripe::Product.retrieve(slug).try(:delete)
       end
+    rescue Stripe::InvalidRequestError
     end
   end
 end

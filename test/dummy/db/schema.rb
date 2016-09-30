@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928181435) do
+ActiveRecord::Schema.define(version: 20160929160858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -488,6 +488,24 @@ ActiveRecord::Schema.define(version: 20160928181435) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_members", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "position"
+    t.string   "department"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "website"
+    t.string   "photo"
+    t.text     "biography"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_menu_pages", force: :cascade do |t|
     t.integer  "menu_id"
     t.integer  "page_id"
@@ -568,6 +586,26 @@ ActiveRecord::Schema.define(version: 20160928181435) do
     t.float    "current_balance"
   end
 
+  create_table "devx_product_attributes", force: :cascade do |t|
+    t.integer  "product_id"
+    t.string   "product_attribute"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "devx_product_attributes", ["product_id"], name: "index_devx_product_attributes_on_product_id", using: :btree
+
+  create_table "devx_product_sku_attributes", force: :cascade do |t|
+    t.integer  "product_sku_id"
+    t.integer  "product_attribute_id"
+    t.string   "value"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "devx_product_sku_attributes", ["product_attribute_id"], name: "index_devx_product_sku_attributes_on_product_attribute_id", using: :btree
+  add_index "devx_product_sku_attributes", ["product_sku_id"], name: "index_devx_product_sku_attributes_on_product_sku_id", using: :btree
+
   create_table "devx_product_skus", force: :cascade do |t|
     t.integer  "product_id"
     t.string   "stripe_id"
@@ -595,6 +633,13 @@ ActiveRecord::Schema.define(version: 20160928181435) do
     t.boolean  "active"
     t.string   "slug"
     t.boolean  "shippable"
+  end
+
+  create_table "devx_registration_submissions", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.text     "submission_content"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "devx_registrations", force: :cascade do |t|
@@ -683,6 +728,13 @@ ActiveRecord::Schema.define(version: 20160928181435) do
 
   add_index "devx_stylesheets", ["slug"], name: "index_devx_stylesheets_on_slug", using: :btree
 
+  create_table "devx_teams", force: :cascade do |t|
+    t.integer  "sport_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_ticket_updates", force: :cascade do |t|
     t.integer  "ticket_id"
     t.integer  "user_id"
@@ -761,8 +813,8 @@ ActiveRecord::Schema.define(version: 20160928181435) do
     t.datetime "updated_at",                              null: false
     t.string   "photo"
     t.integer  "person_id"
-    t.string   "customer_token"
     t.string   "stripe_id"
+    t.string   "customer_token"
     t.boolean  "receive_text_notifications"
   end
 

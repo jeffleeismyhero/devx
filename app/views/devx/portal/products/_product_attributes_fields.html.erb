@@ -1,0 +1,11 @@
+<div class="nested-object">
+	<div class="col-6 columns cd-edit-form">
+		<%= f.label :product_attribute %>
+		<%= f.text_field :product_attribute %>
+	</div>
+
+	<div class="col-12 columns nested-actions pull-right buttons">
+    <%= f.hidden_field :_destroy, class: 'remove-field' %>
+    <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, '#', class: 'remove_fields' %>
+  </div>
+</div>

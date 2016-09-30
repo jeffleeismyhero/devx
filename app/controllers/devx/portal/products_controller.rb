@@ -29,6 +29,9 @@ module Devx
     end
 
     def update
+        update_product_sku_attributes
+        puts @product.product_skus.first.product_sku_attributes.inspect
+
         if @product.valid? && @product.update(product_params)
             redirect_to devx.edit_portal_product_path(@product),
             notice: "Successfully updated product"
@@ -36,23 +39,36 @@ module Devx
             render :edit,
             notice: "Failed to save product"
         end
-     rescue Stripe::InvalidRequestError
+     # rescue Stripe::InvalidRequestError
         render :edit,
         notice: "Ensure that this product matches the product details in Stripe."
     end
 
     def destroy
         if @product.destroy
-            redirect_to devx.portal_products_path,
-            notice: "Successfully deleted product"
+          redirect_to devx.portal_products_path,
+          notice: "Successfully deleted product"
+        else
+          redirect_to devx.portal_products_path,
+          notice: "An error is preventing this product from being deleted."
         end
     end
 
     private
 
     def product_params
-        accessible = [ :name, :description, :active, :sku, :price, :weight, :taxable, :stockable, :image, :shippable, product_skus_attributes: [ :id, :currency, :price, :stockable, :active, :_destroy ] ]
+        accessible = [ :name, :description, :active, :sku, :price, :weight, :taxable, :stockable, :image, :shippable, product_skus_attributes: [ :id, :currency, :price, :stockable, :active, :_destroy ], product_attributes_attributes: [ :id, :product_attribute, :_destroy ], product_sku_attributes_attributes: [ :id, :value, :_destroy ] ]
         params.require(:product).permit(accessible)
+    end
+
+    def update_product_sku_attributes
+        attributes = params[:product_sku_attributes]
+
+        @product.product_skus.try(:each) do |sku|
+            attributes.try(:each) do |key, value|
+                sku.product_sku_attributes.new(product_attribute_id: key, value: value)
+            end
+        end
     end
   end
 end
