@@ -1,0 +1,22 @@
+<% if @attributes[:roster].any? %>
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>Jersey</th>
+        <th>Player</th>
+        <th>Position</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @attributes[:roster].try(:each) do |player| %>
+        <tr>
+          <td><%= sprintf('%02d', player.jersey_number) %></td>
+          <td><%= player.person.try(:full_name) %></td>
+          <td><%= player.position %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3 class="roster-coming-soon">ROSTER COMING SOON!</h3>
+<% end %>
