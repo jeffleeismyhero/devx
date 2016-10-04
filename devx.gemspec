@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
 
   ## Base Gems
-  s.add_runtime_dependency "rails", ">= 4.2"
+  s.add_runtime_dependency "rails", "4.2.7"
   s.add_runtime_dependency "pg", "0.18.4"
   s.add_runtime_dependency "jquery-rails"
   s.add_runtime_dependency "jquery-ui-rails"
