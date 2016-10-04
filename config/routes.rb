@@ -125,52 +125,53 @@ Devx::Engine.routes.draw do
   end
 
   ## Public-facing
-  resources :articles, path: 'news', only: [ :index, :show ] do
-    member do
-      post 'subscribe', to: 'articles#subscribe'
-    end
-  end
-
-  resources :calendars, path: 'calendar', only: [ :index ] do
-    member do
-      get 'export-all', to: 'calendars#export_all'
-      post 'subscribe', to: 'calendars#subscribe'
+  constraints subdomain: false do
+    resources :articles, path: 'news', only: [ :index, :show ] do
+      member do
+        post 'subscribe', to: 'articles#subscribe'
+      end
     end
 
-    resources :events, only: [ :show ] do
-      resources :schedules, only: [ :show ] do
+    resources :calendars, path: 'calendar', only: [ :index ] do
+      member do
+        get 'export-all', to: 'calendars#export_all'
+        post 'subscribe', to: 'calendars#subscribe'
+      end
+
+      resources :events, only: [ :show ] do
+        resources :schedules, only: [ :show ] do
+          member do
+            post 'export', to: 'schedules#export'
+          end
+        end
         member do
-          post 'export', to: 'schedules#export'
+          post 'subscribe', to: 'events#subscribe'
+          post 'unsubscribe', to: 'events#unsubscribe'
         end
       end
-      member do
-        post 'subscribe', to: 'events#subscribe'
-        post 'unsubscribe', to: 'events#unsubscribe'
-      end
     end
+
+    resources :products
+    resources :cart, only: :index
+    get '/cart/add', to: 'cart#add'
+    get '/cart/empty', to: 'cart#empty'
+
+    get '/branding.css', to: 'stylesheets#branding'
+    get '/directory', to: 'administration#index'
+    match '/calendar', to: 'calendars#show', via: [ :get, :post ]
+    match '/contact', to: 'contact#show', via: [ :get, :post ]
+    match '/checkout', to: 'cart#checkout', via: [ :get, :post ]
+
+    resources :registrations, only: [ :show, :create ]
+    resources :forms, only: [ :show, :create ]
+    resources :stylesheets, only: :show, defaults: { format: 'css' }
+    resources :javascripts, only: :show, defaults: { format: 'js' }
+
+
+
+    get '/search' => 'pages#search'
+    match '/:id' => 'pages#show', via: [ :get, :post ], as: :page
+
+    root 'pages#show'
   end
-
-  resources :products
-  resources :cart, only: :index
-  get '/cart/add', to: 'cart#add'
-  get '/cart/empty', to: 'cart#empty'
-
-  get '/branding.css', to: 'stylesheets#branding'
-  get '/directory', to: 'administration#index'
-  match '/calendar', to: 'calendars#show', via: [ :get, :post ]
-  match '/contact', to: 'contact#show', via: [ :get, :post ]
-  match '/checkout', to: 'cart#checkout', via: [ :get, :post ]
-
-  resources :registrations, only: [ :show, :create ]
-  resources :forms, only: [ :show, :create ]
-  resources :stylesheets, only: :show, defaults: { format: 'css' }
-  resources :javascripts, only: :show, defaults: { format: 'js' }
-
-
-
-  get '/search' => 'pages#search'
-  match '/:id' => 'pages#show', via: [ :get, :post ], as: :page
-
-  root 'pages#show'
-
 end

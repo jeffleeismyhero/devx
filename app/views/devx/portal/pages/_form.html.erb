@@ -3,12 +3,12 @@
         <%= f.label :name %><br>
         <%= f.text_field :name %>
     </div>
-    
+
     <div class="col-6 columns cd-edit-form">
         <%= f.label :layout_id %><br>
         <div style="margin:4px 0;"><%= f.select :layout_id, Devx::Layout.all.collect{ |x| [ x.name, x.id ] }, { include_blank: true }, {class:'select2-fixed'} %></div>
     </div>
-    
+
     <div class="col-6 columns cd-edit-form">
         <%= f.label :parent %><br>
         <div style="margin:4px 0;"><%= f.select :parent, Devx::Page.all.where.not(id: @page.id).collect{ |x| [x.name, x.id] }, { include_blank: true }, {class:'select2-fixed'} %></div>
@@ -47,7 +47,7 @@
 
 <div class="col-4 columns cd-edit-form">
   <% if !@page.new_record? %>
-      <%= link_to 'View Page', page_path(@page), target: '_blank' %>
+      <%= link_to 'View Page', devx.page_url(@page, subdomain: false), target: '_blank' %>
   <% end %>
 </div>
 
