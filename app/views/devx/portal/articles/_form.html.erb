@@ -33,11 +33,11 @@
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :featured_until_date, "Featured Until Date" %>
-    <%= f.text_field :featured_until_date, placeholder: 'Until removed', class: 'datepicker' %>
+    <%= f.text_field :featured_until_date, value: date_value(f.object.featured_until_date), placeholder: 'Until removed', class: 'datepicker' %>
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :featured_until_time, "Featured Until Time" %>
-    <%= f.text_field :featured_until_time, class: 'timepicker' %>
+    <%= f.text_field :featured_until_time, value: time_value(f.object.featured_until_time), class: 'timepicker' %>
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :published_at_date, "Publish Date" %>

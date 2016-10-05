@@ -4,6 +4,41 @@ module Devx
     split_accessor :featured_until, date_format: "%m/%d/%Y", time_format: "%I:%M %P"
     split_accessor :published_at, date_format: "%m/%d/%Y", time_format: "%I:%M %P"
 
+    def featured_until_date
+      featured_until.try(:strftime, "%m/%d/%Y")
+    end
+
+    def featured_until_time
+      featured_until.try(:strftime, "%I:%M %P")
+    end
+
+    def published_at_date
+      published_at.try(:strftime, "%m/%d/%Y")
+    end
+
+    def published_at_time
+      published_at.try(:strftime, "%I:%M %P")
+    end
+
+    def featured_until_date=(value)
+        self[:featured_until] = Date.parse("#{value}")
+    end
+
+    def featured_until_time=(value)
+      puts value
+      puts self[:featured_until] = DateTime.parse("#{self[:featured_until].try(:strftime, "%m/%d/%Y")} #{value} #{Time.zone.name}")
+      puts self[:featured_until] -= 1.hour if self[:featured_until].dst?
+    end
+
+    def published_at_date=(value)
+      self[:published_at] = Date.parse("#{value}")
+    end
+
+    def published_at_time=(value)
+      self[:published_at] = DateTime.parse("#{self[:published_at].try(:strftime, "%m/%d/%Y")} #{value} #{Time.zone.name}")
+      self[:published_at] -= 1.hour if self[:published_at].dst?
+    end
+
     extend FriendlyId
     friendly_id :title, use: [ :slugged, :finders ]
 
