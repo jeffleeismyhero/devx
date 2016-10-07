@@ -15,9 +15,9 @@ module Devx
 
     def create
         if @announcement.valid? && @announcement.save
-            redirect_to devx.portal_announcement_path(@announcement),
+            redirect_to devx.portal_announcements_path,
             notice: "Announcement has been successfully created."
-        else 
+        else
             render :new,
             notice: "Announcement failed to create."
         end

@@ -68,16 +68,8 @@ module Devx
 
       @order = Devx::Order.new
 
-      if request.post?
+      if request.post? && session[:cart].present?
         stripe_source = params[:order][:stripe_token]
-
-        if session[:cart]
-          @cart = session[:cart]
-        else
-          @cart = {}
-        end
-
-        line_items = []
 
         if current_user.stripe_id.present?
           customer = Stripe::Customer.retrieve(current_user.stripe_id)
@@ -86,18 +78,29 @@ module Devx
           current_user.update_columns(stripe_id: customer.id)
         end
 
-        @cart.each do |line_item, quantity|
-          sku = Devx::ProductSku.find(line_item)
-          line_items << { type: 'sku', parent: sku.stripe_id, quantity: quantity, description: sku.product.name, amount: sku.price_in_cents }
+        @cart = session[:cart]
+
+        order = params[:order]
+        @order = Devx::Order.new({
+          user: current_user,
+          billing_address_1: order[:billing_address_1],
+          billing_address_2: order[:billing_address_2],
+          billing_address_city: order[:billing_address_city],
+          billing_address_state: order[:billing_address_state],
+          billing_address_zip_code: order[:billing_address_zip_code],
+          shipping_address_1: order[:shipping_address_1],
+          shipping_address_2: order[:shipping_address_2],
+          shipping_address_city: order[:shipping_address_city],
+          shipping_address_state: order[:shipping_address_state],
+          shipping_address_zip_code: order[:shipping_address_zip_code]
+        })
+
+        @cart.try(:each) do |sku, qty|
+          @order.line_items.new(product_sku_id: sku, quantity: qty)
         end
 
-        order = Stripe::Order.create(
-        currency: 'usd',
-        customer: customer.id,
-        items: line_items
-        )
 
-        if order.pay(customer: customer)
+        if @order.valid? && @order.save
           session.delete(:cart)
           redirect_to devx.cart_index_path,
           notice: "Your order has been received."

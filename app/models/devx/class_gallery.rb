@@ -1,5 +1,7 @@
 module Devx
   class ClassGallery < ActiveRecord::Base
+    scope :active, -> { where(active: true) }
+
   	belongs_to :classroom
   	has_many :class_photos
 

@@ -92,5 +92,9 @@ module Devx
         (schedule.end_time && (schedule.start_time < schedule.end_time)) ? schedule : nil
       end.compact
     end
+
+    def is_future_occurrence?
+      return true unless self.start_time < Time.zone.now
+    end
   end
 end

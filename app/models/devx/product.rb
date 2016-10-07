@@ -7,11 +7,11 @@ module Devx
 
     acts_as_paranoid
 
-    has_many :line_items
-    has_many :orders, through: :line_items
     has_many :product_skus, dependent: :destroy
+    has_many :product_attributes, dependent: :destroy
 
     accepts_nested_attributes_for :product_skus, allow_destroy: true
+    accepts_nested_attributes_for :product_attributes, allow_destroy: true
 
     validates :name, presence: true
 
@@ -19,13 +19,37 @@ module Devx
     after_update :update_stripe_product
     before_destroy :destroy_stripe_product
 
+    def self.has_shippables?(cart)
+      shippable = 0
+
+      cart.try(:each) do |sku, value|
+        product_skus = Devx::ProductSku.find(sku) rescue nil
+        if product_skus.try(:product).try(:shippable) == true
+          shippable += 1
+        end
+      end
+
+      if shippable > 0
+        return true
+      else
+        return false
+      end
+    end
+
     def values
+      (a ||= [])
+
+      self.product_attributes.try(:each) do |att|
+        a.push(att.product_attribute) 
+      end 
+
       {
         name: name,
         description: description,
-        shippable: false,
+        shippable: shippable,
         active: active,
-        id: slug
+        id: slug,
+        attributes: a 
       }
     end
 
@@ -44,6 +68,7 @@ module Devx
         values = self.values.delete_if { |k, v| [:id].include?(k) }
         values = values.delete_if { |k, v| v.blank? }
         values.each_pair { |key, value| product.send("#{key}=", value) }
+        product.shippable = self.values[:shippable] || false
         product.active = self.values[:active] || false
     		product.save
       end
@@ -53,6 +78,7 @@ module Devx
       if Stripe.api_key
         Stripe::Product.retrieve(slug).try(:delete)
       end
+    rescue Stripe::InvalidRequestError
     end
   end
 end

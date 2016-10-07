@@ -1,3 +1,9 @@
+<div class="col-12 columns">
+  <% @article.errors.full_messages.each do |e| %>
+    <%= e %><br />
+  <% end %>
+</div>
+
 <div class="col-8 columns no-padding" style="margin-top:20px;">
   <div class="col-12 columns cd-edit-form">
     <%= f.label :title %><br />
@@ -16,7 +22,7 @@
     <%= f.text_field :short_description %>
   </div>
 
-  <div class="col-3 columns cd-edit-form">
+  <div class="col-9 columns cd-edit-form">
   	<label>Featured</label>
   </div>
   <div class="col-3 columns cd-edit-form">
@@ -27,11 +33,11 @@
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :featured_until_date, "Featured Until Date" %>
-    <%= f.text_field :featured_until_date, placeholder: 'Until removed', class: 'datepicker' %>
+    <%= f.text_field :featured_until_date, value: date_value(f.object.featured_until_date), placeholder: 'Until removed', class: 'datepicker' %>
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :featured_until_time, "Featured Until Time" %>
-    <%= f.text_field :featured_until_time, class: 'timepicker' %>
+    <%= f.text_field :featured_until_time, value: time_value(f.object.featured_until_time), class: 'timepicker' %>
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :published_at_date, "Publish Date" %>
@@ -65,6 +71,16 @@
   <div class="col-12 columns">
     <%= f.label :content %><br />
     <div style="margin:4px 0;"><%= f.cktext_area :content %></div>
+  </div>
+</div>
+
+<div class="col-8 columns cd-edit-form no-padding" style="margin-top:20px;">
+  <div class="col-12 columns">
+    <%= content_tag 'div', class: 'nested-attributes' do %>
+      <%= f.fields_for :article_galleries do |l| %>
+        <%= render partial: 'article_gallery_fields', locals: { f: l } %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 

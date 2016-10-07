@@ -52,7 +52,11 @@ Devx::Engine.routes.draw do
     resources :layouts
     resources :javascripts, except: :show
     resources :stylesheets, except: :show
-    resources :articles
+    resources :articles do
+      member do
+        patch 'add_to_gallery', to: 'articles#add_to_gallery'
+      end
+    end
     resources :calendars do
       resources :events
     end
@@ -89,9 +93,12 @@ Devx::Engine.routes.draw do
       collection { post :sort }
       member do
         get 'submissions'
+        post 'refund', to: 'forms#refund'
       end
     end
-    resources :slideshows
+    resources :slideshows do
+      collection { post :sort }
+    end
     resources :media
     resources :administration
     resources :registrations do
@@ -105,6 +112,9 @@ Devx::Engine.routes.draw do
       end
     end
     resources :orders, except: [ :edit ] do
+      member do
+        post 'refund', to: 'orders#refund'
+      end
       resources :transactions
     end
     resources :tickets
@@ -117,7 +127,7 @@ Devx::Engine.routes.draw do
   ## Public-facing
   resources :articles, path: 'news', only: [ :index, :show ] do
     member do
-      post 'subscribe' => 'articles#subscribe'
+      post 'subscribe', to: 'articles#subscribe'
     end
   end
 
@@ -135,6 +145,7 @@ Devx::Engine.routes.draw do
       end
       member do
         post 'subscribe', to: 'events#subscribe'
+        post 'unsubscribe', to: 'events#unsubscribe'
       end
     end
   end
@@ -161,5 +172,4 @@ Devx::Engine.routes.draw do
   match '/:id' => 'pages#show', via: [ :get, :post ], as: :page
 
   root 'pages#show'
-
 end

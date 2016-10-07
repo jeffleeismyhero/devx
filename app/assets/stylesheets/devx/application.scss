@@ -11,7 +11,6 @@
  * file per style scope.
  *
  *= require select2
- *= require fancybox
  *= require dropzone/dropzone
  *= require owl.carousel
  *= require owl.theme
@@ -19,6 +18,7 @@
  *= require photoswipe
  *= require animate
  *= require simple_calendar
+ *= require fancybox
  * require_tree .
  *= require_self
  */
@@ -29,4 +29,4 @@
 @import "pagination.scss";
 @import "accordion.scss";
 @import "slideshow.scss";
-@import "jquery.timepicker.css";
+@import "timepicker.scss";

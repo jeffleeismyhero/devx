@@ -3,7 +3,6 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title><%= full_title(yield(:title)) %></title>
-  <% stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
   <%= stylesheet_link_tag    "devx/application", media: "all" %>
   <%= stylesheet_link_tag    "devx/devx_portal", media: "all" %>
   <%= javascript_include_tag "devx/application" %>
@@ -39,7 +38,7 @@
         <div class="field">
             <%= f.password_field :password, autocomplete: "off", placeholder:'Password' %>
         </div>
-        
+
         <div class="actions hvr-sweep-to-right">
             <%= f.submit "LOGIN", id: 'login' %>
         </div>
@@ -74,8 +73,3 @@
     </div>
 </body>
 </html>
-
-
-
-
-

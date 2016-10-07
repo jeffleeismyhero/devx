@@ -1,5 +1,52 @@
-<% @attributes[:extracurriculars].try(:each) do |extracurricular| %>
+<% if @attributes[:style] == 'columns' %>
+	<div class="container hide-for-medium-down">
+		<% @attributes[:extracurriculars].try(:in_groups_of, 6, false) do |group| %>
+			<!-- START DESKTOP: EXTRACURRICULARS -->
+			<div class="row full-width">
+				<% group.try(:each) do |extracurricular| %>
+				<div class="large-2 columns extracurr">
+					<div data="<%= extracurricular.name.try(:downcase).try(:gsub, /[^0-9a-zA-Z-]/, '-') %>" class="extra-tabs extracurr-title centered">
+						<div style="padding:10px 0px"><%= extracurricular.name %></div>
+					</div>
+				</div>
+				<% end %>
+			</div>
 
-	<li> <%= extracurricular.name %> </li>
+			<div class="row full-width banner sub-menu-banner-1">
+				<% group.try(:each) do |extracurricular| %>
+					<div id="<%= extracurricular.name.try(:downcase).try(:gsub, /[^0-9a-zA-Z-]/, '-') %>-desc" class="large-10 large-offset-1 columns extracurr-desc">
+						<% if extracurricular.image.present? %>
+						<div class="large-3 columns" style="padding:30px 0">
+							<%= image_tag(extracurricular.image.try(:large).try(:url), style: 'max-width:80%;max-height:350px') %>
+						</div>
+						<% end %>
 
+						<div class="large-9 columns">
+							<h3 style="color:#212121;"><%= extracurricular.name %></h3>
+							<%= simple_format extracurricular.description %>
+						</div>
+					</div>
+				<% end %>
+			</div>
+			<!-- END DESKTOP: EXTRACURRICULARS -->
+		<% end %>
+	</div>
+
+	<!-- START MOBILE: EXTRACURRICULARS -->
+	<div class="container hide-for-large-up">
+		<div class="row">
+			<% @attributes[:extracurriculars].try(:each) do |extracurricular| %>
+				<div class="medium-12 columns extracurr">
+						<div data="<%= extracurricular.name.try(:downcase).try(:gsub, /[^0-9a-zA-Z-]/, '-') %>" class="timeline extracurr-title centered">
+						<h6 style="color:white; font-weight:100;"><%= extracurricular.name %></h6>
+						</div>
+						<div id="<%= extracurricular.name.try(:downcase).try(:gsub, /[^0-9a-zA-Z-]/, '-') %>-mobile" class="large-10 large-offset-1 columns extracurr-desc" style="padding:1.5rem;background-color:#fff;">
+								<h3 style="color:#212121;"><%= extracurricular.name %></h3>
+								<%= simple_format extracurricular.description %>
+						</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<!-- END MOBILE: EXTRACURRICULARS -->
 <% end %>

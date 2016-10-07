@@ -4,6 +4,7 @@ module Devx
     TEMP_EMAIL_REGEX = /\Achange@me/
 
     scope :hide_sa, -> { roles.exists?(name: 'Super Administrator') }
+    scope :allow_sms, -> { where(receive_text_notifications: true) }
 
     # Include default devise modules. Others available are:
     # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -21,7 +22,7 @@ module Devx
     has_many :calendar_subscriptions
     has_many :event_subscriptions
     has_many :article_subscriptions
-    has_many :linked_accounts
+    has_many :linked_accounts, dependent: :destroy
     has_many :children, through: :linked_accounts, class_name: 'Devx::Person', source: :person
     has_many :children_linked_accounts, through: :children, source: :linked_accounts
     has_many :orders
@@ -30,7 +31,7 @@ module Devx
     has_many :links_to_parents, class_name: 'Devx::LinkedAccount', primary_key: 'person_id', foreign_key: 'person_id'
     has_many :parents, through: :links_to_parents, source: :user
     has_many :account_transactions, through: :person
-    
+
     # Parent-based relationships
     has_many :links_to_students, class_name: 'Devx::LinkedAccount', primary_key: 'id', foreign_key: 'user_id'
     has_many :students, through: :links_to_students, source: :person

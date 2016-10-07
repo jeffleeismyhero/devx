@@ -20,7 +20,7 @@ module Devx
       @class_gallery.classroom = @classroom
 
   		if @class_gallery.valid? && @class_gallery.save
-  			redirect_to devx.portal_classroom_class_galleries_path,
+  			redirect_to devx.portal_classroom_class_gallery_path(@classroom, @class_gallery),
   			notice: "Class gallery has been successfully created."
   		else
   			render :new,

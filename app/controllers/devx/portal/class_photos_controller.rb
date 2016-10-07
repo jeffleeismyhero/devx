@@ -11,11 +11,9 @@ module Devx
       @class_photo.class_gallery = @class_gallery
 
       if @class_photo.valid? && @class_photo.save
-        redirect_to devx.portal_classroom_class_gallery_path(@classroom, @class_gallery),
-        notice: "Successfully uploaded photo"
-      else
-        redirect_to devx.portal_classroom_class_gallery_path(@classroom, @class_gallery),
-        notice: "Failed to upload photo"
+        respond_to do |format|
+          format.json{ render json: @class_photo }
+        end
       end
     end
 

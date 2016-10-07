@@ -6,7 +6,7 @@
 
 	<div class="col-5 columns cd-edit-form">
 		<%= f.label :person_id %>
-		<%= f.select :person_id, Devx::Person.students.collect{ |x| [x.record_with_uuid, x.id] }, { prompt: 'Select student' }, class: 'select2-fixed' %>
+		<%= f.select :person_id, Devx::Person.students.collect{ |x| [x.record_with_school_id, x.id] }, { prompt: 'Select student' }, class: 'select2-fixed' %>
 	</div>
 
 	<div class="col-2 columns cd-edit-form">

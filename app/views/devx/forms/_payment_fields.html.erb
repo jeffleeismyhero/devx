@@ -1,16 +1,23 @@
 <% if app_settings['stripe'] %>
+  <% if @form.fields.where(field_type: 'fee').any? %>
+    <div class="medium-12 columns">
+      <h5>Total: <%= number_to_currency @form.fields.find_by(field_type: 'fee').options %></h5>
+    </div>
+  <% end %>
   <div id="cc_fields" class="large-<%= field.field_size %> columns cd-edit-form">
 
       <%= f.hidden_field :stripe_token, class: 'stripe-token' %>
 
-      <div class="col-6 columns cd-edit-form">
-          <%= label_tag :amount %>
-          <%= f.number_field :amount, { step: '0.01', placeholder: 'Amount' } %>
-      </div>
+      <% unless @form.fields.where(field_type: 'fee').any? %>
+        <div class="col-6 columns cd-edit-form">
+            <%= label_tag :amount %>
+            <%= f.number_field :amount, { step: '0.01', placeholder: 'Amount' } %>
+        </div>
+      <% end %>
 
       <div class="col-8 columns cd-edit-form">
-      <%= label_tag :cc_type %>
-      <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), { prompt: 'Select Card Type', class: 'select2-fixed' } %>
+      <%= label_tag :cc_type, 'Card Type' %>
+      <%= select_tag :cc_type, options_for_select( ['Visa', 'MasterCard', 'American Express', 'Discover', 'JCB', 'Diners Club'] ), { prompt: 'Select Card Type' } %>
       </div>
       <div class="col-8 columns cd-edit-form">
       <%= label_tag :cc_number, 'Card Number' %>
@@ -29,7 +36,7 @@
 
       <div class="col-8 columns cd-edit-form">
       <%= label_tag :expiry_date, 'Expiration Date' %>
-      <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_month_numbers: false, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { class: 'select2-fixed' } %>
+      <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_month_numbers: false, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } } %>
       </div>
 
       <div class="col-8 columns cd-edit-form">

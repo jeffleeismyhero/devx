@@ -1,5 +1,56 @@
 <div class="col-8 columns no-padding" style="margin-top:20px;">
   <div class="col-12 columns cd-edit-form">
+    <h4>Billing Details</h4>
+  </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :billing_address_1 %>
+    <%= f.text_field :billing_address_1 %>
+  </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :billing_address_2 %>
+    <%= f.text_field :billing_address_2 %>
+  </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :billing_address_city %>
+    <%= f.text_field :billing_address_city %>
+  </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :billing_address_state %>
+    <%= f.select :billing_address_state, options_for_select(us_states), { include_blank: true } %>
+  </div>
+  <div class="col-12 columns cd-edit-form">
+    <%= f.label :billing_address_zip_code %>
+    <%= f.text_field :billing_address_zip_code %>
+  </div>
+
+  <% if Devx::Product.has_shippables?(@cart) %>
+    <div class="col-12 columns cd-edit-form">
+      <h4>Shipping Details</h4>
+    </div>
+    <div class="col-12 columns cd-edit-form">
+      <%= f.label :shipping_address_1 %>
+      <%= f.text_field :shipping_address_1 %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
+      <%= f.label :shipping_address_2 %>
+      <%= f.text_field :shipping_address_2 %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
+      <%= f.label :shipping_address_city %>
+      <%= f.text_field :shipping_address_city %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
+      <%= f.label :shipping_address_state %>
+      <%= f.select :shipping_address_state, options_for_select(us_states), { include_blank: true } %>
+    </div>
+    <div class="col-12 columns cd-edit-form">
+      <%= f.label :shipping_address_zip_code %>
+      <%= f.text_field :shipping_address_zip_code %>
+    </div>
+  <% end %>
+
+
+  <div class="col-12 columns cd-edit-form">
     <h4>Payment details</h4>
   </div>
   <%= f.hidden_field :stripe_token, class: 'stripe-token' %>
@@ -19,11 +70,7 @@
     <%= label_tag :cvv, 'Security Code' %>
     <%= text_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off %>
   </div>
-  </div>
-  <div class="col-8 columns cd-edit-form">
-    <%= label_tag :zip_code, 'Zip Code' %>
-    <%= text_field_tag :zip_code, '', placeholder: 'Zip Code', autocomplete: :off %>
-  </div>
+
   <div class="col-12 columns">
     <div class="cd-update-form">
       <%= f.submit 'Submit order' %>

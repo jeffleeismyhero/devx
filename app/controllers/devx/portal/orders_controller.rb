@@ -76,6 +76,16 @@ module Devx
       end
     end
 
+    def refund
+      if @order.refund_through_stripe
+        redirect_to devx.portal_orders_path,
+        notice: "Successfully refunded order #{@order.id}"
+      else
+        redirect_to devx.portal_order_path(@order),
+        notice: "Failed to refund order #{@order.id}"
+      end
+    end
+
 
     private
 

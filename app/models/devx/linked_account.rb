@@ -1,6 +1,6 @@
 module Devx
   class LinkedAccount < ActiveRecord::Base
-    belongs_to :user, dependent: :destroy
+    belongs_to :user
     belongs_to :person
 
     validates :user, presence: true

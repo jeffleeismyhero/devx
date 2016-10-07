@@ -11,5 +11,15 @@
         <%= render partial: 'form', locals: { f: f } %>
       <% end %>
     </div>
+    <div class="col-8 columns">
+      <h3>Add Images to Gallery</h3>
+      <% if !@article.new_record? %>
+        <%= form_tag devx.add_to_gallery_portal_article_path(@article), method: :patch, id: 'article-gallery-dropzone', class: 'dropzone' do %>
+          <div class="fallback">
+            <%= file_field_tag :file %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

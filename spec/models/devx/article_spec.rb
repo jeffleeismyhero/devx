@@ -42,5 +42,12 @@ module Devx
         expect(featured_articles).to eq([article2, article4, article1, article6, article5])
       end
     end
+
+    describe 'article galleries' do
+      it 'should allow multiple article gallery images' do
+        article = FactoryGirl.build(:devx_article)
+        expect(article).to respond_to(:article_galleries)
+      end
+    end
   end
 end

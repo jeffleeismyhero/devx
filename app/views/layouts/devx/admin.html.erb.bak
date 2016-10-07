@@ -2,7 +2,6 @@
 <html>
 <head>
   <title>DevX | <%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag "//cdn.jcwproductions.com/css/boilerplate.min.css", media: "all" %>
   <%= stylesheet_link_tag    "devx/application", media: "all" %>
   <%= javascript_include_tag "devx/application" %>
   <%= csrf_meta_tags %>

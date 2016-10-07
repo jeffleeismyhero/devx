@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909213333) do
+ActiveRecord::Schema.define(version: 20161005173305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,14 @@ ActiveRecord::Schema.define(version: 20160909213333) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devx_article_galleries", force: :cascade do |t|
+    t.integer  "article_id"
+    t.string   "file"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devx_article_media", force: :cascade do |t|
     t.integer  "article_id"
     t.integer  "medium_id"
@@ -176,6 +184,8 @@ ActiveRecord::Schema.define(version: 20160909213333) do
     t.string   "accent_color_3"
     t.string   "site_name"
     t.string   "address"
+    t.string   "facebook"
+    t.string   "twitter"
   end
 
   create_table "devx_calendar_subscriptions", force: :cascade do |t|
@@ -264,9 +274,10 @@ ActiveRecord::Schema.define(version: 20160909213333) do
     t.time     "end_time"
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.text     "day_of_week",  default: [],              array: true
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.text     "day_of_week",        default: [],              array: true
+    t.integer  "classroom_teachers"
   end
 
   create_table "devx_classroom_custom_tabs", force: :cascade do |t|
@@ -404,8 +415,10 @@ ActiveRecord::Schema.define(version: 20160909213333) do
   create_table "devx_form_submissions", force: :cascade do |t|
     t.integer  "form_id"
     t.text     "submission_content"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "stripe_id"
+    t.boolean  "refunded",           default: false
   end
 
   create_table "devx_forms", force: :cascade do |t|
@@ -417,6 +430,7 @@ ActiveRecord::Schema.define(version: 20160909213333) do
     t.string   "image"
     t.string   "submission_recipients"
     t.integer  "layout_id"
+    t.text     "description"
   end
 
   create_table "devx_identities", force: :cascade do |t|
@@ -459,10 +473,10 @@ ActiveRecord::Schema.define(version: 20160909213333) do
 
   create_table "devx_line_items", force: :cascade do |t|
     t.integer  "order_id"
-    t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "product_sku_id"
   end
 
   create_table "devx_linked_accounts", force: :cascade do |t|
@@ -496,8 +510,21 @@ ActiveRecord::Schema.define(version: 20160909213333) do
 
   create_table "devx_orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "billing_address_1"
+    t.string   "billing_address_2"
+    t.string   "billing_address_city"
+    t.string   "billing_address_state"
+    t.string   "billing_address_zip_code"
+    t.string   "shipping_address_1"
+    t.string   "shipping_address_2"
+    t.string   "shipping_address_city"
+    t.string   "shipping_address_state"
+    t.string   "shipping_address_zip_code"
+    t.string   "stripe_id"
+    t.float    "amount"
+    t.string   "status"
   end
 
   create_table "devx_pages", force: :cascade do |t|
@@ -546,6 +573,26 @@ ActiveRecord::Schema.define(version: 20160909213333) do
     t.float    "current_balance"
   end
 
+  create_table "devx_product_attributes", force: :cascade do |t|
+    t.integer  "product_id"
+    t.string   "product_attribute"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "devx_product_attributes", ["product_id"], name: "index_devx_product_attributes_on_product_id", using: :btree
+
+  create_table "devx_product_sku_attributes", force: :cascade do |t|
+    t.integer  "product_sku_id"
+    t.integer  "product_attribute_id"
+    t.string   "value"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "devx_product_sku_attributes", ["product_attribute_id"], name: "index_devx_product_sku_attributes_on_product_attribute_id", using: :btree
+  add_index "devx_product_sku_attributes", ["product_sku_id"], name: "index_devx_product_sku_attributes_on_product_sku_id", using: :btree
+
   create_table "devx_product_skus", force: :cascade do |t|
     t.integer  "product_id"
     t.string   "stripe_id"
@@ -572,13 +619,7 @@ ActiveRecord::Schema.define(version: 20160909213333) do
     t.string   "stripe_id"
     t.boolean  "active"
     t.string   "slug"
-  end
-
-  create_table "devx_registration_submissions", force: :cascade do |t|
-    t.integer  "registration_id"
-    t.text     "submission_content"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.boolean  "shippable"
   end
 
   create_table "devx_registrations", force: :cascade do |t|
@@ -624,6 +665,7 @@ ActiveRecord::Schema.define(version: 20160909213333) do
     t.integer  "position"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "link"
   end
 
   create_table "devx_slideshows", force: :cascade do |t|
@@ -726,26 +768,27 @@ ActiveRecord::Schema.define(version: 20160909213333) do
   end
 
   create_table "devx_users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                      default: "", null: false
+    t.string   "encrypted_password",         default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",              default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",        default: 0,  null: false
+    t.integer  "failed_attempts",            default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "deleted_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "photo"
     t.integer  "person_id"
     t.string   "customer_token"
     t.string   "stripe_id"
+    t.boolean  "receive_text_notifications"
   end
 
   add_index "devx_users", ["deleted_at"], name: "index_devx_users_on_deleted_at", using: :btree

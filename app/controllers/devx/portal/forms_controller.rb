@@ -86,11 +86,29 @@ module Devx
       @form = Devx::Form.find(params[:id])
     end
 
+    def refund
+      submission = Devx::FormSubmission.find(params[:form_submission])
+
+      if submission.stripe_id.present? && submission.refunded == false
+        puts refund = Stripe::Refund.create(charge: submission.stripe_id)
+        if refund.present? && submission.update_columns(refunded: true)
+          redirect_to devx.portal_form_path(@form),
+          notice: 'Successfully refunded charge'
+        else
+          redirect_to devx.portal_form_path(@form),
+          notice: 'Failed to refund the charge'
+        end
+      else
+        redirect_to devx.portal_form_path(@form),
+        notice: 'Failed to refund the charge'
+      end
+    end
+
 
     private
 
     def form_params
-      accessible = [ :name, :image, :layout_id, :submission_recipients, fields_attributes: [ :id, :name, :field_type, :options, :field_size, :required, :_destroy ] ]
+      accessible = [ :name, :image, :layout_id, :submission_recipients, :description, fields_attributes: [ :id, :name, :field_type, :options, :field_size, :required, :_destroy ] ]
       params.require(:form).permit(accessible)
     end
   end

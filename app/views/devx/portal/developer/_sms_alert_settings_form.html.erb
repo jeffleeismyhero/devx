@@ -1,16 +1,16 @@
 <div class="col-6 columns cd-edit-form">
   <%= label_tag 'settings[twilio_account_sid]', 'Account SID' %>
-  <%= password_field_tag 'settings[twilio_account_sid]' %>
+  <%= password_field_tag 'settings[twilio_account_sid]', @settings.settings['twilio_account_sid'] %>
 </div>
 
 
 <div class="col-6 columns cd-edit-form">
   <%= label_tag 'settings[twilio_auth_token]', 'Auth Token' %>
-  <%= password_field_tag 'settings[twilio_auth_token]' %>
+  <%= password_field_tag 'settings[twilio_auth_token]', @settings.settings['twilio_auth_token'] %>
 </div>
 
 
 <div class="col-6 columns cd-edit-form">
   <%= label_tag 'settings[twilio_phone_number]', 'Phone Number' %>
-  <%= text_field_tag 'settings[twilio_phone_number]' %>
+  <%= text_field_tag 'settings[twilio_phone_number]', @settings.settings['twilio_phone_number'] %>
 </div>

@@ -14,7 +14,7 @@ module Devx
     belongs_to :layout
 
     accepts_nested_attributes_for :classroom_teachers
-    accepts_nested_attributes_for :classroom_custom_tabs,
+    accepts_nested_attributes_for :classroom_custom_tabs, allow_destroy: true,
       reject_if: proc{ |x| x['tab_name'].blank? || x['content'].blank? }
 
     validates :highlight_tab_name, presence: true

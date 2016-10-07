@@ -87,8 +87,9 @@ $(function()
   $(".select2-fixed").select2({ tags: false, multiple: false });
 
 
-  // Fancybox
-  $("a.fancybox").fancybox();
+  //Fancybox
+  $("a.fancybox").fancybox({ type: 'iframe' });
+  $("a.fancybox-gallery").fancybox();
 
 
   // JCW Accordion
@@ -99,6 +100,15 @@ $(function()
   $(".devx-owl").owlCarousel({
     items: 1,
     singleItem: true
+  });
+
+  // Owl Carousel
+  $(".owlcarousel").owlCarousel({
+    items: 1,
+    autoPlay:true,
+    paginationNumbers: true,
+    singleItem:true,
+    loop:true
   });
 
 
@@ -213,8 +223,16 @@ $(".currency-field").on("blur", function()
     }
   });
 
-  $("#article-media-dropzone").dropzone({
-    paramName: "article[image]",
+  $("#article-gallery-dropzone").dropzone({
+    paramName: "article_gallery[file]",
+    queuecomplete: function()
+    {
+      //location.reload();
+    }
+  });
+
+  $("#class-gallery-dropzone").dropzone({
+    paramName: "class_photo[filename]",
     queuecomplete: function()
     {
       //location.reload();

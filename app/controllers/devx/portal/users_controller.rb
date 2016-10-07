@@ -365,10 +365,10 @@ module Devx
   	private
 
   		def user_params
-  			accessible = [ :person_id, :email, :first_name, :last_name, :generate_password, :photo, role_ids: [],
+  			accessible = [ :person_id, :email, :first_name, :last_name, :generate_password, :photo, :receive_text_notifications, role_ids: [],
                       children_attributes: [ :id, :first_name, :last_name, :_destroy ],
                       linked_accounts_attributes: [ :id, :user_id, :person_id, :_destroy ],
-                      person_attributes: [ :id, :first_name, :last_name, :bio, :photo ]
+                      person_attributes: [ :id, :first_name, :last_name, :bio, :photo, :mobile_number ]
                     ]
 
   			#adds the below params to the above var except when the user and password fields are blank

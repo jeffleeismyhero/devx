@@ -1,8 +1,15 @@
-<%= f.label :title %>
-<%= f.text_field :title %>
-<%= f.label :content %>
-<%= f.cktext_area :content %>
-<%= f.label :image %>
-<%= f.file_field :image %>
-<%= f.label :position %>
-<%= f.number_field :position %>
+<div class="nested-object">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= image_tag(f.object.image.try(:small).try(:url)) %>
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+  <%= f.label :link %>
+  <%= f.text_field :link %>
+  <div class="nested-actions buttons">
+    <%= f.hidden_field :_destroy, class: 'remove-field' %>
+    <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, '#', class: 'remove_fields' %>
+  </div>
+</div>

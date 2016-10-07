@@ -1,0 +1,10 @@
+<div class="nested-object col-4 columns">
+  <% if !f.object.new_record? %>
+    <%= image_tag(f.object.file.url, style: 'max-width:100%') %>
+  <% end %>
+
+  <div class="nested-actions pull-right buttons">
+    <%= f.hidden_field :_destroy, class: 'remove-field' %>
+    <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, '#', class: 'remove_fields' %>
+  </div>
+</div>
