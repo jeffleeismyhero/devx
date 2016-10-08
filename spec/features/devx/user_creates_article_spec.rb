@@ -33,9 +33,6 @@ module Devx
       end
 
       expect(page).to have_content('Successfully created article')
-
-      click_link_or_button(@article.title)
-
       expect(find(:css, '#article_title').value).to eq(@article.title)
       expect(find(:css, '#article_published_at_date').value).to eq('11/16/2016')
       expect(find(:css, '#article_published_at_time').value).to eq('9:30 pm')

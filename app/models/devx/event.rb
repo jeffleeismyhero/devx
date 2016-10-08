@@ -22,23 +22,23 @@ module Devx
       reject_if: proc{ |x| x['start_time'].blank? && (x['start_time_date'].blank? || x['start_time_time'].blank?) }
 
     def self.per_page
-        10
+      10
     end
 
     def check_for_duplicates
-        duplicates = Devx::Event.where(name: self.name)
-        duplicates.try(:each) do |duplicate|
-            if duplicate != self
-                duplicate.schedules.try(:each) do |dup_schedule|
-                    self.schedules.try(:each) do |schedule|
-                        if dup_schedule.start_time == schedule.start_time
-                            errors.add(:schedules, 'must be unique for each event')
-                            return false
-                        end
-                    end
-                end
+      duplicates = Devx::Event.where(name: self.name)
+      duplicates.try(:each) do |duplicate|
+        if duplicate != self
+          duplicate.schedules.try(:each) do |dup_schedule|
+            self.schedules.try(:each) do |schedule|
+              if dup_schedule.start_time == schedule.start_time
+                errors.add(:schedules, 'must be unique for each event')
+                return false
+              end
             end
+          end
         end
+      end
     end
   end
 end
