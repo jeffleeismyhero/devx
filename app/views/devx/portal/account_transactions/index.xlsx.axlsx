@@ -1,0 +1,20 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  header = style.add_style b: true
+
+  wb.add_worksheet(name: "Users") do |sheet|
+    # Add Header
+    sheet.add_row [
+      "Date", "School ID", "Customer Name", "Payment Method", "Amount",
+      "Cardholder", "Processed"
+    ], style: header
+
+    @account_transactions.each do |transaction|
+      sheet.add_row [
+        transaction.created_at, transaction.person.try(:school_id),
+        transaction.person.try(:full_name), transaction.payment_method,
+        number_to_currency(transaction.amount), transaction.cardholder, transaction.processed?
+      ]
+    end
+  end
+end

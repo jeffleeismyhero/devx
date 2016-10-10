@@ -16,6 +16,10 @@ module Devx
       return 20
     end
 
+    def processed?
+      self.processed_at.present?
+    end
+
     def payeezy
       require 'payeezy'
 

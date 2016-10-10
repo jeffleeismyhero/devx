@@ -17,6 +17,13 @@ module Devx
       else
         @account_transactions = @account_transactions.pending.not_imported
       end
+
+      respond_to do |format|
+        format.html
+        format.xlsx do
+          render xlsx: 'index', filename: 'transaction_export.xlsx'
+        end
+      end
     end
 
     def process_transaction
