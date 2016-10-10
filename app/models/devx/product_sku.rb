@@ -38,21 +38,21 @@ module Devx
     end
 
   	def create_stripe_sku
-      puts "Creating Sku"
-      puts values.inspect
+      logger.debug "Creating Sku"
+      logger.debug values.inspect
   		product = Stripe::Product.retrieve(self.product.slug)
-  		puts sku = product.skus.create(values.delete_if { |k, v| !v.present? unless k == :active })
+  		logger.debug sku = product.skus.create(values.delete_if { |k, v| !v.present? unless k == :active })
       update_columns(stripe_id: sku.id)
   	end
 
     def update_stripe_sku
-      puts "Updating sku"
+      logger.debug "Updating sku"
       sku = Stripe::SKU.retrieve(stripe_id)
       values = self.values.delete_if { |k, v| [:id].include?(k) }
       values = values.delete_if { |k, v| v.blank? }
       values.each_pair { |key, value| sku.send("#{key}=", value) }
       sku.active = self.values[:active] || false
-      puts sku
+      logger.debug sku
   		sku.save
     end
 
