@@ -1,3 +1,10 @@
+<% if @slideshow.errors.any? %>
+  <ul>
+    <% @slideshow.errors.full_messages.try(:each) do |e| %>
+      <li><%= e %></li>
+    <% end %>
+  </ul>
+<% end %>
 <%= f.label :name %>
 <%= f.text_field :name %>
 

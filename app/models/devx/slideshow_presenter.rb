@@ -21,7 +21,7 @@ module Devx
     private
 
     def slides
-      Devx::Slideshow.find(@attributes[:id]).slides
+      Devx::Slideshow.find(@attributes[:id]).slides.active
     end
   end
 end

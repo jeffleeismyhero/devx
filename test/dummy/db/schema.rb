@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005173305) do
+ActiveRecord::Schema.define(version: 20161010141007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -622,6 +622,13 @@ ActiveRecord::Schema.define(version: 20161005173305) do
     t.boolean  "shippable"
   end
 
+  create_table "devx_registration_submissions", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.text     "submission_content"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "devx_registrations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",            null: false
@@ -666,6 +673,7 @@ ActiveRecord::Schema.define(version: 20161005173305) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "link"
+    t.boolean  "active"
   end
 
   create_table "devx_slideshows", force: :cascade do |t|
@@ -786,8 +794,8 @@ ActiveRecord::Schema.define(version: 20161005173305) do
     t.datetime "updated_at",                              null: false
     t.string   "photo"
     t.integer  "person_id"
-    t.string   "customer_token"
     t.string   "stripe_id"
+    t.string   "customer_token"
     t.boolean  "receive_text_notifications"
   end
 

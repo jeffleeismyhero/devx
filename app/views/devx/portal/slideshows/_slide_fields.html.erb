@@ -8,6 +8,11 @@
   <%= f.file_field :image %>
   <%= f.label :link %>
   <%= f.text_field :link %>
+  <%= f.label :active %>
+  <label class="switch">
+    <%= f.check_box :active %>
+    <div class="slider round"></div>
+  </label>
   <div class="nested-actions buttons">
     <%= f.hidden_field :_destroy, class: 'remove-field' %>
     <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, '#', class: 'remove_fields' %>

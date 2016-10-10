@@ -1,0 +1,11 @@
+<html>
+<body>
+  <p>
+    Hi<%= if @user.person.try(:first_name).try(:present?) then " #{@user.person.first_name}" end %>!
+  </p>
+
+  <p>
+    Your donation of <%= number_to_currency @amount %> has been received. Thank you so much for your support!
+  </p>
+</body>
+</html>
