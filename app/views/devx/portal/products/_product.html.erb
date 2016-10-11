@@ -3,7 +3,7 @@
   <td><%= number_to_currency product.price %></td>
   <td>
   	<%= link_to 'Edit', devx.edit_portal_product_path(product) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-  	<%= link_to 'Manage SKU', devx.portal_product_product_skus_path(product) %> <i class="fa fa-plus" aria-hidden="true"></i>
+  	<%= link_to 'Manage SKUs', devx.portal_product_product_skus_path(product) %> <i class="fa fa-plus" aria-hidden="true"></i>
   	<%= link_to 'Delete', devx.portal_product_path(product), method: :delete, data: { confirm: "Are you sure you want to delete #{product.name}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
   </td>
 </tr>
