@@ -15,7 +15,7 @@ module Devx
     before_save :connect_to_google
 
     def google_calendar
-      if self.calendar_type == 'Google Calendar'
+      if self.calendar_type == 'Google Calendar' && self.client_id.present? && self.client_secret.present?
         return @client = Devx::GoogleCalendar.new({
             client_id: self.client_id,
             client_secret: self.client_secret
