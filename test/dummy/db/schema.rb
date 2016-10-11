@@ -622,13 +622,6 @@ ActiveRecord::Schema.define(version: 20161010141007) do
     t.boolean  "shippable"
   end
 
-  create_table "devx_registration_submissions", force: :cascade do |t|
-    t.integer  "registration_id"
-    t.text     "submission_content"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
-
   create_table "devx_registrations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",            null: false
@@ -794,8 +787,8 @@ ActiveRecord::Schema.define(version: 20161010141007) do
     t.datetime "updated_at",                              null: false
     t.string   "photo"
     t.integer  "person_id"
-    t.string   "stripe_id"
     t.string   "customer_token"
+    t.string   "stripe_id"
     t.boolean  "receive_text_notifications"
   end
 

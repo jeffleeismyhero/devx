@@ -73,7 +73,9 @@ Devx::Engine.routes.draw do
     resources :announcements
     resources :donations
     resources :faqs
-    resources :products
+    resources :products do
+      resources :product_skus
+    end
     resources :documents
     resources :sports
     resources :extracurriculars

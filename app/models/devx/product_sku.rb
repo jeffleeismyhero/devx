@@ -1,6 +1,6 @@
 module Devx
   class ProductSku < ActiveRecord::Base
-    after_update :update_stripe_sku
+    # after_update :update_stripe_sku
     before_destroy :delete_stripe_sku
 
     has_many :line_items
@@ -10,16 +10,13 @@ module Devx
 
     accepts_nested_attributes_for :product_sku_attributes, allow_destroy: true
 
+    validates :product_id, presence: true
+
     def values
       if stockable
   			inventory = 'finite'
   			quantity = 0
   		end
-
-      attributes = {}
-      self.product_sku_attributes.try(:each) do |attribute|
-        attributes[attribute.product_attribute.try(:product_attribute).to_sym] = attribute.value
-      end
 
       {
         price: (self.price * 100).to_i,
@@ -28,13 +25,16 @@ module Devx
 		   	inventory: {
 		     	'type': inventory || 'infinite',
      			'quantity': quantity
-		   	},
-        attributes: attributes
+		   	}
       }
     end
 
     def price_in_cents
       (self.price * 100).to_i
+    end
+
+    def get_attribute(value)
+      product_sku_attributes.where(product_attribute_id: value).collect{ |x| x.value }
     end
 
   	def create_stripe_sku
