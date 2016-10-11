@@ -42,6 +42,7 @@ module Devx
     scope :ordered, -> { order("start_time ASC, end_time ASC") }
 
     belongs_to :event
+    has_one :calendar, through: :event
 
     validates :start_time, presence: true, uniqueness: { scope: [ :event_id ] }
     #validates :event, presence: true

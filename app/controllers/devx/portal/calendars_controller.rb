@@ -13,7 +13,7 @@ module Devx
     end
 
     def show
-      @schedules = Devx::Schedule.where(calendar: @calendar).upcoming.ordered
+      @schedules = @calendar.schedules.upcoming.ordered
       @q = @schedules.search(params[:q])
       @q.sorts = 'start_time asc'
       @schedules = @q.result.ordered.paginate(page: params[:page])
