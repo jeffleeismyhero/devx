@@ -30,8 +30,6 @@ module Devx
 
     def update
         update_product_sku_attributes
-        puts @product.product_skus.first.product_sku_attributes.inspect
-
         if @product.valid? && @product.update(product_params)
             redirect_to devx.edit_portal_product_path(@product),
             notice: "Successfully updated product"
@@ -39,9 +37,9 @@ module Devx
             render :edit,
             notice: "Failed to save product"
         end
-     # rescue Stripe::InvalidRequestError
-        render :edit,
-        notice: "Ensure that this product matches the product details in Stripe."
+        #rescue Stripe::InvalidRequestError
+        #render :edit,
+        #notice: "Ensure that this product matches the product details in Stripe."
     end
 
     def destroy
@@ -57,7 +55,9 @@ module Devx
     private
 
     def product_params
-        accessible = [ :name, :description, :active, :sku, :price, :weight, :taxable, :stockable, :image, :shippable, product_skus_attributes: [ :id, :currency, :price, :stockable, :active, :_destroy ], product_attributes_attributes: [ :id, :product_attribute, :_destroy ], product_sku_attributes_attributes: [ :id, :value, :_destroy ] ]
+        accessible = [  :name, :description, :active, :sku, :price, :weight, :taxable, :stockable, 
+                        :image, :shippable, product_skus_attributes: [ :id, :currency, :price, :stockable, :active, :_destroy ], 
+                        product_attributes_attributes: [ :id, :product_attribute, :_destroy ], product_sku_attributes_attributes: [ :id, :value, :_destroy ] ]
         params.require(:product).permit(accessible)
     end
 
