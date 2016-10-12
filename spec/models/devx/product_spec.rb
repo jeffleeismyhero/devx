@@ -11,7 +11,7 @@ module Devx
       }
       Stripe.api_key = 'sk_test_DG3ZjPAckcGfkV3QJ5SDCCxb'
       # Delete all associated data
-      Stripe::Product.list.each do |stripe_product|
+      Stripe::Product.list(active: :false).each do |stripe_product|
         Stripe::SKU.list(active: :false).each do |stripe_sku|
           stripe_sku.delete
         end
