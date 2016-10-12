@@ -11,8 +11,23 @@ module Devx
       }
       Stripe.api_key = 'sk_test_DG3ZjPAckcGfkV3QJ5SDCCxb'
       # Delete all associated data
-      Stripe::Product.list(active: :false).each do |stripe_product|
-        Stripe::SKU.list(active: :false).each do |stripe_sku|
+      Stripe::Product.list.each do |stripe_product|
+        Stripe::SKU.list.each do |stripe_sku|
+          stripe_sku.delete
+        end
+        stripe_product.delete
+      end
+    end
+
+    after(:all) do
+      Rails.configuration.stripe = {
+        publishable_key: 'pk_test_xBspDeWOapLw0oAh6yci2xGh',
+        secret_key: 'sk_test_DG3ZjPAckcGfkV3QJ5SDCCxb'
+      }
+      Stripe.api_key = 'sk_test_DG3ZjPAckcGfkV3QJ5SDCCxb'
+      # Delete all associated data
+      Stripe::Product.list.each do |stripe_product|
+        Stripe::SKU.list.each do |stripe_sku|
           stripe_sku.delete
         end
         stripe_product.delete

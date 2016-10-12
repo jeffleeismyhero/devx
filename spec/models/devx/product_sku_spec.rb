@@ -11,8 +11,23 @@ module Devx
       }
       Stripe.api_key = 'sk_test_DG3ZjPAckcGfkV3QJ5SDCCxb'
       # Delete all associated data
-      Stripe::Product.list(active: :false).each do |stripe_product|
-        Stripe::SKU.list(active: :false).each do |stripe_sku|
+      Stripe::Product.list.each do |stripe_product|
+        Stripe::SKU.list.each do |stripe_sku|
+          stripe_sku.delete
+        end
+        stripe_product.delete
+      end
+    end
+
+    after(:all) do
+      Rails.configuration.stripe = {
+        publishable_key: 'pk_test_xBspDeWOapLw0oAh6yci2xGh',
+        secret_key: 'sk_test_DG3ZjPAckcGfkV3QJ5SDCCxb'
+      }
+      Stripe.api_key = 'sk_test_DG3ZjPAckcGfkV3QJ5SDCCxb'
+      # Delete all associated data
+      Stripe::Product.list.each do |stripe_product|
+        Stripe::SKU.list.each do |stripe_sku|
           stripe_sku.delete
         end
         stripe_product.delete
@@ -38,6 +53,14 @@ module Devx
         expect(stripe_product.name).not_to be_nil
         product_sku.product.destroy
         expect { Stripe::Product.retrieve(product_sku.product.slug) }.to raise_error Stripe::InvalidRequestError
+      end
+
+      it 'is able to be updated in Stripe' do
+        product_sku.price = 1.99
+        expect { product_sku.save }.not_to raise_error Stripe::InvalidRequestError
+        stripe_sku = Stripe::SKU.retrieve(product_sku.stripe_id)
+        expect(stripe_sku).not_to be_nil
+        expect(stripe_sku.price).to eq(199)
       end
 
       # it 'creates Stripe::SKU records for nested Devx::Sku records' do
