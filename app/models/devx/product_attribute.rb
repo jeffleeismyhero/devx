@@ -4,5 +4,8 @@ module Devx
   	belongs_to :product
 
   	accepts_nested_attributes_for :product_sku_attributes, allow_destroy: true
+
+    validates :product_attribute, presence: true
+    validates :product, presence: true
   end
 end

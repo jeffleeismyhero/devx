@@ -21,12 +21,6 @@ module Devx
   		end
 
       attributes = {}
-      # self.product.try(:product_attributes).try(:each) do |attribute|
-      #   puts self.id
-      #   attributes[attribute.product_attribute.try(:to_s)] = Devx::ProductSkuAttribute.where(product_sku_id: self.id, product_attribute_id: attribute.id).collect{ |x| x.value }
-      #   attributes[attribute.product_attribute].to_s
-      # end
-      # puts attributes.inspect
 
       self.product_sku_attributes.try(:each) do |attribute|
         attributes[attribute.product_attribute.product_attribute] = attribute.value
@@ -81,7 +75,8 @@ module Devx
 
       sku = Stripe::SKU.retrieve(stripe_id)
       values = self.values.delete_if { |k, v| [:id].include?(k) }
-      values = values.delete_if { |k, v| !v.present? }
+      values = values.delete_if { |k, v| !v.present? unless k == :active }
+      values.delete(:inventory)
       values.each_pair { |key, value| sku.send("#{key}=", value) }
       sku.active = self.values[:active] || false
       logger.debug sku
