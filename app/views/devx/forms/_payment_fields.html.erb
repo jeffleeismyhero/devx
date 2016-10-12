@@ -82,6 +82,10 @@
         });
       });
     </script>
+  <% elsif @form.fields.where(field_type: 'fee').any? %>
+    <div class="medium-12 columns">
+      <h5>Total: <%= number_to_currency @form.fields.find_by(field_type: 'fee').options %></h5>
+    </div>
   <% else %>
     <div class="medium-12 columns">
       <%= label_tag :amount %>
