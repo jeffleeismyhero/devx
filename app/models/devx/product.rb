@@ -58,7 +58,7 @@ module Devx
     def create_stripe_product
       if Stripe.api_key
       	Stripe::Product.create(values.delete_if { |k, v| v.blank? unless k == :active })
-        product_skus.collect(&:create_stripe_sku)
+        #product_skus.collect(&:create_stripe_sku)
       end
     end
 
