@@ -1,16 +1,16 @@
 <div class="col-12 columns">
-	<div class="col-1 columns cd-edit-form">
+	<div class="col-2 columns cd-edit-form">
 		<%= f.label :jersey_number, "Number" %>
 		<%= f.text_field :jersey_number %>
 	</div>
 
-	<div class="col-5 columns cd-edit-form">
+	<div class="col-4 columns cd-edit-form">
 		<%= f.label :person_id %>
 		<%= f.select :person_id, Devx::Person.students.collect{ |x| [x.record_with_school_id, x.id] }, { prompt: 'Select student' }, class: 'select2-fixed' %>
 	</div>
 
-	<div class="col-2 columns cd-edit-form">
-		<%= f.label :position %>
+	<div class="col-1 columns cd-edit-form">
+		<%= f.label :position, "Pos" %>
 		<%= f.text_field :position %>
 	</div>
 
@@ -22,5 +22,10 @@
 	<div class="col-2 columns cd-edit-form">
 		<%= f.label :weight %>
 		<%= f.text_field :weight %>
+	</div>
+
+	<div class="col-1 columns cd-edit-form">
+		<%= f.label :grade %>
+		<%= f.text_field :grade %>
 	</div>
 </div>
