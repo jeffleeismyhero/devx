@@ -61,7 +61,7 @@ module Devx
           single_events: true,
           order_by: 'startTime',
           time_min: Time.now.beginning_of_year.iso8601,
-          time_max: (Time.now + 1.year).iso8601
+          time_max: (Time.now + 6.months).iso8601
         )
 
         return response.items
