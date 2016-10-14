@@ -44,10 +44,8 @@ module Devx
 
     def sport_params
         accessible = [ :name,
-                      sport_teams_attributes: [ :id, :jersey_number, :person_id, :position, :height, :weight, :_destroy ] ]
+                      sport_teams_attributes: [ :id, :jersey_number, :person_id, :position, :height, :weight, :grade, :_destroy ] ]
         params.require(:sport).permit(accessible)
     end
   end
 end
-
-
