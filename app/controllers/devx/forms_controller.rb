@@ -60,6 +60,11 @@ module Devx
             Devx::NotificationMailer.delay.form_submission(recipient, @form, @submission.submission_content)
           end
 
+          notice = @form.success_message
+          if notice.nil?
+            notice = "Successfully submitted form"
+          end
+
           redirect_to devx.form_path(@form),
           notice: 'Successfully submitted form'
         end
