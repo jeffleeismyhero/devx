@@ -5,6 +5,7 @@
         <% if @attributes[:roster].any?{ |x| x.jersey_number.present? } %><th>Jersey</th><% end %>
         <th>Player</th>
         <% if @attributes[:roster].any?{ |x| x.position.present? } %><th>Position</th><% end %>
+        <% if @attributes[:roster].any?{ |x| x.grade.present? } %><th>Grade</th><% end %>
       </tr>
     </thead>
     <tbody>
