@@ -3,8 +3,6 @@ Devx::Engine.routes.draw do
 
   get '/not-found', to: 'pages#not_found'
 
-  get "/annualfund" => redirect("/advancement")
-
   devise_for :users, class_name: "Devx::User", module: :devise,
     controllers: { omniauth_callbacks: 'devx/omniauth_callbacks' },
     path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
