@@ -12,6 +12,7 @@
         <tr>
           <% if @attributes[:roster].any?{ |x| x.jersey_number.present? } %><td><%= sprintf('%02d', player.jersey_number) %></td><% end %>
           <td><%= player.person.try(:full_name) %></td>
+          <% if @attributes[:roster].any?{ |x| x.grade.present? } %><td><%= player.grade %></td><% end %>
           <% if @attributes[:roster].any?{ |x| x.position.present? } %><td><%= player.position %></td><% end %>
         </tr>
       <% end %>
