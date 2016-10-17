@@ -49,10 +49,12 @@ module Devx
       end
 
       if @submission.valid?
-        if response = Devx::PaymentProcessor.process(@form, @submission, payment_details, request.env["HTTP_X_FORWARDED_FOR"])
-          purchase_successful = true
-        else
-          purchase_successful = false
+        if price > 0
+          if response = Devx::PaymentProcessor.process(@form, @submission, payment_details, request.env["HTTP_X_FORWARDED_FOR"])
+            purchase_successful = true
+          else
+            purchase_successful = false
+          end
         end
 
         if ((price > 0 && purchase_successful == true) || price.zero?) && @submission.save
@@ -66,7 +68,7 @@ module Devx
           end
 
           redirect_to devx.form_path(@form),
-          notice: 'Successfully submitted form'
+          notice: notice
         end
       else
         render :show,

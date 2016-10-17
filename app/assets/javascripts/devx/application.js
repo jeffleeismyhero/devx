@@ -171,11 +171,44 @@ $(function()
   });
 
 
-// Currency formatter
-$(".currency-field").on("blur", function()
-{
-  $(this).val(parseFloat(Math.abs($(this).val())).toFixed(2));
-})
+  // Form builder validations
+  $("form#form-builder").on("submit", function()
+  {
+    var invalid_fields = [];
+
+    $(this).find("input, select").each(function()
+    {
+      if ($(this).prop("required"))
+      {
+        invalid_fields.push($(this).prev("label").text());
+      }
+    });
+
+    if (invalid_fields.length > 0)
+    {
+      msg = "";
+
+      $(invalid_fields).each(function(f)
+      {
+        msg += invalid_fields[f] + " is a required field\n\r"
+      });
+
+      alert(msg);
+    }
+    else
+    {
+        $("form#form-builder").submit();
+    }
+
+    return false;
+  });
+
+
+  // Currency formatter
+  $(".currency-field").on("blur", function()
+  {
+    $(this).val(parseFloat(Math.abs($(this).val())).toFixed(2));
+  })
 
 
   // Calendar type onchange event
