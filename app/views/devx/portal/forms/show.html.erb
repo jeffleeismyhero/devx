@@ -44,7 +44,7 @@
                       <td>&nbsp;</td>
                     <% end %>
                   <% end %>
-                  <% if @fields.include?('Amount') && Stripe.api_key.present? && submission.refunded == false %><td><%= link_to 'Refund', devx.refund_portal_form_path(@form, form_submission: submission), method: :post, data: { confirm: 'Refund this payment?' } %></td><% else %><td>Refunded</td><% end %>
+                  <% if Stripe.api_key.present? %><% if @fields.include?('Amount') && submission.refunded == false %><td><%= link_to 'Refund', devx.refund_portal_form_path(@form, form_submission: submission), method: :post, data: { confirm: 'Refund this payment?' } %></td><% else %><td>Refunded</td><% end %><% end %>
                 </tr>
               <% end %>
             </tbody>

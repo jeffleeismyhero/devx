@@ -196,6 +196,7 @@ $(function()
       });
 
       alert(msg);
+      return false;
     }
     else
     {
