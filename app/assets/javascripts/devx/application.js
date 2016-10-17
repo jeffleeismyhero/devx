@@ -205,7 +205,7 @@ $(function()
       alert(msg);
       return false;
     }
-    else
+    else if (invalid_fields.length == 0)
     {
         $("form#form-builder").submit();
     }
@@ -316,7 +316,7 @@ $(function()
       });
     }
     else {
-      form.submit();
+      // form.submit();
     }
 
     return false;
