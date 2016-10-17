@@ -36,6 +36,7 @@
           </div>
         </div>
         <% end %>
+        <% if current_user.super_administrator? %>
         <div class="cd-accordion-tab">
           <div class="cd-accordion-title">
             <span><i class="fa fa-question"></i></span>
@@ -49,6 +50,7 @@
             <% end %>
           </div>
         </div>
+        <% end %>
         <div class="cd-accordion-tab">
           <div class="cd-accordion-title" style="padding-top:21px;">
             <span><%= current_user.try(:full_name) %></span>
