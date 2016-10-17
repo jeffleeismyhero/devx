@@ -180,7 +180,7 @@ $(function()
 
     $(this).find("input, select").each(function()
     {
-      if ($(this).prop("required"))
+      if ($(this).prop("required") && $(this).val() == "")
       {
         if ($(this).attr("id") != "_expiry_date_1i" && $(this).attr("id") != "_expiry_date_2i")
         {
