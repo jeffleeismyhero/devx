@@ -21,32 +21,32 @@
       </div>
       <div class="col-8 columns cd-edit-form">
       <%= label_tag :cc_number, 'Card Number' %>
-      <%= text_field_tag :cc_number, '', placeholder: 'Card Number', autocomplete: :off %>
+      <%= text_field_tag :cc_number, '', placeholder: 'Card Number', autocomplete: :off, required: true %>
       </div>
 
       <div class="col-8 columns cd-edit-form">
       <%= label_tag :ch_first_name, 'Cardholder First Name' %>
-      <%= text_field_tag :ch_first_name, '', placeholder: 'Cardholder First Name', autocomplete: :off %>
+      <%= text_field_tag :ch_first_name, '', placeholder: 'Cardholder First Name', autocomplete: :off, required: true %>
       </div>
 
       <div class="col-8 columns cd-edit-form">
       <%= label_tag :ch_last_name, 'Cardholder Last Name' %>
-      <%= text_field_tag :ch_last_name, '', placeholder: 'Cardholder Last Name', autocomplete: :off %>
+      <%= text_field_tag :ch_last_name, '', placeholder: 'Cardholder Last Name', autocomplete: :off, required: true %>
       </div>
 
       <div class="col-8 columns cd-edit-form">
       <%= label_tag :expiry_date, 'Expiration Date' %>
-      <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_month_numbers: false, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } } %>
+      <%= date_select "", :expiry_date, { discard_day: true, order: [:month, :year], use_month_numbers: false, start_year: Date.today.year, end_year: Date.today.year + 25, prompt:{ month:'Month', year:'Year' } }, { required: true } %>
       </div>
 
       <div class="col-8 columns cd-edit-form">
       <%= label_tag :cvv, 'Security Code' %>
-      <%= number_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off %>
+      <%= number_field_tag :cvv, '', placeholder: 'Security Code', autocomplete: :off, required: true %>
       </div>
 
       <div class="col-8 columns cd-edit-form">
       <%= label_tag :zip_code, 'Zip Code' %>
-      <%= number_field_tag :zip_code, '', placeholder: 'Zip Code', autocomplete: :off %>
+      <%= number_field_tag :zip_code, '', placeholder: 'Zip Code', autocomplete: :off, required: true %>
       </div>
   </div>
   <%= javascript_include_tag "https://js.stripe.com/v2/" %>
@@ -89,7 +89,7 @@
   <% else %>
     <div class="medium-12 columns">
       <%= label_tag :amount %>
-      <%= text_field_tag :amount, '', placeholder: 'Amount' %>
+      <%= text_field_tag :amount, '', placeholder: 'Amount', required: true %>
     </div>
   <% end %>
 
@@ -106,12 +106,12 @@
 
     <div class="medium-5 columns cd-edit-form">
     <%= label_tag :ch_first_name, 'Cardholder First Name' %>
-    <%= text_field_tag :ch_first_name, '', placeholder: 'Cardholder First Name', autocomplete: :off %>
+    <%= text_field_tag :ch_first_name, '', placeholder: 'Cardholder First Name', autocomplete: :off, required: true %>
     </div>
 
     <div class="medium-4 columns cd-edit-form">
     <%= label_tag :ch_last_name, 'Cardholder Last Name' %>
-    <%= text_field_tag :ch_last_name, '', placeholder: 'Cardholder Last Name', autocomplete: :off %>
+    <%= text_field_tag :ch_last_name, '', placeholder: 'Cardholder Last Name', autocomplete: :off, required: true %>
     </div>
 
     <div class="medium-5 columns cd-edit-form">

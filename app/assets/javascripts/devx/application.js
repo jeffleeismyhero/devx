@@ -48,6 +48,7 @@ $(function()
       name:         $("#ch_name").val()
     };
 
+    if (typeof Stripe != "undefined"){
     Stripe.createToken(card, function(status, response)
     {
       if (status === 200)
@@ -61,6 +62,7 @@ $(function()
         console.log(response);
       }
     });
+    }
 
     return false;
   });
@@ -292,17 +294,22 @@ $(function()
       name:         $("#ch_name").val()
     };
 
-    Stripe.createToken(card, function(status, response) {
-      if (status === 200) {
-        //$(".last-4-digits").val(response.card.last4);
-        $(".stripe-token").val(response.id);
-        form.submit();
-      } else {
-        //$("#stripe-error-message").text(response.error.message);
-        //$("#credit-card-errors").show();
-        $(".submit").attr("disabled", false);
-      }
-    });
+    if (typeof Stripe != "undefined") {
+      Stripe.createToken(card, function(status, response) {
+        if (status === 200) {
+          //$(".last-4-digits").val(response.card.last4);
+          $(".stripe-token").val(response.id);
+          form.submit();
+        } else {
+          //$("#stripe-error-message").text(response.error.message);
+          //$("#credit-card-errors").show();
+          $(".submit").attr("disabled", false);
+        }
+      });
+    }
+    else {
+      form.submit();
+    }
 
     return false;
   });
