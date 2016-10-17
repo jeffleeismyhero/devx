@@ -182,7 +182,14 @@ $(function()
     {
       if ($(this).prop("required"))
       {
-        invalid_fields.push($(this).prev("label").text());
+        if (!$(this).attr("id") == "_expiry_date_1i" || !$(this).attr("id") == "_expiry_date_2i")
+        {
+          invalid_fields.push($(this).prev("label").text());
+        }
+        else
+        {
+            invalid_fields.push("Expiration Date");
+        }
       }
     });
 
