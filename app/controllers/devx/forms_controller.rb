@@ -3,7 +3,7 @@ require_dependency "devx/application_controller"
 module Devx
   class FormsController < ApplicationController
     load_resource :form, class: 'Devx::Form'
-    layout :determine_layout
+    layout :determine_layout, except: :create
 
     def show
       @page = Devx::Page.new(name: @form.name, layout: @form.layout)
@@ -69,6 +69,9 @@ module Devx
 
           redirect_to devx.form_path(@form),
           notice: notice
+        else
+          render :show,
+          notice: 'There was a problem processing your payment. Please try again.'
         end
       else
         render :show,
