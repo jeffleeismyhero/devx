@@ -1,5 +1,7 @@
 module Devx
   class FormMailer < ApplicationMailer
+    add_template_helper(ApplicationHelper)
+    
     def send_confirmation(form, submission, recipient)
       @form = form
       @submission = submission
@@ -19,7 +21,7 @@ module Devx
           if @submission.key?(sanitized_field)
             @field = @submission[sanitized_field.to_sym]
             if sanitized_field == 'Amount'
-              @field = number_to_currency @field
+              @field =  @field
             end
 
             logger.debug "[FORM] Replacing #{field} with #{@field}"
