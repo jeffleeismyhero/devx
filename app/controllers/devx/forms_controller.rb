@@ -32,6 +32,8 @@ module Devx
         price = params['amount'].to_f
       end
 
+      logger.debug "[DONATE] #{params['ch_first_name']} #{params['ch_last_name']} - AMOUNT: #{params['amount']} --- PRICE: #{price}".squish
+      
       if price > 0
         payment_details = {
           amount: price,
