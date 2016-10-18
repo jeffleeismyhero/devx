@@ -19,7 +19,7 @@ module Devx
           logger.debug "[FORM] Checking if #{sanitized_field} is key........#{@submission.key?(sanitized_field)}"
 
           if @submission.key?(sanitized_field)
-            @field = @submission[sanitized_field.to_sym]
+            @field = @submission[sanitized_field.to_s]
 
             logger.debug "[FORM] Replacing #{field} with #{@field}"
 
