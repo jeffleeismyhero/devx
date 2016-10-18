@@ -112,7 +112,7 @@ module Devx
 
     def form_params
       accessible = [ :name, :image, :layout_id, :submission_recipients, :description, :success_message,
-        :confirmation_email_text, :confirmation_email_from, :confirmation_email_subject,
+        :confirmation_email_text, :confirmation_email_from, :confirmation_email_subject, :send_confirmation_email,
         fields_attributes: [ :id, :name, :field_type, :options, :field_size, :required, :_destroy ] ]
       params.require(:form).permit(accessible)
     end
