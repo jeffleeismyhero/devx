@@ -217,7 +217,7 @@ $(function()
   // Currency formatter
   $(".currency-field").on("blur", function()
   {
-    $(this).val(parseFloat(Math.abs($(this).val())).toFixed(2));
+    $(this).val(parseFloat(Math.abs($(this).val().replace(/\,/g, ''))).toFixed(2));
   })
 
 
