@@ -26,7 +26,7 @@ module Devx
 
             logger.debug "[FORM] Replacing #{field} with #{@field}"
 
-            @body.gsub!(field, @field)
+            @body.gsub!(field, @field.to_s)
           end
         end
       end
