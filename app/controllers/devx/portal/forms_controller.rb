@@ -71,6 +71,9 @@ module Devx
     end
 
     def destroy
+      if @form.destroy
+        redirect_to devx.portal_forms_path
+      end
     end
 
     def sort
@@ -108,7 +111,9 @@ module Devx
     private
 
     def form_params
-      accessible = [ :name, :image, :layout_id, :submission_recipients, :description, :success_message, fields_attributes: [ :id, :name, :field_type, :options, :field_size, :required, :_destroy ] ]
+      accessible = [ :name, :image, :layout_id, :submission_recipients, :description, :success_message,
+        :confirmation_email_text, :confirmation_email_from, :confirmation_email_subject,
+        fields_attributes: [ :id, :name, :field_type, :options, :field_size, :required, :_destroy ] ]
       params.require(:form).permit(accessible)
     end
   end

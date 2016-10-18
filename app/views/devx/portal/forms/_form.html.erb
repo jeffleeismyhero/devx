@@ -36,6 +36,31 @@
 </div>
 
 <div class="col-12 columns no-padding">
+  <h3>Confirmation E-mail</h3>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :send_confirmation_email %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+      <label class="switch">
+          <%= f.check_box :send_confirmation_email %>
+          <div class="slider round"></div>
+      </label>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :confirmation_email_from %>
+    <%= f.text_field :confirmation_email_from %>
+  </div>
+  <div class="col-6 columns cd-edit-form">
+    <%= f.label :confirmation_email_subject %>
+    <%= f.text_field :confirmation_email_subject %>
+  </div>
+  <div class="col-8 columns cd-edit-form">
+    <%= f.label :confirmation_email_text %>
+    <%= f.cktext_area :confirmation_email_text %>
+  </div>
+</div>
+
+<div class="col-12 columns no-padding">
     <div class="cd-update-form">
         <%= f.submit %>
     </div>

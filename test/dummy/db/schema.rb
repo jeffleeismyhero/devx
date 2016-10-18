@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014203713) do
+ActiveRecord::Schema.define(version: 20161018204241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -423,8 +423,8 @@ ActiveRecord::Schema.define(version: 20161014203713) do
 
   create_table "devx_forms", force: :cascade do |t|
     t.integer  "registration_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.string   "name"
     t.string   "slug"
     t.string   "image"
@@ -432,6 +432,10 @@ ActiveRecord::Schema.define(version: 20161014203713) do
     t.integer  "layout_id"
     t.text     "description"
     t.string   "success_message"
+    t.boolean  "send_confirmation_email",    default: false
+    t.string   "confirmation_email_from"
+    t.string   "confirmation_email_subject"
+    t.text     "confirmation_email_text"
   end
 
   create_table "devx_identities", force: :cascade do |t|

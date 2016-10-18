@@ -10,8 +10,6 @@ module Devx
     end
 
     def create
-      render plain: params.inspect
-      return
       @form = Devx::Form.find(params[:form][:id])
       @submission = Devx::FormSubmission.new(form_id: params[:form][:id], submission_content: params[:form][:submission_content])
 
@@ -66,6 +64,11 @@ module Devx
             Devx::NotificationMailer.delay.form_submission(recipient, @form, @submission.submission_content)
           end
 
+          if @form.fields.where(field_type: 'email_field').any?
+            Devx::FormMailer.delay.send_confirmation(@form, @submission.submission_content, @form.fields.where(field_type: 'email_field').first)
+
+          end
+
           notice = @form.success_message
           if notice.nil?
             notice = "Successfully submitted form"
@@ -98,7 +101,7 @@ module Devx
     private
 
     def sanitize_currency(value)
-      value.to_s.gsub(/[^\.0-9]/, '').to_f
+      value.to_s.gsub(/[^\.\d]/, '').to_f
     end
   end
 end

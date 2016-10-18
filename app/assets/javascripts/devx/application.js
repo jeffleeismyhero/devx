@@ -219,7 +219,13 @@ $(function()
   {
     if ($(".currency-field").val() != "")
     {
-      $(".currency-field").val(parseFloat($(this).val().replace(/[^0-9\.]+/g, '')).toFixed(2));
+      value = parseFloat($(this).val().replace(/[^0-9\.]+/g, '')).toFixed(2);
+      if (value == "NaN")
+      {
+        value = 0
+      }
+
+      $(".currency-field").val(value);
     }
   });
 
@@ -228,16 +234,16 @@ $(function()
     if ($(this).val() != "")
     {
       value = parseFloat($(this).val().replace(/[^0-9\.]+/g, '')).toFixed(2);
+      if (value == "NaN")
+      {
+        value = 0
+      }
 
       $(this).val(value);
 
       if ($("input[type=submit]").attr("value").startsWith("Give"))
       {
-        console.log("true");
         $("input[type=submit]").attr("value", "Give $" + value);
-      }
-      else {
-        console.log("false");
       }
     }
   });

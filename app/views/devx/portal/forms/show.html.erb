@@ -30,7 +30,7 @@
               <% @fields.try(:each) do |field| %>
                 <th><%= field %></th>
               <% end %>
-              <% if @fields.include?('Amount') && Stripe.api_key.present? %><th>Refund</th><% end %>
+              <% if @fields.include?('Amount') && app_settings['stripe'].present? && Stripe.api_key.present? %><th>Refund</th><% end %>
             </thead>
             <tbody>
               <% @form.form_submissions.try(:each_with_index) do |submission, submission_index| %>
@@ -44,7 +44,7 @@
                       <td>&nbsp;</td>
                     <% end %>
                   <% end %>
-                  <% if Stripe.api_key.present? %><% if @fields.include?('Amount') && submission.refunded == false %><td><%= link_to 'Refund', devx.refund_portal_form_path(@form, form_submission: submission), method: :post, data: { confirm: 'Refund this payment?' } %></td><% else %><td>Refunded</td><% end %><% end %>
+                  <% if app_settings['stripe'].present? && Stripe.api_key.present? %><% if @fields.include?('Amount') && submission.refunded == false %><td><%= link_to 'Refund', devx.refund_portal_form_path(@form, form_submission: submission), method: :post, data: { confirm: 'Refund this payment?' } %></td><% else %><td>Refunded</td><% end %><% end %>
                 </tr>
               <% end %>
             </tbody>
