@@ -20,9 +20,6 @@ module Devx
 
           if @submission.key?(sanitized_field)
             @field = @submission[sanitized_field.to_sym]
-            if sanitized_field == 'Amount'
-              @field =  number_to_currency @field
-            end
 
             logger.debug "[FORM] Replacing #{field} with #{@field}"
 
