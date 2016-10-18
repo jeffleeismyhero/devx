@@ -10,6 +10,8 @@ module Devx
     end
 
     def create
+      render plain: params.inspect
+      return
       @form = Devx::Form.find(params[:form][:id])
       @submission = Devx::FormSubmission.new(form_id: params[:form][:id], submission_content: params[:form][:submission_content])
 
@@ -24,16 +26,16 @@ module Devx
 
       if purchase_fields.any?
         purchase_fields.try(:each) do |field|
-          price += (field.options.to_f * @submission.submission_content[field.name].to_f)
+          price += sanitize_currency(field.options.to_f * @submission.submission_content[field.name])
         end
       elsif @submission.submission_content['fee'].present?
-        price += @submission.submission_content['fee'].to_f
+        price += sanitize_currency(@submission.submission_content['fee'])
       elsif params['amount'].present?
-        price = params['amount'].to_f
+        price = sanitize_currency(params['amount'])
       end
 
       logger.debug "[DONATE] #{params['ch_first_name']} #{params['ch_last_name']} - AMOUNT: #{params['amount']} --- PRICE: #{price}".squish
-      
+
       if price > 0
         payment_details = {
           amount: price,
@@ -90,6 +92,13 @@ module Devx
       else
         'devx/application'
       end
+    end
+
+
+    private
+
+    def sanitize_currency(value)
+      value.to_s.gsub(/[^\.0-9]/, '').to_f
     end
   end
 end

@@ -215,10 +215,33 @@ $(function()
 
 
   // Currency formatter
+  $("form#form-builder").on("submit", function()
+  {
+    if ($(".currency-field").val() != "")
+    {
+      $(".currency-field").val(parseFloat($(this).val().replace(/[^0-9\.]+/g, '')).toFixed(2));
+    }
+  });
+
   $(".currency-field").on("blur", function()
   {
-    $(this).val(parseFloat(Math.abs($(this).val().replace(/\,/g, ''))).toFixed(2));
-  })
+    if ($(this).val() != "")
+    {
+      value = parseFloat($(this).val().replace(/[^0-9\.]+/g, '')).toFixed(2);
+
+      $(this).val(value);
+
+      if ($("input[type=submit]").attr("value").startsWith("Give"))
+      {
+        console.log("true");
+        $("input[type=submit]").attr("value", "Give $" + value);
+      }
+      else {
+        console.log("false");
+      }
+    }
+  });
+
 
 
   // Calendar type onchange event

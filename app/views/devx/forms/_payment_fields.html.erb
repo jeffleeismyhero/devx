@@ -91,6 +91,12 @@
       <%= label_tag :amount %>
       <%= text_field_tag :amount, '', placeholder: 'Amount', required: true, class: 'currency-field' %>
     </div>
+    <script type="text/javascript">
+      $(function()
+      {
+        $("input[type=submit]").attr("value", "Give");
+      });
+    </script>
   <% end %>
 
   <div id="cc_fields" class="large-<%= field.field_size %> columns cd-edit-form">
