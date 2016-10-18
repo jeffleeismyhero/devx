@@ -64,8 +64,8 @@ module Devx
             Devx::NotificationMailer.delay.form_submission(recipient, @form, @submission.submission_content)
           end
 
-          if @form.send_confirmation_email == true && @form.fields.where(field_type: 'email_field').any? 
-            Devx::FormMailer.delay.send_confirmation(@form, @submission.submission_content, @form.fields.where(field_type: 'email_field').first)
+          if @form.send_confirmation_email == true && @form.fields.where(field_type: 'email_field').any?
+            Devx::FormMailer.delay.send_confirmation(@form, @submission.submission_content, @submission.submission_content[@form.fields.where(field_type: 'email_field').first.try(:name]).to_s)
 
           end
 
