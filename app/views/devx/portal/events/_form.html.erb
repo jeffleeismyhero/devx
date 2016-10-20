@@ -38,7 +38,7 @@
   <div class="col-12 columns no-padding">
     <h3>Event Schedules</h3>
     <%= content_tag 'div', class: 'nested-attributes' do %>
-      <%= f.fields_for :schedules do |schedule| %>
+      <%= f.fields_for :schedules, @event.schedules.order(start_time: :asc) do |schedule| %>
         <%= render partial: 'schedule_fields', locals: { f: schedule } %>
       <% end %>
     <% end %>
