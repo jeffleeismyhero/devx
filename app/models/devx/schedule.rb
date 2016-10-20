@@ -1,5 +1,10 @@
 module Devx
   class Schedule < ActiveRecord::Base
+
+    def self.default_scope
+      order(start_time: :asc)
+    end
+
     def start_time_date
       start_time.try(:strftime, "%m/%d/%Y")
     end
