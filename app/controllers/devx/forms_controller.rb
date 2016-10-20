@@ -24,7 +24,7 @@ module Devx
 
       if purchase_fields.any?
         purchase_fields.try(:each) do |field|
-          price += sanitize_currency(field.options.to_f * @submission.submission_content[field.name])
+          price += sanitize_currency(field.options.to_f * @submission.submission_content[field.name].to_f)
         end
       elsif @submission.submission_content['fee'].present?
         price += sanitize_currency(@submission.submission_content['fee'])
