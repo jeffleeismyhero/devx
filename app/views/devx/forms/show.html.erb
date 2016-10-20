@@ -1,8 +1,7 @@
 <% provide(:title, "#{@form.name}") %>
 
-<!--   <div style="padding:140px 0px;margin:0 auto;text-align:center">
-    <h1 style="padding:0;margin:0;border:none;color:#000;"><%= @form.name %></h1>
-  </div> -->
+<div class="container banner header-img" style="background-image:url(<%= @form.image.try(:url) %>); background-size:cover; background-position:top center; width:100%; min-height:400px;"></div>
+
 <% if flash.any? %>
   <div class="container notify">
     <div class="row">
@@ -13,7 +12,7 @@
   </div>
 <% end %>
 
-<div class="container">
+<div class="container<%= " #{@form.custom_classes.try(:squish)}" %>">
   <div class="row">
     <div class="medium-10 medium-offset-1 columns">
       <div class="page-header"><%= @form.name %></div>

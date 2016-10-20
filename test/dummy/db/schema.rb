@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018204241) do
+ActiveRecord::Schema.define(version: 20161020212533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -436,6 +436,7 @@ ActiveRecord::Schema.define(version: 20161018204241) do
     t.string   "confirmation_email_from"
     t.string   "confirmation_email_subject"
     t.text     "confirmation_email_text"
+    t.string   "custom_classes"
   end
 
   create_table "devx_identities", force: :cascade do |t|
