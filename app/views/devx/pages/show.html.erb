@@ -1,4 +1,4 @@
-<% provide(:title, @page.name) %>
+<% provide(:title, @page.try(:name)) %>
 <% @shortcodes.try(:each) do |shortcode| %>
   <% @page.content.gsub!("#{shortcode}", sc_content_html(shortcode)) %>
 <% end %>

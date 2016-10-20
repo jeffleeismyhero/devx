@@ -28,6 +28,11 @@
             <span><strong>Location:</strong> <%= @event.location %></span>
             </p>
           <% end %>
+          <% if @event.venue.present? %>
+            <p>
+              <span>Venue: <%= link_to @event.venue.try(:name), "https://www.google.com/maps/place/#{@event.venue.try(:full_address)}" %></span>
+            </p>
+          <% end %>
           <% if @event.contact_name.present? %>
             <p>
             <span><strong>Contact Name:</strong> <%= @event.contact_name %></span>
@@ -38,4 +43,3 @@
     </div>
   </div>
 </div>
-
