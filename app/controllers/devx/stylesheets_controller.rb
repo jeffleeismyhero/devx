@@ -6,7 +6,7 @@ module Devx
 
     def show
       respond_to do |format|
-        format.css { render text: @stylesheet.content, content_type: 'text/css' }
+        format.css { render text: YUI::CssCompressor.new.compress(@stylesheet.content), content_type: 'text/css' }
       end
     end
   end
