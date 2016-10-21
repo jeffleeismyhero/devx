@@ -14,7 +14,7 @@ module Devx
       if @fields.any?
         @fields.each_with_index do |field, index|
           logger.debug "[FORM] Sanitizing #{field}"
-          sanitized_field = field.gsub(/[^a-zA-Z0-9 \_\-\(\)\'\"]/i, '')
+          sanitized_field = field.gsub(/[^a-zA-Z0-9 \_\-\(\)\'\"\#\$]/i, '')
           logger.debug "[FORM] Sanitized #{sanitized_field}"
 
           logger.debug "[FORM] Checking if #{sanitized_field} is key........#{@submission.key?(sanitized_field)}"
