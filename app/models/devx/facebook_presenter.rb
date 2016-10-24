@@ -29,7 +29,7 @@ module Devx
 
     def feed
       if Devx::ApplicationSetting.find_or_create_by(id: 1).settings['facebook_feeds']
-        client.get_connection(Devx::ApplicationSetting.find_or_create_by(id: 1).settings['facebook_uid'], 'posts', { limit: @attributes[:limit], fields: [ 'id', 'message', 'created_time', 'picture', 'link', 'from', 'type' ], type: 'large' })
+        client.get_connection(Devx::ApplicationSetting.find_or_create_by(id: 1).settings['facebook_uid'], 'posts', { limit: @attributes[:limit], fields: [ 'id', 'message', 'created_time', 'picture', 'link', 'from', 'type' ], type: 'large' }) rescue nil
       else
         return
       end

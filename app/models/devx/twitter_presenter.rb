@@ -32,7 +32,7 @@ module Devx
 
     def tweets
       if Devx::ApplicationSetting.find_or_create_by(id: 1).settings['twitter_feeds']
-        client.user_timeline(Devx::ApplicationSetting.find_or_create_by(id: 1).settings['twitter_timeline'], { include_rts: @attributes[:retweet], count: @attributes[:limit] })
+        client.user_timeline(Devx::ApplicationSetting.find_or_create_by(id: 1).settings['twitter_timeline'], { include_rts: @attributes[:retweet], count: @attributes[:limit] }) rescue nil
       else
         return
       end

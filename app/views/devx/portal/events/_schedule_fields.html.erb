@@ -1,19 +1,19 @@
 <div class="col-12 columns no-padding">
   <div class="col-3 columns cd-edit-form">
     <%= f.label :start_time_date, "Start Date" %>
-    <%= f.text_field :start_time_date, placeholder: date_value(Date.today), class: 'datepicker start-time-date' %>
+    <%= f.text_field :start_time_date, placeholder: 'Start Date', class: 'datepicker start-time-date' %>
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :start_time_time, "Start Time" %>
-    <%= f.text_field :start_time_time, placeholder: time_value(Time.now), class: 'timepicker start-time-time' %>
+    <%= f.text_field :start_time_time, placeholder: 'Start Time', class: 'timepicker start-time-time' %>
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :end_time_date, "End Date" %>
-    <%= f.text_field :end_time_date, placeholder: date_value(Date.today), class: 'datepicker end-time-date' %>
+    <%= f.text_field :end_time_date, placeholder: 'End Date', class: 'datepicker end-time-date' %>
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.label :end_time_time, "End Time" %>
-    <%= f.text_field :end_time_time, placeholder: time_value(Time.now), class: 'timepicker end-time-time' %>
+    <%= f.text_field :end_time_time, placeholder: 'End Time', class: 'timepicker end-time-time' %>
   </div>
   <div class="col-3 columns cd-edit-form">
     <%= f.check_box :all_day %> All-day

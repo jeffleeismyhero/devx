@@ -19,7 +19,7 @@
                 <%= f.label :event_schedules_start_time_gteq, 'Date range' %>
                 <%= f.date_field :event_schedules_start_time_gteq %>
                 <%= f.date_field :event_schedules_start_time_lteq %>
-                <%= f.select :event_tags_name_eq, @tags.collect{ |x| [x.name, x.name] }, { prompt: 'Select category' }, { class: 'select2-fixed' } %>
+                <%= select_tag :event_category, options_for_select(@tags), { prompt: 'Select category', class: 'select2-fixed' } %>
                 <%= f.submit %>
             <% end %>
             </div>
