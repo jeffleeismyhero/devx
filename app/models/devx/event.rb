@@ -8,7 +8,7 @@ module Devx
     belongs_to :calendar
     belongs_to :venue
 
-    scope :upcoming, -> { joins(:schedules).where("start_time > ?", Time.zone.now).order(start_time: :asc) }
+    scope :upcoming, -> { joins(:schedules).where("devx_schedules.start_time > ?", Time.zone.now).order('devx_schedules.start_time ASC').order('devx_schedules.start_time ASC') }
     scope :ordered, -> { joins(:schedules).order('devx_schedules.start_time ASC') }
     scope :for, -> (start_time, end_time) { where('start_time > ? AND start_time < ?', start_time.beginning_of_month, end_time.end_of_month) }
     scope :uniq_dates, -> { uniq.pluck(:start_time) }

@@ -21,8 +21,8 @@ module Devx
       # return
 
       @q = @events.search(params[:q])
-      @q.sorts = 'start_time asc'
-      @events = @q.result.ordered.paginate(page: params[:page])
+      @q.sorts = 'devx_schedules.start_time asc'
+      @events = @q.result(distinct: true).paginate(page: params[:page])
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
     end
 
