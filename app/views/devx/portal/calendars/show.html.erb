@@ -15,11 +15,11 @@
             <div class="cd-edit-form">
             <%= search_form_for @q, url: devx.portal_calendar_path(@calendar) do |f| %>
                 <%= f.label :event_name_cont, 'Event Name' %>
-                <%= f.search_field :event_name_cont, placeholder: 'Search' %>
+                <%= f.search_field :name_cont, placeholder: 'Search' %>
                 <%= f.label :event_schedules_start_time_gteq, 'Date range' %>
-                <%= f.date_field :event_schedules_start_time_gteq %>
-                <%= f.date_field :event_schedules_start_time_lteq %>
-                <%= select_tag :event_category, options_for_select(@tags), { prompt: 'Select category', class: 'select2-fixed' } %>
+                <%= f.date_field :schedules_start_time_gteq %>
+                <%= f.date_field :schedules_start_time_lteq %>
+                <%= f.select :tags_name_eq, @tags.collect{ |x| [x.name, x.name] }, { prompt: 'Select category' }, { class: 'select2-fixed' } %>
                 <%= f.submit %>
             <% end %>
             </div>
@@ -35,14 +35,14 @@
           </tr>
         </thead>
         <tbody>
-          <% @schedules.try(:each) do |schedule| %>
+          <% @events.try(:each) do |event| %>
             <tr>
-              <td><%= schedule.event.name %></td>
-              <td><%= ldate schedule.start_time %></td>
-              <td><%= ldate schedule.end_time %></td>
+              <td><%= event.name %></td>
+              <td><%= ldate event.schedules.next.start_time %></td>
+              <td><%= ldate event.schedules.next.end_time %></td>
               <td>
-              <%= link_to 'Edit', devx.edit_portal_calendar_event_path(@calendar, id: schedule.event, page: params[:page]) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-              <%= link_to 'Delete', devx.portal_calendar_event_path(@calendar, id: schedule.event), method: :delete, data: { confirm: "Are you sure you want to delete #{schedule.event.name}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
+              <%= link_to 'Edit', devx.edit_portal_calendar_event_path(@calendar, id: event, page: params[:page]) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              <%= link_to 'Delete', devx.portal_calendar_event_path(@calendar, id: event), method: :delete, data: { confirm: "Are you sure you want to delete #{event.name}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>
               </td>
             </tr>
           <% end %>
@@ -54,8 +54,8 @@
 <div class="container">
     <div class="row">
       <div class="col-12 columns">
-        <% if @schedules.any? %>
-            <%= will_paginate @schedules, class: 'apple_pagination' %>
+        <% if @events.any? %>
+            <%= will_paginate @events, class: 'apple_pagination' %>
         <% end %>
     </div>
 </div>

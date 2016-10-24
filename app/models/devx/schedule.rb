@@ -40,6 +40,7 @@ module Devx
     scope :coming_up, -> { where('start_time >= ?', Time.zone.now).ordered }
     scope :for_month, -> (start_time) { where('start_time >= ? AND start_time <= ?', start_time.beginning_of_month, start_time.end_of_month).ordered }
     scope :ordered, -> { order("start_time ASC, end_time ASC") }
+    scope :next, -> { joins(:event).where('devx_schedules.start_time > ?', Time.zone.now).first }
 
     belongs_to :event
     has_one :calendar, through: :event

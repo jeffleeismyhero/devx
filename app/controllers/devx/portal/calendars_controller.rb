@@ -13,11 +13,16 @@ module Devx
     end
 
     def show
-      @schedules = @calendar.schedules.upcoming.ordered
+      # @schedules = @calendar.schedules.upcoming.ordered
+      @events = @calendar.events.upcoming
 
-      @q = @schedules.search(params[:q])
+      # @schedules = @schedules.reject{ |schedule| schedule.event.tag_list == 'Band' }
+      # render plain: @schedules.first
+      # return
+
+      @q = @events.search(params[:q])
       @q.sorts = 'start_time asc'
-      @schedules = @q.result.ordered.paginate(page: params[:page])
+      @events = @q.result.ordered.paginate(page: params[:page])
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
     end
 
