@@ -38,8 +38,8 @@
           <% @events.try(:each) do |event| %>
             <tr>
               <td><%= event.name %></td>
-              <td><%= ldate event.schedules.next.start_time %></td>
-              <td><%= ldate event.schedules.next.end_time %></td>
+              <td><%= ldate event.schedules.next.start_time rescue ldate event.schedules.last.start_time %></td>
+              <td><%= ldate event.schedules.next.end_time rescue ldate event.schedules.last.end_time %></td>
               <td>
               <%= link_to 'Edit', devx.edit_portal_calendar_event_path(@calendar, id: event, page: params[:page]) %> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               <%= link_to 'Delete', devx.portal_calendar_event_path(@calendar, id: event), method: :delete, data: { confirm: "Are you sure you want to delete #{event.name}?" } %> <i class="fa fa-trash" aria-hidden="true"></i>

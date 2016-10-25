@@ -10,6 +10,7 @@ module Devx
 
     scope :upcoming, -> { joins(:schedules).where("devx_schedules.start_time > ?", Time.zone.now).ordered }
     scope :ordered, -> { order('devx_schedules.start_time ASC, devx_schedules.end_time ASC') }
+    scope :schedules_join, -> { joins(:schedules).ordered }
     scope :for, -> (start_time, end_time) { where('start_time > ? AND start_time < ?', start_time.beginning_of_month, end_time.end_of_month) }
     scope :uniq_dates, -> { uniq.pluck(:start_time) }
 

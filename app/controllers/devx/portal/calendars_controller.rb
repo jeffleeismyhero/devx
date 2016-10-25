@@ -16,7 +16,7 @@ module Devx
       # @schedules = @calendar.schedules.upcoming.ordered
 
       if params[:q].present?
-        @events = @calendar.events.ordered
+        @events = @calendar.events.schedules_join
       else
         @events = @calendar.events.upcoming
       end
