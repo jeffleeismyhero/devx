@@ -14,15 +14,16 @@ module Devx
 
     def show
       # @schedules = @calendar.schedules.upcoming.ordered
-      @events = @calendar.events.upcoming
 
-      # @schedules = @schedules.reject{ |schedule| schedule.event.tag_list == 'Band' }
-      # render plain: @schedules.first
-      # return
+      if params[:q].present?
+        @events = @calendar.events.ordered
+      else
+        @events = @calendar.events.upcoming
+      end
 
       @q = @events.search(params[:q])
-      @q.sorts = 'devx_schedules.start_time asc'
-      @events = @q.result(distinct: true).paginate(page: params[:page])
+      @q.sorts = ['devx_schedules.start_time asc', 'devx_schedules.end_time asc'] if @q.sorts.empty?
+      @events = @q.result.ordered.paginate(page: params[:page])
       @tags = Devx::Event.tag_counts_on(:tags).order(name: :asc)
     end
 
